@@ -1,0 +1,5 @@
+# Restrict access to the Oedipus Decision Maker project-specific code.
+# @copyright 2008-03-30
+
+Order Deny,Allow
+Deny from all
