@@ -1373,6 +1373,22 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/object-orientation/classes/ObjectOrientation_NamedMethodCaller.inc.php';
 			break;
 
+		case('Oedipus_DBPage'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_DBPage.inc.php';
+			break;
+
+		case('Oedipus_ExceptionPage'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_ExceptionPage.inc.php';
+			break;
+
+		case('Oedipus_HTMLPage'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_HTMLPage.inc.php';
+			break;
+
+		case('Oedipus_MailingListSignUpPage'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_MailingListSignUpPage.inc.php';
+			break;
+
 		case('OrderedTables_AdminCRUDHelper'): 
 			require_once PROJECT_ROOT . '/plug-ins/ordered-tables/classes/helpers/OrderedTables_AdminCRUDHelper.inc.php';
 			break;
