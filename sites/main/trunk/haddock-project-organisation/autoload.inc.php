@@ -2,7 +2,7 @@
 /**
  * __autoload .INC file
  *
- * Last Modified: 2008-03-30
+ * Last Modified: 2008-04-02
  */
 
 function __autoload($class_name)
@@ -1375,6 +1375,10 @@ function __autoload($class_name)
 
 		case('Oedipus_DBPage'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_DBPage.inc.php';
+			break;
+
+		case('Oedipus_ExampleTablePage'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_ExampleTablePage.inc.php';
 			break;
 
 		case('Oedipus_ExceptionPage'): 
