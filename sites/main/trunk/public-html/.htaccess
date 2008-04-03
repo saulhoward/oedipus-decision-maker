@@ -1,0 +1,6 @@
+# .htaccess file for the project-specific folder of the ODM
+#
+# @copyright 2008-04-03, RFI
+
+Order Allow,Deny
+Allow from all
