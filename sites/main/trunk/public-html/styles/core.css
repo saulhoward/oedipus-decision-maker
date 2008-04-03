@@ -24,11 +24,24 @@ a:visited
 	background: transparent url(/images/oedipus-logo.png) top left no-repeat;
 	text-indent: -3000px;
 }
+
+/*CONTENT*/
 #content
 {
 	padding: 0.5em 1em;
 
 }
+#content h2
+{
+	text-align: center;
+	font-size: 1.4em;
+	font-weight: 900;
+}
+#content p
+{
+	margin: 1em 0;
+}
+
 #navigation
 {
 	position: absolute;

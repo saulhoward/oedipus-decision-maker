@@ -16,7 +16,7 @@ extends
 		echo <<<HTML
 		<table class="oedipus">
 			<caption>
-				Drama Theory Example Table
+				Example Drama Theoretic Oedipus Table
 			</caption>
 
 			<!-- colgroup defines columns for css -->
