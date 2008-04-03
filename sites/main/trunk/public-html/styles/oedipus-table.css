@@ -4,30 +4,94 @@
 
 table.oedipus
 {
-/*        margin: 50px;*/
+	font: italic 1em "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+/*        padding: 50px;*/
+}
+
+/* Crap from Web */
+table.oedipus caption {
+	padding: 0 0 5px 0;
+	text-align: right;
+}
+
+table.oedipus th {
+/*        color: #4f6b72;*/
+	border-right: 1px solid #C1DAD7;
+	border-bottom: 1px solid #C1DAD7;
+	border-top: 1px solid #C1DAD7;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	text-align: left;
+	padding: 6px 6px 6px 12px;
+/*        background: #CAE8EA url(images/bg_header.jpg) no-repeat;*/
+}
+table.oedipus td {
+	border-right: 1px solid #C1DAD7;
+	border-bottom: 1px solid #C1DAD7;
+	padding: 6px 6px 6px 12px;
+	color: #4f6b72;
 }
 
 /* COLUMNS FOR ACTORS, STATED INTENTIONS */
 table.oedipus colgroup.options-column
 {
-	background: grey;
+/*        background: grey;*/
 }
 table.oedipus colgroup.actor-column
 {
 /*        background: cyan;*/
 }
-#actor1.actor-column
+table.oedipus #actor1.actor-column
 {
-	background: cyan;
+	background-color: #8080FF; /* BLUE -50% SAT. */
+}
+table.oedipus #actor2.actor-column
+{
+	background-color: #FF8080; /* RED -50% SAT. */
 }
 
-/* ICONS FOR POSITION CARDS */
-table.oedipus a.position-card
+table.oedipus .si-column
+{
+	background-color: #CAE8EA;
+}
+
+table.oedipus td.option, table.oedipus th.option
+{
+	background: #CAE8EA url(images/bg_header.jpg) no-repeat;
+	color: #4f6b72;
+}
+
+/* ICONS FOR POSITION AND SI TILES */
+table.oedipus a.position-tile,
+table.oedipus a.si-tile
 {
 	height: 50px;
 	width: 50px;
-	background: transparent url('blue_filled_x.png') center center no-repeat;
 	display: block;
 	text-indent: -3000px;
 	margin: 0 auto;
 }
+
+/*POSITION TILES*/
+table.oedipus a.position-tile#actor1-option1,
+table.oedipus a.position-tile#actor1-option2
+{
+
+	background: transparent url('/images/position-tiles/40px-png/squares/blue_filled_x.png') center center no-repeat;
+}
+
+table.oedipus a.position-tile#actor2-option1,
+table.oedipus a.position-tile#actor2-option2
+{
+
+	background: transparent url('/images/position-tiles/40px-png/squares/red_filled_question.png') center center no-repeat;
+}
+
+/*SI TILES*/
+table.oedipus a.si-tile#actor1-option1,
+table.oedipus a.si-tile#actor1-option2
+{
+
+	background: transparent url('/images/position-tiles/40px-png/diamonds/blue_filled.png') center center no-repeat;
+}
+

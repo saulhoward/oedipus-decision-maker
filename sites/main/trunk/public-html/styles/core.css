@@ -1,0 +1,42 @@
+/* Core CSS Styles for
+ * Oedipus Decision Maker
+ * Saul Howard, CLWD, 2008
+ */
+body
+{
+	font-family: Lucida Sans Unicode, Lucida Grande, sans-serif;
+
+}
+a:visited
+{
+	color: blue;
+}
+#header
+{
+	height: 70px;
+	background-color:#ECF2FA;
+	border-bottom:1px solid #6797D3;
+}
+#header h1
+{
+	height: 70px;
+	width: 150px;
+	background: transparent url(/images/oedipus-logo.png) top left no-repeat;
+	text-indent: -3000px;
+}
+#content
+{
+	padding: 0.5em 1em;
+
+}
+#navigation
+{
+	position: absolute;
+	top: 40px;
+	left: 150px;
+}
+#navigation ul.navigation li
+{
+	display: inline;
+	padding: 0 0.5em;
+}
