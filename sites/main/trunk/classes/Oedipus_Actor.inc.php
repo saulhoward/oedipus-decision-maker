@@ -1,44 +1,51 @@
 <?php
 /**
- * Oedipus_Table
+ * Oedipus_Actor
  *
  * @copyright RFI 2007-12-15
+ * @copyright SANH 2008-04-05
  */
 
 /**
- * Holds the data for a Oedipus Drama Theoretic table.
+ * Holds the data for an option in a Oedipus Drama Theoretic table.
  */
 class
-	Oedipus_Table
+	Oedipus_Actor
 {
 	private $name;
 	
-	private $actors;
+	private $options;
 	
 	public function
 		__construct($name)
 	{
 		$this->name = $name;
 		
-		$this->actors = array();
+		$this->options = array();
 	}
 	
 	public function
-		add_actor(
-			Oedipus_Actor $actor
+		add_option(
+			Oedipus_Option $option
 			)
 		{
-		$this->actors[$actor->get_name()] = $actor;
+		$this->options[$option->get_name()] = $option;
 	}
 	
 	public function
-		get_actor($actor_name)
+		get_option($option_name)
 	{
-		if (isset($this->actors[$actor_name])) {
-			return $this->actors[$actor_name];
+		if (isset($this->options[$option_name])) {
+			return $this->options[$option_name];
 		} else {
-			throw new Exception("No actor called '$actor_name' in the '$this->name' table!");
+			throw new Exception("No option called '$option_name' in the '$this->name' table!");
 		}
+	}
+
+	public function
+		get_name()
+	{
+		return $this->name;
 	}
 }
 ?>
