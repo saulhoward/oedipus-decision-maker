@@ -20,8 +20,8 @@ a:visited
 #header h1
 {
 	height: 70px;
-	width: 150px;
-	background: transparent url(/images/oedipus-logo.png) top left no-repeat;
+	width: 220px;
+	background: transparent url(/images/oedipus-logo-with-head.png) top left no-repeat;
 	text-indent: -3000px;
 }
 
@@ -46,7 +46,7 @@ a:visited
 {
 	position: absolute;
 	top: 40px;
-	left: 150px;
+	left: 220px;
 }
 #navigation ul.navigation li
 {

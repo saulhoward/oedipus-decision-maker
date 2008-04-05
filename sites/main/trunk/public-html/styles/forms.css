@@ -8,9 +8,10 @@
  */
 form 
 {
-	background: #6F85BB url(/images/form-bg.gif) top left repeat-x;
+	background: #ECF2FA url(/images/form-bg.gif) top left repeat-x;
+	border: 1px solid #6797D3;
 	margin: 10px auto;
-	padding: 1em 0 2em 0;
+	padding: 1em 0;
 	max-width: 100%;
 	width: 26em;
 	min-width: 400px;
@@ -160,8 +161,8 @@ input.submit
 {
 	border-color: black;
 	color: black;
-	margin: 0 0.5em;
-	float: left;
+	margin: 1em 0 0 14.7em;
+/*        float: left;*/
 	border: 3px double #999999;
 	border-top-color: #CCCCCC;
 	border-left-color: #CCCCCC;
