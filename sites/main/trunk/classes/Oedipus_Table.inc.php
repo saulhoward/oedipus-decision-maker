@@ -56,6 +56,12 @@ Oedipus_Table
 	}
 
 	public function
+		count_actors()
+	{
+		return count($this->actors);
+	}
+
+	public function
 		get_name()
 	{
 		return $this->name;

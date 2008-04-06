@@ -2,7 +2,7 @@
 /**
  * __autoload .INC file
  *
- * Last Modified: 2008-04-05
+ * Last Modified: 2008-04-06
  */
 
 function __autoload($class_name)
@@ -1429,6 +1429,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusHTMLTable.inc.php';
 			break;
 
+		case('Oedipus_OedipusTableCreatorHTMLForm'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusTableCreatorHTMLForm.inc.php';
+			break;
+
 		case('Oedipus_Option'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Option.inc.php';
 			break;
@@ -1445,8 +1449,16 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Table.inc.php';
 			break;
 
+		case('Oedipus_TableCreatorHelper'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_TableCreatorHelper.inc.php';
+			break;
+
 		case('Oedipus_TableCreatorPage'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_TableCreatorPage.inc.php';
+			break;
+
+		case('Oedipus_TableCreatorRedirectScript'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/redirect-scripts/Oedipus_TableCreatorRedirectScript.inc.php';
 			break;
 
 		case('OrderedTables_AdminCRUDHelper'): 

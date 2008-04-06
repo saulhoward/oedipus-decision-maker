@@ -20,66 +20,17 @@ extends
 </p>
 HTML;
 
-		$table_div = new HTMLTags_Div();
-		$table_div->set_attribute_str('class', 'oedipus-table');
-
-		// Creating a Table
-		// -----------------
-		// 1.
-		// Create the actors,
-		// and their options, options have stated intentions
-		$actors = array();
-
-		$ryu = new Oedipus_Actor('Ryu', 'blue');
-		$ryus_options = array();
-		$stated_intention_1 = new Oedipus_StatedIntention('1', 'q');
-		$ryus_options[] = new Oedipus_Option('jump up and down', $stated_intention_1);
-		$stated_intention_2 = new Oedipus_StatedIntention('0', 'x');
-		$ryus_options[] = new Oedipus_Option('shake it all about', $stated_intention_2);
-		foreach ($ryus_options as $ryus_option)
+		if (isset($_GET['table_values']))
 		{
-			$ryu->add_option($ryus_option);
+			$table = Oedipus_TableCreatorHelper::create_oedipus_table_from_get($_GET);
+		}
+		else
+		{
+			$table = Oedipus_TableCreatorHelper::get_default_oedipus_table();
 		}
 
-		$ganja_master = new Oedipus_Actor('Ganja Master', 'red');
-
-		$actors[] = $ryu;
-		$actors[] = $ganja_master;
-		
-		// 2.
-		// create the positions 
-		// attached to options for ease of display (?)
-		// positions have an actor as well as an option
-		foreach ($actors as $actor)
-		{
-			foreach ($actor->get_options() as $option)
-			{
-				$positions = array();
-
-				foreach ($actors as $position_actor)
-				{
-					$positions[$position_actor->get_name()] =
-					       	new Oedipus_Position('0', 'q', $position_actor);
-				}
-
-				$option->add_positions($positions);
-			}
-		}
-		
-		// 3.
-		// Create the table
-		$table = new Oedipus_Table('Example Table', $actors);
-
-		// DEBUG
-		// print_r($table->get_actors());exit;
-
-		// 4.
-		// Create the HTMLTable from the Oedipus_Table object
-		// and display it
-		$html_table = new Oedipus_OedipusHTMLTable($table);
-
-		$table_div->append_tag_to_content($html_table);
-		echo $table_div->get_as_string();
+		$table_creator_page_div = Oedipus_TableCreatorHelper::render_oedipus_table_creator_page_div($table);
+		echo $table_creator_page_div->get_as_string();
 	}
 
 }

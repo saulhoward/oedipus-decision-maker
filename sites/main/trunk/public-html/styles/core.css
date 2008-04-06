@@ -53,3 +53,10 @@ a:visited
 	display: inline;
 	padding: 0 0.5em;
 }
+
+/* Table Creator Form */
+div.table-creator-form
+{
+	float: right;
+	width: 50%;
+}

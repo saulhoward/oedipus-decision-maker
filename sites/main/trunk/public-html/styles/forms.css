@@ -10,7 +10,7 @@ form
 {
 	background: #ECF2FA url(/images/form-bg.gif) top left repeat-x;
 	border: 1px solid #6797D3;
-	margin: 10px auto;
+	margin: 0 auto;
 	padding: 1em 0;
 	max-width: 100%;
 	width: 26em;
@@ -198,8 +198,8 @@ code.form_explanation
 }
 form div.submit_buttons_div 
 {
-	padding: 1em 0 0 11em;
-	margin: 0 0 1em 0;
+/*        padding: 1em 0 0 11em;*/
+/*        margin: 0 0 1em 0;*/
 }
 
 /* CUSTIOMER DETAILS FORM */

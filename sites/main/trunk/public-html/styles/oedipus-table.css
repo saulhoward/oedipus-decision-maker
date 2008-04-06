@@ -7,11 +7,13 @@ div.oedipus-table
 	padding: 1em;
 	margin: 0 2em;
 	width: 40%;
+	float: left;
 	background: #FFFF99;
 }
 table.oedipus
 {
 	font: italic 1em "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	margin: 0 auto;
 }
 
 table.oedipus caption {

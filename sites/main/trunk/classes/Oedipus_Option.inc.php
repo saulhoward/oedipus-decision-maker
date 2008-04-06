@@ -13,14 +13,22 @@ class
 	Oedipus_Option
 {
 	private $name;
+	private $id;
 	private $positions;
 	private $stated_intention;
 	
 	public function
-		__construct($name, Oedipus_StatedIntention $stated_intention)
+		__construct($id, $name, Oedipus_StatedIntention $stated_intention)
 	{
 		$this->name = $name;
+		$this->id = $id;
 		$this->stated_intention = $stated_intention;
+	}
+
+	public function
+		get_id()
+	{
+		return $this->id;
 	}
 
 	public function

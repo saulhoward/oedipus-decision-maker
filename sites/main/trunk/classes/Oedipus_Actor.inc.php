@@ -12,14 +12,16 @@
 class
 	Oedipus_Actor
 {
+	private $id;
 	private $name;
 	private $options;
 	private $color;
 	
 	public function
-		__construct($name, $color)
+		__construct($id, $name, $color)
 	{
 		$this->name = $name;
+		$this->id = $id;
 		$this->color = $color;
 		$this->options = array();
 	}
@@ -64,6 +66,12 @@ class
 		get_color()
 	{
 		return $this->color;
+	}
+
+	public function
+		get_id()
+	{
+		return $this->id;
 	}
 
 	public function
