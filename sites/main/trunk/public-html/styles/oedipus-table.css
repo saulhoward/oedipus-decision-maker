@@ -4,7 +4,7 @@
 
 div.oedipus-table
 {
-	padding: 1em;
+	padding: 0.5em 1em 1em 1em;
 	margin: 0 2em;
 	width: 40%;
 	float: left;
@@ -17,7 +17,7 @@ table.oedipus
 }
 
 table.oedipus caption {
-	padding: 0 0 5px 0;
+	padding: 0 0 1em 0;
 	text-align: left;
 }
 
