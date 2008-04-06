@@ -9,28 +9,36 @@
  * Holds the data for a Oedipus Drama Theoretic table.
  */
 class
-	Oedipus_Table
+Oedipus_Table
 {
 	private $name;
-	
+
 	private $actors;
-	
+
 	public function
-		__construct($name)
+		__construct($name, $actors)
 	{
 		$this->name = $name;
-		
-		$this->actors = array();
+
+		$this->actors = $actors;
 	}
-	
+
 	public function
 		add_actor(
 			Oedipus_Actor $actor
-			)
-		{
+		)
+	{
 		$this->actors[$actor->get_name()] = $actor;
 	}
-	
+
+	public function
+		add_actors(
+			$actors
+		)
+	{
+		$this->actors = $actors;
+	}
+
 	public function
 		get_actor($actor_name)
 	{
@@ -39,6 +47,18 @@ class
 		} else {
 			throw new Exception("No actor called '$actor_name' in the '$this->name' table!");
 		}
+	}
+
+	public function
+		get_actors()
+	{
+		return $this->actors;
+	}
+
+	public function
+		get_name()
+	{
+		return $this->name;
 	}
 }
 ?>

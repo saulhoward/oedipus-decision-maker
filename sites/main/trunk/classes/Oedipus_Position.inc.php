@@ -1,29 +1,47 @@
 <?php
 /**
- * Oedipus_Option
+ * Oedipus_Position
  *
  * @copyright RFI 2007-12-15
  * @copyright SANH 2008-04-05
  */
 
 /**
- * Holds the data for an option (which belongs to an actor) in a Oedipus Drama Theoretic table.
+ * Holds the data for a position (one for every actor/option conjunction) in a Oedipus Drama Theoretic table.
+ * The positions belong to options
  */
 class
-	Oedipus_Option
+	Oedipus_Position
 {
-	private $name;
+	private $tile;
+	private $doubt;
+	private $actor;
 	
 	public function
-		__construct($name)
+		__construct($tile, $doubt, Oedipus_Actor $actor)
 	{
-		$this->name = $name;
+		$this->tile = $tile;
+		$this->doubt = $doubt;
+		$this->actor = $actor;
 	}
 
 	public function
-		get_name()
+		get_tile()
 	{
-		return $this->name;
+		return $this->tile;
 	}
+
+	public function
+		get_doubt()
+	{
+		return $this->doubt;
+	}
+
+	public function
+		get_actor()
+	{
+		return $this->actor;
+	}
+
 }
 ?>

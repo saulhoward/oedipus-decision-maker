@@ -5,25 +5,24 @@
 table.oedipus
 {
 	font: italic 1em "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
-/*        padding: 50px;*/
 }
 
-/* Crap from Web */
 table.oedipus caption {
 	padding: 0 0 5px 0;
-	text-align: right;
+	text-align: left;
 }
 
 table.oedipus th {
-/*        color: #4f6b72;*/
 	border-right: 1px solid #C1DAD7;
 	border-bottom: 1px solid #C1DAD7;
-	border-top: 1px solid #C1DAD7;
 	letter-spacing: 2px;
 	text-transform: uppercase;
 	text-align: left;
 	padding: 6px 6px 6px 12px;
-/*        background: #CAE8EA url(images/bg_header.jpg) no-repeat;*/
+}
+table.oedipus thead th
+{
+	text-align: center;
 }
 table.oedipus td {
 	border-right: 1px solid #C1DAD7;
@@ -41,11 +40,11 @@ table.oedipus colgroup.actor-column
 {
 /*        background: cyan;*/
 }
-table.oedipus #actor1.actor-column
+table.oedipus #blue.actor-column
 {
 	background-color: #8080FF; /* BLUE -50% SAT. */
 }
-table.oedipus #actor2.actor-column
+table.oedipus #red.actor-column
 {
 	background-color: #FF8080; /* RED -50% SAT. */
 }
@@ -70,28 +69,82 @@ table.oedipus a.si-tile
 	display: block;
 	text-indent: -3000px;
 	margin: 0 auto;
+	background: transparent url('/images/position-tiles/40px-png/squares/blue_filled.png') center center no-repeat;
 }
 
 /*POSITION TILES*/
-table.oedipus a.position-tile#actor1-option1,
-table.oedipus a.position-tile#actor1-option2
+/* BLUE */
+table.oedipus a.position-tile#blue1x
 {
-
-	background: transparent url('/images/position-tiles/40px-png/squares/blue_filled_x.png') center center no-repeat;
+	background-image: url('/images/position-tiles/40px-png/squares/blue_filled_x.png');
 }
-
-table.oedipus a.position-tile#actor2-option1,
-table.oedipus a.position-tile#actor2-option2
+table.oedipus a.position-tile#blue1q
 {
-
-	background: transparent url('/images/position-tiles/40px-png/squares/red_filled_question.png') center center no-repeat;
+	background-image: url('/images/position-tiles/40px-png/squares/blue_filled_question.png');
 }
-
+table.oedipus a.position-tile#blue1
+{
+	background-image: url('/images/position-tiles/40px-png/squares/blue_filled.png');
+}
+table.oedipus a.position-tile#blue0x
+{
+	background-image: url('/images/position-tiles/40px-png/squares/blue_empty_x.png');
+}
+table.oedipus a.position-tile#blue0q
+{
+	background-image: url('/images/position-tiles/40px-png/squares/blue_empty_question.png');
+}
+table.oedipus a.position-tile#blue0
+{
+	background-image: url('/images/position-tiles/40px-png/squares/blue_empty.png');
+}
+/* RED */
+table.oedipus a.position-tile#red1x
+{
+	background-image: url('/images/position-tiles/40px-png/squares/red_filled_x.png');
+}
+table.oedipus a.position-tile#red1q
+{
+	background-image: url('/images/position-tiles/40px-png/squares/red_filled_question.png');
+}
+table.oedipus a.position-tile#red1
+{
+	background-image: url('/images/position-tiles/40px-png/squares/red_filled.png');
+}
+table.oedipus a.position-tile#red0x
+{
+	background-image: url('/images/position-tiles/40px-png/squares/red_empty_x.png');
+}
+table.oedipus a.position-tile#red0q
+{
+	background-image: url('/images/position-tiles/40px-png/squares/red_empty_question.png');
+}
+table.oedipus a.position-tile#red0
+{
+	background-image: url('/images/position-tiles/40px-png/squares/red_empty.png');
+}
 /*SI TILES*/
-table.oedipus a.si-tile#actor1-option1,
-table.oedipus a.si-tile#actor1-option2
+table.oedipus a.si-tile#blue1x
 {
-
-	background: transparent url('/images/position-tiles/40px-png/diamonds/blue_filled.png') center center no-repeat;
+	background-image: url('/images/position-tiles/40px-png/diamonds/blue_filled_x.png');
 }
-
+table.oedipus a.si-tile#blue1q
+{
+	background-image: url('/images/position-tiles/40px-png/diamonds/blue_filled_question.png');
+}
+table.oedipus a.si-tile#blue1
+{
+	background-image: url('/images/position-tiles/40px-png/diamonds/blue_filled.png');
+}
+table.oedipus a.si-tile#blue0x
+{
+	background-image: url('/images/position-tiles/40px-png/diamonds/blue_empty_x.png');
+}
+table.oedipus a.si-tile#blue0q
+{
+	background-image: url('/images/position-tiles/40px-png/diamonds/blue_empty_question.png');
+}
+table.oedipus a.si-tile#blue0
+{
+	background-image: url('/images/position-tiles/40px-png/diamonds/blue_empty.png');
+}

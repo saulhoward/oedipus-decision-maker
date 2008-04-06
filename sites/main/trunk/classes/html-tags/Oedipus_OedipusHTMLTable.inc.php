@@ -28,18 +28,19 @@ extends
 	//
 	
 	private $actors;
-	private $options;
+
+	private $table;
 
 	public function
-		__construct()
+		__construct(Oedipus_Table $table)
 	{
 		parent::__construct();
 		
-		$this->set_attribute_str('id', 'reorder_rows');
+		$this->set_attribute_str('class', 'oedipus');
 		
-		$this->actors = array();
-		
-		$this->options = array();
+		$this->table = $table;
+
+		$this->actors = $table->get_actors();
 	}
 	
 	protected function
@@ -47,13 +48,27 @@ extends
 	{
 		$content = new HTMLTags_TagContent();
 		
+		$content->append_tag($this->get_caption());
+
+		$colgroups = $this->get_colgroups();
+		foreach ($colgroups as $colgroup)
+		{
+			$content->append_tag($colgroup);
+		}
+
 		$content->append_tag($this->get_thead());
-		
+
 		$content->append_tag($this->get_tbody());
 		
 		return $content;
 	}
-	
+		
+	protected function
+		get_caption()
+	{
+		return new HTMLTags_Caption($this->table->get_name());
+	}
+
 	protected function
 		get_thead()
 	{
@@ -62,6 +77,48 @@ extends
 		$thead->append_tag_to_content($this->get_heading_tr());
 		
 		return $thead;
+	}
+		protected function
+		get_colgroups()
+	{
+//                
+//                        <!-- colgroup defines columns for css -->
+//                        <colgroup class="options-column" span="1">
+//                        </colgroup>
+
+//                        <colgroup class="actor-column" id="actor1" span="1">
+//                        </colgroup>
+//                        <colgroup class="actor-column" id="actor2" span="1">
+//                        </colgroup>
+
+//                        <colgroup class="si-column" span="1">
+//                        </colgroup>
+
+		$colgroups = array();
+
+		// Options ColGroup
+		$options_colgroup = new HTMLTags_ColGroup();
+		$options_colgroup->set_attribute_str('class', 'options-column');
+		$options_colgroup->set_attribute_str('span', '1');
+		$colgroups[] = $options_colgroup;
+
+		// Actor ColGroup
+		foreach ($this->actors as $actor)
+		{
+			$actor_colgroup = new HTMLTags_ColGroup();
+			$actor_colgroup->set_attribute_str('class', 'actor-column');
+			$actor_colgroup->set_attribute_str('id', $actor->get_color());
+			$actor_colgroup->set_attribute_str('span', '1');
+			$colgroups[] = $actor_colgroup;
+		}
+	
+		// si ColGroup
+		$si_colgroup = new HTMLTags_ColGroup();
+		$si_colgroup->set_attribute_str('class', 'si-column');
+		$si_colgroup->set_attribute_str('span', '1');
+		$colgroups[] = $si_colgroup;
+		
+		return $colgroups;
 	}
 	
 	protected function
@@ -79,7 +136,7 @@ extends
 		$actors = $this->get_actors();
 		
 		foreach ($actors as $actor) {
-			$heading_tr->append_tag_to_content(new HTMLTags_TH($actor->get_name()));
+			$heading_tr->append_tag_to_content(new HTMLTags_TH($actor->get_short_name()));
 		}
 		
 		// SI Column
@@ -122,76 +179,111 @@ extends
 	protected function
 		get_option_trs()
 	{
-		$options = $this->get_options();
-		foreach ($options as $option)
+		$option_trs = array();
+
+		foreach ($this->actors as $actor)
 		{
+			if ($actor->has_options())
+			{
+				// Actors Name TR
+				$actors_name_tr = new HTMLTags_TR();
+				$actors_name_th = new HTMLTags_TH($actor->get_name());
+				$actors_name_th->set_attribute_str('class', 'option');
+				$actors_name_tr->append_tag_to_content($actors_name_th);
 
+				for ($i = -1; $i < count($this->actors); $i++)
+				{
+					$blank_td = new HTMLTags_TD();
+					$actors_name_tr->append_tag_to_content($blank_td);
+				}
+				$option_trs[] = $actors_name_tr;
 
+				// Option TRs with positions
+				$options = $actor->get_options();
+				foreach ($options as $option)
+				{
+					$tr = new HTMLTags_TR();
+					$option_th = new HTMLTags_TH($option->get_name());
+					$option_th->set_attribute_str('class', 'option');
+					$tr->append_tag_to_content($option_th);
+
+					foreach ($this->actors as $position_actor)
+					{
+						$position = $option->get_position($position_actor->get_name());
+
+						$position_td = new HTMLTags_TD();
+						$position_td->append_tag_to_content(
+							$this->get_position_tile($position)
+						);
+						$tr->append_tag_to_content($position_td);
+					}
+
+					// Stated Intention TD
+					$stated_intention = $option->get_stated_intention();
+					$stated_intention_td = new HTMLTags_TD();
+					$stated_intention_td->append_tag_to_content(
+						$this->get_stated_intention_tile($stated_intention, $actor)
+					);
+					$tr->append_tag_to_content($stated_intention_td);
+
+					$option_trs[] = $tr;
+				}
+			}
+		}
+
+		return $option_trs;
+	}
+	
+	public function
+		get_position_tile(Oedipus_Position $position)
+	{
+//                <a href="#" class="position-tile" id="actor1-option1">0</a>
+
+		$html_tile_link = new HTMLTags_URL();
+		$html_tile_link->set_file('#');
+
+		$html_tile = new HTMLTags_A($position->get_tile() . $position->get_doubt());
+		$html_tile->set_href($html_tile_link);
+
+		$html_tile->set_attribute_str('class', 'position-tile');
+		$actor = $position->get_actor();
+		$html_tile_id = $actor->get_color() . $position->get_tile() . $position->get_doubt();
+		$html_tile->set_attribute_str('id', $html_tile_id);
+		return $html_tile;
 
 	}
 	
+	public function
+		get_stated_intention_tile(Oedipus_StatedIntention $stated_intention, Oedipus_Actor $actor)
+	{
+//                <a href="#" class="si-tile" id="actor1-option1">0</a>
+
+		$html_tile_link = new HTMLTags_URL();
+		$html_tile_link->set_file('#');
+
+		$html_tile = new HTMLTags_A($stated_intention->get_tile() . $stated_intention->get_doubt());
+		$html_tile->set_href($html_tile_link);
+
+		$html_tile->set_attribute_str('class', 'si-tile');
+		$html_tile_id = 
+			$actor->get_color() . $stated_intention->get_tile() . $stated_intention->get_doubt();
+		$html_tile->set_attribute_str('id', $html_tile_id);
+
+		return $html_tile;
+	}
+
+
 	public function
 		get_options($options)
 	{
-		if (count($this->options) < 1) {
-			throw new Exception('There needs to be at least one option!');
-		}
-		
-		return $this->options;
+		return $this->table->get_options();
 	}
 	
-	public function
-		add_option($option)
-	{
-		$this->options[] = $option;
-	}
-
-//        protected function
-//                get_base_redirect_script_url()
-//        {
-//                if (!isset($this->base_redirect_script_url)) {
-//                        throw new Exception("The base redirect script URL must be set!");
-//                }
-//                
-//                return $this->base_redirect_script_url;
-//        }
-//        
-//        public function
-//                set_base_redirect_script_url(
-//                        HTMLTags_URL $base_redirect_script_url
-//                )
-//        {
-//                $this->base_redirect_script_url = $base_redirect_script_url;
-//        }
-//        
-//        protected function
-//                get_key_fields()
-//        {
-//                if (!isset($this->key_fields)) {
-//                        throw new Exception("The key fields must be set!");
-//                }
-//                
-//                return $this->key_fields;
-//        }
-//        
-//        public function
-//                set_key_fields($key_fields)
-//        {
-//                $this->key_fields = $key_fields;
-//        }
-
 	public function
 		set_actors($actors)
 	{
 		$this->actors = $actors;
 	}
-
-	public function
-		set_options($options)
-	{
-		$this->options = $options;
-	}
-
 }
 
 

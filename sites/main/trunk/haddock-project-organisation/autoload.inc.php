@@ -2,7 +2,7 @@
 /**
  * __autoload .INC file
  *
- * Last Modified: 2008-04-02
+ * Last Modified: 2008-04-05
  */
 
 function __autoload($class_name)
@@ -625,6 +625,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/database/classes/DB.inc.php';
 			break;
 
+		case('DBPages_AdminHelper'): 
+			require_once PROJECT_ROOT . '/plug-ins/db-pages/classes/helpers/DBPages_AdminHelper.inc.php';
+			break;
+
 		case('DBPages_ConfigManager'): 
 			require_once PROJECT_ROOT . '/plug-ins/db-pages/classes/DBPages_ConfigManager.inc.php';
 			break;
@@ -663,6 +667,10 @@ function __autoload($class_name)
 
 		case('DBPages_PageRenderer'): 
 			require_once PROJECT_ROOT . '/plug-ins/db-pages/classes/renderers/DBPages_PageRenderer.inc.php';
+			break;
+
+		case('DBPages_PageSectionNotFoundException'): 
+			require_once PROJECT_ROOT . '/plug-ins/db-pages/classes/exceptions/DBPages_PageSectionNotFoundException.inc.php';
 			break;
 
 		case('DBPages_PCROFactory'): 
@@ -961,6 +969,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/html-tags/classes/standard/HTMLTags_Code.inc.php';
 			break;
 
+		case('HTMLTags_ColGroup'): 
+			require_once PROJECT_ROOT . '/haddock/html-tags/classes/standard/HTMLTags_ColGroup.inc.php';
+			break;
+
 		case('HTMLTags_ConfirmationP'): 
 			require_once PROJECT_ROOT . '/haddock/html-tags/classes/extensions/HTMLTags_ConfirmationP.inc.php';
 			break;
@@ -1009,8 +1021,20 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/html-tags/classes/standard/HTMLTags_Form.inc.php';
 			break;
 
+		case('HTMLTags_FormActionAttribute'): 
+			require_once PROJECT_ROOT . '/haddock/html-tags/classes/HTMLTags_FormActionAttribute.inc.php';
+			break;
+
+		case('HTMLTags_FormWithInputs'): 
+			require_once PROJECT_ROOT . '/haddock/html-tags/classes/extensions/HTMLTags_FormWithInputs.inc.php';
+			break;
+
 		case('HTMLTags_Heading'): 
 			require_once PROJECT_ROOT . '/haddock/html-tags/classes/standard/HTMLTags_Heading.inc.php';
+			break;
+
+		case('HTMLTags_HiddenInput'): 
+			require_once PROJECT_ROOT . '/haddock/html-tags/classes/extensions/HTMLTags_HiddenInput.inc.php';
 			break;
 
 		case('HTMLTags_HR'): 
@@ -1115,6 +1139,10 @@ function __autoload($class_name)
 
 		case('HTMLTags_SelectFactory'): 
 			require_once PROJECT_ROOT . '/haddock/html-tags/classes/factories/HTMLTags_SelectFactory.inc.php';
+			break;
+
+		case('HTMLTags_SimpleForm'): 
+			require_once PROJECT_ROOT . '/haddock/html-tags/classes/extensions/HTMLTags_SimpleForm.inc.php';
 			break;
 
 		case('HTMLTags_SimpleOLForm'): 
@@ -1373,6 +1401,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/object-orientation/classes/ObjectOrientation_NamedMethodCaller.inc.php';
 			break;
 
+		case('Oedipus_Actor'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Actor.inc.php';
+			break;
+
 		case('Oedipus_DBPage'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_DBPage.inc.php';
 			break;
@@ -1391,6 +1423,30 @@ function __autoload($class_name)
 
 		case('Oedipus_MailingListSignUpPage'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_MailingListSignUpPage.inc.php';
+			break;
+
+		case('Oedipus_OedipusHTMLTable'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusHTMLTable.inc.php';
+			break;
+
+		case('Oedipus_Option'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Option.inc.php';
+			break;
+
+		case('Oedipus_Position'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Position.inc.php';
+			break;
+
+		case('Oedipus_StatedIntention'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_StatedIntention.inc.php';
+			break;
+
+		case('Oedipus_Table'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Table.inc.php';
+			break;
+
+		case('Oedipus_TableCreatorPage'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_TableCreatorPage.inc.php';
 			break;
 
 		case('OrderedTables_AdminCRUDHelper'): 
