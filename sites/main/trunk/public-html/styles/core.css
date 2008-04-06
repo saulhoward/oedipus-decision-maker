@@ -41,6 +41,15 @@ a:visited
 {
 	margin: 1em 0;
 }
+#content ul.links
+{
+	margin: 1em;
+}
+#content ul.links li
+{
+	margin: 0.2em 0;
+	list-style: disc url(/images/bullet_blue.png) inside;
+}
 
 #navigation
 {

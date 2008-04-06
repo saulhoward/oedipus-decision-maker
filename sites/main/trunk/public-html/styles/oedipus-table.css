@@ -64,16 +64,49 @@ table.oedipus #red.actor-column
 {
 	background-color: #FF8080; /* RED -50% SAT. */
 }
+table.oedipus #green.actor-column
+{
+	background-color: #80FF80; /* GREEN -50% SAT. */
+}
+table.oedipus #orange.actor-column
+{
+	background-color: #FFE480; /* ORANGE -50% SAT. */
+}
 
 table.oedipus .si-column
 {
 	background-color: #CAE8EA;
 }
 
+table.oedipus th.option em
+{
+/*        font-weight: 900;*/
+	color: black;
+}
 table.oedipus td.option, table.oedipus th.option
 {
 	background: #CAE8EA url(images/bg_header.jpg) no-repeat;
 	color: #4f6b72;
+}
+
+table.oedipus #red.option, table.oedipus #red.option
+{
+	border-left: 10px solid red;
+}
+
+table.oedipus #blue.option, table.oedipus #blue.option
+{
+	border-left: 10px solid blue;
+}
+
+table.oedipus #green.option, table.oedipus #green.option
+{
+	border-left: 10px solid green;
+}
+
+table.oedipus #orange.option, table.oedipus #orange.option
+{
+	border-left: 10px solid #FFC800;
 }
 
 /* ICONS FOR POSITION AND SI TILES */
@@ -139,6 +172,57 @@ table.oedipus a.position-tile#red0
 {
 	background-image: url('/images/position-tiles/40px-png/squares/red_empty.png');
 }
+/* green */
+table.oedipus a.position-tile#green1x
+{
+	background-image: url('/images/position-tiles/40px-png/squares/green_filled_x.png');
+}
+table.oedipus a.position-tile#green1q
+{
+	background-image: url('/images/position-tiles/40px-png/squares/green_filled_question.png');
+}
+table.oedipus a.position-tile#green1
+{
+	background-image: url('/images/position-tiles/40px-png/squares/green_filled.png');
+}
+table.oedipus a.position-tile#green0x
+{
+	background-image: url('/images/position-tiles/40px-png/squares/green_empty_x.png');
+}
+table.oedipus a.position-tile#green0q
+{
+	background-image: url('/images/position-tiles/40px-png/squares/green_empty_question.png');
+}
+table.oedipus a.position-tile#green0
+{
+	background-image: url('/images/position-tiles/40px-png/squares/green_empty.png');
+}
+/* orange */
+table.oedipus a.position-tile#orange1x
+{
+	background-image: url('/images/position-tiles/40px-png/squares/orange_filled_x.png');
+}
+table.oedipus a.position-tile#orange1q
+{
+	background-image: url('/images/position-tiles/40px-png/squares/orange_filled_question.png');
+}
+table.oedipus a.position-tile#orange1
+{
+	background-image: url('/images/position-tiles/40px-png/squares/orange_filled.png');
+}
+table.oedipus a.position-tile#orange0x
+{
+	background-image: url('/images/position-tiles/40px-png/squares/orange_empty_x.png');
+}
+table.oedipus a.position-tile#orange0q
+{
+	background-image: url('/images/position-tiles/40px-png/squares/orange_empty_question.png');
+}
+table.oedipus a.position-tile#orange0
+{
+	background-image: url('/images/position-tiles/40px-png/squares/orange_empty.png');
+}
+
 /*SI TILES*/
 table.oedipus a.si-tile#blue1x
 {
@@ -163,4 +247,79 @@ table.oedipus a.si-tile#blue0q
 table.oedipus a.si-tile#blue0
 {
 	background-image: url('/images/position-tiles/40px-png/diamonds/blue_empty.png');
+}
+/* RED SI */
+table.oedipus a.si-tile#red1x
+{
+	background-image: url('/images/position-tiles/40px-png/diamonds/red_filled_x.png');
+}
+table.oedipus a.si-tile#red1q
+{
+	background-image: url('/images/position-tiles/40px-png/diamonds/red_filled_question.png');
+}
+table.oedipus a.si-tile#red1
+{
+	background-image: url('/images/position-tiles/40px-png/diamonds/red_filled.png');
+}
+table.oedipus a.si-tile#red0x
+{
+	background-image: url('/images/position-tiles/40px-png/diamonds/red_empty_x.png');
+}
+table.oedipus a.si-tile#red0q
+{
+	background-image: url('/images/position-tiles/40px-png/diamonds/red_empty_question.png');
+}
+table.oedipus a.si-tile#red0
+{
+	background-image: url('/images/position-tiles/40px-png/diamonds/red_empty.png');
+}
+/* green SI */
+table.oedipus a.si-tile#green1x
+{
+	background-image: url('/images/position-tiles/40px-png/diamonds/green_filled_x.png');
+}
+table.oedipus a.si-tile#green1q
+{
+	background-image: url('/images/position-tiles/40px-png/diamonds/green_filled_question.png');
+}
+table.oedipus a.si-tile#green1
+{
+	background-image: url('/images/position-tiles/40px-png/diamonds/green_filled.png');
+}
+table.oedipus a.si-tile#green0x
+{
+	background-image: url('/images/position-tiles/40px-png/diamonds/green_empty_x.png');
+}
+table.oedipus a.si-tile#green0q
+{
+	background-image: url('/images/position-tiles/40px-png/diamonds/green_empty_question.png');
+}
+table.oedipus a.si-tile#green0
+{
+	background-image: url('/images/position-tiles/40px-png/diamonds/green_empty.png');
+}
+/* orange SI */
+table.oedipus a.si-tile#orange1x
+{
+	background-image: url('/images/position-tiles/40px-png/diamonds/orange_filled_x.png');
+}
+table.oedipus a.si-tile#orange1q
+{
+	background-image: url('/images/position-tiles/40px-png/diamonds/orange_filled_question.png');
+}
+table.oedipus a.si-tile#orange1
+{
+	background-image: url('/images/position-tiles/40px-png/diamonds/orange_filled.png');
+}
+table.oedipus a.si-tile#orange0x
+{
+	background-image: url('/images/position-tiles/40px-png/diamonds/orange_empty_x.png');
+}
+table.oedipus a.si-tile#orange0q
+{
+	background-image: url('/images/position-tiles/40px-png/diamonds/orange_empty_question.png');
+}
+table.oedipus a.si-tile#orange0
+{
+	background-image: url('/images/position-tiles/40px-png/diamonds/orange_empty.png');
 }

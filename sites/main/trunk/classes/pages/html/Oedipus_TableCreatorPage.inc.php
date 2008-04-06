@@ -13,12 +13,7 @@ extends
 	public function
 		content()
 	{
-		echo <<<HTML
-<h2>Drama Theoretic Table Creator</h2>
-<p>
-	This is the table creator
-</p>
-HTML;
+		DBPages_PageRenderer::render_page_section('table-creator', 'instructions');
 
 		if (isset($_GET['table_values']))
 		{

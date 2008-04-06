@@ -189,8 +189,11 @@ extends
 			{
 				// Actors Name TR
 				$actors_name_tr = new HTMLTags_TR();
-				$actors_name_th = new HTMLTags_TH($actor->get_name());
+				$actors_name_em = new HTMLTags_Em($actor->get_name());
+				$actors_name_th = new HTMLTags_TH();
+				$actors_name_th->append_tag_to_content($actors_name_em);
 				$actors_name_th->set_attribute_str('class', 'option');
+				$actors_name_th->set_attribute_str('id', $actor->get_color());
 				$actors_name_tr->append_tag_to_content($actors_name_th);
 
 				for ($i = -1; $i < count($this->actors); $i++)
@@ -207,6 +210,7 @@ extends
 					$tr = new HTMLTags_TR();
 					$option_th = new HTMLTags_TH($option->get_name());
 					$option_th->set_attribute_str('class', 'option');
+					$option_th->set_attribute_str('id', $actor->get_color());
 					$tr->append_tag_to_content($option_th);
 
 					foreach ($this->actors as $position_actor)
