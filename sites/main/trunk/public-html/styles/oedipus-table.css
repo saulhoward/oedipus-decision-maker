@@ -2,6 +2,13 @@
  * Saul Howard 2008, CLWD
  */
 
+div.oedipus-table
+{
+	padding: 1em;
+	margin: 0 2em;
+	width: 40%;
+	background: #FFFF99;
+}
 table.oedipus
 {
 	font: italic 1em "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
@@ -13,7 +20,9 @@ table.oedipus caption {
 }
 
 table.oedipus th {
+	border-left: 1px solid #C1DAD7;
 	border-right: 1px solid #C1DAD7;
+	border-top: 1px solid #C1DAD7;
 	border-bottom: 1px solid #C1DAD7;
 	letter-spacing: 2px;
 	text-transform: uppercase;
@@ -22,7 +31,12 @@ table.oedipus th {
 }
 table.oedipus thead th
 {
+	border-left: 0;
 	text-align: center;
+}
+table.oedipus th.blank
+{
+	border: 0;
 }
 table.oedipus td {
 	border-right: 1px solid #C1DAD7;

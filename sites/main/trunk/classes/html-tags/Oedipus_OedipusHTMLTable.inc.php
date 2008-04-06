@@ -128,7 +128,9 @@ extends
 		
 		/* Blank TH
 		 */
-		$heading_tr->append_tag_to_content(new HTMLTags_TH());
+		$blank_th = new HTMLTags_TH();
+		$blank_th->set_attribute_str('class', 'blank');
+		$heading_tr->append_tag_to_content($blank_th);
 
 		/*
 		 * Append the column headings for the data in the table.
@@ -228,6 +230,18 @@ extends
 
 					$option_trs[] = $tr;
 				}
+				// Blank TR
+				$blank_tr = new HTMLTags_TR();
+				$blank_th = new HTMLTags_TH();
+				$blank_th->set_attribute_str('class', 'blank');
+				$blank_tr->append_tag_to_content($blank_th);
+
+				for ($i = -1; $i < count($this->actors); $i++)
+				{
+					$blank_td = new HTMLTags_TD();
+					$blank_tr->append_tag_to_content($blank_td);
+				}
+				$option_trs[] = $blank_tr;
 			}
 		}
 

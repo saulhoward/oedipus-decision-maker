@@ -20,6 +20,9 @@ extends
 </p>
 HTML;
 
+		$table_div = new HTMLTags_Div();
+		$table_div->set_attribute_str('class', 'oedipus-table');
+
 		// Creating a Table
 		// -----------------
 		// 1.
@@ -68,13 +71,15 @@ HTML;
 		$table = new Oedipus_Table('Example Table', $actors);
 
 		// DEBUG
-//                print_r($table->get_actors());exit;
+		// print_r($table->get_actors());exit;
 
 		// 4.
 		// Create the HTMLTable from the Oedipus_Table object
 		// and display it
 		$html_table = new Oedipus_OedipusHTMLTable($table);
-		echo $html_table->get_as_string();
+
+		$table_div->append_tag_to_content($html_table);
+		echo $table_div->get_as_string();
 	}
 
 }
