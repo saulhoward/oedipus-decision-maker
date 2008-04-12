@@ -2,7 +2,7 @@
 /**
  * __autoload .INC file
  *
- * Last Modified: 2008-04-06
+ * Last Modified: 2008-04-12
  */
 
 function __autoload($class_name)
@@ -961,6 +961,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/html-tags/classes/standard/HTMLTags_BR.inc.php';
 			break;
 
+		case('HTMLTags_Button'): 
+			require_once PROJECT_ROOT . '/haddock/html-tags/classes/standard/HTMLTags_Button.inc.php';
+			break;
+
 		case('HTMLTags_Caption'): 
 			require_once PROJECT_ROOT . '/haddock/html-tags/classes/standard/HTMLTags_Caption.inc.php';
 			break;
@@ -1409,6 +1413,22 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_DBPage.inc.php';
 			break;
 
+		case('Oedipus_Drama'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Drama.inc.php';
+			break;
+
+		case('Oedipus_DramaEditorHelper'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_DramaEditorHelper.inc.php';
+			break;
+
+		case('Oedipus_DramaEditorPage'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_DramaEditorPage.inc.php';
+			break;
+
+		case('Oedipus_DramaEditorRedirectScript'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/redirect-scripts/Oedipus_DramaEditorRedirectScript.inc.php';
+			break;
+
 		case('Oedipus_ExampleTablePage'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_ExampleTablePage.inc.php';
 			break;
@@ -1459,6 +1479,10 @@ function __autoload($class_name)
 
 		case('Oedipus_TableCreatorRedirectScript'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/redirect-scripts/Oedipus_TableCreatorRedirectScript.inc.php';
+			break;
+
+		case('Oedipus_TableRenderer'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/renderers/Oedipus_TableRenderer.inc.php';
 			break;
 
 		case('OrderedTables_AdminCRUDHelper'): 

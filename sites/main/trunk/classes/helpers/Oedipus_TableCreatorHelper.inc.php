@@ -24,7 +24,7 @@ class
 
 		$table_div = new HTMLTags_Div();
 		$table_div->set_attribute_str('class', 'oedipus-table');
-		$html_table = Oedipus_TableCreatorHelper::render_oedipus_html_table($table);
+		$html_table = Oedipus_TableRenderer::render_oedipus_html_table($table);
 		$table_div->append_tag_to_content($html_table);
 		$table_creator_page_div->append_tag_to_content($table_div);
 
@@ -114,12 +114,6 @@ class
 		$get['actor_color-2'] = 'red';
 
 		return self::create_oedipus_table_from_get($get);
-	}
-
-	public static function
-		render_oedipus_html_table(Oedipus_Table $table)
-	{
-		return new Oedipus_OedipusHTMLTable($table);
 	}
 
 	public static function
@@ -229,7 +223,7 @@ class
 		$return_to_url = new HTMLTags_URL();
 		$return_to_url->set_file('/');
 		$return_to_url->set_get_variable('oo-page', 1);
-		$return_to_url->set_get_variable('page-class', Oedipus_TableCreatorPage);
+		$return_to_url->set_get_variable('page-class', 'Oedipus_TableCreatorPage');
 
 		$return_to_url->set_get_variable('table_values', 1);
 
@@ -256,14 +250,16 @@ class
 //                                $_SESSION['email'] = $_POST['email'];
 //                        }
 //                        
+
 //            try {
-//                $last_added_id = $people_table->add_person(
+//                $last_added_id = $oedipus_tables_table->update_table(
 //                    $_POST['name'],
 //                    $_POST['email'],
 //                    isset($_POST['force_email'])
 //                );
 //                
-//                $return_to_url->set_get_variable('person_added');
+//                $return_to_url->set_get_variable('table_updated');
+
 //                
 //                $_SESSION['last_added_id'] = $last_added_id;
 //                
