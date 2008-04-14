@@ -189,23 +189,6 @@ class
 		return $form;
 	}
 
-	// FORM URLS
-	public static function
-		get_table_creator_form_action_url()
-	{
-		$url = new HTMLTags_URL();
-		$url->set_file('/Oedipus_TableCreatorRedirectScript');
-		return $url;
-	}
-	
-	public static function
-		get_table_creator_form_cancel_url()
-	{
-		$url = new HTMLTags_URL();
-		$url->set_file('/Oedipus_TableCreatorPage');
-		return $url;
-	}
-
 	// PROCESS GET & POST
 	public static function
 		process_table_creator_form()
@@ -282,6 +265,35 @@ class
 		#exit;
 		
 		return $return_to_url;
+	}
+	
+	/*
+	 * ----------------------------------------
+	 * Functions to do with making URLs
+	 * ----------------------------------------
+	 */
+	
+	// FORM URLS
+	public static function
+		get_table_creator_form_action_url()
+	{
+		#$url = new HTMLTags_URL();
+		#$url->set_file('/Oedipus_TableCreatorRedirectScript');
+		#return $url;
+		
+		return PublicHTML_URLHelper
+			::get_oo_page_url('Oedipus_TableCreatorRedirectScript');
+	}
+	
+	public static function
+		get_table_creator_form_cancel_url()
+	{
+		#$url = new HTMLTags_URL();
+		#$url->set_file('/Oedipus_TableCreatorPage');
+		#return $url;
+		
+		return PublicHTML_URLHelper
+			::get_oo_page_url('Oedipus_TableCreatorPage');
 	}
 }
 ?>
