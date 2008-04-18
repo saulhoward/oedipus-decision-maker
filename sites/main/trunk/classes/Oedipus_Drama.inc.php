@@ -64,6 +64,12 @@ Oedipus_Drama
 	}
 
 	public function
+		get_id()
+	{
+		return $this->id;
+	}
+
+	public function
 		get_name()
 	{
 		return $this->name;

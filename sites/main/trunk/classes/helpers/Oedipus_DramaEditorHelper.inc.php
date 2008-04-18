@@ -204,13 +204,13 @@ SQL;
 		}
 
 		// CREATE TABLE FORM
-		$drama_div->append_tag_to_content(self::render_html_new_table_form());
+		$drama_div->append_tag_to_content(self::render_html_new_table_form($drama));
 
 		return $drama_div;
 	}
 
 	public static function
-		render_html_new_table_form()
+		render_html_new_table_form(Oedipus_Drama $drama)
 	{
 		$form = new HTMLTags_SimpleOLForm('new_table');
 		$form->set_legend_text('New Table');
@@ -227,6 +227,7 @@ SQL;
 		$form->add_input_name_with_value('table_name', '', 'Table Name:');
 		// Hidden Inputs
 		$form->add_hidden_input('new_table', 1);
+		$form->add_hidden_input('drama_unique_name', $drama->get_unique_name());
 
 		$form->set_submit_text('Create Table');
 
@@ -291,6 +292,55 @@ SQL;
 		}
 
 		return $dramas;
+	}
+
+	public function
+		add_table(
+			Oedipus_Drama $drama,
+		       	$table_name
+		)
+	{
+		// ADD TABLE TO DATABASE
+		$drama_id = $drama->get_id();
+		$dbh = DB::m();
+		$sql = <<<SQL
+INSERT INTO
+	oedipus_tables
+SET
+	name = '$table_name',
+	drama_id = $drama_id,
+	added = NOW()
+SQL;
+
+		//                print_r($sql);exit;
+		$result = mysql_query($sql, $dbh);
+
+		$table_id = mysql_insert_id($dbh);
+
+		// ADD DEFAULT ACTOR tO DATABASE
+		$actor_name = 'First Actor';
+		$actor_color = 'red';
+		$sql2 = <<<SQL
+INSERT INTO
+	oedipus_actors
+SET
+	name = '$actor_name',
+	color = '$actor_color',
+	table_id = $table_id,
+	added = NOW()
+SQL;
+
+		//                print_r($sql);exit;
+		$result2 = mysql_query($sql2, $dbh);
+		$actor_id = mysql_insert_id($dbh);
+
+		$actor = new Oedipus_Actor($actor_id, $actor_name, $actor_color);
+		$actors = array();
+		$actors[] = $actor;
+
+		$table = new Oedipus_Table($table_id, $table_name, $actors);
+		//                print_r($table);exit;
+		return $table;
 	}
 
 	// ------------

@@ -11,12 +11,12 @@
 class
 Oedipus_Table
 {
+	private $id;
 	private $name;
-
 	private $actors;
 
 	public function
-		__construct($name, $actors)
+		__construct($id, $name, $actors)
 	{
 		$this->name = $name;
 
