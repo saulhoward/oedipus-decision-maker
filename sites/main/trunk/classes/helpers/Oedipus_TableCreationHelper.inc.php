@@ -1,12 +1,13 @@
 <?php
 /**
- * Oedipus_TableCreatorHelper
+ * Oedipus_TableCreationHelper
  *
  * @copyright RFI, 2008-02-18
+ * @copyright SANH, 2008-04-19
  */
 
 class
-	Oedipus_TableCreatorHelper
+	Oedipus_TableCreationHelper
 {
 
 	public static function
@@ -30,7 +31,7 @@ class
 
 		$form_div = new HTMLTags_Div();
 		$form_div->set_attribute_str('class', 'table-creator-form');
-		$html_form = Oedipus_TableCreatorHelper::render_oedipus_html_table_creator_form($table);
+		$html_form = Oedipus_TableCreationHelper::render_oedipus_html_table_creator_form($table);
 		$form_div->append_tag_to_content($html_form);
 		$table_creator_page_div->append_tag_to_content($form_div);
 
