@@ -1,0 +1,8 @@
+CREATE TABLE `oedipus_options` (
+`id` INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`added` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_roman_ci NOT NULL ,
+`name` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_roman_ci NOT NULL ,
+`actor_id` INT( 10 ) UNSIGNED NOT NULL ,
+`stated_intention_id` INT( 10 ) UNSIGNED NOT NULL
+) ENGINE = MYISAM ;
+

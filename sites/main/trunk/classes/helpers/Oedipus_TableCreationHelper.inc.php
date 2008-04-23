@@ -39,6 +39,134 @@ class
 	}
 
 	public static function
+		get_oedipus_table_by_id($table_id)
+	{
+		$dbh = DB::m();
+		// Get the table
+		$tables_query = <<<SQL
+SELECT 
+	*
+	FROM
+		oedipus_tables
+	WHERE
+		id = $table_id
+SQL;
+
+		//                print_r($tables_query);exit;
+		$tables_result = mysql_query($tables_query, $dbh);
+		//                print_r($tables);exit;
+		$table_result = mysql_fetch_array($tables_result);
+		// -----------------------------------------------------------------------------
+		// Creating a Table
+		// -----------------
+		// 1.
+		// Create the actors,
+		// and their options, options have stated intentions
+
+		// Foreach table, get the actors
+		$table_id = $table_result['id'];
+		// Get all actors for this drama
+		$actors_query = <<<SQL
+SELECT 
+	*
+	FROM
+		oedipus_actors
+	WHERE
+		table_id = $table_id
+SQL;
+
+		//                print_r($actors_query);exit;
+		$actors_result = mysql_query($actors_query, $dbh);
+		//                print_r($actors);exit;
+
+		// create an array of actors
+		$actors = array();
+		while($actor_result = mysql_fetch_array($actors_result))
+		{
+			$actor = new Oedipus_Actor(
+				$actor_result['id'], $actor_result['name'], $actor_result['color']
+			);
+
+			//add the stated intentions to the option object
+			//add the options to the actor object
+	
+			for ($j = 1; $j <= $get['actor-' . $i . '-no_of_options'];  $j++)
+			{
+				$stated_intention = new Oedipus_StatedIntention('1', 'q');
+				$actors_option = 
+					new Oedipus_Option(
+						$j, $get['actor-' . $i . '-option_name-' . $j], $stated_intention
+					);
+
+				$actor->add_option($actors_option);
+			}
+
+			$actors[] = $actor;
+		//add the positions to the option object
+			//
+		}
+
+		$table = new Oedipus_Table($table_result['id'], $table_result['name'], $actors);
+		// -----------------------------------------------------------------------------
+		// -----------------------------------------------------------------------------
+		// -----------------------------------------------------------------------------
+		// Creating a Table
+		// -----------------
+		// 1.
+		// Create the actors,
+		// and their options, options have stated intentions
+
+		$actors = array();
+		for ($i = 1; $i <= $get['no_of_actors'];  $i++)
+		{
+			$actor = new Oedipus_Actor($i, $get['actor_name-' . $i], $get['actor_color-' . $i]);
+
+			for ($j = 1; $j <= $get['actor-' . $i . '-no_of_options'];  $j++)
+			{
+				$stated_intention = new Oedipus_StatedIntention('1', 'q');
+				$actors_option = 
+					new Oedipus_Option(
+						$j, $get['actor-' . $i . '-option_name-' . $j], $stated_intention
+					);
+
+				$actor->add_option($actors_option);
+			}
+
+			$actors[] = $actor;
+		}
+
+		// 2.
+		// create the positions 
+		// attached to options for ease of display (?)
+		// positions have an actor as well as an option
+		foreach ($actors as $actor)
+		{
+			foreach ($actor->get_options() as $option)
+			{
+				$positions = array();
+
+				foreach ($actors as $position_actor)
+				{
+					$positions[$position_actor->get_name()] =
+						new Oedipus_Position('0', 'q', $position_actor);
+				}
+
+				$option->add_positions($positions);
+			}
+		}
+
+		// 3.
+		// Create the table
+		$table = new Oedipus_Table($get['table_name'], $actors);
+
+		// DEBUG
+		// print_r($table->get_actors());exit;
+
+		return $table;
+	}
+
+
+	public static function
 		create_oedipus_table_from_get($get)
 	{
 		// Creating a Table
