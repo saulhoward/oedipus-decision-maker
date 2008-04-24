@@ -2,7 +2,7 @@
 /**
  * __autoload .INC file
  *
- * Last Modified: 2008-04-23
+ * Last Modified: 2008-04-24
  */
 
 function __autoload($class_name)
@@ -1463,6 +1463,10 @@ function __autoload($class_name)
 
 		case('Oedipus_OedipusTableCreatorHTMLForm'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusTableCreatorHTMLForm.inc.php';
+			break;
+
+		case('Oedipus_OedipusTableOptionsUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusTableOptionsUL.inc.php';
 			break;
 
 		case('Oedipus_Option'): 

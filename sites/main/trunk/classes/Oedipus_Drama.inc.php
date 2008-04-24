@@ -30,7 +30,8 @@ Oedipus_Drama
 			Oedipus_Table $table
 		)
 	{
-		$this->tables[$table->get_name()] = $table;
+//                $this->tables[$table->get_name()] = $table;
+		$this->tables[$table->get_id()] = $table;
 	}
 
 	public function
@@ -42,12 +43,12 @@ Oedipus_Drama
 	}
 
 	public function
-		get_table($table_name)
+		get_table($table_id)
 	{
-		if (isset($this->tables[$table_name])) {
-			return $this->tables[$table_name];
+		if (isset($this->tables[$table_id])) {
+			return $this->tables[$table_id];
 		} else {
-			throw new Exception("No table called '$table_name' in the '$this->name' drama!");
+			throw new Exception("No table with id '$table_id' in the '$this->name' drama!");
 		}
 	}
 

@@ -37,6 +37,10 @@ a:visited
 	font-size: 1.4em;
 	font-weight: 900;
 }
+#content h2 span
+{
+	color: red;
+}
 #content p
 {
 	margin: 1em 0;

@@ -7,7 +7,7 @@
  */
 
 class
-	Oedipus_DramaEditorHelper
+Oedipus_DramaEditorHelper
 {
 	public static function
 		render_oedipus_drama_editor_page_div(
@@ -23,11 +23,11 @@ class
 		$drama_div->append_tag_to_content($html_drama);
 		$drama_editor_page_div->append_tag_to_content($drama_div);
 
-//                $form_div = new HTMLTags_Div();
-//                $form_div->set_attribute_str('class', 'drama-editor-form');
-//                $html_form = Oedipus_TableCreatorHelper::render_oedipus_html_drama_editor_form($drama);
-//                $form_div->append_tag_to_content($html_form);
-//                $drama_editor_page_div->append_tag_to_content($form_div);
+		//                $form_div = new HTMLTags_Div();
+		//                $form_div->set_attribute_str('class', 'drama-editor-form');
+		//                $html_form = Oedipus_TableCreatorHelper::render_oedipus_html_drama_editor_form($drama);
+		//                $form_div->append_tag_to_content($html_form);
+		//                $drama_editor_page_div->append_tag_to_content($form_div);
 
 		return $drama_editor_page_div;
 	}
@@ -78,7 +78,7 @@ class
 		return PublicHTML_URLHelper
 			::get_oo_page_url('Oedipus_DramaEditorRedirectScript');
 	}
-	
+
 	public static function
 		get_new_drama_form_cancel_url()
 	{
@@ -102,14 +102,14 @@ SET
 	added = NOW()
 SQL;
 
-//                print_r($sql);exit;
+		//                print_r($sql);exit;
 		$result = mysql_query($sql, $dbh);
 
 		$drama_id = mysql_insert_id($dbh);
 
 
 		$drama = new Oedipus_Drama($drama_id, $drama_name, $drama_unique_name);
-//                print_r($drama);exit;
+		//                print_r($drama);exit;
 		return $drama;
 	}
 
@@ -117,11 +117,11 @@ SQL;
 		create_unique_name($name)
 	{
 		// unique names will be used as part of the url
-		$name = urlencode($name);
+		$name = self::string_for_url($name);
 
 		$i = 0;
 
-//                print_r($name);exit;
+		//                print_r($name);exit;
 		// Check if name is already in oedipus_dramas
 		$is_name_unique = self::is_name_unique($name);
 		while ($is_name_unique > 0)
@@ -135,9 +135,32 @@ SQL;
 			$i++;
 		}
 
-//                print_r($name);exit;
+		//                print_r($name);exit;
 		return $name;
 	}
+
+	public function 
+		string_for_url($strIn) 
+	{
+		//Function from darrenG at http://www.webmasterworld.com/php/3413526.htm
+		//
+		$strOut = '';
+		$allowed = '/[^a-zA-Z0-9 ]/';
+		$strOut = $strIn;
+
+		// only alphanum and spaces allowed
+		$strOut = preg_replace($allowed, '', $strOut);
+
+		// swap spaces for _ (changed to delete spaces)
+		// $strOut = str_replace(' ', '_', $strOut);
+		$strOut = str_replace(' ', '', $strOut);
+		$strOut = trim($strOut);
+
+		// make lower case for consistancy
+		$strOut = strtolower($strOut);
+
+		return $strOut;
+	} 
 
 	public function
 		is_name_unique($unique_name)
@@ -153,7 +176,7 @@ SELECT
 		unique_name = '$unique_name'
 SQL;
 
-//                print_r($query);exit;
+		//                print_r($query);exit;
 		$result = mysql_query($query, $dbh);
 		$row = mysql_fetch_array($result);
 
@@ -162,7 +185,7 @@ SQL;
 			return TRUE;
 		}
 
-//                print_r($row['count']);exit;
+		//                print_r($row['count']);exit;
 		return FALSE;
 	}
 
@@ -180,10 +203,10 @@ SELECT
 		unique_name = '$unique_name'
 SQL;
 
-		//                print_r($query);exit;
+		//                                print_r($query);exit;
 		$result = mysql_query($query, $dbh);
 		$row = mysql_fetch_array($result);
-		//                print_r($row);exit;
+		//                                print_r($row);exit;
 
 		$drama = new Oedipus_Drama($row['id'], $row['name'], $row['unique_name']);
 
@@ -199,17 +222,20 @@ SELECT
 		drama_id = $drama_id
 SQL;
 
-		//                print_r($tables_query);exit;
+//                                print_r($tables_query);exit;
 		$tables_result = mysql_query($tables_query, $dbh);
-		//                print_r($tables);exit;
+//                print_r($tables_result);exit;
 
 		// Add the tables to the drama object
 		//
-		while($table_result = mysql_fetch_array($tables_result))
+		if ($tables_result)
 		{
-			$table_id = $table_result['id'];
-			$table = Oedipus_TableCreationHelper::get_oedipus_table_by_id($table_id);
-			$drama->add_table($table);
+			while($table_result = mysql_fetch_array($tables_result))
+			{
+				$table_id = $table_result['id'];
+				$table = Oedipus_TableCreationHelper::get_oedipus_table_by_id($table_id);
+				$drama->add_table($table);
+			}
 		}
 		return $drama;
 	}
@@ -224,11 +250,17 @@ SQL;
 		{
 			$table_div = new HTMLTags_Div();
 			$table_div->set_attribute_str('class', 'oedipus-table');
-			$html_table = Oedipus_TableRenderer::render_oedipus_html_table($table);
+
+			$html_table = 
+				Oedipus_TableCreationHelper::get_oedipus_html_table($table);
 			$table_div->append_tag_to_content($html_table);
+
+			$html_table_options = 
+				Oedipus_TableCreationHelper::get_oedipus_html_table_options($table);
+			$table_div->append_tag_to_content($html_table_options);
+			
 			$drama_div->append_tag_to_content($table_div);
 
-//                        $drama_div->append_tag_to_content(Oedipus_TableRenderer::render_oedipus_html_table($table));
 		}
 
 		// CREATE TABLE FORM
@@ -269,7 +301,7 @@ SQL;
 		return PublicHTML_URLHelper
 			::get_oo_page_url('Oedipus_DramaEditorRedirectScript');
 	}
-	
+
 	public static function
 		get_new_table_form_cancel_url()
 	{
@@ -307,7 +339,7 @@ SELECT
 	oedipus_dramas
 SQL;
 
-//                print_r($query);exit;
+		//                print_r($query);exit;
 		$result = mysql_query($query, $dbh);
 
 		$dramas = array();
@@ -323,7 +355,7 @@ SQL;
 	public function
 		add_table(
 			Oedipus_Drama $drama,
-		       	$table_name
+			$table_name
 		)
 	{
 		// ADD TABLE TO DATABASE
@@ -441,7 +473,7 @@ SET
 	actor_id = $actor_id
 SQL;
 
-//                                                        print_r($sql5);exit;
+					//                                                        print_r($sql5);exit;
 					$result5 = mysql_query($sql5, $dbh);
 					$position_id = mysql_insert_id($dbh);
 
@@ -462,7 +494,7 @@ SQL;
 
 		//
 		// Update Drama Object with new Table
-//                $drama->add_table($table);
+		//                $drama->add_table($table);
 		return $table;
 	}
 

@@ -16,6 +16,7 @@ extends
 	{
 		if (isset($_GET['drama_unique_name']))
 		{
+//                        print_r($_GET);exit;
 			$drama = Oedipus_DramaEditorHelper::get_drama_by_unique_name($_GET['drama_unique_name']);
 			echo '<h2>Editing Drama <span class="drama_name">' 
 				. $drama->get_name() 

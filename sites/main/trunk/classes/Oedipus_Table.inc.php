@@ -18,6 +18,7 @@ Oedipus_Table
 	public function
 		__construct($id, $name, $actors)
 	{
+		$this->id = $id;
 		$this->name = $name;
 
 		$this->actors = $actors;
@@ -59,6 +60,12 @@ Oedipus_Table
 		count_actors()
 	{
 		return count($this->actors);
+	}
+
+	public function
+		get_id()
+	{
+		return $this->id;
 	}
 
 	public function

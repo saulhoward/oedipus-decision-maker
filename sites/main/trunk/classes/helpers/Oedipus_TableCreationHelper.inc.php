@@ -25,7 +25,7 @@ class
 
 		$table_div = new HTMLTags_Div();
 		$table_div->set_attribute_str('class', 'oedipus-table');
-		$html_table = Oedipus_TableRenderer::render_oedipus_html_table($table);
+		$html_table = self::get_oedipus_html_table($table);
 		$table_div->append_tag_to_content($html_table);
 		$table_creator_page_div->append_tag_to_content($table_div);
 
@@ -273,6 +273,18 @@ SQL;
 		$get['actor_color-2'] = 'red';
 
 		return self::create_oedipus_table_from_get($get);
+	}
+
+	public static function
+		get_oedipus_html_table_options(Oedipus_Table $table)
+	{
+		return new Oedipus_OedipusTableOptionsUL($table);
+	}
+
+	public static function
+		get_oedipus_html_table(Oedipus_Table $table)
+	{
+		return new Oedipus_OedipusHTMLTable($table);
 	}
 
 	public static function
