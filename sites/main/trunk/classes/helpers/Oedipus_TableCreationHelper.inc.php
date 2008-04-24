@@ -63,7 +63,7 @@ SQL;
 		// Create the actors,
 		// and their options, options have stated intentions
 
-		// Foreach table, get the actors
+		// For this table, get the actors
 		$table_id = $table_result['id'];
 		// Get all actors for this drama
 		$actors_query = <<<SQL
@@ -89,50 +89,59 @@ SQL;
 
 			//add the stated intentions to the option object
 			//add the options to the actor object
-	
-			for ($j = 1; $j <= $get['actor-' . $i . '-no_of_options'];  $j++)
+
+			// For this actor, get the options
+			$actor_id = $actor_result['id'];
+			// Get all actors for this drama
+			$options_query = <<<SQL
+SELECT 
+	*
+	FROM
+		oedipus_options
+	WHERE
+		actor_id = $actor_id
+SQL;
+
+			//                print_r($actors_query);exit;
+			$options_result = mysql_query($options_query, $dbh);
+			//                print_r($actors);exit;
+
+			$options = array();
+			while($option_result = mysql_fetch_array($options_result))
 			{
-				$stated_intention = new Oedipus_StatedIntention('1', 'q');
+				//get the stated intention
+				$stated_intention_id = $option_result['stated_intention_id'];
+				$stated_intentions_query = <<<SQL
+SELECT 
+	*
+	FROM
+		oedipus_stated_intentions
+	WHERE
+		id = $stated_intention_id
+SQL;
+
+				//                print_r($actors_query);exit;
+				$stated_intentions_result = mysql_query($stated_intentions_query, $dbh);
+				$stated_intention_result = mysql_fetch_array($stated_intentions_result);
+
+				$stated_intention = new Oedipus_StatedIntention(
+					$stated_intention_result['position'],
+					$stated_intention_result['doubt']
+				);
+
 				$actors_option = 
 					new Oedipus_Option(
-						$j, $get['actor-' . $i . '-option_name-' . $j], $stated_intention
+						$option_result['id'],
+						$option_result['name'],
+						$stated_intention
 					);
 
 				$actor->add_option($actors_option);
 			}
 
 			$actors[] = $actor;
-		//add the positions to the option object
+			//add the positions to the option object
 			//
-		}
-
-		$table = new Oedipus_Table($table_result['id'], $table_result['name'], $actors);
-		// -----------------------------------------------------------------------------
-		// -----------------------------------------------------------------------------
-		// -----------------------------------------------------------------------------
-		// Creating a Table
-		// -----------------
-		// 1.
-		// Create the actors,
-		// and their options, options have stated intentions
-
-		$actors = array();
-		for ($i = 1; $i <= $get['no_of_actors'];  $i++)
-		{
-			$actor = new Oedipus_Actor($i, $get['actor_name-' . $i], $get['actor_color-' . $i]);
-
-			for ($j = 1; $j <= $get['actor-' . $i . '-no_of_options'];  $j++)
-			{
-				$stated_intention = new Oedipus_StatedIntention('1', 'q');
-				$actors_option = 
-					new Oedipus_Option(
-						$j, $get['actor-' . $i . '-option_name-' . $j], $stated_intention
-					);
-
-				$actor->add_option($actors_option);
-			}
-
-			$actors[] = $actor;
 		}
 
 		// 2.
@@ -147,18 +156,39 @@ SQL;
 
 				foreach ($actors as $position_actor)
 				{
+					$actor_id = $position_actor->get_id();
+					$option_id = $option->get_id();
+					// Get all actors for this drama
+					$positions_query = <<<SQL
+SELECT 
+	*
+	FROM
+		oedipus_positions
+	WHERE
+		actor_id = $actor_id
+AND
+		option_id = $option_id
+SQL;
+
+					//                print_r($actors_query);exit;
+					$positions_result = mysql_query($positions_query, $dbh);
+					//                print_r($actors);exit;
+					$position_result = mysql_fetch_array($positions_result);
+
 					$positions[$position_actor->get_name()] =
-						new Oedipus_Position('0', 'q', $position_actor);
+						new Oedipus_Position(
+							$position_result['position'],
+							$position_result['doubt'],
+							$position_actor
+						);
 				}
 
 				$option->add_positions($positions);
 			}
 		}
 
-		// 3.
-		// Create the table
-		$table = new Oedipus_Table($get['table_name'], $actors);
 
+		$table = new Oedipus_Table($table_result['id'], $table_result['name'], $actors);
 		// DEBUG
 		// print_r($table->get_actors());exit;
 

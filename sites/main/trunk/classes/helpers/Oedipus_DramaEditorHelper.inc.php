@@ -207,33 +207,8 @@ SQL;
 		//
 		while($table_result = mysql_fetch_array($tables_result))
 		{
-			// Foreach table, get the actors
 			$table_id = $table_result['id'];
-			// Get all actors for this drama
-			$actors_query = <<<SQL
-SELECT 
-	*
-	FROM
-		oedipus_actors
-	WHERE
-		table_id = $table_id
-SQL;
-
-			//                print_r($actors_query);exit;
-			$actors_result = mysql_query($actors_query, $dbh);
-			//                print_r($actors);exit;
-
-			// Add the actors to the drama object
-			//
-			$actors = array();
-			while($actor_result = mysql_fetch_array($actors_result))
-			{
-				$actors[] = new Oedipus_Actor(
-					$actor_result['id'], $actor_result['name'], $actor_result['color']
-				);
-			}
-
-			$table = new Oedipus_Table($table_result['id'], $table_result['name'], $actors);
+			$table = Oedipus_TableCreationHelper::get_oedipus_table_by_id($table_id);
 			$drama->add_table($table);
 		}
 		return $drama;
@@ -247,7 +222,13 @@ SQL;
 		// SHOW THE TABLES
 		foreach ($drama->get_tables() as $table)
 		{
-			$drama_div->append_tag_to_content(Oedipus_TableRenderer::render_oedipus_html_table($table));
+			$table_div = new HTMLTags_Div();
+			$table_div->set_attribute_str('class', 'oedipus-table');
+			$html_table = Oedipus_TableRenderer::render_oedipus_html_table($table);
+			$table_div->append_tag_to_content($html_table);
+			$drama_div->append_tag_to_content($table_div);
+
+//                        $drama_div->append_tag_to_content(Oedipus_TableRenderer::render_oedipus_html_table($table));
 		}
 
 		// CREATE TABLE FORM
@@ -382,6 +363,99 @@ SQL;
 		$actor = new Oedipus_Actor($actor_id, $actor_name, $actor_color);
 		$actors = array();
 		$actors[] = $actor;
+
+		foreach ($actors as $actor)
+		{
+
+			// ADD DEFAULT stated_intention tO DATABASE
+			$stated_intention_position = '1';
+			$stated_intention_doubt = '';
+			$sql3 = <<<SQL
+INSERT INTO
+	oedipus_stated_intentions
+SET
+	position = '$stated_intention_position',
+	doubt = '$stated_intention_doubt'
+SQL;
+
+			//                print_r($sql);exit;
+			$result3 = mysql_query($sql3, $dbh);
+			$stated_intention_id = mysql_insert_id($dbh);
+
+
+			// ADD DEFAULT option tO DATABASE
+			$option_name = 'First Option';
+			$sql4 = <<<SQL
+INSERT INTO
+	oedipus_options
+SET
+	name = '$option_name',
+	actor_id = $actor_id,
+	stated_intention_id = $stated_intention_id,
+	added = NOW()
+SQL;
+
+			//                print_r($sql);exit;
+			$result4 = mysql_query($sql4, $dbh);
+			$option_id = mysql_insert_id($dbh);
+
+			$stated_intention = new Oedipus_StatedIntention(
+				$stated_intention_position,
+				$stated_intention_doubt
+			);
+
+			$actors_option = 
+				new Oedipus_Option(
+					$option_id,
+					$option_name,
+					$stated_intention
+				);
+
+
+			$actor->add_option($actors_option);
+		}
+
+		// Create default positions
+
+		foreach ($actors as $actor)
+		{
+			foreach ($actor->get_options() as $option)
+			{
+				$positions = array();
+
+				foreach ($actors as $position_actor)
+				{
+
+					// ADD DEFAULT position tO DATABASE
+					$position_position = '1';
+					$position_doubt = '';
+					$option_id = $option->get_id();
+					$actor_id = $position_actor->get_id();
+					$sql5 = <<<SQL
+INSERT INTO
+	oedipus_positions
+SET
+	position = '$position_position',
+	doubt = '$position_doubt',
+	option_id = $option_id,
+	actor_id = $actor_id
+SQL;
+
+//                                                        print_r($sql5);exit;
+					$result5 = mysql_query($sql5, $dbh);
+					$position_id = mysql_insert_id($dbh);
+
+					$positions[$position_actor->get_name()] =
+						new Oedipus_Position(
+							$position_position,
+							$position_doubt,
+							$position_actor
+						);
+				}
+
+				$option->add_positions($positions);
+			}
+		}
 
 		$table = new Oedipus_Table($table_id, $table_name, $actors);
 		//                print_r($table);exit;

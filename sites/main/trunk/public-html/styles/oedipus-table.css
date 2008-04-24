@@ -5,9 +5,9 @@
 div.oedipus-table
 {
 	padding: 0.5em 1em 1em 1em;
-	margin: 0 2em;
+	margin: 1em 2em;
 	width: 40%;
-	float: left;
+/*        float: left;*/
 	background: #FFFF99;
 }
 table.oedipus

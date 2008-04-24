@@ -2,7 +2,7 @@
 /**
  * __autoload .INC file
  *
- * Last Modified: 2008-04-14
+ * Last Modified: 2008-04-23
  */
 
 function __autoload($class_name)
@@ -135,6 +135,10 @@ function __autoload($class_name)
 
 		case('CodeAnalysis_ExecutionTimer'): 
 			require_once PROJECT_ROOT . '/haddock/code-analysis/classes/CodeAnalysis_ExecutionTimer.inc.php';
+			break;
+
+		case('Configuration_ConfigManagerHelper'): 
+			require_once PROJECT_ROOT . '/haddock/configuration/classes/helpers/Configuration_ConfigManagerHelper.inc.php';
 			break;
 
 		case('Database_AddConditionsToWhereClauseBehaviour'): 
@@ -323,6 +327,10 @@ function __autoload($class_name)
 
 		case('Database_ImagesTableRenderer'): 
 			require_once PROJECT_ROOT . '/haddock/database/classes/renderers/table-renderers/Database_ImagesTableRenderer.inc.php';
+			break;
+
+		case('Database_InputSanitationHelper'): 
+			require_once PROJECT_ROOT . '/haddock/database/classes/helpers/Database_InputSanitationHelper.inc.php';
 			break;
 
 		case('Database_IntField'): 
@@ -957,6 +965,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/html-tags/classes/factories/HTMLTags_BLSeparatedPFactory.inc.php';
 			break;
 
+		case('HTMLTags_BLSeparatedPsRenderer'): 
+			require_once PROJECT_ROOT . '/haddock/html-tags/classes/renderers/HTMLTags_BLSeparatedPsRenderer.inc.php';
+			break;
+
 		case('HTMLTags_BR'): 
 			require_once PROJECT_ROOT . '/haddock/html-tags/classes/standard/HTMLTags_BR.inc.php';
 			break;
@@ -1469,8 +1481,8 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Table.inc.php';
 			break;
 
-		case('Oedipus_TableCreatorHelper'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_TableCreatorHelper.inc.php';
+		case('Oedipus_TableCreationHelper'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_TableCreationHelper.inc.php';
 			break;
 
 		case('Oedipus_TableCreatorPage'): 
