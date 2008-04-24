@@ -9,35 +9,6 @@
 class
 	Oedipus_TableCreationHelper
 {
-
-	public static function
-		render_oedipus_table_creator_page_div(
-			Oedipus_Table $table = NULL
-		)
-	{
-		if ($table == NULL)
-		{
-			$table = self::get_default_oedipus_table();
-		}
-
-		$table_creator_page_div = new HTMLTags_Div();
-		$table_creator_page_div->set_attribute_str('class', 'table-creator');
-
-		$table_div = new HTMLTags_Div();
-		$table_div->set_attribute_str('class', 'oedipus-table');
-		$html_table = self::get_oedipus_html_table($table);
-		$table_div->append_tag_to_content($html_table);
-		$table_creator_page_div->append_tag_to_content($table_div);
-
-		$form_div = new HTMLTags_Div();
-		$form_div->set_attribute_str('class', 'table-creator-form');
-		$html_form = Oedipus_TableCreationHelper::render_oedipus_html_table_creator_form($table);
-		$form_div->append_tag_to_content($html_form);
-		$table_creator_page_div->append_tag_to_content($form_div);
-
-		return $table_creator_page_div;
-	}
-
 	public static function
 		get_oedipus_table_by_id($table_id)
 	{
@@ -187,8 +158,12 @@ SQL;
 			}
 		}
 
-
-		$table = new Oedipus_Table($table_result['id'], $table_result['name'], $actors);
+		$table = new Oedipus_Table(
+			$table_result['id'],
+			$table_result['drama_id'],
+			$table_result['name'],
+			$actors
+		);
 		// DEBUG
 		// print_r($table->get_actors());exit;
 
@@ -275,99 +250,15 @@ SQL;
 		return self::create_oedipus_table_from_get($get);
 	}
 
-	public static function
-		get_oedipus_html_table_options(Oedipus_Table $table)
-	{
-		return new Oedipus_OedipusTableOptionsUL($table);
-	}
-
-	public static function
-		get_oedipus_html_table(Oedipus_Table $table)
-	{
-		return new Oedipus_OedipusHTMLTable($table);
-	}
-
-	public static function
-		render_oedipus_html_table_creator_form(
-			Oedipus_Table $table
-		)
-	{
-		$form = new Oedipus_OedipusTableCreatorHTMLForm('table_creator');
-		$form->set_legend_text('Table Values');
-
-		// action
-		$form_action = self::get_table_creator_form_action_url();
-		$form->set_action($form_action);
-
-		// cancel
-		$form_cancel = self::get_table_creator_form_cancel_url();
-		$form->set_cancel_location($form_cancel);
-
-		// Table Name Input
-		$form->add_input_name_with_value('table_name', $table->get_name(), 'Table Name:');
-
-		// Actor Inputs
-		foreach ($table->get_actors() as $actor)
-		{
-			$actor_name_li = new HTMLTags_LI();
-			$actor_name_li->append_str_to_content('Actor &lsquo;' . $actor->get_name() . '&rsquo;:');
-			$form->add_input_li($actor_name_li);
-
-			// Name Input
-			$form->add_input_name_with_value(
-				'actor_name-' . $actor->get_id(), $actor->get_name(), 'Name:'
-			);
-			// color Input
-			$form->add_input_name_with_value(
-				'actor_color-' . $actor->get_id(), $actor->get_color(), 'Color:'
-			);
-
-			// Options
-			foreach ($actor->get_options() as $option)
-			{
-				$option_name_li = new HTMLTags_LI();
-				$option_name_li->append_str_to_content('Option ' . $option->get_id() . ':');
-				$form->add_input_li($option_name_li);
-
-				// name Input
-				$form->add_input_name_with_value(
-					'actor-' . $actor->get_id() . '-'
-					. 'option_name-' . $option->get_id(),
-					       	$option->get_name(), 'Action:'
-				);
-
-				// stated_intention Input
-//                                $stated_intention = $option->get_stated_intention();
-//                                $form->add_input_name_with_value(
-//                                        'actor-' . $actor->get_id() . '-'
-//                                        . 'option_stated_intention-' . $option->get_id(),
-//                                                $stated_intention->get_tile() . $stated_intention->get_doubt(),
-//                                                       'Stated Intention:'
-//                                );
-
-				// Hidden Inputs
-				$form->add_hidden_input(
-					'actor-' . $actor->get_id() . '-no_of_options', $table->count_actors()
-				);
-			}
-		}
-
-		// Hidden Inputs
-		$form->add_hidden_input('no_of_actors', $table->count_actors());
-
-		$form->set_submit_text('Update Table');
-
-		return $form;
-	}
 
 	// PROCESS GET & POST
 	public static function
-		process_table_creator_form()
+		process_table_editor_form()
 	{
 //                echo 'print_r($_GET)' . "\n";
 //                print_r($_GET);
 //                echo 'print_r($_POST)' . "\n";
-//                print_r($_POST);exit;
+		print_r($_POST);exit;
 		//echo 'print_r($_SESSION)' . "\n";
 		//print_r($_SESSION);
 //                echo '$_SESSION[\'name\']: ' . $_SESSION['name'] . "\n";
@@ -443,28 +334,5 @@ SQL;
 	 * Functions to do with making URLs
 	 * ----------------------------------------
 	 */
-	
-	// FORM URLS
-	public static function
-		get_table_creator_form_action_url()
-	{
-		#$url = new HTMLTags_URL();
-		#$url->set_file('/Oedipus_TableCreatorRedirectScript');
-		#return $url;
-		
-		return PublicHTML_URLHelper
-			::get_oo_page_url('Oedipus_TableCreatorRedirectScript');
-	}
-	
-	public static function
-		get_table_creator_form_cancel_url()
-	{
-		#$url = new HTMLTags_URL();
-		#$url->set_file('/Oedipus_TableCreatorPage');
-		#return $url;
-		
-		return PublicHTML_URLHelper
-			::get_oo_page_url('Oedipus_TableCreatorPage');
-	}
 }
 ?>

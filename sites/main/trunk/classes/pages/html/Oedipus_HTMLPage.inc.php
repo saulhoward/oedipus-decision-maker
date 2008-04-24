@@ -14,7 +14,7 @@ PublicHTML_HTMLPage
 		render_body_div_navigation()
 	{
 		echo '<div id="navigation">';
-		Navigation_1DULRenderer::render_ul('Left Nav');
+		Navigation_1DULRenderer::render_ul('Main Nav');
 		echo '</div>';
 	}
 

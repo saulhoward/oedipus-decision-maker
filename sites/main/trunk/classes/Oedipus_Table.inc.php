@@ -12,13 +12,15 @@ class
 Oedipus_Table
 {
 	private $id;
+	private $drama_id;
 	private $name;
 	private $actors;
 
 	public function
-		__construct($id, $name, $actors)
+		__construct($id, $drama_id, $name, $actors)
 	{
 		$this->id = $id;
+		$this->drama_id = $drama_id;
 		$this->name = $name;
 
 		$this->actors = $actors;
@@ -60,6 +62,12 @@ Oedipus_Table
 		count_actors()
 	{
 		return count($this->actors);
+	}
+
+	public function
+		get_drama_id()
+	{
+		return $this->drama_id;
 	}
 
 	public function
