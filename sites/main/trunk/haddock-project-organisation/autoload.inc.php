@@ -2,7 +2,7 @@
 /**
  * __autoload .INC file
  *
- * Last Modified: 2008-04-24
+ * Last Modified: 2008-04-25
  */
 
 function __autoload($class_name)
@@ -1457,6 +1457,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_MailingListSignUpPage.inc.php';
 			break;
 
+		case('Oedipus_OedipusActorEditorHTMLForm'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusActorEditorHTMLForm.inc.php';
+			break;
+
 		case('Oedipus_OedipusHTMLTable'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusHTMLTable.inc.php';
 			break;
@@ -1467,6 +1471,10 @@ function __autoload($class_name)
 
 		case('Oedipus_OedipusTableEditorPageOptionsUL'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusTableEditorPageOptionsUL.inc.php';
+			break;
+
+		case('Oedipus_OedipusTableNameEditorHTMLForm'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusTableNameEditorHTMLForm.inc.php';
 			break;
 
 		case('Oedipus_OedipusTableOptionsUL'): 
@@ -1493,16 +1501,16 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_TableCreationHelper.inc.php';
 			break;
 
-		case('Oedipus_TableCreatorPage'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_TableCreatorPage.inc.php';
-			break;
-
 		case('Oedipus_TableEditorPage'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_TableEditorPage.inc.php';
 			break;
 
 		case('Oedipus_TableEditorRedirectScript'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/redirect-scripts/Oedipus_TableEditorRedirectScript.inc.php';
+			break;
+
+		case('Oedipus_TableImageHelper'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_TableImageHelper.inc.php';
 			break;
 
 		case('OrderedTables_AdminCRUDHelper'): 

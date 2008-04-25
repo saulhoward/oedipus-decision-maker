@@ -170,6 +170,80 @@ SQL;
 		return $table;
 	}
 
+	/* 
+	 * Functions for updating and editing table values
+	 *
+	 */
+
+	public static function
+		set_table_name(
+			$table_id,
+			$table_name
+		)
+	{
+		$table_name_is_valid = TRUE; //Implement this!
+
+		if ($table_name_is_valid) 
+		{
+			$dbh = DB::m();
+
+			$sql = <<<SQL
+UPDATE
+	oedipus_tables
+SET
+	name = '$table_name'
+WHERE
+	id = $table_id
+SQL;
+
+//                        print_r($sql);exit;
+			mysql_query($sql, $dbh);
+		} 
+		else 
+		{
+//                        throw new Database_CRUDException("'$href' is not a validate HREF!");
+		}
+	}
+	
+	public static function
+		update_actor_by_id(
+			$actor_id,
+			$actor_name,
+			$actor_color
+		)
+	{
+		$actor_data_is_valid = TRUE; //Implement this!
+
+		if ($actor_data_is_valid) 
+		{
+			$dbh = DB::m();
+
+			$sql = <<<SQL
+UPDATE
+	oedipus_actors
+SET
+	name = '$actor_name',
+	color = '$actor_color'
+WHERE
+	id = $actor_id
+SQL;
+
+			#print_r($sql);exit;
+			mysql_query($sql, $dbh);
+		} 
+		else 
+		{
+//                        throw new Database_CRUDException("'$href' is not a validate HREF!");
+		}
+	}
+
+
+	/*
+	 * --------------------------------------------------------------------------
+	 * Functions unused are under here
+	 *
+	 * --------------------------------------------------------------------------
+	 */
 
 	public static function
 		create_oedipus_table_from_get($get)
@@ -251,11 +325,14 @@ SQL;
 		return self::create_oedipus_table_from_get($get);
 	}
 
-
 	// PROCESS GET & POST
 	public static function
 		process_table_editor_form()
 	{
+		// NOT USED ANYMORE
+		//
+		//
+
 //                echo 'print_r($_GET)' . "\n";
 //                print_r($_GET);
 //                echo 'print_r($_POST)' . "\n";

@@ -57,11 +57,23 @@ Oedipus_HTMLPage
 			$table_div->append_tag_to_content($html_table);
 			$table_editor_page_div->append_tag_to_content($table_div);
 
-			$form_div = new HTMLTags_Div();
-			$form_div->set_attribute_str('class', 'table-editor-form');
-			$html_form = $this->get_oedipus_html_table_editor_form();
-			$form_div->append_tag_to_content($html_form);
-			$table_editor_page_div->append_tag_to_content($form_div);
+			//Table Name form
+			$table_name_form_div = new HTMLTags_Div();
+			$table_name_form_div->set_attribute_str('class', 'table-editor-form');
+			$html_form = $this->get_oedipus_html_table_name_editor_form();
+			$table_name_form_div->append_tag_to_content($html_form);
+			$table_editor_page_div->append_tag_to_content($table_name_form_div);
+
+			foreach ($this->table->get_actors() as $actor)
+			{
+				//Actor form
+				$actor_form_div = new HTMLTags_Div();
+				$actor_form_div->set_attribute_str('class', 'table-editor-form');
+				$html_form = $this->get_oedipus_html_actor_editor_form($actor);
+				$actor_form_div->append_tag_to_content($html_form);
+				$table_editor_page_div->append_tag_to_content($actor_form_div);
+			}
+	
 		}
 		return $table_editor_page_div;
 	}
@@ -73,9 +85,15 @@ Oedipus_HTMLPage
 	}
 
 	private function
-		get_oedipus_html_table_editor_form()
+		get_oedipus_html_table_name_editor_form()
 	{
-		return new Oedipus_OedipusTableEditorHTMLForm($this->table);
+		return new Oedipus_OedipusTableNameEditorHTMLForm($this->table);
+	}
+
+	private function
+		get_oedipus_html_actor_editor_form(Oedipus_Actor $actor)
+	{
+		return new Oedipus_OedipusActorEditorHTMLForm($this->table, $actor);
 	}
 
 	private function
