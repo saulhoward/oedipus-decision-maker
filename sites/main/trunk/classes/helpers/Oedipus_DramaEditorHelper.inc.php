@@ -387,13 +387,27 @@ SQL;
 	// ------------
 	// URLS
 	// ------------
-	public static function
-		get_redirect_script_return_url()
-	{
-		return PublicHTML_URLHelper
-			::get_oo_page_url('Oedipus_DramaEditorPage');
-	}
 
+	public static function
+		get_drama_editor_url(Oedipus_Drama $drama = NULL)
+	{
+		if ($drama == NULL)
+		{
+			return PublicHTML_URLHelper
+				::get_oo_page_url('Oedipus_DramaEditorPage');
+		}
+		else
+		{
+			$url = new HTMLTags_URL();
+			$url->set_file('/');
+			$url->set_get_variable('oo-page', 1);
+			$url->set_get_variable('page-class', 'Oedipus_DramaEditorPage');
+
+			$url->set_get_variable('drama_unique_name', $drama->get_unique_name());
+
+			return $url;
+		}
+	}
 
 }
 ?>

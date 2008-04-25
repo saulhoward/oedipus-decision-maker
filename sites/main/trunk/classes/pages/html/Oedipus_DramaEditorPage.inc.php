@@ -37,7 +37,7 @@ extends
 		{
 			// NO DRAMA SET
 			DBPages_PageRenderer::render_page_section('drama-editor', 'title');
-			DBPages_PageRenderer::render_page_section('drama-editor', 'instructions');
+			DBPages_PageRenderer::render_page_section('drama-editor', 'no-drama-set');
 
 			$drama_editor_page_div = new HTMLTags_Div();
 			$drama_editor_page_div->append_tag_to_content(
@@ -172,7 +172,7 @@ extends
 		{
 			$li = new HTMLTags_LI();
 			$link = new HTMLTags_A($drama->get_name());
-			$link->set_href($this->get_drama_editor_url($drama));
+			$link->set_href(Oedipus_DramaEditorHelper::get_drama_editor_url($drama));
 			$li->append_tag_to_content($link);
 			$ul->append_tag_to_content($li);
 		}
@@ -239,27 +239,5 @@ extends
 		return PublicHTML_URLHelper
 			::get_oo_page_url('Oedipus_DramaEditorPage');
 	}
-	
-	private function
-		get_drama_editor_url(Oedipus_Drama $drama = NULL)
-	{
-		if ($drama == NULL)
-		{
-			return PublicHTML_URLHelper
-				::get_oo_page_url('Oedipus_DramaEditorPage');
-		}
-		else
-		{
-			$url = new HTMLTags_URL();
-			$url->set_file('/');
-			$url->set_get_variable('oo-page', 1);
-			$url->set_get_variable('page-class', 'Oedipus_DramaEditorPage');
-
-			$url->set_get_variable('drama_unique_name', $drama->get_unique_name());
-
-			return $url;
-		}
-	}
-
 }
 ?>

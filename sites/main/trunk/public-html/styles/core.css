@@ -67,8 +67,13 @@ a:visited
 	padding: 0 0.5em;
 }
 
-/* Table Creator Form */
-div.table-creator-form
+/* Table Editor Page */
+div.table-editor
+{
+	margin: 1em 0 0 0;
+}
+/* Table Editor Form */
+div.table-editor-form
 {
 	float: right;
 	width: 50%;

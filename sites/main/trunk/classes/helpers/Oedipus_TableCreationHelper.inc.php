@@ -179,6 +179,7 @@ SQL;
 		// 1.
 		// Create the actors,
 		// and their options, options have stated intentions
+		// foreach actor, check if 
 
 		$actors = array();
 		for ($i = 1; $i <= $get['no_of_actors'];  $i++)

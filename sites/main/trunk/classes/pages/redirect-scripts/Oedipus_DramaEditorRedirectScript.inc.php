@@ -9,7 +9,7 @@ extends
 	{
 
 //                print_r($_POST);exit;
-		$return_to_url = Oedipus_DramaEditorHelper::get_redirect_script_return_url();
+		$return_to_url = $this->get_redirect_script_return_url();
 
 		if (
 			isset($_POST['new_drama'])
@@ -36,5 +36,13 @@ extends
 		} 
 		$this->set_return_to_url($return_to_url);
 	}
+
+	private function
+		get_redirect_script_return_url()
+	{
+		return PublicHTML_URLHelper
+			::get_oo_page_url('Oedipus_DramaEditorPage');
+	}
+
 }
 ?>

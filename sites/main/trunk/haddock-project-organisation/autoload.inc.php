@@ -1461,8 +1461,12 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusHTMLTable.inc.php';
 			break;
 
-		case('Oedipus_OedipusTableCreatorHTMLForm'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusTableCreatorHTMLForm.inc.php';
+		case('Oedipus_OedipusTableEditorHTMLForm'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusTableEditorHTMLForm.inc.php';
+			break;
+
+		case('Oedipus_OedipusTableEditorPageOptionsUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusTableEditorPageOptionsUL.inc.php';
 			break;
 
 		case('Oedipus_OedipusTableOptionsUL'): 
@@ -1493,12 +1497,12 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_TableCreatorPage.inc.php';
 			break;
 
-		case('Oedipus_TableCreatorRedirectScript'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/pages/redirect-scripts/Oedipus_TableCreatorRedirectScript.inc.php';
+		case('Oedipus_TableEditorPage'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_TableEditorPage.inc.php';
 			break;
 
-		case('Oedipus_TableRenderer'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/renderers/Oedipus_TableRenderer.inc.php';
+		case('Oedipus_TableEditorRedirectScript'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/redirect-scripts/Oedipus_TableEditorRedirectScript.inc.php';
 			break;
 
 		case('OrderedTables_AdminCRUDHelper'): 
