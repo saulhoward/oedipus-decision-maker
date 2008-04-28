@@ -2,7 +2,7 @@
 /**
  * __autoload .INC file
  *
- * Last Modified: 2008-04-25
+ * Last Modified: 2008-04-27
  */
 
 function __autoload($class_name)
@@ -1269,6 +1269,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/logging/classes/Logging_Logger.inc.php';
 			break;
 
+		case('Logging_LogsHelper'): 
+			require_once PROJECT_ROOT . '/haddock/logging/classes/helpers/Logging_LogsHelper.inc.php';
+			break;
+
 		case('Logging_ServerLogsTable'): 
 			require_once PROJECT_ROOT . '/haddock/logging/classes/database/elements/table-subclasses/Logging_ServerLogsTable.inc.php';
 			break;
@@ -1441,6 +1445,14 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/redirect-scripts/Oedipus_DramaEditorRedirectScript.inc.php';
 			break;
 
+		case('Oedipus_DramaHelper'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_DramaHelper.inc.php';
+			break;
+
+		case('Oedipus_DramaPage'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_DramaPage.inc.php';
+			break;
+
 		case('Oedipus_ExampleTablePage'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_ExampleTablePage.inc.php';
 			break;
@@ -1459,6 +1471,10 @@ function __autoload($class_name)
 
 		case('Oedipus_OedipusActorEditorHTMLForm'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusActorEditorHTMLForm.inc.php';
+			break;
+
+		case('Oedipus_OedipusDramaPageOptionsUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusDramaPageOptionsUL.inc.php';
 			break;
 
 		case('Oedipus_OedipusHTMLTable'): 

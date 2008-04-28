@@ -1,0 +1,18 @@
+# Fragment of the doc root .htaccess file for the Oedipus Decision Maker project-specific
+#
+# @copyright 2008-02-24, RFI
+# @copyright 2008-04-27, SANH
+
+# These rules provide a clean url for each drama, using the oedipus_dramas.unique_name field
+
+<IfModule mod_rewrite.c>
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^dramas/([-\w]+) /?oo-page=1&page-class=Oedipus_DramaPage&drama_unique_name=$1
+</IfModule>
+
+# Back up using mod_alias
+
+<IfModule !mod_rewrite.c>
+	RedirectMatch temp ^/dramas/([-\w]+) /?oo-page=1&page-class=Oedipus_DramaPage&drama_unique_name=$1
+</IfModule>
+

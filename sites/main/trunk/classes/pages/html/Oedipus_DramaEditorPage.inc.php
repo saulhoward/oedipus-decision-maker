@@ -18,12 +18,20 @@ extends
 	{
 		if (isset($_GET['drama_unique_name']))
 		{
-			$this->drama =
-			       	Oedipus_DramaEditorHelper::get_drama_by_unique_name($_GET['drama_unique_name']);
+			try
+			{
+				$this->drama =
+					Oedipus_DramaEditorHelper
+					::get_drama_by_unique_name($_GET['drama_unique_name']);
 
-//                        print_r($_GET);exit;
-			$drama_editor_page_div =
-			       	$this->get_oedipus_drama_editor_page_div();
+				//                        print_r($_GET);exit;
+				$drama_editor_page_div =
+					$this->get_oedipus_drama_editor_page_div();
+			}
+			catch (Exception $e)
+			{
+
+			}
 		}
 		elseif (isset($_GET['drama_id']))
 		{
