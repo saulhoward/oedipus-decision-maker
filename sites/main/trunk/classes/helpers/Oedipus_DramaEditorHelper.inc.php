@@ -389,25 +389,31 @@ SQL;
 	// ------------
 
 	public static function
-		get_drama_editor_url(Oedipus_Drama $drama = NULL)
+		get_drama_editor_url(
+			Oedipus_Drama $drama = NULL
+		)
 	{
-		if ($drama == NULL)
-		{
+		if (isset($drama)) {
+			#$url = new HTMLTags_URL();
+			#$url->set_file('/');
+			#$url->set_get_variable('oo-page', 1);
+			#$url->set_get_variable('page-class', 'Oedipus_DramaEditorPage');
+			#
+			#$url->set_get_variable('drama_unique_name', $drama->get_unique_name());
+			#
+			#return $url;
+			
+			return PublicHTML_URLHelper
+				::get_oo_page_url(
+					'Oedipus_DramaEditorPage',
+					array(
+						'drama_unique_name' => $drama->get_unique_name()
+					)
+				);
+		} else {
 			return PublicHTML_URLHelper
 				::get_oo_page_url('Oedipus_DramaEditorPage');
 		}
-		else
-		{
-			$url = new HTMLTags_URL();
-			$url->set_file('/');
-			$url->set_get_variable('oo-page', 1);
-			$url->set_get_variable('page-class', 'Oedipus_DramaEditorPage');
-
-			$url->set_get_variable('drama_unique_name', $drama->get_unique_name());
-
-			return $url;
-		}
 	}
-
 }
 ?>
