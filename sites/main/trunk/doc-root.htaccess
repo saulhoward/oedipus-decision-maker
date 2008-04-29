@@ -6,6 +6,10 @@
 # These rules provide a clean url for each drama, using the oedipus_dramas.unique_name field
 
 <IfModule mod_rewrite.c>
+	# Translate numerical IDs to the the relevant drama.
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule ^dramas/(\d+) /?oo-page=1&page-class=Oedipus_DramaPage&drama_id=$1
+	
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteRule ^dramas/([-\w]+) /?oo-page=1&page-class=Oedipus_DramaPage&drama_unique_name=$1
 </IfModule>
