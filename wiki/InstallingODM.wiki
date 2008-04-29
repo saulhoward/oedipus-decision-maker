@@ -1,0 +1,5 @@
+#summary Installing ODM on a Web Server
+
+= Introduction =
+
+Installing Oedipus is much like installing any [http://code.google.com/p/haddock-cms/ Haddock CMS] site.
