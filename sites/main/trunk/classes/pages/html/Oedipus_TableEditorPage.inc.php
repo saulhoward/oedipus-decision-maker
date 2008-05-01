@@ -12,6 +12,7 @@ extends
 Oedipus_HTMLPage
 {
 	private $table;
+	private $table_editor_page_div;
 
 	public function
 		content()
@@ -20,10 +21,9 @@ Oedipus_HTMLPage
 		{
 			//                        print_r($_GET);exit;
 			$this->table = Oedipus_TableCreationHelper::get_oedipus_table_by_id($_GET['table_id']);
-			$table_editor_page_div =
-				$this->get_oedipus_table_editor_page_div();
+			$this->set_oedipus_table_editor_page_div();
 
-			echo $table_editor_page_div->get_as_string();
+			echo $this->table_editor_page_div->get_as_string();
 		}
 		else
 		{
@@ -34,48 +34,70 @@ Oedipus_HTMLPage
 	}
 
 	private function
-		get_oedipus_table_editor_page_div()
+		set_oedipus_table_editor_page_div()
 	{
 		echo '<h2>Editing Table <span class="table_name">' 
 			. $this->table->get_name() 
 			. '</span></h2>';
 
-		$table_editor_page_div = new HTMLTags_Div();
-		$table_editor_page_div->set_attribute_str('class', 'table-editor');
+		$this->table_editor_page_div = new HTMLTags_Div();
+		$this->table_editor_page_div->set_attribute_str('class', 'table-editor');
 
 		if (isset($this->table))
 		{
-			$links_div = new HTMLTags_Div();
-			$links_div->set_attribute_str('class', 'table-editor-page-options');
-			$html_table = $this->get_oedipus_html_table_editor_page_options_ul();
-			$links_div->append_tag_to_content($html_table);
-			$table_editor_page_div->append_tag_to_content($links_div);
+			$this->wrap_element_with_class_and_add_to_page_div(
+				$this->get_oedipus_html_table_editor_page_options_ul(),
+				'table-editor-page-options'
+			)
 
-			$table_div = new HTMLTags_Div();
-			$table_div->set_attribute_str('class', 'oedipus-table');
-			$html_table = $this->get_oedipus_html_table();
-			$table_div->append_tag_to_content($html_table);
-			$table_editor_page_div->append_tag_to_content($table_div);
-
+			$this->wrap_element_with_class_and_add_to_page_div(
+				$this->get_oedipus_html_table(),
+				'oedipus-table'
+			)
+	
 			//Table Name form
-			$table_name_form_div = new HTMLTags_Div();
-			$table_name_form_div->set_attribute_str('class', 'table-editor-form');
-			$html_form = $this->get_oedipus_html_table_name_editor_form();
-			$table_name_form_div->append_tag_to_content($html_form);
-			$table_editor_page_div->append_tag_to_content($table_name_form_div);
+			$this->wrap_element_with_class_and_add_to_page_div(
+				$this->get_oedipus_html_table_name_editor_form(),
+				'table-editor-form'
+			)
+	
+			//Table actions UL
+			$this->wrap_element_with_class_and_add_to_page_div(
+				$this->get_oedipus_html_table_editor_actions_ul(),
+				'table-editor-form'
+			)
 
 			foreach ($this->table->get_actors() as $actor)
 			{
 				//Actor form
-				$actor_form_div = new HTMLTags_Div();
-				$actor_form_div->set_attribute_str('class', 'table-editor-form');
-				$html_form = $this->get_oedipus_html_actor_editor_form($actor);
-				$actor_form_div->append_tag_to_content($html_form);
-				$table_editor_page_div->append_tag_to_content($actor_form_div);
+				$this->wrap_element_with_class_and_add_to_page_div(
+					$this->get_oedipus_html_actor_editor_form($actor),
+					'table-editor-form'
+				)
 			}
 	
 		}
-		return $table_editor_page_div;
+	}
+
+	private function
+		wrap_element_with_class_and_add_to_page_div($content, $class_name)
+	{
+		$this->table_editor_page_div->append_tag_to_content(
+			$this->wrap_in_div_with_class(
+				$content,
+				$class_name
+			)
+		);
+	}
+
+
+	private function
+		wrap_in_div_with_class($content, $class_name)
+	{
+		$div = new HTMLTags_Div();
+		$div->set_attribute_str('class', $class_name);
+		$div->append_tag_to_content($content);
+		return $div;
 	}
 
 	private function
@@ -91,6 +113,12 @@ Oedipus_HTMLPage
 	}
 
 	private function
+		get_oedipus_html_table_editor_actions_ul()
+	{
+		return new Oedipus_OedipusTableEditorTableActionsUL($this->table);
+	}
+
+	private function
 		get_oedipus_html_actor_editor_form(Oedipus_Actor $actor)
 	{
 		return new Oedipus_OedipusActorEditorHTMLForm($this->table, $actor);
@@ -101,6 +129,5 @@ Oedipus_HTMLPage
 	{
 		return new Oedipus_OedipusTableEditorPageOptionsUL($this->table);
 	}
-
 }
 ?>
