@@ -50,7 +50,7 @@ extends
 		);
 
 		return PublicHTML_URLHelper
-			::get_oo_page_url('Oedipus_TableEditorPage', $get_variables);
+			::get_oo_page_url('Oedipus_TableEditorRedirectScript', $get_variables);
 	}
 }
 ?>

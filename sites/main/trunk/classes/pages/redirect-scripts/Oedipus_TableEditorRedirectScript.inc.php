@@ -11,17 +11,22 @@ extends
 	{
 		$return_to_url = $this->get_return_to_url();
 
+		/*
+		 * The $_POST
+		 */
 		if (isset($_POST['table_id']))
 		{
-//                        $this->table = Oedipus_TableCreationHelper::get_oedipus_table_by_id($_POST['table_id']);
 			$this->table_id = $_POST['table_id'];
 
 			if (isset($_POST['table_name']))
 			{
-				Oedipus_TableCreationHelper::set_table_name($this->table_id, $_POST['table_name']);
+				Oedipus_TableCreationHelper::set_table_name(
+					$this->table_id,
+					$_POST['table_name']
+				);
 			}
 
-			if (
+			elseif (
 				isset($_POST['actor_id'])
 				&&
 				isset($_POST['actor_name'])
@@ -37,6 +42,48 @@ extends
 			}
 
 		}
+
+		/*
+		 * The $_GET
+		 */
+		elseif (isset($_GET['table_id']))
+		{
+			$this->table_id = $_GET['table_id'];
+			if (
+				isset($_GET['new_actor'])
+			)
+			{
+				Oedipus_TableCreationHelper::add_actor(
+					'New Actor',
+					$this->table_id,
+					'orange'
+				);
+			}
+			elseif (
+				isset($_GET['delete_actor'])
+				&&
+				isset($_GET['actor_id'])
+			)
+			{
+				Oedipus_TableCreationHelper::delete_actor(
+					$_GET['actor_id']
+				);
+			}
+			elseif (
+				isset($_GET['add_option'])
+				&&
+				isset($_GET['actor_id'])
+			)
+			{
+				Oedipus_TableCreationHelper::add_option(
+					'New Option',
+					$_GET['actor_id'],
+					$this->table_id
+				);
+			}
+	
+		}
+
 		$this->set_return_to_url($return_to_url);
 	}
 	

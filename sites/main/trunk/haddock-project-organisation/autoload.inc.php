@@ -2,7 +2,7 @@
 /**
  * __autoload .INC file
  *
- * Last Modified: 2008-04-29
+ * Last Modified: 2008-05-02
  */
 
 function __autoload($class_name)
@@ -1361,6 +1361,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/plug-ins/navigation/classes/renderers/Navigation_1DULRenderer.inc.php';
 			break;
 
+		case('Navigation_HTMLListsHelper'): 
+			require_once PROJECT_ROOT . '/plug-ins/navigation/classes/helpers/Navigation_HTMLListsHelper.inc.php';
+			break;
+
 		case('Navigation_LinkNode'): 
 			require_once PROJECT_ROOT . '/plug-ins/navigation/classes/Navigation_LinkNode.inc.php';
 			break;
@@ -1399,6 +1403,10 @@ function __autoload($class_name)
 
 		case('Navigation_NodesCRUDManager'): 
 			require_once PROJECT_ROOT . '/plug-ins/navigation/classes/Navigation_NodesCRUDManager.inc.php';
+			break;
+
+		case('Navigation_NodesHelper'): 
+			require_once PROJECT_ROOT . '/plug-ins/navigation/classes/helpers/Navigation_NodesHelper.inc.php';
 			break;
 
 		case('Navigation_SPoE'): 
@@ -1493,12 +1501,32 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusHTMLTable.inc.php';
 			break;
 
+		case('Oedipus_OedipusOptionEditorHTMLForm'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusOptionEditorHTMLForm.inc.php';
+			break;
+
+		case('Oedipus_OedipusTableEditorActionsUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusTableEditorActionsUL.inc.php';
+			break;
+
+		case('Oedipus_OedipusTableEditorActorActionsUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusTableEditorActorActionsUL.inc.php';
+			break;
+
 		case('Oedipus_OedipusTableEditorHTMLForm'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusTableEditorHTMLForm.inc.php';
 			break;
 
+		case('Oedipus_OedipusTableEditorOptionActionsUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusTableEditorOptionActionsUL.inc.php';
+			break;
+
 		case('Oedipus_OedipusTableEditorPageOptionsUL'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusTableEditorPageOptionsUL.inc.php';
+			break;
+
+		case('Oedipus_OedipusTableEditorTableActionsUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusTableEditorTableActionsUL.inc.php';
 			break;
 
 		case('Oedipus_OedipusTableNameEditorHTMLForm'): 

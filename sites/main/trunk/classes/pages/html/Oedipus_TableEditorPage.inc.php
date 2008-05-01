@@ -12,7 +12,6 @@ extends
 Oedipus_HTMLPage
 {
 	private $table;
-	private $table_editor_page_div;
 
 	public function
 		content()
@@ -21,9 +20,9 @@ Oedipus_HTMLPage
 		{
 			//                        print_r($_GET);exit;
 			$this->table = Oedipus_TableCreationHelper::get_oedipus_table_by_id($_GET['table_id']);
-			$this->set_oedipus_table_editor_page_div();
+			$table_editor_page_div = $this->get_oedipus_table_editor_page_div();
 
-			echo $this->table_editor_page_div->get_as_string();
+			echo $table_editor_page_div->get_as_string();
 		}
 		else
 		{
@@ -34,55 +33,95 @@ Oedipus_HTMLPage
 	}
 
 	private function
-		set_oedipus_table_editor_page_div()
+		get_oedipus_table_editor_page_div()
 	{
 		echo '<h2>Editing Table <span class="table_name">' 
 			. $this->table->get_name() 
 			. '</span></h2>';
 
-		$this->table_editor_page_div = new HTMLTags_Div();
-		$this->table_editor_page_div->set_attribute_str('class', 'table-editor');
+		$table_editor_page_div = new HTMLTags_Div();
+		$table_editor_page_div->set_attribute_str('class', 'table-editor');
 
 		if (isset($this->table))
 		{
-			$this->wrap_element_with_class_and_add_to_page_div(
+			$this->wrap_element_with_class_and_add_to_div(
+				$table_editor_page_div,
 				$this->get_oedipus_html_table_editor_page_options_ul(),
 				'table-editor-page-options'
-			)
+			);
 
-			$this->wrap_element_with_class_and_add_to_page_div(
+			$this->wrap_element_with_class_and_add_to_div(
+				$table_editor_page_div,
 				$this->get_oedipus_html_table(),
 				'oedipus-table'
-			)
+			);
 	
-			//Table Name form
-			$this->wrap_element_with_class_and_add_to_page_div(
-				$this->get_oedipus_html_table_name_editor_form(),
-				'table-editor-form'
-			)
-	
-			//Table actions UL
-			$this->wrap_element_with_class_and_add_to_page_div(
-				$this->get_oedipus_html_table_editor_actions_ul(),
-				'table-editor-form'
-			)
-
-			foreach ($this->table->get_actors() as $actor)
-			{
-				//Actor form
-				$this->wrap_element_with_class_and_add_to_page_div(
-					$this->get_oedipus_html_actor_editor_form($actor),
-					'table-editor-form'
-				)
-			}
-	
+			$table_editor_page_div->append_tag_to_content(
+				$this->get_oedipus_table_editor_forms_div()
+			);
 		}
+		return $table_editor_page_div;
+	}
+	
+	private function
+		get_oedipus_table_editor_forms_div()
+	{
+		$table_editor_forms_div = new HTMLTags_Div();
+		$table_editor_forms_div->set_attribute_str('class', 'table-editor-forms');
+
+		//Table Name form
+		$this->wrap_element_with_class_and_add_to_div(
+			$table_editor_forms_div,
+			$this->get_oedipus_html_table_name_editor_form(),
+			'table-editor-form'
+		);
+
+		//Table actions UL
+		$this->wrap_element_with_class_and_add_to_div(
+			$table_editor_forms_div,
+			$this->get_oedipus_html_table_editor_actions_ul(),
+			'table-editor-form'
+		);
+
+		foreach ($this->table->get_actors() as $actor)
+		{
+			//Actor form
+			$this->wrap_element_with_class_and_add_to_div(
+				$table_editor_forms_div,
+				$this->get_oedipus_html_actor_editor_form($actor),
+				'table-editor-form'
+			);
+			//Actor actions UL
+			$this->wrap_element_with_class_and_add_to_div(
+				$table_editor_forms_div,
+				$this->get_oedipus_html_actor_actions_ul($actor),
+				'table-editor-form'
+			);
+
+			foreach ($actor->get_options() as $option)
+			{
+				//Option form
+				$this->wrap_element_with_class_and_add_to_div(
+					$table_editor_forms_div,
+					$this->get_oedipus_html_option_editor_form($option),
+					'table-editor-form'
+				);
+				//Option actions UL
+				$this->wrap_element_with_class_and_add_to_div(
+					$table_editor_forms_div,
+					$this->get_oedipus_html_option_actions_ul($option),
+					'table-editor-form'
+				);
+			}
+
+		}
+		return $table_editor_forms_div;
 	}
 
 	private function
-		wrap_element_with_class_and_add_to_page_div($content, $class_name)
+		wrap_element_with_class_and_add_to_div($div, $content, $class_name)
 	{
-		$this->table_editor_page_div->append_tag_to_content(
+		$div->append_tag_to_content(
 			$this->wrap_in_div_with_class(
 				$content,
 				$class_name
@@ -122,6 +161,24 @@ Oedipus_HTMLPage
 		get_oedipus_html_actor_editor_form(Oedipus_Actor $actor)
 	{
 		return new Oedipus_OedipusActorEditorHTMLForm($this->table, $actor);
+	}
+
+	private function
+		get_oedipus_html_actor_actions_ul(Oedipus_Actor $actor)
+	{
+		return new Oedipus_OedipusTableEditorActorActionsUL($this->table, $actor);
+	}
+
+	private function
+		get_oedipus_html_actor_editor_form(Oedipus_Option $option)
+	{
+		return new Oedipus_OedipusOptionEditorHTMLForm($this->table, $option);
+	}
+
+	private function
+		get_oedipus_html_actor_actions_ul(Oedipus_Option $option)
+	{
+		return new Oedipus_OedipusTableEditorOptionActionsUL($this->table, $option);
 	}
 
 	private function

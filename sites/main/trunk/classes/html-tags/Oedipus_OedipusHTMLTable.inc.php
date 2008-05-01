@@ -215,7 +215,7 @@ extends
 
 					foreach ($this->actors as $position_actor)
 					{
-						$position = $option->get_position($position_actor->get_name());
+						$position = $option->get_position($position_actor->get_id());
 
 						$position_td = new HTMLTags_TD();
 						$position_td->append_tag_to_content(
