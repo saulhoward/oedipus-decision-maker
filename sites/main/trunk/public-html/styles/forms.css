@@ -1,247 +1,118 @@
 /* Forms CSS Stylesheet
- * Saul HOward, CLWD, 2008
+ * Saul Howard, CLWD, 2008
  */
 
 /* 
- * FORMS CSS
- * clearlinewebdesign.com 2007
+ * Oedipus FORMS CSS
+ * clearlinewebdesign.com 2008
  */
 form 
 {
-	background: #ECF2FA url(/images/form-bg.gif) top left repeat-x;
-	border: 1px solid #6797D3;
-	margin: 0 auto;
-	padding: 1em 0;
-	max-width: 100%;
-	width: 26em;
-	min-width: 400px;
+/*        padding: 0.7em 0;*/
+
+	clear: both;
 }
-form#customer-details-form 
+form legend
 {
-	width: 30em;
-}
-form#customer-details-form input 
-{
-	max-width: 40%;
-}
-form#comment-form 
-{
-	font-size: 90%;
-}
-form#comment-form label
-{
-	width: 7em;
-	max-width: 90%;
-}
-form#comment-form div.submit_buttons_div 
-{
-    padding: 1em 0 0 8em;
-    margin: 0 0 1em 0;
-}
-#sidebar 
-{
-	width: 80%;
-	text-align: center;
-	margin: 0 auto;
-}
-#sidebar form 
-{
-	font-size: 75%;
-	max-width: 100%;
-	width: 22em;
-	min-width: 200px;
-	text-align: left;
-}
-#sidebar form label
-{
-	width: 6em;
-}
-#sidebar form input
-{
-	width: 8.5em;
-	max-width: 90%;
-}
-#sidebar form input.submit
-{
-	width: auto;
-}
-#sidebar form div.submit_buttons_div 
-{
-    padding: 1em 0 0 7em;
-    margin: 0 0 1em 0;
-}
-#not-logged-in a 
-{
-	font-size: 0.8em;
-}
-form fieldset 
-{
-	color: black;
-	border: 0;
-}
-form legend 
-{
-	padding: 0 2px 0.5em 1.5em;
-	font-weight: bold;
-	color: black;
-}
-form label 
-{
-	width: 8em;
-	margin-right: 1em;
-	display: inline-block;
-	vertical-align: top;
-	float: left;
-	text-align: right;
-}
-form fieldset ol 
-{
-	margin: 0;
-	padding: 0;
-}
-form fieldset li 
-{
-	list-style: none;
-	padding: 5px;
-	margin: 0;
-}
-form fieldset fieldset 
-{
-	border: none;
-	margin: 3px 0 0;
-}
-form fieldset fieldset legend 
-{
-	padding: 0 0 5px;
-	font-weight: normal;
-}
-form fieldset fieldset label 
-{
-	display: block;
-	width: auto;
-}
-form em 
-{
-	font-weight: bold;
-	font-style: normal;
-	color: #f00;
-}
-form label 
-{
-	width: 10em; /* Width of labels */
-}
-form fieldset fieldset label 
-{
-	margin-left: 103px; /* Width plus 3 (html space) */
-}
-form textarea, form input.text 
-{
-	background-color: #E3E3E3;
-	color: black;
-	overflow: auto;
-	width: 200px;
-	max-width: 60%;
-}
-form input 
-{
-	background-color: #E3E3E3;
-	color: black;
-	max-width: 50%;
-}
-form input:focus, form textarea:focus, form input.focused, form textarea.focused 
-{
-	background-color: white;
-}
-form textarea 
-{
-	font-size: 1.1em;
-	width: 55%;
-}
-input.submit
-{
-	border-color: black;
-	color: black;
-	margin: 1em 0 0 14.7em;
-/*        float: left;*/
-	border: 3px double #999999;
-	border-top-color: #CCCCCC;
-	border-left-color: #CCCCCC;
-	padding: 0.25em;
-	background: #FFFFFF url(/images/button_bg.jpg) top left repeat-x; 
-	color: #333333;
-	font-size: 75%;
-	font-weight: bold;
-	width: auto;
-	overflow: normal;
-}
-input.submit:active
-{
-	border: 3px double #CCCCCC;
-	border-top-color: #999999;
-	border-left-color: #999999;
-}
-p.form_explanation, code.form_explanation 
-{
-	font-size: .8em;
-/*        color: #999;*/
-	margin: 0 auto;
-/*        width: 30em;*/
-	display: block;
-}
-p.form_explanation em
-{
+	text-decoration: italic;
+	text-transform: uppercase;
 	font-weight: 900;
-	color: orange;
+	border-bottom: 1px solid black;
+	margin: 0 0 0.2em 0;
 }
-code.form_explanation 
+form ol
 {
+/*        float: left;*/
+/*        border: 1px solid black;*/
+	width: 20em;
 }
-form div.submit_buttons_div 
+form ol li label
 {
-/*        padding: 1em 0 0 11em;*/
-/*        margin: 0 0 1em 0;*/
-}
-
-/* CUSTIOMER DETAILS FORM */
-form#customer-details-form 
-{
-	width: 75%;
-}
-form#customer-details-form label
-{
-	width: 12em;
-}
-form#customer-details-form div.submit_buttons_div 
-{
-	padding: 1em 0 0 13em;
+display:inline-block;
+float:left;
+margin-right:0.5em;
+text-align:right;
+vertical-align:top;
+width:7em;
 }
 
-/*SEARCH FORM*/
-  
-form.searchform input.text 
+div.submit_buttons_div
 {
-	background-color: black;
-	border-color: #000;
-	color: white;
-	margin: 5px 0;
-	width: 90%;
+/*        float: right;*/
+	margin: -2em 0 0 17em;
+/*        width: 10em;*/
+	padding: 0.5em 0 0 0;
 }
 
-/* FORM NOTIFICATION DIV */
-#form_notification_div 
+div.table-editor,
+div.actor-editor,
+div.option-editor,
+div.table-editor-actions,
+div.actor-editor-actions,
+div.option-editor-actions
 {
-	width: 26em;
-	text-align: center;
-	padding: 0;
-	margin: 0 auto;
+/*        width: 10em;*/
+	clear:both;
+	width: 80%;
 }
-#form_notification_div p
+
+div.table-editor
 {
-	color: #E3E3E3;
-	background: #B30000;
-	padding: 1em;
-	font-weight: 600;
-	margin: 0;
+	padding: 0 0 0.5em 0;
+}
+div.actor-editor
+{
+	padding: 0.5em 0 0.5em 2em;
+}
+div.option-editor
+{
+	padding: 0.5em 0 0.5em 4em;
+}
+div.table-editor-actions
+{
+	padding: 0 0 0.5em 0;
+}
+div.actor-editor-actions
+{
+	padding: 0 0 0.5em 2em;
+}
+div.option-editor-actions
+{
+	padding: 0 0 0.5em 4em;
+}
+
+
+div.table-editor ul
+{
+	display: inline;
+}
+#blue.actor-editor,
+#blue.option-editor,
+#blue.actor-editor-actions,
+#blue.option-editor-actions
+{
+	background-color: #8080FF; /* BLUE -50% SAT. */
+}
+#red.actor-editor,
+#red.option-editor,
+#red.actor-editor-actions,
+#red.option-editor-actions
+{
+	background-color: #FF8080; /* RED -50% SAT. */
+}
+#green.actor-editor,
+#green.option-editor,
+#green.actor-editor-actions,
+#green.option-editor-actions
+{
+	background-color: #80FF80; /* GREEN -50% SAT. */
+}
+#orange.actor-editor,
+#orange.option-editor,
+#orange.actor-editor-actions,
+#orange.option-editor-actions
+{
+	background-color: #FFE480; /* ORANGE -50% SAT. */
 }
 
 

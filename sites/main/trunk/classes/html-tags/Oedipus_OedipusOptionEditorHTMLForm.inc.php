@@ -26,14 +26,9 @@ Oedipus_OedipusTableEditorHTMLForm
 
 		//                $this->table = $table;
 
-		# Actor Input
-		$option_name_li = new HTMLTags_LI();
-		$option_name_li->append_str_to_content('Option &lsquo;' . $option->get_name() . '&rsquo;:');
-		$this->add_input_li($option_name_li);
-
 		# Name Input
 		$this->add_input_name_with_value(
-			'option_name', $option->get_name(), 'Name:'
+			'option_name', $option->get_name(), 'Option Name:'
 		);
 
 		# Hidden Inputs

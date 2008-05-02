@@ -206,6 +206,37 @@ SQL;
 	}
 
 	public static function
+		set_option_name(
+			$option_id,
+			$option_name
+		)
+	{
+		$option_name_is_valid = TRUE; //Implement this!
+
+		if ($option_name_is_valid) 
+		{
+			$dbh = DB::m();
+
+			$sql = <<<SQL
+UPDATE
+	oedipus_options
+SET
+	name = '$option_name'
+WHERE
+	id = $option_id
+SQL;
+
+			//                        print_r($sql);exit;
+			mysql_query($sql, $dbh);
+		} 
+		else 
+		{
+			//                        throw new Database_CRUDException("'$href' is not a validate HREF!");
+		}
+	}
+
+
+	public static function
 		add_actor(
 			$actor_name,
 			$table_id,
@@ -475,6 +506,57 @@ SQL;
 		{
 			//                        throw new Database_CRUDException("'$href' is not a validate HREF!");
 		}
+	}
+
+	public static function
+		delete_option($option_id)
+	{
+		$option_data_is_valid = TRUE; //Implement this!
+
+		if ($option_data_is_valid) 
+		{
+			$dbh = DB::m();
+
+			// Delete the Stated Intention for the Option
+			// delete s_i where option_id
+			$stated_intentions_sql = <<<SQL
+DELETE FROM
+	oedipus_stated_intentions
+WHERE
+	option_id = $option_id
+SQL;
+
+			//                                        print_r($sql);exit;
+			mysql_query($stated_intentions_sql, $dbh);
+
+			// Delete everyone's positions on the Option
+			// delete position where option_id
+			$option_positions_sql = <<<SQL
+DELETE FROM
+	oedipus_positions
+WHERE
+	option_id = $option_id
+SQL;
+
+			//                        print_r($sql);exit;
+			mysql_query($option_positions_sql, $dbh);
+
+			// Delete the Options themselves
+			$options_sql = <<<SQL
+DELETE FROM
+	oedipus_options
+WHERE
+	id = $option_id
+SQL;
+
+			//                        print_r($sql);exit;
+			mysql_query($options_sql, $dbh);
+		}
+		else 
+		{
+			//throw new Database_CRUDException("'$href' is not a validate HREF!");
+		}
+
 	}
 
 

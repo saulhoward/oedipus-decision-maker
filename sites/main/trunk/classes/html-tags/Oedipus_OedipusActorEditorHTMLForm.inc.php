@@ -26,14 +26,10 @@ Oedipus_OedipusTableEditorHTMLForm
 
 		//                $this->table = $table;
 
-		# Actor Input
-		$actor_name_li = new HTMLTags_LI();
-		$actor_name_li->append_str_to_content('Actor &lsquo;' . $actor->get_name() . '&rsquo;:');
-		$this->add_input_li($actor_name_li);
 
 		# Name Input
 		$this->add_input_name_with_value(
-			'actor_name', $actor->get_name(), 'Name:'
+			'actor_name', $actor->get_name(), 'Actor Name:'
 		);
 		# color Input
 		$this->add_input_name_with_value(

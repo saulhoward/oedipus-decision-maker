@@ -41,6 +41,17 @@ extends
 				);
 			}
 
+			elseif (
+				isset($_POST['option_name'])
+				&&
+				isset($_POST['option_id'])
+			)
+			{
+				Oedipus_TableCreationHelper::set_option_name(
+					$_POST['option_id'],
+					$_POST['option_name']
+				);
+			}
 		}
 
 		/*
@@ -81,7 +92,16 @@ extends
 					$this->table_id
 				);
 			}
-	
+			elseif (
+				isset($_GET['delete_option'])
+				&&
+				isset($_GET['option_id'])
+			)
+			{
+				Oedipus_TableCreationHelper::delete_option(
+					$_GET['option_id']
+				);
+			}
 		}
 
 		$this->set_return_to_url($return_to_url);
