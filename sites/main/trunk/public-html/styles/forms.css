@@ -6,86 +6,166 @@
  * Oedipus FORMS CSS
  * clearlinewebdesign.com 2008
  */
-form 
-{
-/*        padding: 0.7em 0;*/
 
+/*
+ * The Basic-Form
+ */
+form#basic-form
+{
+	padding: 0.7em;
+	width: 26em;
+	margin: 0 auto;
 	clear: both;
+	background: #ccc;
 }
-form legend
+form#basic-form legend
 {
-	text-decoration: italic;
-	text-transform: uppercase;
+	font-style: italic;
 	font-weight: 900;
-	border-bottom: 1px solid black;
-	margin: 0 0 0.2em 0;
+	color: #666;
+	text-transform: uppercase;
+	margin: 0 0 0.8em 0;
 }
-form ol
+form#basic-form input
 {
-/*        float: left;*/
-/*        border: 1px solid black;*/
-	width: 20em;
+	width: 12em;
 }
-form ol li label
+form#basic-form input.submit
 {
-display:inline-block;
-float:left;
-margin-right:0.5em;
-text-align:right;
-vertical-align:top;
-width:7em;
+	width: auto;
 }
-
-div.submit_buttons_div
+form#basic-form ol li label
 {
-/*        float: right;*/
-	margin: -2em 0 0 17em;
-/*        width: 10em;*/
+	display:inline-block;
+	float:left;
+	margin-right:0.5em;
+	text-align:right;
+	vertical-align:top;
+	width:7em;
+}
+form#basic-form div.submit_buttons_div
+{
+	margin: -2em 0 0 19em;
 	padding: 0.5em 0 0 0;
 }
 
-div.table-editor,
+/* 
+ * Table Editor Forms 
+ */
+div.table-editor-forms form 
+{
+	clear: both;
+	width: auto;
+/*        background: transparent;*/
+}
+div.table-editor-forms form ol
+{
+	/*        float: left;*/
+	/*        border: 1px solid black;*/
+	width: 22em;
+}
+div.table-editor-forms form ol li label
+{
+	display:inline-block;
+	float:left;
+	margin-right:0.5em;
+	text-align:right;
+	vertical-align:top;
+	width:7em;
+}
+div.table-editor-forms input
+{
+	width: 15em;
+}
+div.table-editor-forms  input.submit
+{
+	width: auto;
+}
+div.table-editor-forms  input#actor_color
+{
+	width: 4em;
+}
+div.table-editor-forms div.submit_buttons_div
+{
+	margin: -2em 0 0 21em;
+	padding: 0.5em 0 0 0;
+}
+div.table-editor-forms
+{
+	background-color:#FFFF99;
+	padding: 0 0 1em 0;
+	margin: 0 auto 3em auto;
+	width: 30em;
+}
+div.table-editor-form,
 div.actor-editor,
 div.option-editor,
 div.table-editor-actions,
 div.actor-editor-actions,
 div.option-editor-actions
 {
-/*        width: 10em;*/
-	clear:both;
-	width: 80%;
+	/*        margin: 0 auto;*/
 }
 
-div.table-editor
+div.table-editor-form
 {
-	padding: 0 0 0.5em 0;
+	padding: 1em 0 0.5em 0;
 }
 div.actor-editor
 {
-	padding: 0.5em 0 0.5em 2em;
+	padding: 0.5em 0 0.5em 0.5em;
+	margin: 0.5em 1em 0 2em;
 }
 div.option-editor
 {
-	padding: 0.5em 0 0.5em 4em;
+	padding: 0.5em 0 0.5em 0.5em;
+	margin: 0.2em 1em 0 4em;
 }
 div.table-editor-actions
 {
-	padding: 0 0 0.5em 0;
+	padding: 0.5em 0 0 0.5em;
 }
 div.actor-editor-actions
 {
-	padding: 0 0 0.5em 2em;
+	padding: 0 0 0.5em 0.5em;
+	margin: 0 1em 0 2em;
 }
 div.option-editor-actions
 {
-	padding: 0 0 0.5em 4em;
+	padding: 0 0 0.5em 0.5em;
+	margin: 0 1em 0 4em;
 }
-
-
-div.table-editor ul
+div.table-editor-actions a,
+div.actor-editor-actions a,
+div.option-editor-actions a
 {
-	display: inline;
+	text-decoration:none;
 }
+div.table-editor-actions a:hover,
+div.actor-editor-actions a:hover,
+div.option-editor-actions a:hover
+{
+	text-decoration:underline;
+}
+
+/*
+ * UL ICONS in the Table Editor Forms
+ */
+div.table-editor-forms ul.table-options li#add_new_actor,
+div.table-editor-forms ul.table-options li#add_option
+{
+	list-style: disc url(/images/icons/16x16/list-add.png) inside;
+}
+div.table-editor-forms ul.table-options li#delete_actor,
+div.table-editor-forms ul.table-options li#delete_option
+{
+	/*        list-style: disc url(/images/icons/16x16/list-remove.png) inside;*/
+	list-style: disc url(/images/icons/16x16/edit-delete.png) inside;
+}
+
+/*
+ * Background colors in the Table Editor Forms
+ */
 #blue.actor-editor,
 #blue.option-editor,
 #blue.actor-editor-actions,

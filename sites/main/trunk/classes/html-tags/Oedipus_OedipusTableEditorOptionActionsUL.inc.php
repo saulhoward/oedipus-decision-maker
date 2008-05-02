@@ -33,7 +33,7 @@ extends
 		get_delete_option_li()
 	{
 		$delete_option_url = $this->get_delete_option_url();
-		$link = new HTMLTags_A('Delete this Option');
+		$link = new HTMLTags_A('delete this Option');
 		$link->set_href($delete_option_url);
 		$li = new HTMLTags_LI();
 		$li->append_tag_to_content($link);

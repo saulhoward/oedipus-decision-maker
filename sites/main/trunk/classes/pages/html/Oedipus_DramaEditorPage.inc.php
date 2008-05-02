@@ -71,6 +71,9 @@ extends
 				. $this->drama->get_name() 
 				. '</span></h2>';
 
+			$drama_editor_page_div->append_tag_to_content(
+				$this->get_oedipus_html_drama_editor_page_actions_ul()
+			);
 
 			$drama_div = new HTMLTags_Div();
 			$drama_div->set_attribute_str('class', 'oedipus-drama');
@@ -136,13 +139,19 @@ extends
 	private function
 		get_oedipus_html_table(Oedipus_Table $table)
 	{
-		return new Oedipus_OedipusHTMLTable($table);
+		return new Oedipus_OedipusHTMLTable($table, FALSE);
 	}
 
 	private function
 		get_oedipus_html_table_options(Oedipus_Table $table)
 	{
 		return new Oedipus_OedipusTableOptionsUL($table);
+	}
+
+	private function
+		get_oedipus_html_drama_editor_page_actions_ul()
+	{
+		return new Oedipus_OedipusDramaEditorPageActionsUL($this->drama);
 	}
 
 	private function

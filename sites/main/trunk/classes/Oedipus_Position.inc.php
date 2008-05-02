@@ -13,13 +13,15 @@
 class
 	Oedipus_Position
 {
+	private $id;
 	private $tile;
 	private $doubt;
 	private $actor;
 	
 	public function
-		__construct($tile, $doubt, Oedipus_Actor $actor)
+		__construct($id, $tile, $doubt, Oedipus_Actor $actor)
 	{
+		$this->id = $id;
 		$this->tile = $tile;
 		$this->doubt = $doubt;
 		$this->actor = $actor;
@@ -35,6 +37,12 @@ class
 		get_doubt()
 	{
 		return $this->doubt;
+	}
+
+	public function
+		get_id()
+	{
+		return $this->id;
 	}
 
 	public function

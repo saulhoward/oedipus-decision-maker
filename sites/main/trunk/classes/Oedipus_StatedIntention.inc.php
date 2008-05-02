@@ -13,14 +13,22 @@
 class
 	Oedipus_StatedIntention
 {
+	private $id;
 	private $tile;
 	private $doubt;
 	
 	public function
-		__construct($tile, $doubt)
+		__construct($id, $tile, $doubt)
 	{
+		$this->id = $id;
 		$this->tile = $tile;
 		$this->doubt = $doubt;
+	}
+
+	public function
+		get_id()
+	{
+		return $this->id;
 	}
 
 	public function

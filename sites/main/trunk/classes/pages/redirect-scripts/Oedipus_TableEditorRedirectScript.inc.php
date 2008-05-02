@@ -102,6 +102,38 @@ extends
 					$_GET['option_id']
 				);
 			}
+			elseif (
+				isset($_GET['edit_position'])
+				&&
+				isset($_GET['position_id'])
+				&&
+				isset($_GET['position_tile'])
+				&&
+				isset($_GET['position_doubt'])
+			)
+			{
+				Oedipus_TableCreationHelper::update_position_by_id(
+					$_GET['position_id'],
+					$_GET['position_tile'],
+					$_GET['position_doubt']
+				);
+			}
+			elseif (
+				isset($_GET['edit_stated_intention'])
+				&&
+				isset($_GET['stated_intention_id'])
+				&&
+				isset($_GET['stated_intention_tile'])
+				&&
+				isset($_GET['stated_intention_doubt'])
+			)
+			{
+				Oedipus_TableCreationHelper::update_stated_intention_by_id(
+					$_GET['stated_intention_id'],
+					$_GET['stated_intention_tile'],
+					$_GET['stated_intention_doubt']
+				);
+			}
 		}
 
 		$this->set_return_to_url($return_to_url);

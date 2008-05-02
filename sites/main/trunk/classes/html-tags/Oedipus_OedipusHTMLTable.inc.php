@@ -26,18 +26,22 @@ extends
 	// For each option, every actor has a position on it.
 	// For each option, there is a si-position on it.
 	//
-	
+
+	private $edit_mode;
+
 	private $actors;
 
 	private $table;
 
 	public function
-		__construct(Oedipus_Table $table)
+		__construct(Oedipus_Table $table, $edit_mode = TRUE)
 	{
 		parent::__construct();
 		
 		$this->set_attribute_str('class', 'oedipus');
 		
+		$this->edit_mode = $edit_mode;
+
 		$this->table = $table;
 
 		$this->actors = $table->get_actors();
@@ -257,34 +261,79 @@ extends
 	{
 //                <a href="#" class="position-tile" id="actor1-option1">0</a>
 
-		$html_tile_link = new HTMLTags_URL();
-		$html_tile_link->set_file('#');
+		if ($this->edit_mode)
+		{
+			$html_tile_link = PublicHTML_URLHelper
+				::get_oo_page_url(
+					'Oedipus_TableEditorRedirectScript',
+					array(
+						'table_id' => $this->table->get_id(),
+						'edit_position' => 1,
+						'position_id' => $position->get_id(),
+						'position_tile' => $position->get_tile(),
+						'position_doubt' => $position->get_doubt()
+					)
+				);
+		}
+		else
+		{
+			$html_tile_link = new HTMLTags_URL();
+			$html_tile_link->set_file('#');
+		}
 
 		$html_tile = new HTMLTags_A($position->get_tile() . $position->get_doubt());
 		$html_tile->set_href($html_tile_link);
 
 		$html_tile->set_attribute_str('class', 'position-tile');
 		$actor = $position->get_actor();
-		$html_tile_id = $actor->get_color() . $position->get_tile() . $position->get_doubt();
+		$html_tile_id = $actor->get_color() . $position->get_tile() 
+			. $this->add_q_to_doubt($position->get_doubt());
 		$html_tile->set_attribute_str('id', $html_tile_id);
 		return $html_tile;
 
 	}
 	
+	private function
+		add_q_to_doubt($doubt)
+	{
+		if ($doubt == '?')
+		{
+			$doubt = 'q';
+		}
+		return $doubt;
+	}
+
 	public function
 		get_stated_intention_tile(Oedipus_StatedIntention $stated_intention, Oedipus_Actor $actor)
 	{
 //                <a href="#" class="si-tile" id="actor1-option1">0</a>
-
-		$html_tile_link = new HTMLTags_URL();
-		$html_tile_link->set_file('#');
+		if ($this->edit_mode)
+		{
+			$html_tile_link = PublicHTML_URLHelper
+				::get_oo_page_url(
+					'Oedipus_TableEditorRedirectScript',
+					array(
+						'table_id' => $this->table->get_id(),
+						'edit_stated_intention' => 1,
+						'stated_intention_id' => $stated_intention->get_id(),
+						'stated_intention_tile' => $stated_intention->get_tile(),
+						'stated_intention_doubt' => $stated_intention->get_doubt()
+					)
+				);
+		}
+		else
+		{
+			$html_tile_link = new HTMLTags_URL();
+			$html_tile_link->set_file('#');
+		}
 
 		$html_tile = new HTMLTags_A($stated_intention->get_tile() . $stated_intention->get_doubt());
 		$html_tile->set_href($html_tile_link);
 
 		$html_tile->set_attribute_str('class', 'si-tile');
 		$html_tile_id = 
-			$actor->get_color() . $stated_intention->get_tile() . $stated_intention->get_doubt();
+			$actor->get_color() . $stated_intention->get_tile() 
+			. $this->add_q_to_doubt($stated_intention->get_doubt());
 		$html_tile->set_attribute_str('id', $html_tile_id);
 
 		return $html_tile;

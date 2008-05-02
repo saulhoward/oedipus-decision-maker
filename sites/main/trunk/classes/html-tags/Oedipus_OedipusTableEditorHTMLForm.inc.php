@@ -42,8 +42,7 @@ extends
 		
 		$this->set_attribute_str('name', $name);
 		$this->set_attribute_str('method', $method);
-		$this->set_attribute_str('class', 'basic-form');
-		$this->set_attribute_str('id', 'basic-form');
+		$this->set_attribute_str('class', 'oedipus-table-form');
 		
 		$this->input_lis = array();
 
@@ -60,7 +59,7 @@ extends
 		# Hidden Inputs
 		$this->add_hidden_input('table_id', $table->get_id());
 
-		$this->set_submit_text('Update Table');
+		$this->set_submit_text('OK');
 	}
 	
 	public function

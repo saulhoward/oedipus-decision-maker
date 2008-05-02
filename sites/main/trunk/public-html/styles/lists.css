@@ -1,0 +1,88 @@
+/* List CSS Styles for
+ * Oedipus Decision Maker
+ * Saul Howard, CLWD, 2008
+ */
+
+
+/*
+ * UL At the top of pages
+ */
+ul.page-actions
+{
+	margin: 1em 0 0.5em 0;
+	width: 30em;
+}
+ul.page-actions li
+{
+
+	line-height: 32px;
+	height: 32px;
+}
+ul.page-actions li a
+{
+	font-weight: 900;
+	font-size:1.1em;
+	text-decoration: none;
+	background-color: #FFFF99;
+	padding: 0.5em 0 0 35px;
+	height: 32px;
+}
+ul.page-actions li a:hover
+{
+	text-decoration: underline;
+}
+ul.page-actions li#back-to-drama a
+{
+	color: #03C000;
+	background: transparent url(/images/icons/32x32/document-save.png) top left no-repeat;
+}
+ul.page-actions li#edit-drama a
+{
+	color: #2D36C2;
+	background: transparent url(/images/icons/32x32/document-open.png) top left no-repeat;
+}
+ul.page-actions li#view-drama a
+{
+	color: #2D36C2;
+	background: transparent url(/images/icons/32x32/emblem-documents.png) top left no-repeat;
+}
+
+
+
+/*
+ * All Dramas UL
+ */
+ul.all-dramas
+{
+	margin: 2em auto;
+	width: 100%;
+	text-align: center;
+}
+ul.all-dramas li
+{
+	line-height:3em;
+}
+ul.all-dramas li a
+{
+	padding: 0.5em;
+	color: black;
+	text-decoration: none;
+	font-size: 1.2em;
+	font-weight: 900;
+	background-color: #ccc;
+}
+ul.all-dramas li a:hover
+{
+	color: white;
+	background-color: black;
+}
+ul.all-dramas li a span
+{
+	padding: 0 1em;
+}
+ul.all-dramas li a span#added
+{
+	font-size: 0.9em;
+	font-weight: 300;
+	color: #333;
+}

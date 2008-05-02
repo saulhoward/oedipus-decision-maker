@@ -1,6 +1,6 @@
 <?php
 /**
- * Oedipus_OedipusDramaPageOptionsUL
+ * Oedipus_OedipusDramaPageActionsUL
  *
  *  2008-03-17, RFI
  *  2008-04-05, SANH
@@ -8,9 +8,9 @@
  */
 
 class
-	Oedipus_OedipusDramaPageOptionsUL
+	Oedipus_OedipusDramaPageActionsUL
 extends
-	HTMLTags_UL
+Oedipus_OedipusPageActionsUL
 {
 	private $drama;
 
@@ -20,8 +20,6 @@ extends
 		parent::__construct();
 
 		$this->drama = $drama;
-		
-		$this->set_attribute_str('class', 'drama-page-options');
 		
 		// Link to edit the table
 

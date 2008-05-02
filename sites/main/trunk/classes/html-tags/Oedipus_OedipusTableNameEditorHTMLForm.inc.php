@@ -27,7 +27,7 @@ Oedipus_OedipusTableEditorHTMLForm
 		//                $this->table = $table;
 
 		# Table Name Input
-		$this->add_input_name_with_value('table_name', $table->get_name(), 'Table Name:');
+		$this->add_input_name_with_value('table_name', $table->get_name(), 'Table');
 	}
 }
 ?>

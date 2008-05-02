@@ -52,10 +52,73 @@ extends
 			$drama_page_div->append_tag_to_content(
 				$this->get_all_dramas_ul()
 			);
+			$drama_page_div->append_tag_to_content(
+				$this->get_create_new_drama_div()
+			);
+	
 		}
 
 		echo $drama_page_div->get_as_string();
 	}
+
+	/* 
+	 * Create New Drama stuff - move this out!
+	 */
+	private function
+		get_create_new_drama_div()
+	{
+		$drama_editor_page_div = new HTMLTags_Div();
+		$drama_editor_page_div->set_attribute_str('class', 'drama-editor');
+
+		$form_div = new HTMLTags_Div();
+		$form_div->set_attribute_str('class', 'new-drama-form');
+		$html_form = $this->get_html_new_drama_form();
+		$form_div->append_tag_to_content($html_form);
+		$drama_editor_page_div->append_tag_to_content($form_div);
+
+		return $drama_editor_page_div;
+	}
+
+	private function
+		get_html_new_drama_form()
+	{
+		$form = new HTMLTags_SimpleOLForm('new_drama');
+		$form->set_legend_text('New Drama');
+
+		// action
+		$form_action = self::get_new_drama_form_action_url();
+		$form->set_action($form_action);
+
+		// cancel
+		$form_cancel = self::get_new_drama_form_cancel_url();
+		$form->set_cancel_location($form_cancel);
+
+		// Drama Name Input
+		$form->add_input_name_with_value('drama_name', '', 'Drama Name:');
+		// Hidden Inputs
+		$form->add_hidden_input('new_drama', 1);
+
+		$form->set_submit_text('Create Drama');
+
+		return $form;
+	}
+
+	private function
+		get_new_drama_form_action_url()
+	{
+		return PublicHTML_URLHelper
+			::get_oo_page_url('Oedipus_DramaEditorRedirectScript');
+	}
+
+	private function
+		get_new_drama_form_cancel_url()
+	{
+		return PublicHTML_URLHelper
+			::get_oo_page_url('Oedipus_DramaPage');
+	}
+	/* 
+	 * End of Create New Drama stuff - move this out!
+	 */
 
 	private function
 		get_oedipus_drama_page_div()
@@ -64,7 +127,7 @@ extends
 		$drama_page_div->set_attribute_str('class', 'drama');
 
 		$drama_page_options = 
-			$this->get_oedipus_drama_page_options();
+			$this->get_oedipus_drama_page_actions();
 		$drama_page_div->append_tag_to_content($drama_page_options);
 
 		if (isset($this->drama))
@@ -120,32 +183,19 @@ extends
 	private function
 		get_oedipus_html_table(Oedipus_Table $table)
 	{
-		return new Oedipus_OedipusHTMLTable($table);
+		return new Oedipus_OedipusHTMLTable($table, FALSE);
 	}
 
 	private function
-		get_oedipus_drama_page_options()
+		get_oedipus_drama_page_actions()
 	{
-		return new Oedipus_OedipusDramaPageOptionsUL($this->drama);
+		return new Oedipus_OedipusDramaPageActionsUL($this->drama);
 	}
 
 	private function
 		get_all_dramas_ul()
 	{
-		$ul = new HTMLTags_UL();
-
-		$dramas = Oedipus_DramaEditorHelper::get_all_dramas();
-
-		foreach ($dramas as $drama)
-		{
-			$li = new HTMLTags_LI();
-			$link = new HTMLTags_A($drama->get_name());
-			$link->set_href(Oedipus_DramaHelper::get_drama_url($drama));
-			$li->append_tag_to_content($link);
-			$ul->append_tag_to_content($li);
-		}
-
-		return $ul;
+		return new Oedipus_OedipusAllDramasUL();
 	}
 }
 ?>

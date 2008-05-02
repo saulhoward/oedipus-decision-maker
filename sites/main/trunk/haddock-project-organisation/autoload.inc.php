@@ -1493,8 +1493,16 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusActorEditorHTMLForm.inc.php';
 			break;
 
-		case('Oedipus_OedipusDramaPageOptionsUL'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusDramaPageOptionsUL.inc.php';
+		case('Oedipus_OedipusAllDramasUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusAllDramasUL.inc.php';
+			break;
+
+		case('Oedipus_OedipusDramaEditorPageActionsUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusDramaEditorPageActionsUL.inc.php';
+			break;
+
+		case('Oedipus_OedipusDramaPageActionsUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusDramaPageActionsUL.inc.php';
 			break;
 
 		case('Oedipus_OedipusHTMLTable'): 
@@ -1503,6 +1511,10 @@ function __autoload($class_name)
 
 		case('Oedipus_OedipusOptionEditorHTMLForm'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusOptionEditorHTMLForm.inc.php';
+			break;
+
+		case('Oedipus_OedipusPageActionsUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusPageActionsUL.inc.php';
 			break;
 
 		case('Oedipus_OedipusTableEditorActionsUL'): 
@@ -1521,8 +1533,8 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusTableEditorOptionActionsUL.inc.php';
 			break;
 
-		case('Oedipus_OedipusTableEditorPageOptionsUL'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusTableEditorPageOptionsUL.inc.php';
+		case('Oedipus_OedipusTableEditorPageActionsUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusTableEditorPageActionsUL.inc.php';
 			break;
 
 		case('Oedipus_OedipusTableEditorTableActionsUL'): 

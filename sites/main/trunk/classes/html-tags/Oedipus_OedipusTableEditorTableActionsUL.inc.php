@@ -32,7 +32,7 @@ extends
 		get_add_new_actor_li()
 	{
 		$add_new_actor_url = $this->get_add_new_actor_url();
-		$link = new HTMLTags_A('Add a new Actor');
+		$link = new HTMLTags_A('add a new Actor');
 		$link->set_href($add_new_actor_url);
 		$li = new HTMLTags_LI();
 		$li->append_tag_to_content($link);

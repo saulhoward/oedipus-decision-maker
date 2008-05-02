@@ -96,6 +96,7 @@ SQL;
 				$stated_intention_result = mysql_fetch_array($stated_intentions_result);
 
 				$stated_intention = new Oedipus_StatedIntention(
+					$stated_intention_result['id'],
 					$stated_intention_result['position'],
 					$stated_intention_result['doubt']
 				);
@@ -148,6 +149,7 @@ SQL;
 
 					$positions[$position_actor->get_id()] =
 						new Oedipus_Position(
+							$position_result['id'],
 							$position_result['position'],
 							$position_result['doubt'],
 							$position_actor
@@ -476,6 +478,110 @@ SQL;
 
 	}
 
+	public static function
+		update_position_by_id(
+			$position_id,
+			$position_tile,
+			$position_doubt
+		)
+	{
+		$position_data_is_valid = TRUE; //Implement this!
+
+		if ($position_data_is_valid) 
+		{
+			$position_tile = self::get_next_tile($position_tile, $position_doubt);
+			$position_doubt = self::get_next_doubt($position_doubt);
+
+			$dbh = DB::m();
+
+			$sql = <<<SQL
+UPDATE
+	oedipus_positions
+SET
+	position = '$position_tile',
+	doubt = '$position_doubt'
+WHERE
+	id = $position_id
+SQL;
+
+			#print_r($sql);exit;
+			mysql_query($sql, $dbh);
+		} 
+		else 
+		{
+			//                        throw new Database_CRUDException("'$href' is not a validate HREF!");
+		}
+	}
+
+	public static function
+		update_stated_intention_by_id(
+			$stated_intention_id,
+			$stated_intention_tile,
+			$stated_intention_doubt
+		)
+	{
+		$stated_intention_data_is_valid = TRUE; //Implement this!
+
+		if ($stated_intention_data_is_valid) 
+		{
+			$stated_intention_tile = self::get_next_tile($stated_intention_tile, $stated_intention_doubt);
+			$stated_intention_doubt = self::get_next_doubt($stated_intention_doubt);
+
+			$dbh = DB::m();
+
+			$sql = <<<SQL
+UPDATE
+	oedipus_stated_intentions
+SET
+	position = '$stated_intention_tile',
+	doubt = '$stated_intention_doubt'
+WHERE
+	id = $stated_intention_id
+SQL;
+
+			#print_r($sql);exit;
+			mysql_query($sql, $dbh);
+		} 
+		else 
+		{
+			//                        throw new Database_CRUDException("'$href' is not a validate HREF!");
+		}
+	}
+
+
+	public static function
+		get_next_doubt($position_doubt)
+	{
+		if ($position_doubt == '')
+		{
+			return '?';
+		}
+		elseif ($position_doubt == '?')
+		{
+			return 'x';
+		}
+		elseif ($position_doubt == 'x')
+		{
+			return '';
+		}
+		return $position_doubt;
+	}
+	
+
+	public static function
+		get_next_tile($position_tile, $position_doubt)
+	{
+		if ($position_tile == '1' && $position_doubt == 'x')
+		{
+			return 0;
+		}
+		elseif ($position_tile == '0' && $position_doubt == 'x')
+		{
+			return 1;
+		}
+		return $position_tile;
+	}
+	
 	public static function
 		update_actor_by_id(
 			$actor_id,

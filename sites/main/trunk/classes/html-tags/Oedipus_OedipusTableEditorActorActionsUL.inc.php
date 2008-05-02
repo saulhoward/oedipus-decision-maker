@@ -37,7 +37,7 @@ extends
 		get_delete_actor_li()
 	{
 		$delete_actor_url = $this->get_delete_actor_url();
-		$link = new HTMLTags_A('Delete this Actor');
+		$link = new HTMLTags_A('delete this Actor');
 		$link->set_href($delete_actor_url);
 		$li = new HTMLTags_LI();
 		$li->append_tag_to_content($link);
@@ -50,7 +50,7 @@ extends
 		get_add_option_li()
 	{
 		$add_option_url = $this->get_add_option_url();
-		$link = new HTMLTags_A('Add new Option');
+		$link = new HTMLTags_A('add new Option');
 		$link->set_href($add_option_url);
 		$li = new HTMLTags_LI();
 		$li->append_tag_to_content($link);

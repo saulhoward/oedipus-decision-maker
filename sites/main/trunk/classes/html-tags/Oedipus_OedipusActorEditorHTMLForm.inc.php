@@ -29,11 +29,11 @@ Oedipus_OedipusTableEditorHTMLForm
 
 		# Name Input
 		$this->add_input_name_with_value(
-			'actor_name', $actor->get_name(), 'Actor Name:'
+			'actor_name', $actor->get_name(), 'Actor'
 		);
 		# color Input
 		$this->add_input_name_with_value(
-			'actor_color', $actor->get_color(), 'Color:'
+			'actor_color', $actor->get_color(), 'Color'
 		);
 
 		# Hidden Inputs

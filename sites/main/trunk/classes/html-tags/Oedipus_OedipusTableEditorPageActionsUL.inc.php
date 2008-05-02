@@ -7,9 +7,9 @@
  */
 
 class
-	Oedipus_OedipusTableEditorPageOptionsUL
+	Oedipus_OedipusTableEditorPageActionsUL
 extends
-	HTMLTags_UL
+	Oedipus_OedipusPageActionsUL
 {
 	private $table;
 
@@ -19,8 +19,6 @@ extends
 		parent::__construct();
 
 		$this->table = $table;
-		
-		$this->set_attribute_str('class', 'table-editor-page-options');
 		
 		// Link to edit the table
 
@@ -32,7 +30,7 @@ extends
 		get_back_to_drama_li()
 	{
 		$back_to_drama_url = $this->get_back_to_drama_url();
-		$link = new HTMLTags_A('Go Back to Drama');
+		$link = new HTMLTags_A('Save and Return');
 		$link->set_href($back_to_drama_url);
 		$li = new HTMLTags_LI();
 		$li->append_tag_to_content($link);

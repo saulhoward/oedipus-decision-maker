@@ -20,7 +20,7 @@ Oedipus_OedipusTableEditorHTMLForm
 	//        private $table;
 
 	public function
-		__construct(Oedipus_Table $table, Oedipus_Option $option)
+		__construct(Oedipus_Table $table, Oedipus_Option $option, $iteration)
 	{
 		parent::__construct($table, 'option_editor');
 
@@ -28,7 +28,7 @@ Oedipus_OedipusTableEditorHTMLForm
 
 		# Name Input
 		$this->add_input_name_with_value(
-			'option_name', $option->get_name(), 'Option Name:'
+			'option_name', $option->get_name(), 'Option&nbsp;' . $iteration
 		);
 
 		# Hidden Inputs

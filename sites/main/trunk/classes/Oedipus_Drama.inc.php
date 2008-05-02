@@ -13,14 +13,16 @@ Oedipus_Drama
 {
 	private $name;
 	private $id;
+	private $added;
 	private $unique_name;
 	private $tables;
 
 	public function
-		__construct($id, $name, $unique_name)
+		__construct($id, $name, $unique_name, $added)
 	{
 		$this->id = $id;
 		$this->name = $name;
+		$this->added = $added;
 		$this->unique_name = $unique_name;
 		$this->tables = array();
 	}
@@ -68,6 +70,19 @@ Oedipus_Drama
 		get_id()
 	{
 		return $this->id;
+	}
+
+	public function
+		get_human_readable_added()
+	{
+		$date = strtotime($this->added);
+		return date("F j, Y, g:i a", $date);
+	}
+
+	public function
+		get_added()
+	{
+		return $this->added;
 	}
 
 	public function
