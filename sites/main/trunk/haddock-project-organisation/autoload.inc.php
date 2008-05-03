@@ -1537,6 +1537,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusPageActionsUL.inc.php';
 			break;
 
+		case('Oedipus_OedipusShareDramaPageActionsUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusShareDramaPageActionsUL.inc.php';
+			break;
+
 		case('Oedipus_OedipusTableEditorActionsUL'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusTableEditorActionsUL.inc.php';
 			break;
@@ -1575,6 +1579,10 @@ function __autoload($class_name)
 
 		case('Oedipus_Position'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Position.inc.php';
+			break;
+
+		case('Oedipus_ShareDramaPage'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_ShareDramaPage.inc.php';
 			break;
 
 		case('Oedipus_StatedIntention'): 
