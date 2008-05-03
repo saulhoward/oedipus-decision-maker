@@ -318,6 +318,7 @@ SQL;
 			$option_id = mysql_insert_id($dbh);
 
 			$stated_intention = new Oedipus_StatedIntention(
+				$stated_intention_id,
 				$stated_intention_position,
 				$stated_intention_doubt
 			);
@@ -365,6 +366,7 @@ SQL;
 
 					$positions[$position_actor->get_name()] =
 						new Oedipus_Position(
+							$position_id,
 							$position_position,
 							$position_doubt,
 							$position_actor

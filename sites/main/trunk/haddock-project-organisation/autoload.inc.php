@@ -2,7 +2,7 @@
 /**
  * __autoload .INC file
  *
- * Last Modified: 2008-05-02
+ * Last Modified: 2008-05-03
  */
 
 function __autoload($class_name)
@@ -185,6 +185,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/database/classes/renderers/field-renderers/Database_ChoiceFieldRenderer.inc.php';
 			break;
 
+		case('Database_ConfigManager'): 
+			require_once PROJECT_ROOT . '/haddock/database/classes/managers/config/Database_ConfigManager.inc.php';
+			break;
+
 		case('Database_CRUDAdminManager'): 
 			require_once PROJECT_ROOT . '/haddock/database/classes/Database_CRUDAdminManager.inc.php';
 			break;
@@ -363,6 +367,10 @@ function __autoload($class_name)
 
 		case('Database_ManageSimpleCRUDAdminRedirectScript'): 
 			require_once PROJECT_ROOT . '/haddock/database/classes/pages/crud-pages/simple-crud/Database_ManageSimpleCRUDAdminRedirectScript.inc.php';
+			break;
+
+		case('Database_ModifyingStatementHelper'): 
+			require_once PROJECT_ROOT . '/haddock/database/classes/helpers/Database_ModifyingStatementHelper.inc.php';
 			break;
 
 		case('Database_MySQLException'): 
@@ -1353,6 +1361,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/plug-ins/mailing-list/classes/url-factories/MailingList_SignUpURLFactory.inc.php';
 			break;
 
+		case('ModelViewController_Model'): 
+			require_once PROJECT_ROOT . '/haddock/model-view-controller/classes/ModelViewController_Model.inc.php';
+			break;
+
 		case('Navigation_1DTreeRetriever'): 
 			require_once PROJECT_ROOT . '/plug-ins/navigation/classes/database/retrievers/Navigation_1DTreeRetriever.inc.php';
 			break;
@@ -1443,6 +1455,14 @@ function __autoload($class_name)
 
 		case('Oedipus_Actor'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Actor.inc.php';
+			break;
+
+		case('Oedipus_AddDramaHTMLForm'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_AddDramaHTMLForm.inc.php';
+			break;
+
+		case('Oedipus_AddTableHTMLForm'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_AddTableHTMLForm.inc.php';
 			break;
 
 		case('Oedipus_DBPage'): 

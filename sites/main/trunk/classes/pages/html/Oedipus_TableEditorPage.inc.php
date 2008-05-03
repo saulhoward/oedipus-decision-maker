@@ -35,9 +35,9 @@ Oedipus_HTMLPage
 	private function
 		get_oedipus_table_editor_page_div()
 	{
-		echo '<h2>Editing Table <span class="table_name">' 
+		echo '<h2><span class="edit_text">Editing Table</span>&nbsp;' 
 			. $this->table->get_name() 
-			. '</span></h2>';
+			. '</h2>';
 
 		$table_editor_page_div = new HTMLTags_Div();
 		$table_editor_page_div->set_attribute_str('class', 'table-editor');

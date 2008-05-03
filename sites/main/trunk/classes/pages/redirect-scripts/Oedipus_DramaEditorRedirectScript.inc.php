@@ -22,14 +22,14 @@ extends
 		}
 	
 		elseif (
-			isset($_POST['new_table'])
+			isset($_POST['add_table'])
 			&&
 			isset($_POST['table_name'])
 			&&
-			isset($_POST['drama_unique_name'])
+			isset($_POST['drama_id'])
 			)
 		{
-			$drama = Oedipus_DramaEditorHelper::get_drama_by_unique_name($_POST['drama_unique_name']);
+			$drama = Oedipus_DramaEditorHelper::get_drama_by_id($_POST['drama_id']);
 			$table = Oedipus_DramaEditorHelper::add_table($drama, $_POST['table_name']);
 			$drama->add_table($table);
 			$return_to_url = Oedipus_DramaEditorHelper::get_drama_editor_url($drama);

@@ -9,14 +9,15 @@
  */
 ul.page-actions
 {
-	margin: 1em 0 0.5em 0;
-	width: 30em;
+	margin: 0.5em 0 0.5em 0;
+	width: 100%;
 }
 ul.page-actions li
 {
-
+	display: inline;
 	line-height: 32px;
 	height: 32px;
+	margin: 0 1em 0 0;
 }
 ul.page-actions li a
 {
@@ -38,15 +39,19 @@ ul.page-actions li#back-to-drama a
 }
 ul.page-actions li#edit-drama a
 {
-	color: #2D36C2;
+	color: #E9292E;
 	background: transparent url(/images/icons/32x32/document-open.png) top left no-repeat;
 }
 ul.page-actions li#view-drama a
 {
 	color: #2D36C2;
-	background: transparent url(/images/icons/32x32/emblem-documents.png) top left no-repeat;
+	background: transparent url(/images/icons/32x32/drama.png) top left no-repeat;
 }
-
+ul.page-actions li#share-drama a
+{
+	color: #2D36C2;
+	background: transparent url(/images/icons/32x32/share-icon.png) top left no-repeat;
+}
 
 
 /*

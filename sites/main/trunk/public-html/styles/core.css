@@ -36,10 +36,12 @@ a:visited
 	text-align: center;
 	font-size: 1.4em;
 	font-weight: 900;
+	color: #333;
 }
 #content h2 span
 {
-	color: red;
+	color: #E9292E;
+/*        font-style: italic;*/
 }
 #content p
 {
