@@ -72,30 +72,22 @@ Oedipus_HTMLPage
 		$drama_editor_page_div = new HTMLTags_Div();
 		$drama_editor_page_div->set_attribute_str('class', 'drama-editor');
 
+		$drama_editor_page_div->append_tag_to_content(
+			$this->get_oedipus_html_drama_editor_page_actions_ul()
+		);
+
 		if (isset($this->drama))
 		{
-			echo '<h2><span class="edit_txt">Editing</span>&nbsp;' 
-				. $this->drama->get_name() 
-				. '</h2>';
-
 			$drama_editor_page_div->append_tag_to_content(
-				$this->get_oedipus_html_drama_editor_page_actions_ul()
+				$this->get_drama_heading()
 			);
 
-			$drama_editor_page_div->append_tag_to_content($this->get_oedipus_html_drama_div());
+			$drama_editor_page_div->append_tag_to_content(
+				$this->get_oedipus_html_drama_div()
+			);
 		}
 
 		return $drama_editor_page_div;
-	}
-
-	private function
-		get_create_new_drama_div()
-	{
-		$form_div = new HTMLTags_Div();
-		$form_div->set_attribute_str('class', 'add-drama-form');
-		$html_form = $this->get_add_drama_form();
-		$form_div->append_tag_to_content($html_form);
-		return $form_div;
 	}
 
 	private function
@@ -107,25 +99,57 @@ Oedipus_HTMLPage
 		// SHOW THE TABLES
 		foreach ($this->drama->get_tables() as $table)
 		{
-			$table_div = new HTMLTags_Div();
-			$table_div->set_attribute_str('class', 'oedipus-table');
+			# The left and right column divs
+			$left_div = new HTMLTags_Div();
+			$left_div->set_attribute_str('class', 'left-column');
 
-			$html_table = 
-				$this->get_oedipus_html_table($table);
-			$table_div->append_tag_to_content($html_table);
+			# The table itself
+			$left_div->append_tag_to_content($this->get_oedipus_table_div($table));
+			# The instructions
+			//$left_div->append_tag_to_content($this->get_drama_page_table_instructions_div());
+			$drama_div->append_tag_to_content($left_div);
 
-			$html_table_options = 
-				$this->get_oedipus_html_table_options($table);
-			$table_div->append_tag_to_content($html_table_options);
+			$right_div = new HTMLTags_Div();
+			$right_div->set_attribute_str('class', 'right-column');
+			# The notes etc. added here
+			$right->append_tag_to_content($this->get_table_notes_form($table));
+			$drama_div->append_tag_to_content($right_div);
 
-			$drama_div->append_tag_to_content($table_div);
-
+			$clear_div = new HTMLTags_Div();
+			$clear_div->set_attribute_str('class', 'clear-columns');
+			$drama_div->append_tag_to_content($clear_div);
 		}
 
 		// CREATE TABLE FORM
 		$drama_div->append_tag_to_content($this->get_add_table_form());
 
 		return $drama_div;
+	}
+
+	/*
+	 * Functions to call in the html-tags
+	 * classes for the page elements
+	 *
+	 */
+	private function
+		get_drama_heading()
+	{
+		$heading = new HTMLTags_Heading(2);
+		$span = new HTMLTags_Span('Editing:&nbsp;');
+		$span->set_attribute_str('class', 'edit-text');
+		$heading->append_tag_to_content($span);
+		$heading->append_str_to_content($this->drama->get_name());
+		return $heading;
+	}
+
+	private function
+		get_oedipus_table_div(Oedipus_Table $table)
+	{
+		$table_div = new HTMLTags_Div();
+		$table_div->set_attribute_str('class', 'oedipus-table');
+		$table_div->append_tag_to_content($this->get_oedipus_html_table($table));
+		$table_div->append_tag_to_content($this->get_oedipus_html_table_options($table));
+		return $table_div;
 	}
 
 	private function
@@ -138,6 +162,12 @@ Oedipus_HTMLPage
 		get_oedipus_html_table_options(Oedipus_Table $table)
 	{
 		return new Oedipus_OedipusTableOptionsUL($table);
+	}
+
+	private function
+		get_table_notes_form(Oedipus_Table $table)
+	{
+		return new Oedipus_EditTableNoteHTMLForm($table);
 	}
 
 	private function
@@ -156,6 +186,16 @@ Oedipus_HTMLPage
 		get_add_drama_form()
 	{
 		return new Oedipus_AddDramaHTMLForm();
+	}
+
+	private function
+		get_create_new_drama_div()
+	{
+		$form_div = new HTMLTags_Div();
+		$form_div->set_attribute_str('class', 'add-drama-form');
+		$html_form = $this->get_add_drama_form();
+		$form_div->append_tag_to_content($html_form);
+		return $form_div;
 	}
 
 	private function

@@ -37,6 +37,7 @@ a:visited
 	font-size: 1.4em;
 	font-weight: 900;
 	color: #333;
+	margin: 0 0 1em 0;
 }
 #content h2 span
 {
@@ -57,6 +58,28 @@ a:visited
 	list-style: disc url(/images/bullet_blue.png) inside;
 }
 
+/*
+ * Left and Right Columns
+ */
+div.left-column
+{
+	float: left;
+	width: 50%;
+}
+div.right-column
+{
+	float: right;
+	width: 50%;
+}
+div.clear-columns
+{
+	clear: both;
+	height: 1em;
+}
+/*
+ * Navigation (move to lists.css?)
+ */
+
 #navigation
 {
 	position: absolute;
@@ -73,6 +96,10 @@ a:visited
 div.table-editor
 {
 
+}
+div.table-editor-instructions
+{
+/*        float: left;*/
 }
 /* Table Editor Form */
 div.table-editor-forms

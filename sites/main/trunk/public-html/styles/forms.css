@@ -68,18 +68,21 @@ div.table-editor-forms form ol li label
 {
 	display:inline-block;
 	float:left;
-	margin-right:0.5em;
+	margin: 0.5em 0.5em 0 0;
 	text-align:right;
-	vertical-align:top;
-	width:7em;
+	vertical-align:middle;
+	width:5em;
 }
 div.table-editor-forms input
 {
-	width: 15em;
+	width: 12em;
+	font-size: 1.05em;
 }
 div.table-editor-forms  input.submit
 {
 	width: auto;
+
+	font-size: 0.9em;
 }
 div.table-editor-forms  input#actor_color
 {
@@ -87,7 +90,7 @@ div.table-editor-forms  input#actor_color
 }
 div.table-editor-forms div.submit_buttons_div
 {
-	margin: -2em 0 0 21em;
+	margin: -2.2em 0 0 19em;
 	padding: 0.5em 0 0 0;
 }
 div.table-editor-forms

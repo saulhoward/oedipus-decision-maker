@@ -6,12 +6,12 @@ div.oedipus-table
 {
 	padding: 0.5em 1em 1em 1em;
 	margin: 1em 2em;
-	width: 40%;
+/*        width: 100%;*/
 	background: #FFFF99;
 }
 div.table-editor div.oedipus-table
 {
-	float: left;
+/*        float: left;*/
 }
 
 table.oedipus
