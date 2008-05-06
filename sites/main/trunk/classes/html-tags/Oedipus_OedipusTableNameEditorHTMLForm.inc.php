@@ -9,7 +9,9 @@
 
 /**
  * Oedipus Form for editing tables' names
- * extends Oedipus_TableEditorHTMLForm
+ *
+ * extends:
+ * Oedipus_TableEditorHTMLForm
  */
 
 class

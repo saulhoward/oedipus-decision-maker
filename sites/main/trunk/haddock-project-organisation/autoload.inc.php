@@ -2,7 +2,7 @@
 /**
  * __autoload .INC file
  *
- * Last Modified: 2008-05-03
+ * Last Modified: 2008-05-06
  */
 
 function __autoload($class_name)
@@ -1461,8 +1461,16 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_AddDramaHTMLForm.inc.php';
 			break;
 
+		case('Oedipus_AddNoteHTMLForm'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_AddNoteHTMLForm.inc.php';
+			break;
+
 		case('Oedipus_AddTableHTMLForm'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_AddTableHTMLForm.inc.php';
+			break;
+
+		case('Oedipus_AddTableNoteHTMLForm'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_AddTableNoteHTMLForm.inc.php';
 			break;
 
 		case('Oedipus_DBPage'): 
@@ -1493,6 +1501,18 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_DramaPage.inc.php';
 			break;
 
+		case('Oedipus_EditNoteHTMLForm'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditNoteHTMLForm.inc.php';
+			break;
+
+		case('Oedipus_EditTableNoteHTMLForm'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditTableNoteHTMLForm.inc.php';
+			break;
+
+		case('Oedipus_EditTableNoteRedirectScript'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/redirect-scripts/Oedipus_EditTableNoteRedirectScript.inc.php';
+			break;
+
 		case('Oedipus_ExampleTablePage'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_ExampleTablePage.inc.php';
 			break;
@@ -1507,6 +1527,14 @@ function __autoload($class_name)
 
 		case('Oedipus_MailingListSignUpPage'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_MailingListSignUpPage.inc.php';
+			break;
+
+		case('Oedipus_Note'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Note.inc.php';
+			break;
+
+		case('Oedipus_NotesHelper'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_NotesHelper.inc.php';
 			break;
 
 		case('Oedipus_OedipusActorEditorHTMLForm'): 

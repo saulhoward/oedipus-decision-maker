@@ -114,7 +114,8 @@ Oedipus_HTMLPage
 			$right_div = new HTMLTags_Div();
 			$right_div->set_attribute_str('class', 'right-column');
 			# The notes etc. added here
-			#
+			$right_div->append_tag_to_content($this->get_table_notes_div($table));
+
 			$drama_div->append_tag_to_content($right_div);
 
 			$clear_div = new HTMLTags_Div();
@@ -199,6 +200,21 @@ Oedipus_HTMLPage
 		return new Oedipus_AddDramaHTMLForm();
 	}
 
+	private function
+		get_table_notes_div(Oedipus_Table $table)
+	{
+		$div = new HTMLTags_Div();
+
+		try
+		{
+			$note = Oedipus_NotesHelper::get_note_by_table_id($table->get_id());
+			$div->append_str_to_content($note->get_note_text());
+		}
+		catch (Exception $e)
+		{
+		}
+		return $div;
+	}
 
 }
 ?>

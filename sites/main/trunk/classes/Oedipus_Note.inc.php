@@ -23,11 +23,13 @@ Oedipus_Note
 		$this->note_text = $note_text;
 		$this->added = $added;
 	}
+
 	public function
 		get_note_text()
 	{
 		return $this->note_text;
 	}
+
 	public function
 		get_id()
 	{

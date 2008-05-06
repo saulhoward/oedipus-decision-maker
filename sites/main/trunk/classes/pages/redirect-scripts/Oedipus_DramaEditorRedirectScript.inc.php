@@ -30,11 +30,32 @@ extends
 			)
 		{
 			$drama = Oedipus_DramaEditorHelper::get_drama_by_id($_POST['drama_id']);
+
+			# ---------------------------------
+			# Add a default table for the drama
+			# ---------------------------------
 			$table = Oedipus_DramaEditorHelper::add_table($drama, $_POST['table_name']);
 			$drama->add_table($table);
+
+			# ---------------------------------
+			# Add a default note for the table
+			# ---------------------------------
+			$note = $this->add_default_note_to_table($table);
+
 			$return_to_url = Oedipus_DramaEditorHelper::get_drama_editor_url($drama);
 		} 
 		$this->set_return_to_url($return_to_url);
+	}
+
+
+	private function
+		add_default_note_to_table(Oedipus_Table $table)
+	{
+		$note_text = <<<TXT
+This is an Oedipus Options Table.
+TXT;
+
+		return Oedipus_NotesHelper::add_note_to_table($table, $note_text);
 	}
 
 	private function
