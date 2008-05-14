@@ -2,7 +2,11 @@
 /**
  * __autoload .INC file
  *
+<<<<<<< .mine
+ * Last Modified: 2008-05-14
+=======
  * Last Modified: 2008-05-15
+>>>>>>> .r56
  */
 
 function __autoload($class_name)
@@ -1569,6 +1573,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_ExceptionPage.inc.php';
 			break;
 
+		case('Oedipus_GDPNGImage'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/png/Oedipus_GDPNGImage.inc.php';
+			break;
+
 		case('Oedipus_HTMLPage'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_HTMLPage.inc.php';
 			break;
@@ -1685,6 +1693,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_TableImageHelper.inc.php';
 			break;
 
+		case('Oedipus_TablePNGImage'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/png/Oedipus_TablePNGImage.inc.php';
+			break;
+
 		case('OrderedTables_AdminCRUDHelper'): 
 			require_once PROJECT_ROOT . '/plug-ins/ordered-tables/classes/helpers/OrderedTables_AdminCRUDHelper.inc.php';
 			break;
@@ -1769,6 +1781,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/public-html/classes/renderers/PublicHTML_ExceptionRenderer.inc.php';
 			break;
 
+		case('PublicHTML_GDPNGImage'): 
+			require_once PROJECT_ROOT . '/haddock/public-html/classes/pages/png/PublicHTML_GDPNGImage.inc.php';
+			break;
+
 		case('PublicHTML_HaddockHTTPResponse'): 
 			require_once PROJECT_ROOT . '/haddock/public-html/classes/pages/PublicHTML_HaddockHTTPResponse.inc.php';
 			break;
@@ -1811,6 +1827,10 @@ function __autoload($class_name)
 
 		case('PublicHTML_PCROFactory'): 
 			require_once PROJECT_ROOT . '/haddock/public-html/classes/PublicHTML_PCROFactory.inc.php';
+			break;
+
+		case('PublicHTML_PNGImage'): 
+			require_once PROJECT_ROOT . '/haddock/public-html/classes/pages/png/PublicHTML_PNGImage.inc.php';
 			break;
 
 		case('PublicHTML_PublicURLFactory'): 

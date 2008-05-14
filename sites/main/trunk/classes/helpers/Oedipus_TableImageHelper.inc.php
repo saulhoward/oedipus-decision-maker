@@ -19,9 +19,9 @@ Oedipus_TableImageHelper
 		//
 
 
-		$img = load_png("bogus.image");
+		$img = load_png("/images/logo.png");
 		imagepng($img);
-
+		imagedestroy($img);
 	}
 
 	public function copy_image($url,$logo)
