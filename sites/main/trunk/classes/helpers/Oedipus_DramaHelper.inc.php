@@ -7,7 +7,7 @@
  */
 
 class
-Oedipus_DramaHelper
+	Oedipus_DramaHelper
 {
 	// ------------
 	// URLS
@@ -16,22 +16,25 @@ Oedipus_DramaHelper
 	public static function
 		get_drama_url(Oedipus_Drama $drama = NULL)
 	{
-		if ($drama == NULL)
-		{
-			return PublicHTML_URLHelper
-				::get_oo_page_url('Oedipus_DramaPage');
-		}
-		else
-		{
-			$url = new HTMLTags_URL();
-			$url->set_file('/dramas/'. $drama->get_unique_name());
-//                        $url->set_get_variable('oo-page', 1);
-//                        $url->set_get_variable('page-class', 'Oedipus_DramaEditorPage');
-
-//                        $url->set_get_variable('drama_unique_name', );
-
-			return $url;
-		}
+#		if ($drama == NULL)
+#		{
+#			return PublicHTML_URLHelper
+#				::get_oo_page_url('Oedipus_DramaPage');
+#		}
+#		else
+#		{
+#			$url = new HTMLTags_URL();
+#			$url->set_file('/dramas/'. $drama->get_unique_name());
+#//                        $url->set_get_variable('oo-page', 1);
+#//                        $url->set_get_variable('page-class', 'Oedipus_DramaEditorPage');
+#
+#//                        $url->set_get_variable('drama_unique_name', );
+#
+#			return $url;
+#		}
+		
+		return Oedipus_DramasHelper
+			::get_view_page_url($drama);
 	}
 
 }

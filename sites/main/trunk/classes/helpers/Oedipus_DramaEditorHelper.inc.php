@@ -7,7 +7,7 @@
  */
 
 class
-Oedipus_DramaEditorHelper
+	Oedipus_DramaEditorHelper
 {
 	// PROCESS NEW DRAMA
 	public static function

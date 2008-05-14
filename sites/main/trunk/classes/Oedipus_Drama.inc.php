@@ -2,14 +2,14 @@
 /**
  * Oedipus_Drama
  *
- * @copyright RFI 2007-12-15
+ * @copyright 2007-12-15, RFI & SANH
  */
 
 /**
  * Holds the data for a Oedipus Drama Theoretic drama.
  */
 class
-Oedipus_Drama
+	Oedipus_Drama
 {
 	private $name;
 	private $id;
@@ -18,12 +18,18 @@ Oedipus_Drama
 	private $tables;
 
 	public function
-		__construct($id, $name, $unique_name, $added)
+		__construct(
+			$id,
+			$name,
+			$unique_name,
+			$added
+		)
 	{
 		$this->id = $id;
 		$this->name = $name;
 		$this->added = $added;
 		$this->unique_name = $unique_name;
+		
 		$this->tables = array();
 	}
 

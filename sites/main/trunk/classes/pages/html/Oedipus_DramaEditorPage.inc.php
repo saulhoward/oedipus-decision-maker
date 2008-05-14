@@ -7,39 +7,93 @@
  */
 
 class
-Oedipus_DramaEditorPage
+	Oedipus_DramaEditorPage
 extends
-Oedipus_HTMLPage
+	Oedipus_HTMLPage
 {
 	private $drama;
+	
+	public function 
+		get_drama()
+	{
+		return $this->drama;
+	}
 
+	public function 
+		set_drama(
+			Oedipus_Drama $drama
+		)
+	{
+		$this->drama = $drama;
+	}
+	
+	public function
+		has_drama()
+	{
+		return isset($this->drama);
+	}
+	
 	public function
 		content()
 	{
-		if (isset($_GET['drama_unique_name']))
-		{
-			try
-			{
-				$this->drama =
+		if (isset($_GET['drama_unique_name'])) {
+			try {
+				$this->set_drama(
 					Oedipus_DramaEditorHelper
-					::get_drama_by_unique_name($_GET['drama_unique_name']);
+						::get_drama_by_unique_name(
+							$_GET['drama_unique_name']
+						)
+				);
 
 				//                        print_r($_GET);exit;
 				$drama_editor_page_div =
 					$this->get_oedipus_drama_editor_page_div();
+			} catch (Exception $e) {
+				/*
+				 * See
+				 * http://code.google.com/p/oedipus-decision-maker/issues/detail?id=7
+				 * RFI 2008-04-29
+				 */
 			}
-			catch (Exception $e)
-			{
-
-			}
-		}
-		elseif (isset($_GET['drama_id']))
+#		} elseif (isset($_GET['drama_id'])) {
+#			$this->set_drama(
+#			    Oedipus_DramaEditorHelper
+#					::get_drama_by_id(
+#						$_GET['drama_id']
+#					)
+#			);
+#		}
+#<<<<<<< .mine
+#		
+#		if ($this->has_drama()) {
+#			/*
+#			 * Make a link back to the drama's page.
+#			 */
+#			
+#			$drama = $this->get_drama();
+#			
+#			$drama_view = $drama->get_view();
+#			
+#			$drama_view->render_link_back_to_view_page_p();
+#			
+#			/*
+#			 * Show the tables of the drama.
+#			 */
+#			
+#=======
+		} elseif (isset($_GET['drama_id']))
 		{
 			try
 			{
 				$this->drama =
 					Oedipus_DramaEditorHelper::get_drama_by_id($_GET['drama_id']);
 
+#>>>>>>> .r55
+#<<<<<<< .mine
+#			$drama_editor_page_div =
+#			    $this->get_oedipus_drama_editor_page_div();
+#		} else {
+#=======
 				$drama_editor_page_div =
 					$this->get_oedipus_drama_editor_page_div();
 			}
@@ -50,6 +104,7 @@ Oedipus_HTMLPage
 		}
 		else
 		{
+#>>>>>>> .r55
 			// NO DRAMA SET
 			DBPages_PageRenderer::render_page_section('drama-editor', 'title');
 			DBPages_PageRenderer::render_page_section('drama-editor', 'no-drama-set');
@@ -58,11 +113,12 @@ Oedipus_HTMLPage
 			$drama_editor_page_div->append_tag_to_content(
 				$this->get_all_dramas_ul()
 			);
+			
 			$drama_editor_page_div->append_tag_to_content(
 				$this->get_create_new_drama_div()
 			);
 		}
-
+		
 		echo $drama_editor_page_div->get_as_string();
 	}
 
