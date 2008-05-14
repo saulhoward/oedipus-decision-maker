@@ -7,7 +7,7 @@
  */
 
 class
-Oedipus_NotesHelper
+	Oedipus_NotesHelper
 {
 	public static function
 		add_note_to_table(Oedipus_Table $table, $note_text)
