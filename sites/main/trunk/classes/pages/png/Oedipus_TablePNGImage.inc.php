@@ -18,18 +18,26 @@ Oedipus_GDPNGImage
 	# The Oedipus_Table
 	private $table;
 
+	private $no_of_options;
+	private $no_of_actors_with_options;
+
 	# The GD Image
 	private $image;
 
 	# GD Image attributes
 	private $font;
+	private $stated_intention_font;
+	private $actor_name_font;
+	private $table_name_font;
 	private $padding;
 	private $label_width;
 	private $label_height;
 	private $label_indent_width;
+	private $table_padding;
 	private $table_width;
 	private $table_height;
 	private $column_width;
+	private $column_label_padding;
 	private $table_name_label_height;
 	private $font_size;
 	private $font_color;
@@ -47,13 +55,23 @@ Oedipus_GDPNGImage
 			$this->table =
 				Oedipus_TableCreationHelper::get_oedipus_table_by_id($_GET['table_id']);
 
-			$this->set_padding(10);
-			$this->set_label_width_and_height(200, 50);
-			$this->set_label_indent_width(10);
-			$this->set_table_name_label_height(50);
-			$this->set_column_width(50);
 			$this->set_font('caslon.pfb');
-			$this->set_font_size(16);
+			$this->set_stated_intenion_font('caslon-italic.pfb');
+			$this->set_actor_name_font('caslon-small-caps.pfb');
+			$this->set_table_name_font('caslon-italic.pfb');
+
+			$this->set_font_size(17);
+
+			$this->set_padding(10);
+			$this->set_table_padding(10);
+
+			$this->set_label_indent_width(10);
+			$this->set_column_label_padding(5);
+			$this->set_table_name_label_height(50);
+			$this->set_column_width(56);
+
+			$this->set_label_width_and_height();
+
 			$this->set_oedipus_table_image();
 		}
 
@@ -70,7 +88,14 @@ Oedipus_GDPNGImage
 		$this->set_table_height_and_width();
 
 		$image_width = $this->table_width + ($this->padding * 2);
-		$image_height = $this->table_name_label_height + $this->table_height + ($this->padding * 2);
+		$image_height = 
+			$this->table_name_label_height 
+			+
+			$this->table_height 
+			+
+			($this->padding * 2) 
+			+ 
+			$this->table_padding;
 
 		// Set the image and the colors
 		$this->image = imagecreatetruecolor($image_width, $image_height);
@@ -80,13 +105,13 @@ Oedipus_GDPNGImage
 		imagefill($this->image, 0, 0, $this->background_color);
 
 		// Set the table name label
-		$this->draw_table_name_label();
+		$this->draw_table_name_label($image_width, $this->table_name_label_height + ($this->table_padding * 2));
 
 		// Draw a box for the table
 		imagefilledrectangle($this->image,
 			$this->padding, $this->padding + $this->table_name_label_height,        
 			$this->table_width + $this->padding,
-		       	$this->table_height + $this->padding + $this->table_name_label_height,
+			$this->table_height + $this->padding + $this->table_name_label_height,
 			$this->table_background_color
 		);
 
@@ -108,6 +133,19 @@ Oedipus_GDPNGImage
 
 		$x = 0;
 		$y = 0;
+		//put the x,y in the first column
+		$x = 
+			$this->padding
+			+
+			$this->table_padding;
+		$y = 
+			$this->padding 
+			+ 
+			$this->table_name_label_height 
+			+
+			$this->label_height;
+
+
 		foreach ($this->table->get_actors() as $actor)
 		{
 			if ($actor->has_options())
@@ -117,21 +155,15 @@ Oedipus_GDPNGImage
 				{
 					if ($first)
 					{
-						//put the x,y in the first column
-						$x = $this->padding;
-						$y = $this->padding + $this->table_name_label_height + $this->label_height;
-
 						//print the actors name
-						$this->draw_option_label($actor->get_name(), $x, $y);
+						$this->draw_actor_label($actor->get_name(), $x, $y);
 
 						// move onto the next row
-						$y += $this->label_height;
+						$y += ( $this->label_height / 2 );
 
 						$first = FALSE;
 					}
 
-					//indent x
-					$x += $this->label_indent_width;
 					//print the options label
 					$this->draw_option_label($option->get_name(), $x, $y);
 
@@ -156,15 +188,33 @@ Oedipus_GDPNGImage
 					// move onto the next row
 					$y += $this->label_height;
 					// reset x to the beginning of the line
-					$x = $this->padding;
+					$x = $this->padding + $this->table_padding;
 				}
 			}
 		}
 	}
 
 	private function
+		draw_actor_label($label_text, $x, $y)
+	{
+		imagepstext(
+			$this->image,
+			$label_text, 
+			$this->actor_name_font, 
+			$this->font_size, 
+			$this->font_color,
+			$this->table_background_color,
+			$x, $y
+		);
+	}
+
+
+	private function
 		draw_option_label($label_text, $x, $y)
 	{
+		//indent x
+		$x += $this->label_indent_width;
+
 		imagepstext(
 			$this->image,
 			$label_text, 
@@ -182,34 +232,34 @@ Oedipus_GDPNGImage
 		$position_position= $position->get_tile();
 		switch ($position_position)
 		{
-			case '1':
-				$position_filename_part = '_filled';
-				break;
-			case '0':
-			default:
-				$position_filename_part = '_empty';
+		case '1':
+			$position_filename_part = '_filled';
+			break;
+		case '0':
+		default:
+			$position_filename_part = '_empty';
 		}
 
 		$position_doubt= $position->get_doubt();
 		switch ($position_doubt)
 		{
-			case '?':
-				$doubt_filename_part = '_question';
-				break;
-			case 'x':
-				$doubt_filename_part = '_x';
-				break;
-			case '':
-			default:
-				$doubt_filename_part = '';
+		case '?':
+			$doubt_filename_part = '_question';
+			break;
+		case 'x':
+			$doubt_filename_part = '_x';
+			break;
+		case '':
+		default:
+			$doubt_filename_part = '';
 		}
 
-//                print_r(
-//                        "/project-specific/public-html/images/position-tiles/40px-png/squares/"
-//                        . $position_actor->get_color()
-//                        . $position_filename_part
-//                        . $doubt_filename_part
-//                );exit;
+		//                print_r(
+		//                        "/project-specific/public-html/images/position-tiles/40px-png/squares/"
+		//                        . $position_actor->get_color()
+		//                        . $position_filename_part
+		//                        . $doubt_filename_part
+		//                );exit;
 
 		$tile = $this->load_png(
 			PROJECT_ROOT 
@@ -220,6 +270,13 @@ Oedipus_GDPNGImage
 			. '.png'
 		);
 
+		/*
+		 * Offset $x and $y to position tile better
+		 */
+		$y -= ($this->label_height / 2);
+		$y += 5;
+		$x += 8;
+
 		imagecopy($this->image, $tile, $x, $y, 0, 0, 40, 40);
 	}
 
@@ -229,34 +286,34 @@ Oedipus_GDPNGImage
 		$stated_intention_position= $stated_intention->get_tile();
 		switch ($stated_intention_position)
 		{
-			case '1':
-				$position_filename_part = '_filled';
-				break;
-			case '0':
-			default:
-				$position_filename_part = '_empty';
+		case '1':
+			$position_filename_part = '_filled';
+			break;
+		case '0':
+		default:
+			$position_filename_part = '_empty';
 		}
 
 		$stated_intention_doubt= $stated_intention->get_doubt();
 		switch ($stated_intention_doubt)
 		{
-			case '?':
-				$doubt_filename_part = '_question';
-				break;
-			case 'x':
-				$doubt_filename_part = '_x';
-				break;
-			case '':
-			default:
-				$doubt_filename_part = '';
+		case '?':
+			$doubt_filename_part = '_question';
+			break;
+		case 'x':
+			$doubt_filename_part = '_x';
+			break;
+		case '':
+		default:
+			$doubt_filename_part = '';
 		}
 
-//                print_r(
-//                        "/project-specific/public-html/images/position-tiles/40px-png/squares/"
-//                        . $position_actor->get_color()
-//                        . $position_filename_part
-//                        . $doubt_filename_part
-//                );exit;
+		//                print_r(
+		//                        "/project-specific/public-html/images/position-tiles/40px-png/squares/"
+		//                        . $position_actor->get_color()
+		//                        . $position_filename_part
+		//                        . $doubt_filename_part
+		//                );exit;
 
 		$tile = $this->load_png(
 			PROJECT_ROOT 
@@ -267,19 +324,29 @@ Oedipus_GDPNGImage
 			. '.png'
 		);
 
+		/*
+		 * Offset $x and $y to position tile better
+		 */
+		$y -= ($this->label_height / 2);
+		//                $y += 5;
+		$x += 3;
+
 		imagecopy($this->image, $tile, $x, $y, 0, 0, 50, 50);
 	}
 
 	private function
 		set_table_height_and_width()
 	{
-		// Find the Size of table and image
-		// width = label + (1 X no_of_actors) + 1 for si
-		// height = 1 for header + (1 x no_of_actors)
-		$no_of_actors = $this->get_no_of_actors();
+		// Find the Size of table
+		$this->set_no_of_options_and_no_of_actors_with_options();
 
-		$this->table_width = $this->label_width + ($this->column_width * $no_of_actors) + 100;
-		$this->table_height = ($this->label_height * $no_of_actors) + 100;
+		$this->table_width = 
+			$this->label_width 
+			+ ($this->column_width * ( $this->get_no_of_actors() + 1)) 
+			+ ($this->table_padding * 2);
+
+		$this->table_height = 
+			(($this->label_height * 0.8) * ($this->no_of_options + $this->no_of_actors_with_options + 1));
 	}
 
 	private function
@@ -299,9 +366,6 @@ Oedipus_GDPNGImage
 				$y = $this->padding + $this->table_name_label_height;
 			}
 
-			// Write the heading label 
-			$this->draw_heading_label_for_actor($actor, $x, $y);
-
 			// Draw a box for the column background
 			imagefilledrectangle(
 				$this->image,
@@ -310,72 +374,146 @@ Oedipus_GDPNGImage
 				$this->get_actors_background_color($actor)
 			);
 
+			// Write the heading label 
+			$this->draw_heading_label_for_actor($actor, $x, $y);
+
 			// advance x to the next column
 			$x += $this->column_width;
 			$first = FALSE;
 		}
 
-		// Write the s.i. label 
-		$this->draw_heading_label_for_stated_intention('S.I.', $x, $y);
-
 		// draw the s.i. column background 
 		imagefilledrectangle(
-				$this->image,
-				$x, $y,        
-				$x + $this->column_width, $y + $this->table_height,
-				$this->stated_intention_background_color
-			);
+			$this->image,
+			$x, $y,        
+			$x + $this->column_width, $y + $this->table_height,
+			$this->stated_intention_background_color
+		);
+
+		// Write the s.i. label 
+		$this->draw_heading_label_for_stated_intention('S.I.', $x, $y);
 	}
 
 	private function
 		set_colors()
 	{
 		// define some colors
-		$red = imagecolorallocate($this->image, 255, 0, 0);
-		$white = imagecolorallocate($this->image,255,255,255);
+		//                $red = imagecolorallocate($this->image, 255, 0, 0);
+		//                $white = imagecolorallocate($this->image,255,255,255);
+		//                $lightgrey = imagecolorallocate($this->image, 200, 200, 200);
+		//                $grey = imagecolorallocate($this->image,100,100,100);
+		//                $yellow = imagecolorallocate($this->image, 0xFF, 0xFF, 0x00);
+
 		$black = imagecolorallocate($this->image,0,0,0);
-		$lightgrey = imagecolorallocate($this->image, 200, 200, 200);
-		$grey = imagecolorallocate($this->image,100,100,100);
-		$yellow = imagecolorallocate($this->image, 0xFF, 0xFF, 0x00);
+		$pale_yellow = imagecolorallocate($this->image, 255, 255, 140);
+		$pale_blue = imagecolorallocate($this->image, 160, 255, 255);
+		$darker_pale_blue = imagecolorallocate($this->image, 92, 255, 255);
 
 		// attribute colors
 		$this->font_color =  $black;
-		$this->font_shadow_color =  $grey;
-		$this->padding_color =  $lightgrey;
-		$this->background_color =  $yellow;
-		$this->table_background_color =  $lightgrey;
-		$this->stated_intention_background_color =  $black;
+		$this->background_color =  $pale_yellow;
+		$this->table_background_color =  $pale_blue;
+		$this->stated_intention_background_color =  $darker_pale_blue;
 	}
 
 	private function
 		get_actors_background_color(Oedipus_Actor $actor)
 	{
 		// define some colors
-		$red = imagecolorallocate($this->image, 255, 0, 0);
-		$blue = imagecolorallocate($this->image, 0, 0, 255);
-		$white = imagecolorallocate($this->image,255,255,255);
-		$black = imagecolorallocate($this->image,0,0,0);
-		$lightgrey = imagecolorallocate($this->image, 200, 200, 200);
-		$grey = imagecolorallocate($this->image,100,100,100);
-		$yellow = imagecolorallocate($this->image, 0xFF, 0xFF, 0x00);
+		// These are full bright colours
+		//                $red = imagecolorallocate($this->image, 255, 0, 0);
+		//                $blue = imagecolorallocate($this->image, 0, 0, 255);
+
+		// These are at 50% saturation
+		$red = imagecolorallocate($this->image, 255, 128, 128);
+		$blue = imagecolorallocate($this->image, 128, 128, 255);
+		$green = imagecolorallocate($this->image, 128, 255, 128);
+		$orange = imagecolorallocate($this->image, 255, 228, 128);
 
 		$color = $actor->get_color();
 		switch ($color)
 		{
-			case 'red':
-				return $red;
-			case 'blue':
-				return $blue;
-			default:
-				return $red;
+		case 'red':
+			return $red;
+		case 'blue':
+			return $blue;
+		case 'green':
+			return $green;
+		case 'orange':
+			return $orange;
+		default:
+			return $red;
 		}
 	}
 
 	private function
-		set_label_width_and_height($width = 200, $height = 50)
+		set_no_of_options_and_no_of_actors_with_options()
 	{
-		$this->label_width = $width;
-		$this->label_height = $height;
+		$count_options = 0;
+		$count_actors_with_options = 0;
+
+		// Get all options 
+		foreach ($this->table->get_actors() as $actor)
+		{
+			if ($actor->has_options())
+			{
+				$count_actors_with_options += 1;
+
+				foreach ($actor->get_options() as $option)
+				{
+					$count_options += 1;
+				}
+			}
+		}
+//                print_r("$no_of_options , $no_of_actors_with_options");exit;
+		$this->no_of_options = $count_options;
+		$this->no_of_actors_with_options = $count_actors_with_options;
+	}
+
+	private function
+		set_label_width_and_height()
+	{
+		$max_text_width = 0;
+
+		// Get all option names
+		// and work out which one has
+		// the longest name
+		foreach ($this->table->get_actors() as $actor)
+		{
+			if ($actor->has_options())
+			{
+				foreach ($actor->get_options() as $option)
+				{
+					///get the left lower corner and the right upper
+					list($lx,$ly,$rx,$ry) =
+					       	imagepsbbox($option->get_name(), $this->font, $this->font_size);
+
+					// calculate the size of the text
+					$text_width = $rx - $lx;
+					$text_height = $ry - $ly;
+
+					if ($text_width > $max_text_width)
+					{
+						$max_text_width = $text_width;
+					}
+				}
+			}
+		}
+					
+		// Make the width
+		$this->label_width = $max_text_width + $this->label_indent_width + ( $this->table_padding * 3 );
+
+		// Make the height
+		$label_height = $text_height + $this->table_padding; 
+		// for the icons, 50 px wide
+		if ($label_height < 60)
+		{
+			$this->label_height = 60;
+		}
+		else
+		{
+			$this->label_height = $label_height;
+		}
 	}
 
 	private function
@@ -403,9 +541,42 @@ Oedipus_GDPNGImage
 	}
 
 	private function
+		set_column_label_padding($amount = 10)
+	{
+		$this->column_label_padding = $amount;
+	}
+
+
+	private function
+		set_table_padding($amount = 10)
+	{
+		$this->table_padding = $amount;
+	}
+
+	private function
 		set_padding($amount = 10)
 	{
 		$this->padding = $amount;
+	}
+
+	private function
+		set_stated_intenion_font($font_name = 'caslon.pfb')
+	{
+		$this->stated_intention_font = imagepsloadfont(PROJECT_ROOT . '/project-specific/public-html/fonts/' . $font_name);
+	}
+
+	private function
+		set_table_name_font($font_name = 'caslon.pfb')
+	{
+		$this->table_name_font = 
+			imagepsloadfont(PROJECT_ROOT . '/project-specific/public-html/fonts/' . $font_name);
+	}
+
+	private function
+		set_actor_name_font($font_name = 'caslon.pfb')
+	{
+		$this->actor_name_font = 
+			imagepsloadfont(PROJECT_ROOT . '/project-specific/public-html/fonts/' . $font_name);
 	}
 
 	private function
@@ -418,6 +589,16 @@ Oedipus_GDPNGImage
 		draw_heading_label_for_actor($actor, $x, $y)
 	{
 		$actor_background_color = $this->get_actors_background_color($actor);
+
+		//                $x += $this->column_width;
+		//                $y -= $this->label_height;
+
+		//                $this->center_text($text, $this->background_color, $x, $y);
+
+		#######################
+
+		$y += ( $this->label_height / 2.4 );
+		$x += $this->column_label_padding;
 
 		imagepstext(
 			$this->image,
@@ -433,10 +614,13 @@ Oedipus_GDPNGImage
 	private function
 		draw_heading_label_for_stated_intention($label_text, $x, $y)
 	{
+		$y += ( $this->label_height / 2.4 );
+		$x += ($this->column_label_padding * 3);
+
 		imagepstext(
 			$this->image,
 			$label_text, 
-			$this->font, 
+			$this->stated_intention_font, 
 			$this->font_size, 
 			$this->font_color,
 			$this->stated_intention_background_color,
@@ -445,20 +629,24 @@ Oedipus_GDPNGImage
 	}
 
 	private function
-		draw_table_name_label()
+		draw_table_name_label($bounding_width, $bounding_height)
 	{
 		// The text to draw
 		$text = $this->table->get_name();
 
 		// Add the text
-		imagepstext (
-			$this->image,
-			$text,
-			$this->font, 
-			$this->font_size, 
-			$this->font_color,
-			$this->background_color,
-			$this->padding, $this->table_name_label_height - $this->padding
+//                imagepstext (
+//                        $this->image,
+//                        $text,
+//                        $this->font, 
+//                        $this->font_size, 
+//                        $this->font_color,
+//                        $this->background_color,
+//                        $this->padding, $this->table_name_label_height - $this->padding
+//                );
+
+		$this->center_text(
+			$text, $this->table_name_font, $this->background_color, $bounding_width, $bounding_height
 		);
 	}
 
@@ -466,6 +654,43 @@ Oedipus_GDPNGImage
 		get_no_of_actors()
 	{
 		return count($this->table->get_actors());
+	}
+
+	private function
+		center_text($text, $font, $background_color, $bounding_width, $bounding_height)
+	{
+		///get the left lower corner and the right upper
+		list($lx,$ly,$rx,$ry) = imagepsbbox($text, $this->font, $this->font_size);
+		// calculate the size of the text
+		$textW = $rx - $lx;
+		$textH = $ry - $ly;
+
+		// Calculate the positions
+		$positionLeft = ($bounding_width - $textW)/2;
+		$positionTop = ($bounding_height - $textH)/2;
+
+		// Add some text
+//                imagettftext($image, $textSize, 0, $positionLeft, $positionTop, $white, $textFont, $textString);
+		imagepstext (
+			$this->image,
+			$text,
+			$font, 
+			$this->font_size, 
+			$this->font_color,
+			$this->background_color,
+			$positionLeft, $positionTop
+		);
+
+
+//                imagepstext (
+//                        $this->image,
+//                        $text,
+//                        $this->font, 
+//                        $this->font_size, 
+//                        $this->font_color,
+//                        $background_color,
+//                        $positionLeft, $positionTop
+//                );
 	}
 
 	// Image files for overlaying, etc.
