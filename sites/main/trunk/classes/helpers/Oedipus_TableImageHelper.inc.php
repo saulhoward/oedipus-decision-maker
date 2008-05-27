@@ -49,5 +49,13 @@ Oedipus_TableImageHelper
 		}
 		return $im;
 	}
+
+	public function
+		get_table_png_url($table_id)
+	{
+			$url = new HTMLTags_URL();
+			$url->set_file('/tables/images/option-table-'. $table_id . '.png');
+			return $url;
+	}
 }
 ?>

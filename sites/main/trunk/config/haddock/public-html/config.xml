@@ -9,6 +9,6 @@
 		</meta-pages>
 	</verbosity>
 	<locations>
-		<default value="/db-pages/home.html" />
+		<default value="/Oedipus_HomePage" />
 	</locations>
 </config>

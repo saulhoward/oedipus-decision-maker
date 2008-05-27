@@ -14,7 +14,7 @@ extends
 	private $table;
 
 	public function
-		__construct(Oedipus_Table $table)
+		__construct(Oedipus_Table $table, $edit_table_option = TRUE)
 	{
 		parent::__construct();
 
@@ -23,21 +23,22 @@ extends
 		$this->set_attribute_str('class', 'table-options');
 		
 		// Link to png_image the table
-
 		$png_image_li = $this->get_png_image_li();
 		$this->append_tag_to_content($png_image_li);
 
-		// Link to edit the table
-
-		$edit_li = $this->get_edit_li();
-		$this->append_tag_to_content($edit_li);
+		if ($edit_table_option)
+		{
+			// Link to edit the table
+			$edit_li = $this->get_edit_li();
+			$this->append_tag_to_content($edit_li);
+		}
 	}
 
 	private function
 		get_png_image_li()
 	{
 		$png_image_url = $this->get_png_image_url();
-		$link = new HTMLTags_A('Download as image');
+		$link = new HTMLTags_A('Full size PNG image of this Table');
 		$link->set_href($png_image_url);
 		$li = new HTMLTags_LI();
 		$li->append_tag_to_content($link);
@@ -49,10 +50,12 @@ extends
 	private function
 		get_png_image_url()
 	{
-		$get_variables = array("table_id" => $this->table->get_id());
+		//                $get_variables = array("table_id" => $this->table->get_id());
+		//                return PublicHTML_URLHelper
+		//                        ::get_oo_page_url('Oedipus_TablePNGImage', $get_variables);
 
-		return PublicHTML_URLHelper
-			::get_oo_page_url('Oedipus_TablePNGImage', $get_variables);
+		// Nice URLs /tables/images/option-table-XX.png
+		return Oedipus_TableImageHelper::get_table_png_url($this->table->get_id());
 	}
 
 	private function

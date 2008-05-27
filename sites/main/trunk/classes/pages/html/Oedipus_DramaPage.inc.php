@@ -159,7 +159,27 @@ Oedipus_HTMLPage
 		$table_div->set_attribute_str('class', 'oedipus-table');
 
 		$table_div->append_tag_to_content($this->get_oedipus_html_table($table));
+//                $table_div->append_tag_to_content($this->get_oedipus_png_table($table));
+
+		$table_div->append_tag_to_content($this->get_oedipus_html_table_options($table));
+
 		return $table_div;
+	}
+
+	private function
+		get_oedipus_png_table(Oedipus_Table $table)
+	{
+		$max_width = 300;
+		$max_height = 300;
+		$url = new HTMLTags_URL();
+		$url->set_file(
+			'/tables/images/thumbnails/option-table-'
+			. $table->get_id()
+			. '_' . $max_width . 'x' . $max_height . '.png'
+		);
+		$img = new HTMLTags_IMG();
+		$img->set_src($url);
+		return $img;
 	}
 
 	private function
@@ -193,6 +213,13 @@ Oedipus_HTMLPage
 	{
 		return new Oedipus_OedipusAllDramasUL();
 	}
+
+	private function
+		get_oedipus_html_table_options(Oedipus_Table $table)
+	{
+		return new Oedipus_OedipusTableOptionsUL($table, FALSE);
+	}
+
 
 	private function
 		get_add_drama_form()

@@ -25,6 +25,8 @@ Oedipus_GDPNGImage
 	private $image;
 
 	# GD Image attributes
+	private $image_width;
+	private $image_height;
 	private $font;
 	private $stated_intention_font;
 	private $actor_name_font;
@@ -75,6 +77,20 @@ Oedipus_GDPNGImage
 			$this->set_oedipus_table_image();
 		}
 
+		if (
+			isset($_GET['thumbnail'])
+			&&
+			isset($_GET['max_width'])
+			&&
+			isset($_GET['max_height'])
+		)
+		{
+			$this->set_thumbnail_image(
+				$_GET['max_width'],
+				$_GET['max_height']
+			);
+
+		}
 		if (isset($this->image))
 		{
 			imagepng($this->image);
@@ -83,12 +99,37 @@ Oedipus_GDPNGImage
 	}
 
 	private function
+		set_thumbnail_image($width, $height)
+	{
+		// Resample
+		// Get new dimensions
+		$ratio_orig = $this->image_width / $this->image_height;
+
+		if ($width/$height > $ratio_orig) {
+			$width = $height*$ratio_orig;
+		} else {
+			$height = $width/$ratio_orig;
+		}
+
+		//copy the image to the new size
+		$image_p = imagecreatetruecolor($width, $height);
+		imagecopyresampled(
+			$image_p, 
+			$this->image,
+			0, 0, 0, 0,
+			$width, $height,
+			$this->image_width, $this->image_height
+		);
+
+		$this->image = $image_p;
+	}
+	private function
 		set_oedipus_table_image()
 	{
 		$this->set_table_height_and_width();
 
-		$image_width = $this->table_width + ($this->padding * 2);
-		$image_height = 
+		$this->image_width = $this->table_width + ($this->padding * 2);
+		$this->image_height = 
 			$this->table_name_label_height 
 			+
 			$this->table_height 
@@ -98,14 +139,14 @@ Oedipus_GDPNGImage
 			$this->table_padding;
 
 		// Set the image and the colors
-		$this->image = imagecreatetruecolor($image_width, $image_height);
+		$this->image = imagecreatetruecolor($this->image_width, $this->image_height);
 		$this->set_colors();
 
 		// fill image with background color
 		imagefill($this->image, 0, 0, $this->background_color);
 
 		// Set the table name label
-		$this->draw_table_name_label($image_width, $this->table_name_label_height + ($this->table_padding * 2));
+		$this->draw_table_name_label($this->image_width, $this->table_name_label_height + ($this->table_padding * 2));
 
 		// Draw a box for the table
 		imagefilledrectangle($this->image,

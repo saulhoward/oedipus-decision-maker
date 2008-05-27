@@ -2,11 +2,7 @@
 /**
  * __autoload .INC file
  *
-<<<<<<< .mine
- * Last Modified: 2008-05-14
-=======
- * Last Modified: 2008-05-15
->>>>>>> .r56
+ * Last Modified: 2008-05-27
  */
 
 function __autoload($class_name)
@@ -113,12 +109,44 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/caching/classes/Caching_SessionVarManager.inc.php';
 			break;
 
+		case('CLIScripts_ArgsHelper'): 
+			require_once PROJECT_ROOT . '/haddock/cli-scripts/classes/helpers/CLIScripts_ArgsHelper.inc.php';
+			break;
+
 		case('CLIScripts_BatWrapperScript'): 
 			require_once PROJECT_ROOT . '/haddock/cli-scripts/classes/CLIScripts_BatWrapperScript.inc.php';
 			break;
 
 		case('CLIScripts_BinIncludesDirectory'): 
 			require_once PROJECT_ROOT . '/haddock/cli-scripts/classes/CLIScripts_BinIncludesDirectory.inc.php';
+			break;
+
+		case('CLIScripts_CLIScript'): 
+			require_once PROJECT_ROOT . '/haddock/cli-scripts/classes/cli-scripts/CLIScripts_CLIScript.inc.php';
+			break;
+
+		case('CLIScripts_CLIScriptFilesHelper'): 
+			require_once PROJECT_ROOT . '/haddock/cli-scripts/classes/helpers/CLIScripts_CLIScriptFilesHelper.inc.php';
+			break;
+
+		case('CLIScripts_CLIScriptPHPClassFile'): 
+			require_once PROJECT_ROOT . '/haddock/cli-scripts/classes/file-system/files/CLIScripts_CLIScriptPHPClassFile.inc.php';
+			break;
+
+		case('CLIScripts_ConfigManager'): 
+			require_once PROJECT_ROOT . '/haddock/cli-scripts/classes/managers/config/CLIScripts_ConfigManager.inc.php';
+			break;
+
+		case('CLIScripts_ExceptionsHelper'): 
+			require_once PROJECT_ROOT . '/haddock/cli-scripts/classes/helpers/CLIScripts_ExceptionsHelper.inc.php';
+			break;
+
+		case('CLIScripts_ExecutablePHPFile'): 
+			require_once PROJECT_ROOT . '/haddock/cli-scripts/classes/file-system/files/CLIScripts_ExecutablePHPFile.inc.php';
+			break;
+
+		case('CLIScripts_GenerateScriptObjectRunnersCLIScript'): 
+			require_once PROJECT_ROOT . '/haddock/cli-scripts/classes/cli-scripts/CLIScripts_GenerateScriptObjectRunnersCLIScript.inc.php';
 			break;
 
 		case('CLIScripts_InputReader'): 
@@ -141,8 +169,28 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/cli-scripts/classes/CLIScripts_ScriptDirectory.inc.php';
 			break;
 
+		case('CLIScripts_ScriptLockedException'): 
+			require_once PROJECT_ROOT . '/haddock/cli-scripts/classes/exceptions/CLIScripts_ScriptLockedException.inc.php';
+			break;
+
+		case('CLIScripts_ScriptObjectRunnerFile'): 
+			require_once PROJECT_ROOT . '/haddock/cli-scripts/classes/file-system/files/CLIScripts_ScriptObjectRunnerFile.inc.php';
+			break;
+
+		case('CLIScripts_ScriptObjectRunnersDirectory'): 
+			require_once PROJECT_ROOT . '/haddock/cli-scripts/classes/file-system/directories/CLIScripts_ScriptObjectRunnersDirectory.inc.php';
+			break;
+
+		case('CLIScripts_ScriptObjectRunnersHelper'): 
+			require_once PROJECT_ROOT . '/haddock/cli-scripts/classes/helpers/CLIScripts_ScriptObjectRunnersHelper.inc.php';
+			break;
+
 		case('CLIScripts_ScriptsDirectory'): 
 			require_once PROJECT_ROOT . '/haddock/cli-scripts/classes/CLIScripts_ScriptsDirectory.inc.php';
+			break;
+
+		case('CLIScripts_ShowServerCLIScript'): 
+			require_once PROJECT_ROOT . '/haddock/cli-scripts/classes/cli-scripts/CLIScripts_ShowServerCLIScript.inc.php';
 			break;
 
 		case('CLIScripts_SHWrapperScript'): 
@@ -159,6 +207,10 @@ function __autoload($class_name)
 
 		case('CodeAnalysis_MemoryHelper'): 
 			require_once PROJECT_ROOT . '/haddock/code-analysis/classes/helpers/CodeAnalysis_MemoryHelper.inc.php';
+			break;
+
+		case('Configuration_ConfigManager'): 
+			require_once PROJECT_ROOT . '/haddock/configuration/classes/managers/config/Configuration_ConfigManager.inc.php';
 			break;
 
 		case('Configuration_ConfigManagerHelper'): 
@@ -331,6 +383,10 @@ function __autoload($class_name)
 
 		case('Database_HTMLPreFieldRenderer'): 
 			require_once PROJECT_ROOT . '/haddock/database/classes/renderers/field-renderers/Database_HTMLPreFieldRenderer.inc.php';
+			break;
+
+		case('Database_ImageCacheHelper'): 
+			require_once PROJECT_ROOT . '/haddock/database/classes/helpers/Database_ImageCacheHelper.inc.php';
 			break;
 
 		case('Database_ImageFieldRenderer'): 
@@ -797,6 +853,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/file-system/classes/FileSystem_PHPClassFile.inc.php';
 			break;
 
+		case('FileSystem_PHPFile'): 
+			require_once PROJECT_ROOT . '/haddock/file-system/classes/files/FileSystem_PHPFile.inc.php';
+			break;
+
 		case('FileSystem_PHPIncFile'): 
 			require_once PROJECT_ROOT . '/haddock/file-system/classes/FileSystem_PHPIncFile.inc.php';
 			break;
@@ -863,6 +923,14 @@ function __autoload($class_name)
 
 		case('HaddockProjectOrganisation_AbstractPlugInModuleDirectory'): 
 			require_once PROJECT_ROOT . '/haddock/haddock-project-organisation/classes/file-system/directories/HaddockProjectOrganisation_AbstractPlugInModuleDirectory.inc.php';
+			break;
+
+		case('HaddockProjectOrganisation_AssembleAutoloadFileCLIScript'): 
+			require_once PROJECT_ROOT . '/haddock/haddock-project-organisation/classes/cli-scripts/HaddockProjectOrganisation_AssembleAutoloadFileCLIScript.inc.php';
+			break;
+
+		case('HaddockProjectOrganisation_AutoloadFilesHelper'): 
+			require_once PROJECT_ROOT . '/haddock/haddock-project-organisation/classes/helpers/HaddockProjectOrganisation_AutoloadFilesHelper.inc.php';
 			break;
 
 		case('HaddockProjectOrganisation_AutoloadHelper'): 
@@ -1577,6 +1645,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/png/Oedipus_GDPNGImage.inc.php';
 			break;
 
+		case('Oedipus_HomePage'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_HomePage.inc.php';
+			break;
+
 		case('Oedipus_HTMLPage'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_HTMLPage.inc.php';
 			break;
@@ -1759,6 +1831,10 @@ function __autoload($class_name)
 
 		case('PublicHTML_AJAXFormHelper'): 
 			require_once PROJECT_ROOT . '/haddock/public-html/classes/helpers/PublicHTML_AJAXFormHelper.inc.php';
+			break;
+
+		case('PublicHTML_AssembleHTAccessCLIScript'): 
+			require_once PROJECT_ROOT . '/haddock/public-html/classes/cli-scripts/PublicHTML_AssembleHTAccessCLIScript.inc.php';
 			break;
 
 		case('PublicHTML_ConfigManager'): 

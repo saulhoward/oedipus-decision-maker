@@ -91,3 +91,32 @@ ul.all-dramas li a span#added
 	font-weight: 300;
 	color: #333;
 }
+
+/*
+ * Table Thumbnail List
+ */
+
+div.table_thumbnail_list
+{
+
+	background: #ccc;
+
+}
+div.table_thumbnail_list h3
+{
+	text-align: left;
+	font-weight: 900;
+	padding: 1em 0 0 1em;
+}
+div.table_thumbnail_list ul
+{
+	margin: 0 auto;
+	text-align: center;
+}
+div.table_thumbnail_list ul li
+{
+	margin: 0;
+	padding: 20px;
+	display: inline-block;
+
+}

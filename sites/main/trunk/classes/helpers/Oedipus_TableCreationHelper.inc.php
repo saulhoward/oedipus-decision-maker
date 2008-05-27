@@ -172,6 +172,36 @@ SQL;
 		return $table;
 	}
 
+	public function
+		get_latest_option_tables($no_of_tables)
+	{
+
+		$dbh = DB::m();
+		// Get the table
+		$sql = <<<SQL
+SELECT 
+	id
+FROM 
+	`oedipus_tables`
+ORDER BY 
+	`oedipus_tables`.`added` DESC
+LIMIT 
+	0 , $no_of_tables
+SQL;
+
+		$results = mysql_query($sql, $dbh);
+		//                print_r($actors);exit;
+
+		// create an array of actors
+		$tables = array();
+		while($table_id = mysql_fetch_array($results))
+		{
+			$table = self::get_oedipus_table_by_id($table_id['id']);
+			$tables[] = $table;
+		}
+		return $tables;
+	}
+
 	/* 
 	 * Functions for updating and editing table values
 	 *
@@ -840,5 +870,17 @@ SQL;
 	 * Functions to do with making URLs
 	 * ----------------------------------------
 	 */
+	public function
+		get_drama_url_for_table(Oedipus_Table $table)
+	{
+			return PublicHTML_URLHelper
+				::get_oo_page_url(
+					'Oedipus_DramaPage',
+					array(
+						'drama_id' => $table->get_drama_id()
+					)
+				);
+	}
+
 }
 ?>

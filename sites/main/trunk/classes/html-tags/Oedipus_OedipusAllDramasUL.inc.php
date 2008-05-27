@@ -48,6 +48,11 @@ HTMLTags_UL
 		$li->append_tag_to_content($link);
 		$li->set_attribute_str('id', 'drama');
 
+//                foreach ($drama->get_tables() as $table)
+//                {
+//                        $li->append_tag_to_content($this->get_oedipus_png_table($table));
+//                }
+
 		return $li;
 	}
 
@@ -70,5 +75,23 @@ HTMLTags_UL
 		//                return PublicHTML_URLHelper
 		//                        ::get_oo_page_url('Oedipus_DramaEditorPage', $get_variables);
 	}
+
+	private function
+		get_oedipus_png_table(Oedipus_Table $table)
+	{
+		$max_width = 100;
+		$max_height = 100;
+		$url = new HTMLTags_URL();
+		$url->set_file(
+			'/tables/images/thumbnails/option-table-'
+			. $table->get_id()
+			. '_' . $max_width . 'x' . $max_height . '.png'
+		);
+		$img = new HTMLTags_IMG();
+		$img->set_src($url);
+		return $img;
+	}
+
+
 }
 ?>
