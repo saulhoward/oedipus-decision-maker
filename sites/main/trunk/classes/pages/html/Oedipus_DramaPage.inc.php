@@ -231,6 +231,10 @@ Oedipus_HTMLPage
 		get_table_notes_div(Oedipus_Table $table)
 	{
 		$div = new HTMLTags_Div();
+		$div->set_attribute_str('class', 'notes');
+
+		$heading = new HTMLTags_Heading(3, $table->get_name());
+		$div->append_tag_to_content($heading);
 
 		try
 		{

@@ -46,6 +46,17 @@ PublicHTML_HTMLPage
 			); 
 	} 
 
+	public function
+		render_body_div_footer()
+	{
+		echo '<div id="footer">';
+
+		Navigation_1DULRenderer::render_ul('Footer Nav');
+		DBPages_PageRenderer::render_page_section('all', 'footer');
+
+		echo '</div>';
+	}
+
 	/** 
 	 * This is a bit ugly but I'm not sure how else to do this. 
 	 * 

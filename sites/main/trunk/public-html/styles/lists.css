@@ -3,6 +3,68 @@
  * Saul Howard, CLWD, 2008
  */
 
+/*
+ * Navigation 
+ * Main Nav UL
+ */
+#navigation
+{
+/*        background-color:#E4F2FD;*/
+	border-bottom-color:#C6D9E9;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	list-style-image:none;
+	list-style-position:outside;
+	list-style-type:none;
+	margin:0pt;
+	padding-left:11px;
+}
+#navigation ul.navigation li
+{
+	display: inline;
+	padding: 0 0.5em;
+
+	line-height:200%;
+	list-style-image:none;
+	list-style-position:outside;
+	list-style-type:none;
+	margin:0pt;
+	padding:0pt;
+	text-align:center;
+	white-space:nowrap;
+}
+#navigation a 
+{
+	color:#2583AD;
+	line-height:30px;
+	padding:5px 7px;
+	text-decoration: none;
+}
+/*div#navigation a.current*/
+div#navigation a
+{
+	background-color:#FFFFFF;
+	border-color:#C6D9E9 rgb(198, 217, 233) rgb(255, 255, 255);
+	color:#D54E21;
+	padding-left:6px;
+	padding-right:6px;
+
+	font-weight: normal;
+	padding-left: 6px;
+	padding-right: 6px;
+	-moz-border-radius-topleft: 4px;
+	-khtml-border-top-left-radius: 4px;
+	-webkit-border-top-left-radius: 4px;
+	border-top-left-radius: 4px;
+	-moz-border-radius-topright: 4px;
+	-khtml-border-top-right-radius: 4px;
+	-webkit-border-top-right-radius: 4px;
+	border-top-right-radius: 4px;
+	border-width: 1px;
+	border-style: solid;
+	border-bottom-width: 2px;
+}
+
 
 /*
  * UL At the top of pages
@@ -21,8 +83,8 @@ ul.page-actions li
 }
 ul.page-actions li a
 {
-	font-weight: 900;
-	font-size:1.1em;
+	font-weight: normal;
+	font-size:1em;
 	text-decoration: none;
 	background-color: #FFFF99;
 	padding: 0.5em 0 0 35px;
@@ -98,12 +160,11 @@ ul.all-dramas li a span#added
 
 div.table_thumbnail_list
 {
-
 	background: #ccc;
-
 }
 div.table_thumbnail_list h3
 {
+	font-family:Georgia,"Times New Roman",Times,serif;
 	text-align: left;
 	font-weight: 900;
 	padding: 1em 0 0 1em;
@@ -115,8 +176,40 @@ div.table_thumbnail_list ul
 }
 div.table_thumbnail_list ul li
 {
-	margin: 0;
-	padding: 20px;
+	margin: 20px;
 	display: inline-block;
+}
+div.table_thumbnail_list a
+{
+	padding: 10px;
+	display: inline-block;
+	-moz-border-radius: 6px;
+	-khtml-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	border-width: 1px;
+	border-style: solid;
 
+	border-color:#CCC;
+}
+div.table_thumbnail_list a:hover
+{
+	background-color:#FFFFFF;
+	border-color:#C6D9E9;
+	font-weight: normal;
+}
+
+/*
+ * Footer List
+ */
+
+div#footer ul
+{
+	margin: 1em auto;
+	text-align: center;
+}
+div#footer ul li
+{
+	padding: 0 20px;
+	display: inline;
 }

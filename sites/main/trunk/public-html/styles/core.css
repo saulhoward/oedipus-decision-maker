@@ -4,18 +4,29 @@
  */
 body
 {
-	font-family: Lucida Sans Unicode, Lucida Grande, sans-serif;
+	/*        font-family: Lucida Sans Unicode, Lucida Grande, sans-serif;*/
+	font-family:"Lucida Grande","Lucida Sans Unicode",Tahoma,Verdana,sans-serif;
 
+	color: #333;
+}
+a
+{
+	color:#448ABD;
+	font-weight: bold;
 }
 a:visited
 {
-	color: blue;
+	color:#448ABD;
+}
+a:hover
+{
+	color: #d54e21
 }
 #header
 {
 	height: 70px;
 	background-color:#ECF2FA;
-	border-bottom:1px solid #6797D3;
+	border-bottom:1px solid #C6D9E9;
 }
 #header h1
 {
@@ -33,9 +44,10 @@ a:visited
 }
 #content h2
 {
+	font-family:Georgia,"Times New Roman",Times,serif;
 	text-align: center;
-	font-size: 1.4em;
-	font-weight: 900;
+	font-size: 1.6em;
+/*        font-weight: 900;*/
 	color: #333;
 	margin: 0 0 1em 0;
 }
@@ -76,21 +88,17 @@ div.clear-columns
 	clear: both;
 	height: 1em;
 }
-/*
- * Navigation (move to lists.css?)
- */
 
+/*
+ * Navigation 
+ */
 #navigation
 {
 	position: absolute;
-	top: 40px;
+	top: 38px;
 	left: 220px;
 }
-#navigation ul.navigation li
-{
-	display: inline;
-	padding: 0 0.5em;
-}
+
 
 /* Table Editor Page */
 div.table-editor
@@ -107,4 +115,36 @@ div.table-editor-forms
 	float: left;
 	width: 50%;
 	margin: 0 auto;
+}
+
+
+/*
+* Footer
+ */
+div#footer
+{
+	clear: both;
+	margin: 2em 0 2em 0;
+}
+div#footer p
+{
+	text-align: right;
+	margin: 0 1em;
+}
+
+/*
+ * Notes Div in Right Column
+ */
+div.notes
+{
+	background-color: #ECF2FA;
+	border: 1px solid #C6D9E9;
+	padding: 1em;
+}
+div.notes h3
+{
+	font-family:Georgia,"Times New Roman",Times,serif;
+	text-align: center;
+	font-size: 1.3em;
+	margin: 0 0 1em 0;
 }
