@@ -15,13 +15,18 @@ Oedipus_HTMLPage
 	public function
 		content()
 	{
-			// NO DRAMA SET
-			DBPages_PageRenderer::render_page_section('home', 'content');
+		$home_page_div = new HTMLTags_Div();
 
-			$home_page_div = new HTMLTags_Div();
-			$home_page_div->append_tag_to_content(
-				$this->get_latest_tables_div()
-			);
+		$heading = new HTMLTags_Heading(2, 'Drama Theory for Making Decisions');
+
+		$home_page_div->append_tag_to_content($heading);
+
+		$home_page_div->append_tag_to_content($this->get_home_page_welcome_text_div());
+		$home_page_div->append_tag_to_content($this->get_links_ul());
+
+		$home_page_div->append_tag_to_content(
+			$this->get_latest_tables_div()
+		);
 
 		echo $home_page_div->get_as_string();
 	}
@@ -145,5 +150,30 @@ Oedipus_HTMLPage
 
 		return $a;
 	}
+
+	private function
+		get_home_page_welcome_text_div()
+	{
+		$welcome_div = new HTMLTags_Div();
+		$welcome_div->set_attribute_str('class', 'welcome');
+
+		$db_page = DBPages_SPoE::get_filtered_page_section('home', 'welcome');
+		$welcome_div->append_str_to_content($db_page);	
+
+		return $welcome_div;
+	}
+
+	private function
+		get_links_ul()
+	{
+		$welcome_div = new HTMLTags_Div();
+		$welcome_div->set_attribute_str('class', 'external-links');
+
+		$welcome_div->append_tag_to_content(Navigation_HTMLListsHelper::get_1d_ul('External Links'));
+
+		return $welcome_div;
+	}
+
+
 }
 ?>

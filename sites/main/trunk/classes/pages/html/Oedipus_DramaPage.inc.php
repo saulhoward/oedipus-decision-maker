@@ -97,9 +97,18 @@ Oedipus_HTMLPage
 		$drama_div = new HTMLTags_Div();
 		$drama_div->set_attribute_str('class', 'oedipus-drama');
 
+		$first = TRUE;
 		// SHOW THE TABLES
 		foreach ($this->drama->get_tables() as $table)
 		{
+
+			if (!$first)
+			{
+				$hr = new HTMLTags_HR();
+				$drama_div->append_tag_to_content($hr);
+			}
+			$first = FALSE;
+
 			# The left and right column divs
 			$left_div = new HTMLTags_Div();
 			$left_div->set_attribute_str('class', 'left-column');
@@ -121,6 +130,7 @@ Oedipus_HTMLPage
 			$clear_div = new HTMLTags_Div();
 			$clear_div->set_attribute_str('class', 'clear-columns');
 			$drama_div->append_tag_to_content($clear_div);
+
 		}
 
 		return $drama_div;
@@ -239,7 +249,7 @@ Oedipus_HTMLPage
 		try
 		{
 			$note = Oedipus_NotesHelper::get_note_by_table_id($table->get_id());
-			$div->append_str_to_content($note->get_note_text());
+			$div->append_tag_to_content($note->get_note_text_in_pre());
 		}
 		catch (Exception $e)
 		{

@@ -152,9 +152,18 @@ extends
 		$drama_div = new HTMLTags_Div();
 		$drama_div->set_attribute_str('class', 'oedipus-drama');
 
+		$first = TRUE;
+
 		// SHOW THE TABLES
 		foreach ($this->drama->get_tables() as $table)
 		{
+			if (!$first)
+			{
+				$hr = new HTMLTags_HR();
+				$drama_div->append_tag_to_content($hr);
+			}
+			$first = FALSE;
+
 			# The left and right column divs
 			$left_div = new HTMLTags_Div();
 			$left_div->set_attribute_str('class', 'left-column');
@@ -168,7 +177,7 @@ extends
 			$right_div = new HTMLTags_Div();
 			$right_div->set_attribute_str('class', 'right-column');
 			# The notes etc. added here
-			$right_div->append_tag_to_content($this->get_table_notes_form($table));
+			$right_div->append_tag_to_content($this->get_table_notes_div($table));
 
 			$drama_div->append_tag_to_content($right_div);
 
@@ -219,6 +228,20 @@ extends
 		get_oedipus_html_table_options(Oedipus_Table $table)
 	{
 		return new Oedipus_OedipusTableOptionsUL($table);
+	}
+
+	private function
+		get_table_notes_div(Oedipus_Table $table)
+	{
+		$div = new HTMLTags_Div();
+		$div->set_attribute_str('class', 'notes');
+
+		$heading = new HTMLTags_Heading(3, $table->get_name());
+		$div->append_tag_to_content($heading);
+
+		$div->append_tag_to_content($this->get_table_notes_form($table));
+
+		return $div;
 	}
 
 	private function

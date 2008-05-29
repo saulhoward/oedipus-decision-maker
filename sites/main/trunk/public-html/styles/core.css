@@ -49,7 +49,7 @@ a:hover
 	font-size: 1.6em;
 /*        font-weight: 900;*/
 	color: #333;
-	margin: 0 0 1em 0;
+	margin: 0.5em 0 1em 0;
 }
 #content h2 span
 {
@@ -60,14 +60,29 @@ a:hover
 {
 	margin: 1em 0;
 }
-#content ul.links
+#content div.external-links ul
 {
-	margin: 1em;
+	margin: 1em 0 2em 1em;
 }
-#content ul.links li
+#content div.external-links ul li
 {
 	margin: 0.2em 0;
 	list-style: disc url(/images/bullet_blue.png) inside;
+}
+#content div.welcome em
+{
+	font-weight: bold;
+}
+
+#content hr
+{
+	border: 0;
+	margin:1em 4em 2em 4em;
+	color: #C6D9E9;
+	background-color: #C6D9E9;
+	background-color: #ECF2FA;
+
+	height: 5px;
 }
 
 /*
@@ -137,14 +152,39 @@ div#footer p
  */
 div.notes
 {
-	background-color: #ECF2FA;
+/*        background: #ECF2FA url(/images/icons/32x32/note.png) 98% 10px no-repeat;*/
+	background: #ECF2FA;
 	border: 1px solid #C6D9E9;
-	padding: 1em;
+	padding: 1em 1em 2em 1em;
+	margin-right: 2em;
 }
+div.notes pre 
+{
+/*        overflow: scroll;*/
+	white-space: pre-wrap;       /* css-3 */
+	white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+	white-space: -pre-wrap;      /* Opera 4-6 */
+	white-space: -o-pre-wrap;    /* Opera 7 */
+	word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
 div.notes h3
 {
 	font-family:Georgia,"Times New Roman",Times,serif;
 	text-align: center;
 	font-size: 1.3em;
 	margin: 0 0 1em 0;
+}
+div.notes label
+{
+	display: none;
+}
+div.notes textarea#note_text
+{
+	width: 100%;
+	height: 20em;
+}
+div.notes div.submit_buttons_div
+{
+	text-align: right;
 }

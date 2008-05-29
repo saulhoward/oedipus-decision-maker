@@ -41,5 +41,14 @@ Oedipus_Note
 	{
 		return $this->added;
 	}
+
+	public function
+		get_note_text_in_pre()
+	{
+		$content = $this->note_text;
+		return new HTMLTags_Pre($content);
+	}
+
+
 }
 ?>

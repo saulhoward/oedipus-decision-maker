@@ -21,10 +21,6 @@ extends
 		$this->table = $table;
 		
 		$this->set_attribute_str('class', 'table-options');
-		
-		// Link to png_image the table
-		$png_image_li = $this->get_png_image_li();
-		$this->append_tag_to_content($png_image_li);
 
 		if ($edit_table_option)
 		{
@@ -32,13 +28,17 @@ extends
 			$edit_li = $this->get_edit_li();
 			$this->append_tag_to_content($edit_li);
 		}
+		
+		// Link to png_image the table
+		$png_image_li = $this->get_png_image_li();
+		$this->append_tag_to_content($png_image_li);
 	}
 
 	private function
 		get_png_image_li()
 	{
 		$png_image_url = $this->get_png_image_url();
-		$link = new HTMLTags_A('Full size PNG image of this Table');
+		$link = new HTMLTags_A('PNG image of this Table');
 		$link->set_href($png_image_url);
 		$li = new HTMLTags_LI();
 		$li->append_tag_to_content($link);

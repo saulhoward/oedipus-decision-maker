@@ -77,8 +77,7 @@ ul.page-actions
 ul.page-actions li
 {
 	display: inline;
-	line-height: 32px;
-	height: 32px;
+	height: 30px;
 	margin: 0 1em 0 0;
 }
 ul.page-actions li a
@@ -87,8 +86,8 @@ ul.page-actions li a
 	font-size:1em;
 	text-decoration: none;
 	background-color: #FFFF99;
-	padding: 0.5em 0 0 35px;
-	height: 32px;
+	padding: 0 0 3px 30px;
+	height: 30px;
 }
 ul.page-actions li a:hover
 {
@@ -97,22 +96,22 @@ ul.page-actions li a:hover
 ul.page-actions li#back-to-drama a
 {
 	color: #03C000;
-	background: transparent url(/images/icons/32x32/document-save.png) top left no-repeat;
+	background: transparent url(/images/icons/24x24/document-save.png) top left no-repeat;
 }
 ul.page-actions li#edit-drama a
 {
 	color: #E9292E;
-	background: transparent url(/images/icons/32x32/document-open.png) top left no-repeat;
+	background: transparent url(/images/icons/24x24/document-open.png) top left no-repeat;
 }
 ul.page-actions li#view-drama a
 {
 	color: #2D36C2;
-	background: transparent url(/images/icons/32x32/drama.png) top left no-repeat;
+	background: transparent url(/images/icons/24x24/drama.png) top left no-repeat;
 }
 ul.page-actions li#share-drama a
 {
 	color: #2D36C2;
-	background: transparent url(/images/icons/32x32/share-icon.png) top left no-repeat;
+	background: transparent url(/images/icons/24x24/share-icon.png) top left no-repeat;
 }
 
 
@@ -160,13 +159,16 @@ ul.all-dramas li a span#added
 
 div.table_thumbnail_list
 {
-	background: #ccc;
+	background-color:#faebf9;
+	border-top:1px solid #fa98c3;
+	border-bottom:1px solid #fa98c3;
 }
 div.table_thumbnail_list h3
 {
-	font-family:Georgia,"Times New Roman",Times,serif;
+/*        font-family:Georgia,"Times New Roman",Times,serif;*/
 	text-align: left;
-	font-weight: 900;
+/*        font-weight: 900;*/
+	font-size: 1.1em;
 	padding: 1em 0 0 1em;
 }
 div.table_thumbnail_list ul
@@ -178,6 +180,7 @@ div.table_thumbnail_list ul li
 {
 	margin: 20px;
 	display: inline-block;
+	vertical-align: middle;
 }
 div.table_thumbnail_list a
 {
@@ -190,12 +193,12 @@ div.table_thumbnail_list a
 	border-width: 1px;
 	border-style: solid;
 
-	border-color:#CCC;
+	border-color:#faebf9;
 }
 div.table_thumbnail_list a:hover
 {
 	background-color:#FFFFFF;
-	border-color:#C6D9E9;
+	border-color:#fa98c3;
 	font-weight: normal;
 }
 
@@ -212,4 +215,39 @@ div#footer ul li
 {
 	padding: 0 20px;
 	display: inline;
+}
+
+/*
+ * Table Options
+ */
+
+div.oedipus-table ul.table-options
+{
+	margin: 1em 0 0 0;
+}
+div.oedipus-table ul.table-options li
+{
+	padding: 0.2em 0;
+}
+div.oedipus-table ul.table-options li a
+{
+	font-weight: normal;
+	font-size:1em;
+	text-decoration: none;
+	padding: 0 0 3px 24px;
+	height: 16px;
+}
+div.oedipus-table ul.table-options li a:hover
+{
+	text-decoration: underline;
+}
+div.oedipus-table ul.table-options li#png-image-table a
+{
+	color: #2D36C2;
+	background: transparent url(/images/icons/16x16/image.png) top left no-repeat;
+}
+div.oedipus-table ul.table-options li#edit-table a
+{
+	color: #E9292E;
+	background: transparent url(/images/icons/16x16/document-open.png) top left no-repeat;
 }
