@@ -2,7 +2,7 @@
 /**
  * __autoload .INC file
  *
- * Last Modified: 2008-05-28
+ * Last Modified: 2008-05-29
  */
 
 function __autoload($class_name)
@@ -157,6 +157,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/cli-scripts/classes/CLIScripts_InputReader.inc.php';
 			break;
 
+		case('CLIScripts_InterpreterProgramHelper'): 
+			require_once PROJECT_ROOT . '/haddock/cli-scripts/classes/helpers/CLIScripts_InterpreterProgramHelper.inc.php';
+			break;
+
 		case('CLIScripts_LockFile'): 
 			require_once PROJECT_ROOT . '/haddock/cli-scripts/classes/file-system/files/CLIScripts_LockFile.inc.php';
 			break;
@@ -229,6 +233,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/configuration/classes/helpers/Configuration_ConfigManagerHelper.inc.php';
 			break;
 
+		case('Configuration_InstanceSpecificConfigDirectoryTests'): 
+			require_once PROJECT_ROOT . '/haddock/configuration/classes/unit-tests/Configuration_InstanceSpecificConfigDirectoryTests.inc.php';
+			break;
+
 		case('Database_AddConditionsToWhereClauseBehaviour'): 
 			require_once PROJECT_ROOT . '/haddock/database/classes/sql/behaviours/Database_AddConditionsToWhereClauseBehaviour.inc.php';
 			break;
@@ -267,6 +275,18 @@ function __autoload($class_name)
 
 		case('Database_ConfigManager'): 
 			require_once PROJECT_ROOT . '/haddock/database/classes/managers/config/Database_ConfigManager.inc.php';
+			break;
+
+		case('Database_ConnectionsHelper'): 
+			require_once PROJECT_ROOT . '/haddock/database/classes/helpers/Database_ConnectionsHelper.inc.php';
+			break;
+
+		case('Database_CreateImageCacheDirectoryCLIScript'): 
+			require_once PROJECT_ROOT . '/haddock/database/classes/cli-scripts/Database_CreateImageCacheDirectoryCLIScript.inc.php';
+			break;
+
+		case('Database_CreateMySQLUserAndDatabaseCLIScript'): 
+			require_once PROJECT_ROOT . '/haddock/database/classes/cli-scripts/Database_CreateMySQLUserAndDatabaseCLIScript.inc.php';
 			break;
 
 		case('Database_CreatePasswordsFileCLIScript'): 
@@ -331,6 +351,10 @@ function __autoload($class_name)
 
 		case('Database_DateTimeField'): 
 			require_once PROJECT_ROOT . '/haddock/database/classes/elements/field-subclasses/Database_DateTimeField.inc.php';
+			break;
+
+		case('Database_DBHandleTests'): 
+			require_once PROJECT_ROOT . '/haddock/database/classes/unit-tests/Database_DBHandleTests.inc.php';
 			break;
 
 		case('Database_DBSubClassesDirectory'): 
@@ -517,8 +541,16 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/database/classes/Database_PasswordFile.inc.php';
 			break;
 
+		case('Database_PasswordsDirectoryTests'): 
+			require_once PROJECT_ROOT . '/haddock/database/classes/unit-tests/Database_PasswordsDirectoryTests.inc.php';
+			break;
+
 		case('Database_PasswordsFileHelper'): 
 			require_once PROJECT_ROOT . '/haddock/database/classes/helpers/Database_PasswordsFileHelper.inc.php';
+			break;
+
+		case('Database_PasswordsFileTests'): 
+			require_once PROJECT_ROOT . '/haddock/database/classes/unit-tests/Database_PasswordsFileTests.inc.php';
 			break;
 
 		case('Database_PasswordValidator'): 
@@ -761,12 +793,20 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/database/classes/renderers/field-renderers/Database_TimeFieldRenderer.inc.php';
 			break;
 
+		case('Database_UnableToMakeConnectionException'): 
+			require_once PROJECT_ROOT . '/haddock/database/classes/exceptions/Database_UnableToMakeConnectionException.inc.php';
+			break;
+
 		case('Database_UserInputTooLongException'): 
 			require_once PROJECT_ROOT . '/haddock/database/classes/exceptions/Database_UserInputTooLongException.inc.php';
 			break;
 
 		case('Database_UsernameValidator'): 
 			require_once PROJECT_ROOT . '/haddock/database/classes/input-validation/Database_UsernameValidator.inc.php';
+			break;
+
+		case('Database_UsernameValidatorTests'): 
+			require_once PROJECT_ROOT . '/haddock/database/classes/unit-tests/Database_UsernameValidatorTests.inc.php';
 			break;
 
 		case('Database_VarCharField'): 
@@ -1021,6 +1061,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/haddock-project-organisation/classes/file-system/directories/HaddockProjectOrganisation_CoreModulesDirectory.inc.php';
 			break;
 
+		case('HaddockProjectOrganisation_HaddockDirectoryTests'): 
+			require_once PROJECT_ROOT . '/haddock/haddock-project-organisation/classes/unit-tests/HaddockProjectOrganisation_HaddockDirectoryTests.inc.php';
+			break;
+
 		case('HaddockProjectOrganisation_HPOConfigManager'): 
 			require_once PROJECT_ROOT . '/haddock/haddock-project-organisation/classes/managers/HaddockProjectOrganisation_HPOConfigManager.inc.php';
 			break;
@@ -1089,6 +1133,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/haddock-project-organisation/classes/file-system/directories/HaddockProjectOrganisation_PlugInModulesDirectory.inc.php';
 			break;
 
+		case('HaddockProjectOrganisation_PlugInsDirectoryTests'): 
+			require_once PROJECT_ROOT . '/haddock/haddock-project-organisation/classes/unit-tests/HaddockProjectOrganisation_PlugInsDirectoryTests.inc.php';
+			break;
+
 		case('HaddockProjectOrganisation_ProjectDirectory'): 
 			require_once PROJECT_ROOT . '/haddock/haddock-project-organisation/classes/file-system/directories/HaddockProjectOrganisation_ProjectDirectory.inc.php';
 			break;
@@ -1097,8 +1145,16 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/haddock-project-organisation/classes/finders/HaddockProjectOrganisation_ProjectDirectoryFinder.inc.php';
 			break;
 
+		case('HaddockProjectOrganisation_ProjectDirectoryHelper'): 
+			require_once PROJECT_ROOT . '/haddock/haddock-project-organisation/classes/helpers/HaddockProjectOrganisation_ProjectDirectoryHelper.inc.php';
+			break;
+
 		case('HaddockProjectOrganisation_ProjectSpecificDirectory'): 
 			require_once PROJECT_ROOT . '/haddock/haddock-project-organisation/classes/file-system/directories/HaddockProjectOrganisation_ProjectSpecificDirectory.inc.php';
+			break;
+
+		case('HaddockProjectOrganisation_ProjectSpecificDirectoryTests'): 
+			require_once PROJECT_ROOT . '/haddock/haddock-project-organisation/classes/unit-tests/HaddockProjectOrganisation_ProjectSpecificDirectoryTests.inc.php';
 			break;
 
 		case('HaddockProjectOrganisation_PublicPageDirectory'): 
@@ -1613,6 +1669,14 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/plug-ins/news/classes/News_SPoE.inc.php';
 			break;
 
+		case('ObjectOrientation_CompilationTests'): 
+			require_once PROJECT_ROOT . '/haddock/object-orientation/classes/unit-tests/ObjectOrientation_CompilationTests.inc.php';
+			break;
+
+		case('ObjectOrientation_CountPHPClassFilesInProjectCLIScript'): 
+			require_once PROJECT_ROOT . '/haddock/object-orientation/classes/cli-scripts/ObjectOrientation_CountPHPClassFilesInProjectCLIScript.inc.php';
+			break;
+
 		case('ObjectOrientation_NamedMethodCaller'): 
 			require_once PROJECT_ROOT . '/haddock/object-orientation/classes/ObjectOrientation_NamedMethodCaller.inc.php';
 			break;
@@ -1985,6 +2049,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/public-html/classes/helpers/PublicHTML_URLHelper.inc.php';
 			break;
 
+		case('PublicHTML_VHostTests'): 
+			require_once PROJECT_ROOT . '/haddock/public-html/classes/unit-tests/PublicHTML_VHostTests.inc.php';
+			break;
+
 		case('Security_PasswordGenerator'): 
 			require_once PROJECT_ROOT . '/haddock/security/classes/Security_PasswordGenerator.inc.php';
 			break;
@@ -2015,6 +2083,10 @@ function __autoload($class_name)
 
 		case('UnitTests_RunAllTestsCLIScript'): 
 			require_once PROJECT_ROOT . '/haddock/unit-tests/classes/cli-scripts/UnitTests_RunAllTestsCLIScript.inc.php';
+			break;
+
+		case('UnitTests_TestResult'): 
+			require_once PROJECT_ROOT . '/haddock/unit-tests/classes/UnitTests_TestResult.inc.php';
 			break;
 
 		case('UnitTests_TestResultsSet'): 

@@ -181,8 +181,10 @@ div.notes label
 }
 div.notes textarea#note_text
 {
+	font-family:"Lucida Grande","Lucida Sans Unicode",Tahoma,Verdana,sans-serif;
 	width: 100%;
 	height: 20em;
+	line-height:1em;
 }
 div.notes div.submit_buttons_div
 {
