@@ -1,0 +1,39 @@
+#summary The Interface Design principles for ODM.
+
+= Introduction =
+
+Oedipus Decision Maker uses some new UI elements (like the options table) and many standard elements. The design wants to be intuitive. So we will try and stick to some general principles.
+
+
+= Details =
+
+From AListApart.com:
+
+"Layout and composition
+
+Define all the layout variations that are used for the interface, and when and how they are used. Show wireframes to illustrate these variations (such as different column configurations and where they are used).
+
+Typography
+
+Explain the guidelines for acceptable use of typography. Use illustrations to show examples for the main text, the headline styles and their hierarchy, list styles, etc. It is also a good idea to define the typography standards in promotional graphics, as well as list the alternate typefaces that can be used for hypertext (in the event that the user does not have the font you have declared).
+
+Color palette
+
+Provide a color palette to illustrate the standard colors that must be used throughout the interface. This reference should include exact color codes (you can list hex color values or RGB values). It is good to show where these colors are used. For example, you can include a screenshot that shows the color used for links.
+
+Images
+
+Define the standard image sizes that may be used throughout the interface. This should include any graphic banners (such as promotional banner advertisements) as well as images that are used within content. Show how they may be styled and aligned, and how captions should appear (if used). You can also include what type of imagery that may be used (such as illustration or photography, as well as allowable styles or “mood”). Finally, if you use any icons in the site, set standards for them, such as how they look, where they are used, how they are styled, etc.
+
+Brand guidelines
+
+Beyond typography and color, brand guidelines can include other standard design elements. These standards might define the amount of space allowed around the logo, how the logo appears depending on the background it sits on, or how the organization’s name should always appear in text.
+
+Some style guides include supplementary information beyond the look and feel (for example, you can include standards for copywriting, advertising, and other elements that influence the interface and user experience). When defining design standards, you can even include the related markup and CSS needed to create the visual appearance expected. However, it might be better to create a separate section or document for these front-end development standards."
+
+
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
