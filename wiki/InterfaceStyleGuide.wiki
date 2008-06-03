@@ -7,15 +7,24 @@ Oedipus Decision Maker uses some new UI elements (like the options table) and ma
 
 = Details =
 
-From AListApart.com:
+== Layout and composition ==
 
-"Layout and composition
+Every page has a header section with main navigation, and login info. It is blue.
 
-Define all the layout variations that are used for the interface, and when and how they are used. Show wireframes to illustrate these variations (such as different column configurations and where they are used).
+Some pages have a secondary nav under that, in the white.
 
-Typography
+== Typography ==
 
-Explain the guidelines for acceptable use of typography. Use illustrations to show examples for the main text, the headline styles and their hierarchy, list styles, etc. It is also a good idea to define the typography standards in promotional graphics, as well as list the alternate typefaces that can be used for hypertext (in the event that the user does not have the font you have declared).
+The logo is currently in Caslon.
+
+H1 and H2 are currently in:
+{{{
+	font-family:Georgia,"Times New Roman",Times,serif;
+}}}
+All other text is in:
+{{{
+	font-family:"Lucida Grande","Lucida Sans Unicode",Tahoma,Verdana,sans-serif;
+}}}
 
 Color palette
 
