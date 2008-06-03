@@ -29,12 +29,17 @@ All other text is in:
 == Color palette ==
 
 Light Blue for header background: `#ECF2FA`
+
 Dark Blue for border of light blue sections: `#C6D9E9`
 
+
 Light Pink used on home page: 	`#faebf9`
+
 Dark Pink border colour: `#fa98c3`
 
+
 Main content background is white
+
 Text Colour: `#333`
 
 == Images ==
