@@ -26,23 +26,21 @@ All other text is in:
 	font-family:"Lucida Grande","Lucida Sans Unicode",Tahoma,Verdana,sans-serif;
 }}}
 
-Color palette
+== Color palette ==
 
-Provide a color palette to illustrate the standard colors that must be used throughout the interface. This reference should include exact color codes (you can list hex color values or RGB values). It is good to show where these colors are used. For example, you can include a screenshot that shows the color used for links.
+Light Blue for header background: `#ECF2FA`
+Dark Blue for border of light blue sections: `#C6D9E9`
 
-Images
+Light Pink used on home page: 	`#faebf9`
+Dark Pink border colour: `#fa98c3`
 
-Define the standard image sizes that may be used throughout the interface. This should include any graphic banners (such as promotional banner advertisements) as well as images that are used within content. Show how they may be styled and aligned, and how captions should appear (if used). You can also include what type of imagery that may be used (such as illustration or photography, as well as allowable styles or “mood”). Finally, if you use any icons in the site, set standards for them, such as how they look, where they are used, how they are styled, etc.
+Main content background is white
+Text Colour: `#333`
 
-Brand guidelines
+== Images ==
 
-Beyond typography and color, brand guidelines can include other standard design elements. These standards might define the amount of space allowed around the logo, how the logo appears depending on the background it sits on, or how the organization’s name should always appear in text.
+No firm decision yet on image sizes. Thumbnails on the HomePage are currently 250x185
 
-Some style guides include supplementary information beyond the look and feel (for example, you can include standards for copywriting, advertising, and other elements that influence the interface and user experience). When defining design standards, you can even include the related markup and CSS needed to create the visual appearance expected. However, it might be better to create a separate section or document for these front-end development standards."
+== Brand guidelines ==
 
-
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Logo will probably be changed. At the moment it is 70px high
