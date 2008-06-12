@@ -54,9 +54,11 @@ Oedipus_GDPNGImage
 	{
 		if (isset($_GET['table_id']))
 		{
+			// get the Oedipus_Table
 			$this->table =
 				Oedipus_TableCreationHelper::get_oedipus_table_by_id($_GET['table_id']);
 
+			// Set all of the styles and padding
 			$this->set_font('caslon.pfb');
 			$this->set_stated_intenion_font('caslon-italic.pfb');
 			$this->set_actor_name_font('caslon-small-caps.pfb');
@@ -74,6 +76,7 @@ Oedipus_GDPNGImage
 
 			$this->set_label_width_and_height();
 
+			// Set the GD image object
 			$this->set_oedipus_table_image();
 		}
 
@@ -85,6 +88,7 @@ Oedipus_GDPNGImage
 			isset($_GET['max_height'])
 		)
 		{
+			// If it's a thumbnail, resize the whole image
 			$this->set_thumbnail_image(
 				$_GET['max_width'],
 				$_GET['max_height']
@@ -93,6 +97,7 @@ Oedipus_GDPNGImage
 		}
 		if (isset($this->image))
 		{
+			// Draw the image
 			imagepng($this->image);
 			imagedestroy($this->image);
 		}
@@ -123,6 +128,7 @@ Oedipus_GDPNGImage
 
 		$this->image = $image_p;
 	}
+
 	private function
 		set_oedipus_table_image()
 	{
@@ -146,7 +152,9 @@ Oedipus_GDPNGImage
 		imagefill($this->image, 0, 0, $this->background_color);
 
 		// Set the table name label
-		$this->draw_table_name_label($this->image_width, $this->table_name_label_height + ($this->table_padding * 2));
+		$this->draw_table_name_label(
+			$this->image_width, $this->table_name_label_height + ($this->table_padding * 2)
+		);
 
 		// Draw a box for the table
 		imagefilledrectangle($this->image,
@@ -523,11 +531,18 @@ Oedipus_GDPNGImage
 		{
 			if ($actor->has_options())
 			{
-				foreach ($actor->get_options() as $option)
+				// Check the actor's name as well
+				// this only works because they both have get_name()
+				$options_plus_actor = $actor->get_options();
+				$options_plus_actor[] = $actor;
+
+				foreach ($options_plus_actor as $option_or_actor)
 				{
 					///get the left lower corner and the right upper
-					list($lx,$ly,$rx,$ry) =
-					       	imagepsbbox($option->get_name(), $this->font, $this->font_size);
+					list($lx,$ly,$rx,$ry) =	
+						imagepsbbox(
+							$option_or_actor->get_name(), $this->font, $this->font_size
+						);
 
 					// calculate the size of the text
 					$text_width = $rx - $lx;

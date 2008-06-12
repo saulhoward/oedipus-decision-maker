@@ -92,6 +92,7 @@ div.left-column
 {
 	float: left;
 	width: 50%;
+	min-width: 500px;
 }
 div.right-column
 {
