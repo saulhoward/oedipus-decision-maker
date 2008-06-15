@@ -41,7 +41,7 @@ Oedipus_RestrictedPage
 		if (isset($this->user_id))
 		{
 			$drama_page_div->append_tag_to_content(
-				$this->get_all_dramas_ul()
+				$this->get_all_dramas_div()
 			);
 			$drama_page_div->append_tag_to_content(
 				$this->get_create_new_drama_div()
@@ -64,6 +64,16 @@ Oedipus_RestrictedPage
 		$html_form = $this->get_add_drama_form();
 		$form_div->append_tag_to_content($html_form);
 		return $form_div;
+	}
+
+	private function
+		get_all_dramas_div()
+	{
+		$div = new HTMLTags_Div();
+		$div->set_attribute_str('class', 'my-dramas-list');
+		$html = $this->get_all_dramas_ul();
+		$div->append_tag_to_content($html);
+		return $div;
 	}
 
 	private function
