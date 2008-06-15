@@ -39,9 +39,10 @@
 	line-height:30px;
 	padding:5px 7px;
 	text-decoration: none;
+	font-weight: normal;
 }
 /*div#navigation a.current*/
-div#navigation a
+div#navigation li.selected a
 {
 	background-color:#FFFFFF;
 	border-color:#C6D9E9 rgb(198, 217, 233) rgb(255, 255, 255);
@@ -49,7 +50,6 @@ div#navigation a
 	padding-left:6px;
 	padding-right:6px;
 
-	font-weight: normal;
 	padding-left: 6px;
 	padding-right: 6px;
 	-moz-border-radius-topleft: 4px;

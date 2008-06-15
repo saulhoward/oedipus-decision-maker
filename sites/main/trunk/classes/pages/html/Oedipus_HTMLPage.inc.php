@@ -25,15 +25,17 @@ PublicHTML_HTMLPage
 		$this->render_body_div_footer();
 
 		echo "</body>\n";
-		
-//                $this->render_google_analytics_js();
+
+		//                $this->render_google_analytics_js();
 	}
 
 	public function
 		render_body_div_navigation()
 	{
 		echo '<div id="navigation">';
-		Navigation_1DULRenderer::render_ul('Main Nav');
+//                Navigation_1DULRenderer::render_ul('Main Nav');
+		$nav_ul = $this->get_1d_ul_with_selected_li('Main Nav');
+		echo $nav_ul->get_as_string();
 		echo '</div>';
 	}
 
@@ -46,14 +48,14 @@ PublicHTML_HTMLPage
 	public function 
 		render_head_link_stylesheet() 
 	{ 
-//                HTMLTags_LinkRenderer 
-//                        ::render_style_sheet_link( 
-//                                'http://yui.yahooapis.com/2.3.1/build/reset-fonts-grids/reset-fonts-grids.css' 
-//                        ); 
-//                HTMLTags_LinkRenderer 
-//                        ::render_style_sheet_link( 
-//                                'http://yui.yahooapis.com/2.3.1/build/base/base-min.css' 
-//                        ); 
+		//                HTMLTags_LinkRenderer 
+		//                        ::render_style_sheet_link( 
+		//                                'http://yui.yahooapis.com/2.3.1/build/reset-fonts-grids/reset-fonts-grids.css' 
+		//                        ); 
+		//                HTMLTags_LinkRenderer 
+		//                        ::render_style_sheet_link( 
+		//                                'http://yui.yahooapis.com/2.3.1/build/base/base-min.css' 
+		//                        ); 
 		HTMLTags_LinkRenderer 
 			::render_style_sheet_link( 
 				'/styles/reset.css' 
@@ -84,7 +86,7 @@ PublicHTML_HTMLPage
 		render_head_script_javascript() 
 	{ 
 
-//                echo '<script src="http://www.google.com/jsapi"></script>' . "\n";
+		//                echo '<script src="http://www.google.com/jsapi"></script>' . "\n";
 		echo '<script type="text/javascript" 
 			src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>' . "\n";
 		echo '<script type="text/javascript" src="/scripts/jquery.autogrow.js"></script>' . "\n";
@@ -136,5 +138,66 @@ PublicHTML_HTMLPage
 		echo '</div>' . "\n";
 	}
 
+	/*
+	 * FROM NAVIGATION PLUG IN
+	 * MOVE IT UP
+	 */
+
+	private function
+		get_1d_ul_with_selected_li(
+			$tree_name,
+			$class_name = NULL
+		)
+	{
+
+		$page_class_name = get_class($this);
+
+		if (!isset($class_name)) {
+			$class_name = 'navigation';
+		}
+
+		$nodes
+			= Navigation_1DTreeRetriever
+			::get_tree_nodes($tree_name);
+
+		#print_r($nodes);
+
+		#echo "<ul class=\"$class_name\">\n";
+
+		$ul = new HTMLTags_UL();
+
+		$ul->set_class($class_name);
+
+		foreach ($nodes as $node) {
+			#Navigation_NodeRenderer::render_node($node);
+
+			$li = new HTMLTags_LI();
+
+			$li->append(
+				Navigation_NodesHelper
+				::get_link_a($node)
+			);
+
+			//                        print_r($page_class_name);exit;
+			if (
+				(substr($node['url_href'], 1) == $page_class_name)
+				||
+				(
+					($node['url_href'] == '/')
+					&&
+					($page_class_name == 'Oedipus_HomePage')
+				)
+			)
+			{
+				$li->set_class('selected');
+			}
+
+			$ul->add_li(
+				$li
+			);
+		}
+
+		return $ul;
+	}
 }
 ?>
