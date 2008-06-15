@@ -11,7 +11,7 @@ class
 {
 	// PROCESS NEW DRAMA
 	public static function
-		add_drama($drama_name)
+		add_drama($drama_name, $user_id)
 	{
 		// ADD DRAMA TO DATABASE
 		$drama_unique_name = self::create_unique_name($drama_name);
@@ -22,7 +22,8 @@ INSERT INTO
 SET
 	name = '$drama_name',
 	unique_name = '$drama_unique_name',
-	added = NOW()
+	added = NOW(),
+	created_by_user_id = $user_id
 SQL;
 
 		//                print_r($sql);exit;
@@ -213,6 +214,33 @@ SQL;
 		}
 		return $drama;
 	}
+
+	public function
+		get_all_dramas_for_user($user_id)
+	{
+		$dbh = DB::m();
+		$query = <<<SQL
+SELECT 
+	*
+	FROM
+	oedipus_dramas
+	WHERE
+	created_by_user_id = $user_id
+SQL;
+
+		//                print_r($query);exit;
+		$result = mysql_query($query, $dbh);
+
+		$dramas = array();
+		while($row = mysql_fetch_array($result))
+		{
+			//                print_r($row);exit;
+			$dramas[] = new Oedipus_Drama($row['id'], $row['name'], $row['unique_name'], $row['added']);
+		}
+
+		return $dramas;
+	}
+
 
 	public function
 		get_all_dramas()

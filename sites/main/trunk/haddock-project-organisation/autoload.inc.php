@@ -2,7 +2,7 @@
 /**
  * __autoload .INC file
  *
- * Last Modified: 2008-06-02
+ * Last Modified: 2008-06-15
  */
 
 function __autoload($class_name)
@@ -813,6 +813,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/database/classes/table-structure-synchronisation/Database_TableSpecificationFile.inc.php';
 			break;
 
+		case('Database_TableSpecificationTests'): 
+			require_once PROJECT_ROOT . '/haddock/database/classes/unit-tests/Database_TableSpecificationTests.inc.php';
+			break;
+
 		case('Database_TableStructureManager'): 
 			require_once PROJECT_ROOT . '/haddock/database/classes/table-structure-synchronisation/Database_TableStructureManager.inc.php';
 			break;
@@ -963,6 +967,18 @@ function __autoload($class_name)
 
 		case('FileSystem_Directory'): 
 			require_once PROJECT_ROOT . '/haddock/file-system/classes/FileSystem_Directory.inc.php';
+			break;
+
+		case('FileSystem_DirectoryHelper'): 
+			require_once PROJECT_ROOT . '/haddock/file-system/classes/helpers/FileSystem_DirectoryHelper.inc.php';
+			break;
+
+		case('FileSystem_DirectoryHelperTests'): 
+			require_once PROJECT_ROOT . '/haddock/file-system/classes/unit-tests/FileSystem_DirectoryHelperTests.inc.php';
+			break;
+
+		case('FileSystem_ExistingDirectoryRelativeToProjectRootValidator'): 
+			require_once PROJECT_ROOT . '/haddock/file-system/classes/input-validation/FileSystem_ExistingDirectoryRelativeToProjectRootValidator.inc.php';
 			break;
 
 		case('FileSystem_File'): 
@@ -1869,8 +1885,32 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_HTMLPage.inc.php';
 			break;
 
+		case('Oedipus_HTMLPageWithAccountStatus'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_HTMLPageWithAccountStatus.inc.php';
+			break;
+
+		case('Oedipus_LogInHelper'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_LogInHelper.inc.php';
+			break;
+
+		case('Oedipus_LoginPage'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_LoginPage.inc.php';
+			break;
+
+		case('Oedipus_LoginValidator'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/Oedipus_LoginValidator.inc.php';
+			break;
+
+		case('Oedipus_LogOutRequest'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/Oedipus_LogOutRequest.inc.php';
+			break;
+
 		case('Oedipus_MailingListSignUpPage'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_MailingListSignUpPage.inc.php';
+			break;
+
+		case('Oedipus_MyDramasPage'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_MyDramasPage.inc.php';
 			break;
 
 		case('Oedipus_Note'): 
@@ -1899,6 +1939,10 @@ function __autoload($class_name)
 
 		case('Oedipus_OedipusHTMLTable'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusHTMLTable.inc.php';
+			break;
+
+		case('Oedipus_OedipusMyDramasUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusMyDramasUL.inc.php';
 			break;
 
 		case('Oedipus_OedipusOptionEditorHTMLForm'): 
@@ -1953,6 +1997,22 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Position.inc.php';
 			break;
 
+		case('Oedipus_RedirectScript'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/redirect-scripts/Oedipus_RedirectScript.inc.php';
+			break;
+
+		case('Oedipus_RegisterPage'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_RegisterPage.inc.php';
+			break;
+
+		case('Oedipus_RegistrationValidator'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/Oedipus_RegistrationValidator.inc.php';
+			break;
+
+		case('Oedipus_RestrictedPage'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_RestrictedPage.inc.php';
+			break;
+
 		case('Oedipus_ShareDramaPage'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_ShareDramaPage.inc.php';
 			break;
@@ -1983,6 +2043,14 @@ function __autoload($class_name)
 
 		case('Oedipus_TablePNGImage'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/png/Oedipus_TablePNGImage.inc.php';
+			break;
+
+		case('Oedipus_UserPage'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_UserPage.inc.php';
+			break;
+
+		case('Oedipus_UsersHelper'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_UsersHelper.inc.php';
 			break;
 
 		case('OrderedTables_AdminCRUDHelper'): 
@@ -2125,6 +2193,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/public-html/classes/pages/png/PublicHTML_PNGImage.inc.php';
 			break;
 
+		case('PublicHTML_ProjectRootDotHTAcessFileTests'): 
+			require_once PROJECT_ROOT . '/haddock/public-html/classes/unit-tests/PublicHTML_ProjectRootDotHTAcessFileTests.inc.php';
+			break;
+
 		case('PublicHTML_PublicURLFactory'): 
 			require_once PROJECT_ROOT . '/haddock/public-html/classes/PublicHTML_PublicURLFactory.inc.php';
 			break;
@@ -2139,6 +2211,14 @@ function __autoload($class_name)
 
 		case('PublicHTML_RedirectScript'): 
 			require_once PROJECT_ROOT . '/haddock/public-html/classes/pages/PublicHTML_RedirectScript.inc.php';
+			break;
+
+		case('PublicHTML_RestrictAccessToDirectoryOnTheServerCLIScript'): 
+			require_once PROJECT_ROOT . '/haddock/public-html/classes/cli-scripts/PublicHTML_RestrictAccessToDirectoryOnTheServerCLIScript.inc.php';
+			break;
+
+		case('PublicHTML_ServerAccessControlHelper'): 
+			require_once PROJECT_ROOT . '/haddock/public-html/classes/helpers/PublicHTML_ServerAccessControlHelper.inc.php';
 			break;
 
 		case('PublicHTML_ServerAddressesHelper'): 

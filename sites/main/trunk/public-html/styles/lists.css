@@ -116,19 +116,19 @@ ul.page-actions li#share-drama a
 
 
 /*
- * All Dramas UL
+ * my Dramas UL
  */
-ul.all-dramas
+ul.my-dramas
 {
 	margin: 2em auto;
 	width: 100%;
 	text-align: center;
 }
-ul.all-dramas li
+ul.my-dramas li
 {
 	line-height:3em;
 }
-ul.all-dramas li a
+ul.my-dramas li a
 {
 	padding: 0.5em;
 	color: black;
@@ -137,16 +137,16 @@ ul.all-dramas li a
 	font-weight: 900;
 	background-color: #ccc;
 }
-ul.all-dramas li a:hover
+ul.my-dramas li a:hover
 {
 	color: white;
 	background-color: black;
 }
-ul.all-dramas li a span
+ul.my-dramas li a span
 {
 	padding: 0 1em;
 }
-ul.all-dramas li a span#added
+ul.my-dramas li a span#added
 {
 	font-size: 0.9em;
 	font-weight: 300;

@@ -15,9 +15,11 @@ extends
 			isset($_POST['new_drama'])
 			&&
 			isset($_POST['drama_name'])
+			&&
+			isset($_POST['user_id'])
 			)
 		{
-			$drama = Oedipus_DramaEditorHelper::add_drama($_POST['drama_name']);
+			$drama = Oedipus_DramaEditorHelper::add_drama($_POST['drama_name'], $_POST['user_id']);
 			$return_to_url = Oedipus_DramaEditorHelper::get_drama_editor_url($drama);
 		}
 	

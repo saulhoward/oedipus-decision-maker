@@ -13,6 +13,7 @@ a
 {
 	color:#448ABD;
 	font-weight: bold;
+	text-decoration: none;
 }
 a:visited
 {
@@ -20,6 +21,7 @@ a:visited
 }
 a:hover
 {
+	text-decoration: underline;
 	color: #d54e21
 }
 #header
@@ -114,6 +116,28 @@ div.clear-columns
 	top: 38px;
 	left: 220px;
 }
+/*
+ * Account Status
+ */
+#account_status
+{
+	position: absolute;
+	top: 0.5em;
+	right: 1em;
+
+}
+#account_status a
+{
+	font-weight: normal;
+	text-decoration: none;
+}
+#account_status ul li
+{
+	display: inline;
+	padding: 0 0 0 1em;
+}
+
+
 
 
 /* Table Editor Page */

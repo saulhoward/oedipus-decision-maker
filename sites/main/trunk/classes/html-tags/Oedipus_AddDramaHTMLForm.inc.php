@@ -19,7 +19,7 @@ extends
 {
 
 	public function
-		__construct()
+		__construct($user_id)
 	{
 		parent::__construct('new_drama');
 
@@ -37,6 +37,7 @@ extends
 		$this->add_input_name_with_value('drama_name', '', 'Drama Name:');
 		// Hidden Inputs
 		$this->add_hidden_input('new_drama', 1);
+		$this->add_hidden_input('user_id', $user_id);
 
 		$this->set_submit_text('Create Drama');
 	}
