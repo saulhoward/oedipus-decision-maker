@@ -144,9 +144,11 @@ if (isset($_SESSION['values']['email'])) {
 }
 
 ?>
-<p id="reset_password_link">
-	<a href="<?php echo $prp_url->get_as_string(); ?>">Forgotten your password?</a>
-</p>
+<ul>
+	<li>
+		<a href="<?php echo $prp_url->get_as_string(); ?>">Forgotten your password?</a>
+	</li>
+</ul>
 <?php
 	}
 	
