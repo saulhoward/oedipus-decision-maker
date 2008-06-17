@@ -81,11 +81,11 @@ DBPages_PageRenderer::render_page_section('log-in', 'general-explanation');
 $log_in_redirect_script_url = Oedipus_LogInHelper::get_log_in_redirect_script_url();
 ?>
 <form
+	id="basic-form"
 	name="frmRegistration"
 	method="post"
 	action="<?php echo $log_in_redirect_script_url->get_as_string(); ?>"
 >
-	<p class="form-title" id="log-in">Log In</p>
 	<fieldset>
 		<legend class="txtFormLegend">Your Details</legend>
 	<ol>
@@ -119,12 +119,14 @@ $log_in_redirect_script_url = Oedipus_LogInHelper::get_log_in_redirect_script_ur
 	</li>
 	</ol>
 	</fieldset>
-	<input
-		type="submit"
-		name="submitbutton"
-		value="Log in" 
-		class="left button"
-	/>
+	<div class="submit_buttons_div">
+		<input
+			type="submit"
+			name="submitbutton"
+			value="Log in" 
+			class="left button"
+		/>
+	</div>
 </form>
 <?php
 /*
