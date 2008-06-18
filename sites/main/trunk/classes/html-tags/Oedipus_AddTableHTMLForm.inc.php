@@ -26,7 +26,7 @@ extends
 
 		$this->drama = $drama;
 
-		$this->set_legend_text('New table');
+		$this->set_legend_text('New Options Table');
 
 		// action
 		$this_action = $this->get_new_table_form_action_url();
@@ -37,13 +37,13 @@ extends
 		$this->set_cancel_location($this_cancel);
 
 		// table Name Input
-		$this->add_input_name_with_value('table_name', '', 'table Name:');
+		$this->add_input_name_with_value('table_name', '', 'Table Name:');
 
 		// Hidden Inputs
 		$this->add_hidden_input('drama_id', $this->drama->get_id());
 		$this->add_hidden_input('add_table', 1);
 
-		$this->set_submit_text('Create table');
+		$this->set_submit_text('Create Table');
 	}
 
 	private function

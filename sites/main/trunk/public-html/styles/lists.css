@@ -131,9 +131,14 @@ div.my-dramas-list
 	border-top:1px solid #fa98c3;
 	border-bottom:1px solid #fa98c3;
 	margin: 2em auto;
-	padding: 2em 0;
+	padding: 1em 0 2em 0;
 }
-
+div.my-dramas-list h3
+{
+	text-align: left;
+	font-size: 1.1em;
+	padding: 0 0 0 1em;
+}
 ul.my-dramas
 {
 	text-align: center;

@@ -196,27 +196,27 @@ XML;
 			$email_to = $_POST['first_name'] . ' ' . $_POST['last_name'] . ' <' . $_POST['email'] . '>';
 			$email_subject = "Welcome to play4ateam!";
 			$email_body = <<<EMAIL
-Welcome to Oedipus!
-
-The sports-community website. Designed by players for players!
-
-To get started, go to your profile page at
-
-https://www.play4ateam.com/users/$user_id
-
-Thanks,
-
-The play4ateam Accounts Team
-
-Please do not reply to this email.
+Welcome to Oedipus: Decision Maker
 
 EMAIL;
+
+//To get started, go to your profile page at
+
+//https://www.play4ateam.com/users/$user_id
+
+//Thanks,
+
+//The play4ateam Accounts Team
+
+//Please do not reply to this email.
+
+//EMAIL;
 			
 			$email_body = wordwrap($email_body, 70);
 			
 			$email_additional_headers = '';
-			$email_additional_headers .= "From: The play4ateam Accounts Team <accounts@play4ateam.com>\r\n";
-			$email_additional_headers .= "Reply-To: The play4ateam Accounts Team <accounts@play4ateam.com>\r\n";
+			$email_additional_headers .= "From: The Oedipus Team <saul@convictfilms.com>\r\n";
+			$email_additional_headers .= "Reply-To: The Oedipus Team <saul@convictfilms.com>\r\n";
 			
 			mail($email_to, $email_subject, $email_body, $email_additional_headers);
 			

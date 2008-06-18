@@ -72,6 +72,8 @@ Oedipus_RestrictedPage
 		$div = new HTMLTags_Div();
 		$div->set_attribute_str('class', 'my-dramas-list');
 		$html = $this->get_all_dramas_ul();
+
+		$div->append_tag_to_content(new HTMLTags_Heading(3, 'Dramas created by me'));
 		$div->append_tag_to_content($html);
 		return $div;
 	}

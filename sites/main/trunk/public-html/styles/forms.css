@@ -14,17 +14,20 @@ form#basic-form {  /* set width in form, not fieldset (still takes up more room 
   font:100% verdana,arial,sans-serif;
   margin: 0 auto;
   padding: 0;
-  min-width: 500px;
-  max-width: 600px;
-  width: 560px; 
+  min-width: 30em;
+  max-width: 60em;
+  width: 30em; 
 }
 
 form#basic-form fieldset {
   /* clear: both; note that this clear causes inputs to break to left in ie5.x mac, commented out */
   padding: 10px 10px 20px 10px;        /* padding in fieldset support spotty in IE */
   margin: 0;
-  background:#ECF2FA none repeat scroll 0% 0%;
-  border:1px solid #C6D9E9;
+/*  background:#ECF2FA none repeat scroll 0% 0%;*/
+/*  border:1px solid #C6D9E9;*/
+  
+  background:#FFE2BF none repeat scroll 0% 0%;
+  border:1px solid #FFC680;
 }
 
 form#basic-form fieldset legend {
@@ -50,6 +53,10 @@ form#basic-form input, form#basic-form textarea {
 form#basic-form input#reset {
 	margin-left:0px; /* set margin-left back to zero on reset button (set above) */
 }
+form#basic-form input.checkbox {
+	margin-right:1em; 
+}
+
 
 textarea { overflow: auto; }
 
@@ -69,7 +76,13 @@ form#basic-form div.submit_buttons_div
 {
 	margin-left: 165px;
 }
-
+form#basic-form span.error
+{
+	display: block;
+	margin-left: 165px;
+	margin-bottom: 0.5em;
+	color: red;
+}
 
 
 /* 

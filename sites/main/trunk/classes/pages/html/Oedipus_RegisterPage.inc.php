@@ -8,7 +8,7 @@ extends
 	public static function
 		get_fields()
 	{
-		return explode(' ', 'email first_name last_name password password_confirmation check_read_terms check_age check_newsletter');
+		return explode(' ', 'email first_name last_name password password_confirmation check_newsletter');
 	}
 	
 	public static function
@@ -70,7 +70,7 @@ extends
 		content()
 	{
 ?>
-<h2>Join <em>play4ateam</em></h2>
+<h2>Join <em>Oedipus: Decision Maker</em></h2>
 <?php
 //echo DBPages_SPoE
 //        ::get_filtered_page_section(
@@ -79,12 +79,12 @@ extends
 //        );
 ?>
 	<form
+		id="basic-form"
 		name="frmRegistration"
 		method="post"
 		action="/haddock/public-html/public-html/index.php?oo-page=1&page-class=Oedipus_RegistrationValidator&attempt_submit=1"
 	>
 
-	<p class="form-title" id="user-add">Join <em>Oedipus: Decision Maker</em></legend>
 <fieldset>
 	<legend class="txtFormLegend">Your Details</legend>
 		<!-- Email address -->
@@ -173,62 +173,13 @@ extends
 </ol>
 </fieldset>
 <fieldset>
-	<legend class="txtFormLegend">Terms of Use</legend>
+	<legend class="txtFormLegend">Extras</legend>
 	<ol>
-		<li>
-			<!-- Read terms checkbox -->
-			<input
-				type="checkbox"
-				id="check_read_terms"
-				name="check_read_terms" 
-				class="left" 
-				onblur="validate(this.checked, this.id)"
-				onclick="validate(this.checked, this.id)" 
-<?php
-	if ($_SESSION['values']['check_read_terms'] == 'on') {
-        echo 'checked="checked"';
-	}
-?>
-			/>I have read the
-				<a
-					href="/files/Play4ateam_Website_Terms_and_Conditions.pdf"
-					target="_blank"
-				>Terms of Use</a>
-				and the
-				<a
-					href="/files/Play4ateam_Privacy_policy.pdf"
-					target="_blank"
-				>Privacy Policy</a>
-			<span
-				id="check_read_terms_failed"
-				class="<?php echo $_SESSION['errors']['check_read_terms']['class']; ?>"
-			><?php echo $_SESSION['errors']['check_read_terms']['message']; ?></span>
-			
-	</li>
-	<li>
-			<!-- Age checkbox -->
-			<input
-				type="checkbox"
-				id="check_age"
-				name="check_age" 
-				class="left" 
-				onblur="validate(this.checked, this.id)"
-				onclick="validate(this.checked, this.id)" 
-<?php
-	if ($_SESSION['values']['check_age'] == 'on') {
-        echo 'checked="checked"';
-	}
-?>
-			/>I am aged 16 years or older.
-			<span
-				id="check_age_failed"
-				class="<?php echo $_SESSION['errors']['check_age']['class']; ?>"
-			><?php echo $_SESSION['errors']['check_age']['message']; ?></span>
-		</li>
 		<li>
 			<!-- Newsletter checkbox -->
 			<input
 				type="checkbox"
+				class="checkbox"
 				id="check_newsletter"
 				name="check_newsletter" 
 				class="left" 
@@ -239,21 +190,23 @@ extends
         echo 'checked="checked"';
 	}
 ?>
-			/>I would like to receive a monthly newsletter from play4ateam.com with the latest offers, advice and sporting features.
+			/>I would like to join the Mailing List.
 			<span
 				id="check_newsletter_failed"
 				class="<?php echo $_SESSION['errors']['check_newsletter']['class']; ?>"
 			><?php echo $_SESSION['errors']['check_newsletter']['message']; ?></span>
 		</li>
 	</ol>
+</fieldset>
 	<!-- End of form -->
+<div class="submit_buttons_div">
 	<input
 		type="submit"
 		name="submitbutton"
 		value="Register" 
 		class="left button"
 	/>
-</fieldset>
+</div>
 	<p class="txtSmall left">Note: All fields are required.</p>
 </form>
 <?php
