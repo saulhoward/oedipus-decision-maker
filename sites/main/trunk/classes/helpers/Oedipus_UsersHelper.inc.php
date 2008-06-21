@@ -104,6 +104,41 @@ SQL;
 		}
 	}
 
+	public function
+		is_user_id_allowed_to_view_drama($user_id, Oedipus_Drama $drama)
+	{
+		$user = NULL;
+		$drama_id = $drama->get_id();
+
+		if (InputValidation_NumberValidator::validate_database_id($user_id)) {
+			$dbh = DB::m();
+
+			$user_id = mysql_real_escape_string($user_id, $dbh);
+
+			$query = <<<SQL
+SELECT
+	count(user_id) AS count
+FROM
+	oedipus_users_allowed_to_view_drama_links
+WHERE
+	oedipus_users_allowed_to_view_drama_links.user_id = $user_id
+	AND
+	oedipus_users_allowed_to_view_drama_links.drama_id = $drama_id
+SQL;
+
+			$result = mysql_query($query, $dbh);
+
+			if ($row = mysql_fetch_assoc($result)) {
+
+				if ($row['count'] == 1)
+				{
+					return TRUE;
+				}
+				return FALSE;
+			}
+		}
+	}
+
 	/*
 	 * ----------------------------------------
 	 * Functions to do with URLs

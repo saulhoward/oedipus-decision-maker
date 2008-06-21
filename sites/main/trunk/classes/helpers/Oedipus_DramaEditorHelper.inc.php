@@ -32,7 +32,7 @@ SQL;
 		$drama_id = mysql_insert_id($dbh);
 
 
-		$drama = new Oedipus_Drama($drama_id, $drama_name, $drama_unique_name);
+		$drama = new Oedipus_Drama($drama_id, $drama_name, $drama_unique_name, 'private');
 		//                print_r($drama);exit;
 		return $drama;
 	}
@@ -132,7 +132,7 @@ SQL;
 		$row = mysql_fetch_array($result);
 		//                                print_r($row);exit;
 
-		$drama = new Oedipus_Drama($row['id'], $row['name'], $row['unique_name'], $row['added']);
+		$drama = new Oedipus_Drama($row['id'], $row['name'], $row['unique_name'], $row['added'], $row['status']);
 
 		// Add the tables to the Drama
 
@@ -183,7 +183,7 @@ SQL;
 		$row = mysql_fetch_array($result);
 		//                                print_r($row);exit;
 
-		$drama = new Oedipus_Drama($row['id'], $row['name'], $row['unique_name'], $row['added']);
+		$drama = new Oedipus_Drama($row['id'], $row['name'], $row['unique_name'], $row['added'], $row['status']);
 
 		// Add the tables to the Drama
 		$drama_id = $drama->get_id();
@@ -235,7 +235,13 @@ SQL;
 		while($row = mysql_fetch_array($result))
 		{
 			//                print_r($row);exit;
-			$dramas[] = new Oedipus_Drama($row['id'], $row['name'], $row['unique_name'], $row['added']);
+			$dramas[] = new Oedipus_Drama(
+				$row['id'],
+				$row['name'],
+				$row['unique_name'],
+			       	$row['added'],
+				$row['status']
+			);
 		}
 
 		return $dramas;
@@ -260,7 +266,13 @@ SQL;
 		while($row = mysql_fetch_array($result))
 		{
 			//                print_r($row);exit;
-			$dramas[] = new Oedipus_Drama($row['id'], $row['name'], $row['unique_name'], $row['added']);
+			$dramas[] = new Oedipus_Drama(
+				$row['id'],
+				$row['name'],
+				$row['unique_name'],
+				$row['added'],
+				$row['status']
+			);
 		}
 
 		return $dramas;

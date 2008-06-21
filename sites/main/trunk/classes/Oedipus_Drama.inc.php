@@ -16,19 +16,22 @@ class
 	private $added;
 	private $unique_name;
 	private $tables;
+	private $status;
 
 	public function
 		__construct(
 			$id,
 			$name,
 			$unique_name,
-			$added
+			$added,
+			$status
 		)
 	{
 		$this->id = $id;
 		$this->name = $name;
 		$this->added = $added;
 		$this->unique_name = $unique_name;
+		$this->status = $status;
 		
 		$this->tables = array();
 	}
@@ -98,9 +101,25 @@ class
 	}
 
 	public function
+		get_status()
+	{
+		return $this->status;
+	}
+
+	public function
 		get_unique_name()
 	{
 		return $this->unique_name;
+	}
+
+	public function
+		is_public()
+	{
+		if ($this->status == 'public')
+		{
+			return TRUE;
+		}
+		return FALSE;
 	}
 }
 ?>

@@ -53,13 +53,18 @@ Oedipus_RestrictedPage
 		{
 			/*
 			 * Find out if currently logged in user created the drama
+			 * Or has permission to view the dram
+			 * Or the drama is public
 			 */
 			$user_id = Oedipus_LogInHelper::get_current_user_id();
 			//                $user = Oedipus_UsersHelper::get_user($user_id);
 
 			if (
-				Oedipus_UsersHelper
-				::is_user_id_drama_creator($user_id, $this->drama)
+				($this->drama->is_public())
+				||
+				(Oedipus_UsersHelper::is_user_id_allowed_to_view_drama($user_id, $this->drama))
+				||
+				(Oedipus_UsersHelper::is_user_id_drama_creator($user_id, $this->drama))
 			) 
 			{
 				$drama_page_div =
