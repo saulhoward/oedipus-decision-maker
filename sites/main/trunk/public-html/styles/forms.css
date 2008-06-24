@@ -11,7 +11,6 @@
  * The Basic-Form
  */
 form#basic-form {  /* set width in form, not fieldset (still takes up more room w/ fieldset width */
-  font:100% verdana,arial,sans-serif;
   margin: 0 auto;
   padding: 0;
   min-width: 30em;

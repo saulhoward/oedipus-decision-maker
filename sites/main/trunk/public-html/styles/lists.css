@@ -89,7 +89,6 @@ ul.page-actions li
 ul.page-actions li a
 {
 	font-weight: normal;
-	font-size:1em;
 	text-decoration: none;
 	background-color: #FFFF99;
 	padding: 0 0 3px 30px;
@@ -97,26 +96,26 @@ ul.page-actions li a
 }
 ul.page-actions li a:hover
 {
-	text-decoration: underline;
+/*        text-decoration: underline;*/
 }
 ul.page-actions li#back-to-drama a
 {
-	color: #03C000;
+/*        color: #03C000;*/
 	background: transparent url(/images/icons/24x24/document-save.png) top left no-repeat;
 }
 ul.page-actions li#edit-drama a
 {
-	color: #E9292E;
+/*        color: #E9292E;*/
 	background: transparent url(/images/icons/24x24/document-open.png) top left no-repeat;
 }
 ul.page-actions li#view-drama a
 {
-	color: #2D36C2;
+/*        color: #2D36C2;*/
 	background: transparent url(/images/icons/24x24/drama.png) top left no-repeat;
 }
 ul.page-actions li#share-drama a
 {
-	color: #2D36C2;
+/*        color: #2D36C2;*/
 	background: transparent url(/images/icons/24x24/share-icon.png) top left no-repeat;
 }
 
@@ -136,7 +135,6 @@ div.my-dramas-list
 div.my-dramas-list h3
 {
 	text-align: left;
-	font-size: 1.1em;
 	padding: 0 0 0 1em;
 }
 ul.my-dramas
@@ -201,7 +199,6 @@ div.table_thumbnail_list h3
 /*        font-family:Georgia,"Times New Roman",Times,serif;*/
 	text-align: left;
 /*        font-weight: 900;*/
-	font-size: 1.1em;
 	padding: 1em 0 0 1em;
 }
 div.table_thumbnail_list ul
@@ -265,22 +262,21 @@ div.oedipus-table ul.table-options li
 div.oedipus-table ul.table-options li a
 {
 	font-weight: normal;
-	font-size:1em;
 	text-decoration: none;
 	padding: 0 0 3px 24px;
 	height: 16px;
 }
 div.oedipus-table ul.table-options li a:hover
 {
-	text-decoration: underline;
+/*        text-decoration: underline;*/
 }
 div.oedipus-table ul.table-options li#png-image-table a
 {
-	color: #2D36C2;
+/*        color: #2D36C2;*/
 	background: transparent url(/images/icons/16x16/image.png) top left no-repeat;
 }
 div.oedipus-table ul.table-options li#edit-table a
 {
-	color: #E9292E;
+/*        color: #E9292E;*/
 	background: transparent url(/images/icons/16x16/document-open.png) top left no-repeat;
 }

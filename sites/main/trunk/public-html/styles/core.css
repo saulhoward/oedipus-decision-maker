@@ -5,14 +5,14 @@
 body
 {
 	/*        font-family: Lucida Sans Unicode, Lucida Grande, sans-serif;*/
-	font-family:"Lucida Grande","Lucida Sans Unicode",Tahoma,Verdana,sans-serif;
-
+/*        font-family:"Lucida Grande","Lucida Sans Unicode",Tahoma,Verdana,sans-serif;*/
+/*        font-family: 'Gill Sans','Gill Sans MT',Optima,'BPG Unicode Standard','Bitstream Vera Sans',Verdana,sans-serif;*/
+	font-family: 'Helvetica', 'BPG Unicode Standard','Corbel', 'Bitstream Vera Sans',Verdana,sans-serif;
 	color: #333;
 }
 a
 {
 	color:#448ABD;
-	font-weight: bold;
 	text-decoration: none;
 }
 a:visited
@@ -24,6 +24,15 @@ a:hover
 /*        text-decoration: underline;*/
 	color: #d54e21
 }
+
+/* Font-Sizes */
+body { font-size:100%; }
+h1 { font-size:2.25em;}
+h2 { font-size:1.4em;}
+h3 { font-size:1.2em;}
+h4 { font-size:1.1em;}
+p  { font-size:1em;}
+
 #header
 {
 	height: 70px;
@@ -47,7 +56,6 @@ a:hover
 {
 	font-family:Georgia,"Times New Roman",Times,serif;
 	text-align: center;
-	font-size: 1.6em;
 /*        font-weight: 900;*/
 	color: #333;
 	margin: 0.5em 0 1em 0;
@@ -171,6 +179,10 @@ div#footer p
 	margin: 0 1em;
 }
 
+div#footer p a
+{
+	font-weight: bold;
+}
 /*
  * Notes Div in Right Column
  */
@@ -196,7 +208,6 @@ div.notes h3
 {
 	font-family:Georgia,"Times New Roman",Times,serif;
 	text-align: center;
-	font-size: 1.3em;
 	margin: 0 0 1em 0;
 }
 div.notes label
