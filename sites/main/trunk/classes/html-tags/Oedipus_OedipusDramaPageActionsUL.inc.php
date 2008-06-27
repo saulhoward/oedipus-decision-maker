@@ -15,17 +15,20 @@ Oedipus_OedipusPageActionsUL
 	private $drama;
 
 	public function
-		__construct(Oedipus_Drama $drama)
+		__construct(Oedipus_Drama $drama, $edit_privilege)
 	{
 		parent::__construct();
 
 		$this->drama = $drama;
 
-		// Link to edit the table
-		$edit_this_drama_li = $this->get_edit_this_drama_li();
-		$this->append_tag_to_content($edit_this_drama_li);
+		if ($edit_privilege)
+		{
+			// Link to edit the drama
+			$edit_this_drama_li = $this->get_edit_this_drama_li();
+			$this->append_tag_to_content($edit_this_drama_li);
+		}
 
-		// Link to edit the table
+		// Link to share drama
 		$share_drama_li = $this->get_share_drama_li();
 		$this->append_tag_to_content($share_drama_li);
 	}

@@ -13,6 +13,7 @@ extends
 Oedipus_RestrictedPage
 {
 	private $drama;
+	private $edit_privilege;
 
 	public function
 		content()
@@ -57,20 +58,29 @@ Oedipus_RestrictedPage
 			 * Or the drama is public
 			 */
 			$user_id = Oedipus_LogInHelper::get_current_user_id();
+			$this->edit_privilege = FALSE;
+
 			//                $user = Oedipus_UsersHelper::get_user($user_id);
 
 			if (
 				($this->drama->is_public())
 				||
 				(Oedipus_UsersHelper::is_user_id_allowed_to_view_drama($user_id, $this->drama))
-				||
-				(Oedipus_UsersHelper::is_user_id_drama_creator($user_id, $this->drama))
 			) 
 			{
 				$drama_page_div =
 					$this->get_oedipus_drama_page_div();
 				echo $drama_page_div->get_as_string();
 			}
+			elseif (Oedipus_UsersHelper::is_user_id_drama_creator($user_id, $this->drama)) 
+			{
+				$this->edit_privilege = TRUE;
+
+				$drama_page_div =
+					$this->get_oedipus_drama_page_div();
+				echo $drama_page_div->get_as_string();
+			}
+	
 			else
 			{
 				// DRAMA CREATOR ID NOT SAME AS LOGGED IN USER
@@ -224,7 +234,7 @@ Oedipus_RestrictedPage
 	private function
 		get_oedipus_drama_page_actions()
 	{
-		return new Oedipus_OedipusDramaPageActionsUL($this->drama);
+		return new Oedipus_OedipusDramaPageActionsUL($this->drama, $this->edit_privilege);
 	}
 
 	private function
