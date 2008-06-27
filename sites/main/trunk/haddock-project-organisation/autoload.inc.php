@@ -2041,6 +2041,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_DramasHelper.inc.php';
 			break;
 
+		case('Oedipus_EditDramaStatusHTMLForm'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditDramaStatusHTMLForm.inc.php';
+			break;
+
 		case('Oedipus_EditNoteHTMLForm'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditNoteHTMLForm.inc.php';
 			break;

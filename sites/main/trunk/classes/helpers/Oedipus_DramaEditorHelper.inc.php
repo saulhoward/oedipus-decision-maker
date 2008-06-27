@@ -426,6 +426,33 @@ SQL;
 		return $table;
 	}
 
+	public function
+		set_drama_status($drama_id, $status)
+	{
+		$drama_status_is_valid = TRUE; //Implement this!
+
+		if ($drama_status_is_valid) 
+		{
+			$dbh = DB::m();
+
+			$sql = <<<SQL
+UPDATE
+	oedipus_dramas
+SET
+	status = '$status'
+WHERE
+	id = $drama_id
+SQL;
+
+			//                        print_r($sql);exit;
+			mysql_query($sql, $dbh);
+		} 
+		else 
+		{
+			//                        throw new Database_CRUDException("'$href' is not a validate HREF!");
+		}
+	}
+
 	// ------------
 	// URLS
 	// ------------
@@ -456,6 +483,20 @@ SQL;
 			return PublicHTML_URLHelper
 				::get_oo_page_url('Oedipus_DramaEditorPage');
 		}
+	}
+
+	public static function
+		get_share_drama_url(
+			$drama_id
+		)
+	{
+		return PublicHTML_URLHelper
+			::get_oo_page_url(
+				'Oedipus_ShareDramaPage',
+				array(
+					'drama_id' => $drama_id
+				)
+			);
 	}
 }
 ?>

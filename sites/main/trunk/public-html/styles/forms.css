@@ -42,6 +42,11 @@ form#basic-form label {
 	margin: 5px 0 0; /* set top margin same as form input - textarea etc. elements */
 	text-align: right; 
 }
+form#basic-form label.radio { 
+	display: inline;
+	float: none;
+	line-height: 1.5;
+}
 form#basic-form input, form#basic-form textarea {
 	/* display: inline; inline display must not be set or will hide submit buttons in IE 5x mac */
 	width:auto;      /* set width of form elements to auto-size, otherwise watch for wrap on resize */

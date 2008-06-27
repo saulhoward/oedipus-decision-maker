@@ -28,13 +28,9 @@ Oedipus_RestrictedPage
 				$this->drama =
 					Oedipus_DramaEditorHelper
 					::get_drama_by_unique_name($_GET['drama_unique_name']);
-
-				$drama_page_div =
-					$this->get_oedipus_drama_page_div();
 			}
 			catch (Exception $e)
 			{
-
 			}
 		}
 		elseif (isset($_GET['drama_id']))
@@ -46,7 +42,6 @@ Oedipus_RestrictedPage
 			}
 			catch (Exception $e)
 			{
-
 			}
 		}
 
@@ -61,8 +56,15 @@ Oedipus_RestrictedPage
 			$this->edit_privilege = FALSE;
 
 			//                $user = Oedipus_UsersHelper::get_user($user_id);
+			if (Oedipus_UsersHelper::is_user_id_drama_creator($user_id, $this->drama)) 
+			{
+				$this->edit_privilege = TRUE;
 
-			if (
+				$drama_page_div =
+					$this->get_oedipus_drama_page_div();
+				echo $drama_page_div->get_as_string();
+			}
+			elseif (
 				($this->drama->is_public())
 				||
 				(Oedipus_UsersHelper::is_user_id_allowed_to_view_drama($user_id, $this->drama))
@@ -72,15 +74,6 @@ Oedipus_RestrictedPage
 					$this->get_oedipus_drama_page_div();
 				echo $drama_page_div->get_as_string();
 			}
-			elseif (Oedipus_UsersHelper::is_user_id_drama_creator($user_id, $this->drama)) 
-			{
-				$this->edit_privilege = TRUE;
-
-				$drama_page_div =
-					$this->get_oedipus_drama_page_div();
-				echo $drama_page_div->get_as_string();
-			}
-	
 			else
 			{
 				// DRAMA CREATOR ID NOT SAME AS LOGGED IN USER

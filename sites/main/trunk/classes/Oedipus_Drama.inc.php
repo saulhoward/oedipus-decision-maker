@@ -121,5 +121,27 @@ class
 		}
 		return FALSE;
 	}
+
+	public function
+		get_possible_status_values()
+	{
+		return $this->GetEnumValues('oedipus_dramas', 'status');
+	}
+
+	private function GetEnumValues($Table,$Column)
+	{
+		$dbSQL = "SHOW COLUMNS FROM ".$Table." LIKE '".$Column."'";
+		$dbQuery = mysql_query($dbSQL);
+
+		$dbRow = mysql_fetch_assoc($dbQuery);
+		$EnumValues = $dbRow["Type"];
+
+		$EnumValues = substr($EnumValues, 6, strlen($EnumValues)-8);
+		$EnumValues = str_replace("','",",",$EnumValues);
+
+		return explode(",",$EnumValues);
+	}
+
+
 }
 ?>

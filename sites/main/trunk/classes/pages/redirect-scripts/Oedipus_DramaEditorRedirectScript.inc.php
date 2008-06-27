@@ -46,6 +46,18 @@ extends
 
 			$return_to_url = Oedipus_DramaEditorHelper::get_drama_editor_url($drama);
 		} 
+		elseif (
+			isset($_POST['edit_drama_status'])
+			&&
+			isset($_POST['status'])
+			&&
+			isset($_POST['drama_id'])
+			)
+		{
+			Oedipus_DramaEditorHelper::set_drama_status($_POST['drama_id'], $_POST['status']);
+			$return_to_url = Oedipus_DramaEditorHelper::get_share_drama_url($_POST['drama_id']);
+		}
+	
 		$this->set_return_to_url($return_to_url);
 	}
 

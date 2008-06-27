@@ -13,6 +13,7 @@ extends
 Oedipus_HTMLPage
 {
 	private $drama;
+	private $edit_privilege;
 
 	public function
 		content()
@@ -24,9 +25,6 @@ Oedipus_HTMLPage
 				$this->drama =
 					Oedipus_DramaEditorHelper
 					::get_drama_by_unique_name($_GET['drama_unique_name']);
-
-				$drama_page_div =
-					$this->get_oedipus_drama_page_div();
 			}
 			catch (Exception $e)
 			{
@@ -41,23 +39,54 @@ Oedipus_HTMLPage
 				$this->drama =
 					Oedipus_DramaEditorHelper::get_drama_by_id($_GET['drama_id']);
 
-				$drama_page_div =
-					$this->get_oedipus_drama_page_div();
-
 			}
 			catch (Exception $e)
 			{
 
 			}
 		}
+		if (isset($this->drama))
+		{
+			/*
+			 * Find out if currently logged in user created the drama
+			 * Or has permission to view the dram
+			 * Or the drama is public
+			 */
+			$user_id = Oedipus_LogInHelper::get_current_user_id();
+			$this->edit_privilege = FALSE;
+
+			//                $user = Oedipus_UsersHelper::get_user($user_id);
+			if (Oedipus_UsersHelper::is_user_id_drama_creator($user_id, $this->drama)) 
+			{
+				$this->edit_privilege = TRUE;
+
+				$drama_page_div =
+					$this->get_oedipus_drama_page_div();
+				echo $drama_page_div->get_as_string();
+			}
+			elseif (
+				($this->drama->is_public())
+				||
+				(Oedipus_UsersHelper::is_user_id_allowed_to_view_drama($user_id, $this->drama))
+			) 
+			{
+				$drama_page_div =
+					$this->get_oedipus_drama_page_div();
+				echo $drama_page_div->get_as_string();
+			}
+			else
+			{
+				// DRAMA CREATOR ID NOT SAME AS LOGGED IN USER
+				DBPages_PageRenderer::render_page_section('drama', 'title');
+				DBPages_PageRenderer::render_page_section('drama', 'drama-unavailable');
+			}
+		}
 		else
 		{
 			// NO DRAMA SET
-			DBPages_PageRenderer::render_page_section('share-drama', 'title');
-			DBPages_PageRenderer::render_page_section('share-drama', 'no-drama-set');
+			DBPages_PageRenderer::render_page_section('drama', 'title');
+			DBPages_PageRenderer::render_page_section('drama', 'no-drama-set');
 		}
-
-		echo $drama_page_div->get_as_string();
 	}
 
 	private function
@@ -71,14 +100,13 @@ Oedipus_HTMLPage
 
 		if (isset($this->drama))
 		{
-			echo '<h2><span class="share-text">Share</span>&nbsp;' 
-				. $this->drama->get_name() 
-				. '</h2>';
+			$drama_page_div->append_tag_to_content(
+				$this->get_drama_heading()
+			);
 
 			$drama_page_div->append_tag_to_content($this->get_oedipus_share_drama_div());
 		}
-
-		return $drama_page_div;
+			return $drama_page_div;
 	}
 
 	private function
@@ -91,13 +119,44 @@ Oedipus_HTMLPage
 		 * RSS, Facebook
 		 */
 
+		/*
+		 * Edit Share Settings
+		 */
+		if ($this->edit_privilege)
+		{
+			$drama_div->append_tag_to_content($this->get_edit_drama_status_form());
+		}
+
+
 		return $drama_div;
+	}
+
+	/*
+	 * Functions to call in the html-tags
+	 * classes for the page elements
+	 *
+	 */
+	private function
+		get_drama_heading()
+	{
+		$heading = new HTMLTags_Heading(2);
+		$span = new HTMLTags_Span('Share:&nbsp;');
+		$span->set_attribute_str('class', 'share-text');
+		$heading->append_tag_to_content($span);
+		$heading->append_str_to_content($this->drama->get_name());
+		return $heading;
 	}
 
 	private function
 		get_oedipus_drama_page_actions()
 	{
 		return new Oedipus_OedipusShareDramaPageActionsUL($this->drama);
+	}
+
+	private function
+		get_edit_drama_status_form()
+	{
+		return new Oedipus_EditDramaStatusHTMLForm($this->drama);
 	}
 }
 ?>
