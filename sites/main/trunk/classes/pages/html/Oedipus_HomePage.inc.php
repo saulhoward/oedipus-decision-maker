@@ -8,9 +8,9 @@
  */
 
 class
-Oedipus_HomePage
+	Oedipus_HomePage
 extends
-Oedipus_HTMLPage
+	Oedipus_HTMLPage
 {
 	public function
 		content()
@@ -60,21 +60,43 @@ Oedipus_HTMLPage
 
 		return $table_div;
 	}
-
+	
+	/**
+	 * Shouldn't this be moved to a helper class?
+	 * Wouldn't it be useful elsewhere?
+	 *
+	 * 
+	 * @param Oedipus_Table $table The table that we want to display.
+	 * @return HTMLTags_IMG The html tag object that will be rendered to display the image.
+	 */
 	private function
 		get_oedipus_png_table_img(Oedipus_Table $table)
 	{
+		/*
+		 * Are these global values?
+		 * Should they be set in a file somewhere and returned
+		 * from a helper function?
+		 */
 		$max_width = 250;
 		$max_height = 185;
+		
+		/*
+		 * Should this be moved to its own function?
+		 * e.g.
+		 * 	Oedipus_TableImagesHelper::get_table_thumbnail_img_url(...)
+		 */
 		$url = new HTMLTags_URL();
 		$url->set_file(
 			'/tables/images/thumbnails/option-table-'
 			. $table->get_id()
 			. '_' . $max_width . 'x' . $max_height . '.png'
 		);
+		
 		$img = new HTMLTags_IMG();
+		
 		$img->set_src($url);
 		$img->set_alt($table->get_name());
+		
 		return $img;
 	}
 
@@ -126,7 +148,7 @@ Oedipus_HTMLPage
 		foreach ($tables as $table)
 		{
 			$li = new HTMLTags_LI();
-
+			
 			$a = $this->get_oedipus_png_table_img_a($table);
 			$li->append_tag_to_content($a);
 			$ul->append_tag_to_content($li);
@@ -135,19 +157,28 @@ Oedipus_HTMLPage
 		$div->append_tag_to_content($ul);
 		return $div;
 	}
-
+	
+	/**
+	 * Should the content of this function be refactored to a static
+	 * function in a helper class?
+	 * 
+	 * @param Oedipus_Table $table The table that we want to display.
+	 * @return HTMLTags_A A link to the page for the drama of $table.
+	 */
 	private function
-		get_oedipus_png_table_img_a(Oedipus_Table $table)
+		get_oedipus_png_table_img_a(
+			Oedipus_Table $table
+		)
 	{
 		$url = Oedipus_TableCreationHelper::get_drama_url_for_table($table);
-
+		
 		$a = new HTMLTags_A();
 		$a->set_href($url);
 		$a->set_attribute_str('title', 'View this Drama');
-
+		
 		$img = $this->get_oedipus_png_table_img($table);
 		$a->append_tag_to_content($img);
-
+		
 		return $a;
 	}
 
@@ -173,7 +204,5 @@ Oedipus_HTMLPage
 
 		return $welcome_div;
 	}
-
-
 }
 ?>
