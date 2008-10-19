@@ -11,6 +11,7 @@ class
 Oedipus_DramaPage
 extends
 Oedipus_RestrictedPage
+//Oedipus_HTMLPage
 {
 	private $drama;
 	private $edit_privilege;
