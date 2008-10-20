@@ -2,7 +2,7 @@
 /**
  * __autoload .INC file
  *
- * Last Modified: 2008-07-06
+ * Last Modified: 2008-10-20
  */
 
 function __autoload($class_name)
@@ -21,6 +21,18 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/admin/classes/Admin_ConfigManager.inc.php';
 			break;
 
+		case('Admin_DeleteAllUsersCLIScript'): 
+			require_once PROJECT_ROOT . '/haddock/admin/classes/cli-scripts/Admin_DeleteAllUsersCLIScript.inc.php';
+			break;
+
+		case('Admin_DeleteUserCLIScript'): 
+			require_once PROJECT_ROOT . '/haddock/admin/classes/cli-scripts/Admin_DeleteUserCLIScript.inc.php';
+			break;
+
+		case('Admin_EditUserCLIScript'): 
+			require_once PROJECT_ROOT . '/haddock/admin/classes/cli-scripts/Admin_EditUserCLIScript.inc.php';
+			break;
+
 		case('Admin_HTMLPage'): 
 			require_once PROJECT_ROOT . '/haddock/admin/classes/pages/Admin_HTMLPage.inc.php';
 			break;
@@ -31,6 +43,10 @@ function __autoload($class_name)
 
 		case('Admin_IncludesDirectory'): 
 			require_once PROJECT_ROOT . '/haddock/admin/classes/Admin_IncludesDirectory.inc.php';
+			break;
+
+		case('Admin_ListUsersCLIScript'): 
+			require_once PROJECT_ROOT . '/haddock/admin/classes/cli-scripts/Admin_ListUsersCLIScript.inc.php';
 			break;
 
 		case('Admin_LogInHelper'): 
@@ -69,6 +85,14 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/admin/classes/Admin_PagesDirectory.inc.php';
 			break;
 
+		case('Admin_ResetAllUsersPasswordsCLIScript'): 
+			require_once PROJECT_ROOT . '/haddock/admin/classes/cli-scripts/Admin_ResetAllUsersPasswordsCLIScript.inc.php';
+			break;
+
+		case('Admin_ResetUserPasswordCLIScript'): 
+			require_once PROJECT_ROOT . '/haddock/admin/classes/cli-scripts/Admin_ResetUserPasswordCLIScript.inc.php';
+			break;
+
 		case('Admin_RestrictedHTMLPage'): 
 			require_once PROJECT_ROOT . '/haddock/admin/classes/pages/Admin_RestrictedHTMLPage.inc.php';
 			break;
@@ -77,8 +101,24 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/admin/classes/pages/Admin_RestrictedRedirectScript.inc.php';
 			break;
 
+		case('Admin_ShowUserCLIScript'): 
+			require_once PROJECT_ROOT . '/haddock/admin/classes/cli-scripts/Admin_ShowUserCLIScript.inc.php';
+			break;
+
 		case('Admin_SiteMapUL'): 
 			require_once PROJECT_ROOT . '/haddock/admin/classes/html-tags/Admin_SiteMapUL.inc.php';
+			break;
+
+		case('Admin_StartPage'): 
+			require_once PROJECT_ROOT . '/haddock/admin/classes/pages/Admin_StartPage.inc.php';
+			break;
+
+		case('Admin_StartPageWidget'): 
+			require_once PROJECT_ROOT . '/haddock/admin/classes/Admin_StartPageWidget.inc.php';
+			break;
+
+		case('Admin_UserEntry'): 
+			require_once PROJECT_ROOT . '/haddock/admin/classes/persistence/entries/Admin_UserEntry.inc.php';
 			break;
 
 		case('Admin_UserRow'): 
@@ -87,6 +127,10 @@ function __autoload($class_name)
 
 		case('Admin_UserRowRenderer'): 
 			require_once PROJECT_ROOT . '/haddock/admin/classes/database/renderers/row-renderers/Admin_UserRowRenderer.inc.php';
+			break;
+
+		case('Admin_UsersHelper'): 
+			require_once PROJECT_ROOT . '/haddock/admin/classes/helpers/Admin_UsersHelper.inc.php';
 			break;
 
 		case('Admin_UsersTable'): 
@@ -475,6 +519,10 @@ function __autoload($class_name)
 
 		case('Database_EntityNameValidator'): 
 			require_once PROJECT_ROOT . '/haddock/database/classes/input-validation/Database_EntityNameValidator.inc.php';
+			break;
+
+		case('Database_Entry'): 
+			require_once PROJECT_ROOT . '/haddock/database/classes/persistence/entries/Database_Entry.inc.php';
 			break;
 
 		case('Database_EnumField'): 
@@ -1085,6 +1133,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/file-system/classes/unit-tests/FileSystem_DirectoryHelperTests.inc.php';
 			break;
 
+		case('FileSystem_ExistingDirectoryRelativeToProjectRootCLIScript'): 
+			require_once PROJECT_ROOT . '/haddock/file-system/classes/cli-scripts/FileSystem_ExistingDirectoryRelativeToProjectRootCLIScript.inc.php';
+			break;
+
 		case('FileSystem_ExistingDirectoryRelativeToProjectRootValidator'): 
 			require_once PROJECT_ROOT . '/haddock/file-system/classes/input-validation/FileSystem_ExistingDirectoryRelativeToProjectRootValidator.inc.php';
 			break;
@@ -1393,6 +1445,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/haddock-project-organisation/classes/file-system/files/HaddockProjectOrganisation_ProjectSpecificConfigFile.inc.php';
 			break;
 
+		case('HaddockProjectOrganisation_ProjectSpecificDataHelper'): 
+			require_once PROJECT_ROOT . '/haddock/haddock-project-organisation/classes/helpers/HaddockProjectOrganisation_ProjectSpecificDataHelper.inc.php';
+			break;
+
 		case('HaddockProjectOrganisation_ProjectSpecificDirectory'): 
 			require_once PROJECT_ROOT . '/haddock/haddock-project-organisation/classes/file-system/directories/HaddockProjectOrganisation_ProjectSpecificDirectory.inc.php';
 			break;
@@ -1435,6 +1491,10 @@ function __autoload($class_name)
 
 		case('HaddockProjectOrganisation_StandardModuleSubDirectory'): 
 			require_once PROJECT_ROOT . '/haddock/haddock-project-organisation/classes/file-system/directories/HaddockProjectOrganisation_StandardModuleSubDirectory.inc.php';
+			break;
+
+		case('HaddockProjectOrganisation_StartPageWidget'): 
+			require_once PROJECT_ROOT . '/haddock/haddock-project-organisation/classes/HaddockProjectOrganisation_StartPageWidget.inc.php';
 			break;
 
 		case('HaddockProjectOrganisation_WWWIncludesDirectory'): 
@@ -1821,6 +1881,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/plug-ins/mailing-list/classes/exceptions/MailingList_InvalidEmailException.inc.php';
 			break;
 
+		case('MailingList_ListAddressesAdminPage'): 
+			require_once PROJECT_ROOT . '/plug-ins/mailing-list/classes/pages/html/MailingList_ListAddressesAdminPage.inc.php';
+			break;
+
 		case('MailingList_NameAndEmailException'): 
 			require_once PROJECT_ROOT . '/plug-ins/mailing-list/classes/exceptions/MailingList_NameAndEmailException.inc.php';
 			break;
@@ -1869,6 +1933,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/plug-ins/mailing-list/classes/url-factories/MailingList_SignUpURLFactory.inc.php';
 			break;
 
+		case('MailingList_StartPageWidget'): 
+			require_once PROJECT_ROOT . '/plug-ins/mailing-list/classes/MailingList_StartPageWidget.inc.php';
+			break;
+
 		case('ModelViewController_Model'): 
 			require_once PROJECT_ROOT . '/haddock/model-view-controller/classes/ModelViewController_Model.inc.php';
 			break;
@@ -1881,6 +1949,38 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/plug-ins/navigation/classes/renderers/Navigation_1DULRenderer.inc.php';
 			break;
 
+		case('Navigation_AddNodeToProjectSpecific1DTreeCLIScript'): 
+			require_once PROJECT_ROOT . '/plug-ins/navigation/classes/cli-scripts/Navigation_AddNodeToProjectSpecific1DTreeCLIScript.inc.php';
+			break;
+
+		case('Navigation_AddProjectSpecific1DTreeCLIScript'): 
+			require_once PROJECT_ROOT . '/plug-ins/navigation/classes/cli-scripts/Navigation_AddProjectSpecific1DTreeCLIScript.inc.php';
+			break;
+
+		case('Navigation_DeleteAllNodesFromProjectSpecific1DTreeCLIScript'): 
+			require_once PROJECT_ROOT . '/plug-ins/navigation/classes/cli-scripts/Navigation_DeleteAllNodesFromProjectSpecific1DTreeCLIScript.inc.php';
+			break;
+
+		case('Navigation_DeleteAllProjectSpecific1DTreesCLIScript'): 
+			require_once PROJECT_ROOT . '/plug-ins/navigation/classes/cli-scripts/Navigation_DeleteAllProjectSpecific1DTreesCLIScript.inc.php';
+			break;
+
+		case('Navigation_DeleteNodeFromProjectSpecific1DTreeCLIScript'): 
+			require_once PROJECT_ROOT . '/plug-ins/navigation/classes/cli-scripts/Navigation_DeleteNodeFromProjectSpecific1DTreeCLIScript.inc.php';
+			break;
+
+		case('Navigation_DeleteProjectSpecific1DTreeCLIScript'): 
+			require_once PROJECT_ROOT . '/plug-ins/navigation/classes/cli-scripts/Navigation_DeleteProjectSpecific1DTreeCLIScript.inc.php';
+			break;
+
+		case('Navigation_EditNodeOfProjectSpecific1DTreeCLIScript'): 
+			require_once PROJECT_ROOT . '/plug-ins/navigation/classes/cli-scripts/Navigation_EditNodeOfProjectSpecific1DTreeCLIScript.inc.php';
+			break;
+
+		case('Navigation_EditProjectSpecific1DTreeCLIScript'): 
+			require_once PROJECT_ROOT . '/plug-ins/navigation/classes/cli-scripts/Navigation_EditProjectSpecific1DTreeCLIScript.inc.php';
+			break;
+
 		case('Navigation_HTMLListsHelper'): 
 			require_once PROJECT_ROOT . '/plug-ins/navigation/classes/helpers/Navigation_HTMLListsHelper.inc.php';
 			break;
@@ -1891,6 +1991,18 @@ function __autoload($class_name)
 
 		case('Navigation_LinksTree'): 
 			require_once PROJECT_ROOT . '/plug-ins/navigation/classes/Navigation_LinksTree.inc.php';
+			break;
+
+		case('Navigation_ListNodesOfProjectSpecific1DTreeCLIScript'): 
+			require_once PROJECT_ROOT . '/plug-ins/navigation/classes/cli-scripts/Navigation_ListNodesOfProjectSpecific1DTreeCLIScript.inc.php';
+			break;
+
+		case('Navigation_ListProjectSpecific1DTreesCLIScript'): 
+			require_once PROJECT_ROOT . '/plug-ins/navigation/classes/cli-scripts/Navigation_ListProjectSpecific1DTreesCLIScript.inc.php';
+			break;
+
+		case('Navigation_ListsHelper'): 
+			require_once PROJECT_ROOT . '/plug-ins/navigation/classes/helpers/Navigation_ListsHelper.inc.php';
 			break;
 
 		case('Navigation_ManageNodesAdminPage'): 
@@ -1927,6 +2039,10 @@ function __autoload($class_name)
 
 		case('Navigation_NodesHelper'): 
 			require_once PROJECT_ROOT . '/plug-ins/navigation/classes/helpers/Navigation_NodesHelper.inc.php';
+			break;
+
+		case('Navigation_ShiftNodeOfProjectSpecific1DTreeCLIScript'): 
+			require_once PROJECT_ROOT . '/plug-ins/navigation/classes/cli-scripts/Navigation_ShiftNodeOfProjectSpecific1DTreeCLIScript.inc.php';
 			break;
 
 		case('Navigation_SPoE'): 
@@ -1989,6 +2105,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/haddock/object-orientation/classes/input-validation/ObjectOrientation_UpperCamelCaseValidator.inc.php';
 			break;
 
+		case('Oedipus_Act'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Act.inc.php';
+			break;
+
 		case('Oedipus_Actor'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Actor.inc.php';
 			break;
@@ -2007,6 +2127,10 @@ function __autoload($class_name)
 
 		case('Oedipus_AddTableNoteHTMLForm'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_AddTableNoteHTMLForm.inc.php';
+			break;
+
+		case('Oedipus_Character'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Character.inc.php';
 			break;
 
 		case('Oedipus_DBPage'): 
@@ -2063,6 +2187,10 @@ function __autoload($class_name)
 
 		case('Oedipus_ExceptionPage'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_ExceptionPage.inc.php';
+			break;
+
+		case('Oedipus_Frame'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Frame.inc.php';
 			break;
 
 		case('Oedipus_GDPNGImage'): 
@@ -2205,6 +2333,14 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_RestrictedPage.inc.php';
 			break;
 
+		case('Oedipus_RSSHelper'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_RSSHelper.inc.php';
+			break;
+
+		case('Oedipus_Scene'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Scene.inc.php';
+			break;
+
 		case('Oedipus_ShareDramaPage'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_ShareDramaPage.inc.php';
 			break;
@@ -2301,12 +2437,20 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/plug-ins/ordered-tables/classes/managers/OrderedTables_ReorderTableAdminPageManager.inc.php';
 			break;
 
+		case('Persistence_Entry'): 
+			require_once PROJECT_ROOT . '/haddock/persistence/classes/Persistence_Entry.inc.php';
+			break;
+
 		case('PublicHTML_AboutHaddockCMS'): 
 			require_once PROJECT_ROOT . '/haddock/public-html/classes/pages/html/PublicHTML_AboutHaddockCMS.inc.php';
 			break;
 
 		case('PublicHTML_AJAXFormHelper'): 
 			require_once PROJECT_ROOT . '/haddock/public-html/classes/helpers/PublicHTML_AJAXFormHelper.inc.php';
+			break;
+
+		case('PublicHTML_AllowAccessToDirectoryOnTheServerCLIScript'): 
+			require_once PROJECT_ROOT . '/haddock/public-html/classes/cli-scripts/PublicHTML_AllowAccessToDirectoryOnTheServerCLIScript.inc.php';
 			break;
 
 		case('PublicHTML_AssembleHTAccessCLIScript'): 
@@ -2455,6 +2599,38 @@ function __autoload($class_name)
 
 		case('PublicHTML_VHostTests'): 
 			require_once PROJECT_ROOT . '/haddock/public-html/classes/unit-tests/PublicHTML_VHostTests.inc.php';
+			break;
+
+		case('RSS_AtomSimpleXMLElement'): 
+			require_once PROJECT_ROOT . '/plug-ins/rss/classes/RSS_AtomSimpleXMLElement.inc.php';
+			break;
+
+		case('RSS_BBCSportRSSStartPageWidget'): 
+			require_once PROJECT_ROOT . '/plug-ins/rss/classes/example-widgets/RSS_BBCSportRSSStartPageWidget.inc.php';
+			break;
+
+		case('RSS_BrightonWokDiaryRSSStartPageWidget'): 
+			require_once PROJECT_ROOT . '/plug-ins/rss/classes/example-widgets/RSS_BrightonWokDiaryRSSStartPageWidget.inc.php';
+			break;
+
+		case('RSS_RSS'): 
+			require_once PROJECT_ROOT . '/plug-ins/rss/classes/RSS_RSS.inc.php';
+			break;
+
+		case('RSS_RSSHelper'): 
+			require_once PROJECT_ROOT . '/plug-ins/rss/classes/RSS_RSSHelper.inc.php';
+			break;
+
+		case('RSS_RSSSimpleXMLElement'): 
+			require_once PROJECT_ROOT . '/plug-ins/rss/classes/RSS_RSSSimpleXMLElement.inc.php';
+			break;
+
+		case('RSS_RSSStartPageWidget'): 
+			require_once PROJECT_ROOT . '/plug-ins/rss/classes/RSS_RSSStartPageWidget.inc.php';
+			break;
+
+		case('RSS_SimpleXMLElement'): 
+			require_once PROJECT_ROOT . '/plug-ins/rss/classes/RSS_SimpleXMLElement.inc.php';
 			break;
 
 		case('Security_PasswordGenerator'): 

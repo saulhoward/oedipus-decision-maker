@@ -1,6 +1,6 @@
 <?php
 /**
- * Oedipus_Scene
+ * Oedipus_Act
  *
  * @copyright 2008-10-19, RFI & SANH
  */
@@ -9,67 +9,67 @@
  * Holds the data for a Oedipus Drama Theoretic scene.
  */
 class
-	Oedipus_Scene
+	Oedipus_Act
 {
 	private $name;
 	private $id;
 	private $added;
-	private $frames;
-	private $act_id;
+	private $scenes;
+	private $drama_id;
 
 	public function
 		__construct(
 			$id,
 			$name,
 			$added,
-			$act_id
+			$drama_id
 		)
 	{
 		$this->id = $id;
 		$this->name = $name;
 		$this->added = $added;
-		$this->act_id = $act_id;
+		$this->drama_id = $drama_id;
 		
-		$this->frames = array();
+		$this->scenes = array();
 	}
 
 	public function
-		add_frame(
-			Oedipus_Frame $frame
+		add_scene(
+			Oedipus_Scene $scene
 		)
 	{
-//                $this->frames[$frame->get_name()] = $frame;
-		$this->frames[$frame->get_id()] = $frame;
+//                $this->scenes[$scene->get_name()] = $scene;
+		$this->scenes[$scene->get_id()] = $scene;
 	}
 
 	public function
-		add_frames(
-			$frames
+		add_scenes(
+			$scenes
 		)
 	{
-		$this->frames = $frames;
+		$this->scenes = $scenes;
 	}
 
 	public function
-		get_frame($frame_id)
+		get_scene($scene_id)
 	{
-		if (isset($this->frames[$frame_id])) {
-			return $this->frames[$frame_id];
+		if (isset($this->scenes[$scene_id])) {
+			return $this->scenes[$scene_id];
 		} else {
-			throw new Exception("No frame with id '$frame_id' in the '$this->name' drama!");
+			throw new Exception("No scene with id '$scene_id' in the '$this->name' act!");
 		}
 	}
 
 	public function
-		get_frames()
+		get_scenes()
 	{
-		return $this->frames;
+		return $this->scenes;
 	}
 
 	public function
-		count_frames()
+		count_scenes()
 	{
-		return count($this->frames);
+		return count($this->scenes);
 	}
 
 	public function

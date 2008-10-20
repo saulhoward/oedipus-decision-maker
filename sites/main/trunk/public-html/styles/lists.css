@@ -280,3 +280,26 @@ div.oedipus-table ul.table-options li#edit-table a
 /*        color: #E9292E;*/
 	background: transparent url(/images/icons/16x16/document-open.png) top left no-repeat;
 }
+
+/* RSS UL */
+div.rss
+{
+	width: 40em;
+	margin: 1em 0;
+	padding: 1em;
+}
+
+div.rss ul
+{
+	border: 1px solid #ccc;
+	margin: 1em 0;
+}
+div.rss ul li
+{
+	padding: 0.3em 0.5em;
+	background: #ECF2FA;
+}
+div.rss ul li.odd
+{
+	background: white;
+}

@@ -19,8 +19,16 @@ extends
 			isset($_POST['user_id'])
 			)
 		{
-			$drama = Oedipus_DramaEditorHelper::add_drama($_POST['drama_name'], $_POST['user_id']);
-			$return_to_url = Oedipus_DramaEditorHelper::get_drama_editor_url($drama);
+			$drama = Oedipus_DramaEditorHelper::add_drama(
+				$_POST['drama_name'], $_POST['user_id']
+			);
+
+			// A drama needs at least one act and an act, one scene.
+			$act = Oedipus_DramaEditorHelper::add_act($drama);
+			$scene = Oedipus_DramaEditorHelper::add_scene($act);
+
+			$return_to_url = 
+				Oedipus_DramaEditorHelper::get_drama_editor_url($drama);
 		}
 	
 		elseif (

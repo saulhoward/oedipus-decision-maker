@@ -28,6 +28,11 @@ extends
 			$this->get_latest_tables_div()
 		);
 
+		$home_page_div->append_tag_to_content(
+			$this->get_google_code_rss_div()
+		);
+
+
 		echo $home_page_div->get_as_string();
 	}
 
@@ -47,6 +52,13 @@ extends
 	 * classes for the page elements
 	 *
 	 */
+
+	private function
+		get_google_code_rss_div()
+	{
+		return Oedipus_RSSHelper::get_google_code_rss_div();
+	}
+
 	private function
 		get_oedipus_table_div(Oedipus_Table $table)
 	{

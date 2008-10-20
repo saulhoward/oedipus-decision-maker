@@ -31,10 +31,79 @@ SQL;
 
 		$drama_id = mysql_insert_id($dbh);
 
-
-		$drama = new Oedipus_Drama($drama_id, $drama_name, $drama_unique_name, 'private');
+		$drama = new Oedipus_Drama(
+			$drama_id,
+			$drama_name,
+		       	$drama_unique_name,
+		       	'private'
+		);
 		//                print_r($drama);exit;
 		return $drama;
+	}
+
+	public static function
+		add_act(Oedipus_Drama $drama)
+	{
+		// ADD act TO DATABASE
+		$dbh = DB::m();
+		$drama_id = mysql_real_escape_string($drama->get_id(), $dbh);
+
+		$sql = <<<SQL
+INSERT INTO
+	oedipus_acts
+SET
+	name = 'Act 1',
+	added = NOW(),
+	drama_id = '$drama_id'
+SQL;
+
+//                                print_r($sql);exit;
+		$result = mysql_query($sql, $dbh);
+
+		$act_id = mysql_insert_id($dbh);
+		$added = date();
+
+		$act = new Oedipus_Act(
+			$act_id,
+			$act_name,
+			$added,
+			$drama_id
+		);
+		//                print_r($act);exit;
+	
+		return $act;
+	}
+
+	public static function
+		add_scene(Oedipus_Act $act)
+	{
+		// ADD scene TO DATABASE
+		$dbh = DB::m();
+		$act_id = mysql_real_escape_string($act->get_id(), $dbh);
+
+		$sql = <<<SQL
+INSERT INTO
+	oedipus_scenes
+SET
+	name = 'Scene 1',
+	added = NOW(),
+	act_id = '$act_id'
+SQL;
+
+		//                print_r($sql);exit;
+		$result = mysql_query($sql, $dbh);
+
+		$scene_id = mysql_insert_id($dbh);
+		$added = date();
+
+		$scene = new Oedipus_Scene(
+			$scene_id,
+			$scene_name,
+			$added,
+			$act_id
+		);
+		//                print_r($scene);exit;
+		return $scene;
 	}
 
 	public function
