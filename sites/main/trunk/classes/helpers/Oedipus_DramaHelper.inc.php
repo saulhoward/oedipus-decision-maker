@@ -30,9 +30,12 @@ class
 		$act_div = new HTMLTags_Div();
 		$act_div->set_attribute_str('class', 'act');
 
+		$act_div->append('<h3>' . $act->get_name() . '</h3>');
 		// SHOW THE Scenes
-		foreach ($act->get_scenes() as $act)
+		foreach ($act->get_scenes() as $scene)
 		{
+
+//                        print_r($scene);exit;
 			$act_div->append(self::get_scene_div($scene));
 		}
 
@@ -45,8 +48,9 @@ class
 		$scene_div = new HTMLTags_Div();
 		$scene_div->set_attribute_str('class', 'scene');
 
+		$scene_div->append('<h3>' . $scene->get_name() . '</h3>');
 		// SHOW THE frames
-		foreach ($scene->get_frames() as $scene)
+		foreach ($scene->get_frames() as $frame)
 		{
 			$scene_div->append(self::get_frame_div($frame));
 		}
@@ -199,7 +203,7 @@ SQL;
 		       	$row['added'],
 			$row['status']
 		);
-
+		
 		// Add the acts to this Drama
 
 		// Get all acts for this drama
@@ -224,9 +228,11 @@ SQL;
 			{
 				$act_id = $act_result['id'];
 				$act = self::get_act_by_id($act_id);
+
 				$drama->add_act($act);
 			}
 		}
+
 		return $drama;
 	}
 
@@ -269,7 +275,6 @@ SQL;
 
 //                                print_r($scenes_query);exit;
 		$scenes_result = mysql_query($scenes_query, $dbh);
-//                print_r($scenes_result);exit;
 
 		// Add the scenes to the drama object
 		//
@@ -278,10 +283,12 @@ SQL;
 			while($scene_result = mysql_fetch_array($scenes_result))
 			{
 				$scene_id = $scene_result['id'];
-				$scene = self::get_oedipus_scene_by_id($scene_id);
+				$scene = self::get_scene_by_id($scene_id);
+
 				$act->add_scene($scene);
 			}
 		}
+
 		return $act;
 	}
 
@@ -301,7 +308,7 @@ SQL;
 		//                                print_r($query);exit;
 		$result = mysql_query($query, $dbh);
 		$row = mysql_fetch_array($result);
-		//                                print_r($row);exit;
+//                                                print_r($row);exit;
 
 		$scene = new Oedipus_Scene(
 			$row['id'],
@@ -309,6 +316,8 @@ SQL;
 			$row['added'],
 			$row['act_id']
 		);
+
+//                                                print_r($scene);exit;
 
 		// Add the scenes to this Act
 
@@ -322,7 +331,7 @@ SELECT
 		scene_id = $scene_id
 SQL;
 
-//                                print_r($frames_query);exit;
+//                print_r($frames_query);exit;
 		$frames_result = mysql_query($frames_query, $dbh);
 //                print_r($frames_result);exit;
 
@@ -330,13 +339,16 @@ SQL;
 		//
 		if ($frames_result)
 		{
+
 			while($frame_result = mysql_fetch_array($frames_result))
 			{
+//                                                print_r($frame_result);exit;
 				$frame_id = $frame_result['id'];
-				$frame = self::get_oedipus_frame_by_id($frame_id);
+				$frame = self::get_frame_by_id($frame_id);
 				$scene->add_frame($frame);
 			}
 		}
+
 		return $scene;
 	}
 
@@ -356,7 +368,7 @@ SQL;
 		//                                print_r($query);exit;
 		$result = mysql_query($query, $dbh);
 		$row = mysql_fetch_array($result);
-		//                                print_r($row);exit;
+//                                                print_r($row);exit;
 
 		$frame = new Oedipus_Frame(
 			$row['id'],

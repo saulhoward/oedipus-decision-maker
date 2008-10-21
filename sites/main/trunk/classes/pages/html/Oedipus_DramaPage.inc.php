@@ -118,7 +118,7 @@ Oedipus_RestrictedPage
 			);
 
 			$drama_page_div->append_tag_to_content(
-				$this->get_oedipus_html_drama_div()
+				$this->get_drama_div()
 			);
 		}
 
@@ -126,9 +126,9 @@ Oedipus_RestrictedPage
 	}
 
 	private function
-		get_oedipus_html_drama_div()
+		get_drama_div()
 	{
-		return Oedipus_DramaHelper::get_drama_div();
+		return Oedipus_DramaHelper::get_drama_div($this->drama);
 	}
 
 	private function

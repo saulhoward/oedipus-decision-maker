@@ -15,7 +15,7 @@ class
 	private $id;
 	private $added;
 	private $unique_name;
-	private $tables;
+	private $acts;
 	private $status;
 
 	public function
@@ -33,46 +33,46 @@ class
 		$this->unique_name = $unique_name;
 		$this->status = $status;
 		
-		$this->tables = array();
+		$this->acts = array();
 	}
 
 	public function
-		add_table(
-			Oedipus_Table $table
+		add_act(
+			Oedipus_Act $act
 		)
 	{
-//                $this->tables[$table->get_name()] = $table;
-		$this->tables[$table->get_id()] = $table;
+//                $this->acts[$act->get_name()] = $act;
+		$this->acts[$act->get_id()] = $act;
 	}
 
 	public function
-		add_tables(
-			$tables
+		add_acts(
+			$acts
 		)
 	{
-		$this->tables = $tables;
+		$this->acts = $acts;
 	}
 
 	public function
-		get_table($table_id)
+		get_act($act_id)
 	{
-		if (isset($this->tables[$table_id])) {
-			return $this->tables[$table_id];
+		if (isset($this->acts[$act_id])) {
+			return $this->acts[$act_id];
 		} else {
-			throw new Exception("No table with id '$table_id' in the '$this->name' drama!");
+			throw new Exception("No act with id '$act_id' in the '$this->name' drama!");
 		}
 	}
 
 	public function
-		get_tables()
+		get_acts()
 	{
-		return $this->tables;
+		return $this->acts;
 	}
 
 	public function
-		count_tables()
+		count_acts()
 	{
-		return count($this->tables);
+		return count($this->acts);
 	}
 
 	public function
@@ -128,9 +128,9 @@ class
 		return $this->GetEnumValues('oedipus_dramas', 'status');
 	}
 
-	private function GetEnumValues($Table,$Column)
+	private function GetEnumValues($act,$Column)
 	{
-		$dbSQL = "SHOW COLUMNS FROM ".$Table." LIKE '".$Column."'";
+		$dbSQL = "SHOW COLUMNS FROM ".$act." LIKE '".$Column."'";
 		$dbQuery = mysql_query($dbSQL);
 
 		$dbRow = mysql_fetch_assoc($dbQuery);
