@@ -42,17 +42,18 @@ SQL;
 	}
 
 	public static function
-		add_act(Oedipus_Drama $drama)
+		add_act(Oedipus_Drama $drama, $name = 'Act 1')
 	{
 		// ADD act TO DATABASE
 		$dbh = DB::m();
 		$drama_id = mysql_real_escape_string($drama->get_id(), $dbh);
+		$name = mysql_real_escape_string($name, $dbh);
 
 		$sql = <<<SQL
 INSERT INTO
 	oedipus_acts
 SET
-	name = 'Act 1',
+	name = '$name',
 	added = NOW(),
 	drama_id = '$drama_id'
 SQL;
@@ -75,17 +76,18 @@ SQL;
 	}
 
 	public static function
-		add_scene(Oedipus_Act $act)
+		add_scene(Oedipus_Act $act, $name = 'Scene 1')
 	{
 		// ADD scene TO DATABASE
 		$dbh = DB::m();
 		$act_id = mysql_real_escape_string($act->get_id(), $dbh);
+		$name = mysql_real_escape_string($name, $dbh);
 
 		$sql = <<<SQL
 INSERT INTO
 	oedipus_scenes
 SET
-	name = 'Scene 1',
+	name = '$name',
 	added = NOW(),
 	act_id = '$act_id'
 SQL;

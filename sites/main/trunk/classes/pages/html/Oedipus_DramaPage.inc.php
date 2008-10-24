@@ -32,6 +32,7 @@ Oedipus_RestrictedPage
 			}
 			catch (Exception $e)
 			{
+				throw new Exception($e);
 			}
 		}
 		elseif (isset($_GET['drama_id']))
@@ -44,6 +45,7 @@ Oedipus_RestrictedPage
 			}
 			catch (Exception $e)
 			{
+				throw new Exception($e);
 			}
 		}
 

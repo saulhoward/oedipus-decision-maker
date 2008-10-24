@@ -10,7 +10,7 @@ class
 	Oedipus_NotesHelper
 {
 	public static function
-		add_note_to_table(Oedipus_Table $table, $note_text)
+		add_note_to_frame(Oedipus_Frame $frame, $note_text)
 	{
 		// ADD NOTE TO DATABASE
 		$dbh = DB::m();
@@ -28,12 +28,12 @@ SQL;
 		$note_id = mysql_insert_id($dbh);
 
 		// ADD LINK TO DATABASE
-		$table_id = $table->get_id();
+		$frame_id = $frame->get_id();
 		$link_sql = <<<SQL
 INSERT INTO
-	oedipus_table_to_note_links
+	oedipus_frame_to_note_links
 SET
-	table_id = '$table_id',
+	frame_id = '$frame_id',
 	note_id = '$note_id'
 SQL;
 
@@ -45,7 +45,7 @@ SQL;
 	}
 
 	public function
-		get_note_by_table_id($table_id)
+		get_note_by_frame_id($frame_id)
 	{
 		$dbh = DB::m();
 
@@ -56,11 +56,11 @@ SELECT
 		oedipus_notes.added
 	FROM
 		oedipus_notes,
-		oedipus_table_to_note_links
+		oedipus_frame_to_note_links
 	WHERE
-		oedipus_notes.id=oedipus_table_to_note_links.note_id
+		oedipus_notes.id=oedipus_frame_to_note_links.note_id
 	AND
-		oedipus_table_to_note_links.table_id = '$table_id'
+		oedipus_frame_to_note_links.frame_id = '$frame_id'
 SQL;
 
 		//                                print_r($query);exit;
@@ -100,7 +100,7 @@ SQL;
 	}
 
 	public function
-		has_table_got_note($table_id)
+		has_frame_got_note($frame_id)
 	{
 		$dbh = DB::m();
 
@@ -108,9 +108,9 @@ SQL;
 SELECT 
 		COUNT(*) as count
 	FROM
-		oedipus_table_to_note_links
+		oedipus_frame_to_note_links
 	WHERE
-		table_id = $table_id
+		frame_id = $frame_id
 SQL;
 
 //                                                print_r($query);exit;

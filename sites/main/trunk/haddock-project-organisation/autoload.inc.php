@@ -2,7 +2,7 @@
 /**
  * __autoload .INC file
  *
- * Last Modified: 2008-10-20
+ * Last Modified: 2008-10-24
  */
 
 function __autoload($class_name)
@@ -2193,6 +2193,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Frame.inc.php';
 			break;
 
+		case('Oedipus_FrameHTMLTable'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_FrameHTMLTable.inc.php';
+			break;
+
 		case('Oedipus_GDPNGImage'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/png/Oedipus_GDPNGImage.inc.php';
 			break;
@@ -2257,6 +2261,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusDramaPageActionsUL.inc.php';
 			break;
 
+		case('Oedipus_OedipusFrameOptionsUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusFrameOptionsUL.inc.php';
+			break;
+
 		case('Oedipus_OedipusHTMLTable'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusHTMLTable.inc.php';
 			break;
@@ -2303,10 +2311,6 @@ function __autoload($class_name)
 
 		case('Oedipus_OedipusTableNameEditorHTMLForm'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusTableNameEditorHTMLForm.inc.php';
-			break;
-
-		case('Oedipus_OedipusTableOptionsUL'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusTableOptionsUL.inc.php';
 			break;
 
 		case('Oedipus_Option'): 

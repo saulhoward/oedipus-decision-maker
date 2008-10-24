@@ -7,7 +7,10 @@
  */
 
 /**
- * Holds the data for a position (one for every actor/option conjunction) in a Oedipus Drama Theoretic table.
+ * Holds the data for a position 
+ * (one for every character/option conjunction)
+ * in a Oedipus Drama Theoretic frame.
+ *
  * The positions belong to options
  */
 class
@@ -16,15 +19,15 @@ class
 	private $id;
 	private $tile;
 	private $doubt;
-	private $actor;
+	private $character;
 	
 	public function
-		__construct($id, $tile, $doubt, Oedipus_Actor $actor)
+		__construct($id, $tile, $doubt, Oedipus_Character $character)
 	{
 		$this->id = $id;
 		$this->tile = $tile;
 		$this->doubt = $doubt;
-		$this->actor = $actor;
+		$this->character = $character;
 	}
 
 	public function
@@ -46,9 +49,9 @@ class
 	}
 
 	public function
-		get_actor()
+		get_character()
 	{
-		return $this->actor;
+		return $this->character;
 	}
 
 }

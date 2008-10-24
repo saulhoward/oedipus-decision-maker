@@ -7,7 +7,7 @@
  */
 
 /**
- * Holds the data for an option (which belongs to an actor) in a Oedipus Drama Theoretic table.
+ * Holds the data for an option (which belongs to a character) in a Oedipus Drama Theoretic table.
  */
 class
 	Oedipus_Option
@@ -58,12 +58,12 @@ class
 	}
 
 	public function
-		get_position($actor_id)
+		get_position($character_id)
 	{
-		if (isset($this->positions[$actor_id])) {
-			return $this->positions[$actor_id];
+		if (isset($this->positions[$character_id])) {
+			return $this->positions[$character_id];
 		} else {
-			throw new Exception("No position for the actor '$actor_id' in the '$this->name' option!");
+			throw new Exception("No position for the character '$character_id' in the '$this->name' option!");
 		}
 	}
 

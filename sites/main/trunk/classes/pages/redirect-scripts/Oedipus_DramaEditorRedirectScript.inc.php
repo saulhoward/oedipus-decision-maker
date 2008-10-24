@@ -26,6 +26,7 @@ extends
 			// A drama needs at least one act and an act, one scene.
 			$act = Oedipus_DramaEditorHelper::add_act($drama);
 			$scene = Oedipus_DramaEditorHelper::add_scene($act);
+			$frame = Oedipus_DramaHelper::add_frame($scene, 'First frame');
 
 			$return_to_url = 
 				Oedipus_DramaEditorHelper::get_drama_editor_url($drama);

@@ -6,22 +6,24 @@
  */
 
 /**
- * Holds the data for a Oedipus Drama Theoretic frame.
+ * Holds the data for a Oedipus scene Theoretic frame.
  */
 class
-Oedipus_Table
+Oedipus_Frame
 {
 	private $id;
-	private $drama_id;
+	private $scene_id;
 	private $name;
+	private $added;
 	private $characters;
 
 	public function
-		__construct($id, $drama_id, $name, $characters)
+		__construct($id, $name, $added, $scene_id, $characters)
 	{
 		$this->id = $id;
-		$this->drama_id = $drama_id;
 		$this->name = $name;
+		$this->added = $added;
+		$this->scene_id = $scene_id;
 
 		$this->characters = $characters;
 	}
@@ -65,9 +67,9 @@ Oedipus_Table
 	}
 
 	public function
-		get_drama_id()
+		get_scene_id()
 	{
-		return $this->drama_id;
+		return $this->scene_id;
 	}
 
 	public function
