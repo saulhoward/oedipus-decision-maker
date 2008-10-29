@@ -1,6 +1,6 @@
 <?php
 class
-	Oedipus_EditTableNoteRedirectScript
+	Oedipus_EditFrameNoteRedirectScript
 extends
 	PublicHTML_RedirectScript
 {
@@ -40,16 +40,16 @@ extends
 			&&
 			isset($_POST['drama_id'])
 			&&
-			isset($_POST['table_id'])
+			isset($_POST['frame_id'])
 		)
 		{
 			$this->drama_id = $_POST['drama_id'];
-			$table = Oedipus_TableCreationHelper::get_oedipus_table_by_id($_POST['table_id']);
+			$frame = Oedipus_DramaHelper::get_frame_by_id($_POST['frame_id']);
 
 			if (isset($_POST['note_text']))
 			{
-				Oedipus_NotesHelper::add_note_to_table(
-					$table,
+				Oedipus_NotesHelper::add_note_to_frame(
+					$frame,
 					$_POST['note_text']
 				);
 			}
@@ -76,7 +76,7 @@ extends
 		}
 
 		return PublicHTML_URLHelper
-			::get_oo_page_url('Oedipus_DramaEditorPage', $get_variables);
+			::get_oo_page_url('Oedipus_EditDramaPage', $get_variables);
 	}
 
 }

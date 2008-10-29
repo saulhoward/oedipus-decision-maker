@@ -1,6 +1,6 @@
 <?php
 /**
- * Oedipus_OedipusOptionEditorHTMLForm
+ * Oedipus_EditOptionHTMLForm
  *
  * @copyright 2006-11-27, RFI
  * @copyright 2008-04-06, RFI
@@ -9,22 +9,22 @@
 
 /**
  * Oedipus Form for editing options' values
- * extends Oedipus_TableEditorHTMLForm
+ * extends Oedipus_EditFrameHTMLForm
  */
 
 class
-Oedipus_OedipusOptionEditorHTMLForm
+Oedipus_EditOptionHTMLForm
 extends
-Oedipus_OedipusTableEditorHTMLForm
+Oedipus_EditFrameHTMLForm
 {
-	//        private $table;
+	//        private $frame;
 
 	public function
-		__construct(Oedipus_Table $table, Oedipus_Option $option, $iteration)
+		__construct(Oedipus_Frame $frame, Oedipus_Option $option, $iteration)
 	{
-		parent::__construct($table, 'option_editor');
+		parent::__construct($frame, 'option_editor');
 
-		//                $this->table = $table;
+		//                $this->frame = $frame;
 
 		# Name Input
 		$this->add_input_name_with_value(

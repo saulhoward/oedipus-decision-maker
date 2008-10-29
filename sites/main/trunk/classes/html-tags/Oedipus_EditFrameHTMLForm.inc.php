@@ -1,6 +1,6 @@
 <?php
 /**
- * Oedipus_OedipusTableEditorHTMLForm
+ * Oedipus_EditFrameHTMLForm
  *
  * @copyright 2006-11-27, RFI
  * @copyright 2008-04-06, RFI
@@ -8,9 +8,9 @@
  */
 
 /**
- * Oedipus Form for editing tables
+ * Oedipus Form for editing frames
  *
- * Oedipus_TableNameEditor,
+ * Oedipus_frameNameEditor,
  * Oedipus_ActorEditor,
  * Oedipus_OptionEditor
  *
@@ -18,11 +18,11 @@
  */
 
 class
-	Oedipus_OedipusTableEditorHTMLForm
+	Oedipus_EditFrameHTMLForm
 extends
 	HTMLTags_SimpleForm
 {
-	private $table;
+	private $frame;
 
 	private $first_input_name;
 	
@@ -32,7 +32,7 @@ extends
 	
 	public function
 		__construct(
-			Oedipus_Table $table,
+			Oedipus_Frame $frame,
 		       	$name
 		)
 	{
@@ -42,22 +42,22 @@ extends
 		
 		$this->set_attribute_str('name', $name);
 		$this->set_attribute_str('method', $method);
-		$this->set_attribute_str('class', 'oedipus-table-form');
+		$this->set_attribute_str('class', 'frame-form');
 		
 		$this->input_lis = array();
 
-		$this->table = $table;
+		$this->frame = $frame;
 
 		# action
-		$this_action = $this->get_table_editor_form_action_url();
+		$this_action = $this->get_frame_editor_form_action_url();
 		$this->set_action($this_action);
 
 //                # cancel
-//                $this_cancel = $this->get_table_editor_form_cancel_url();
+//                $this_cancel = $this->get_frame_editor_form_cancel_url();
 //                $this->set_cancel_location($this_cancel);
 
 		# Hidden Inputs
-		$this->add_hidden_input('table_id', $table->get_id());
+		$this->add_hidden_input('frame_id', $frame->get_id());
 
 		$this->set_submit_text('OK');
 	}
@@ -304,21 +304,21 @@ MSG;
 	
 	# FORM URLS
 	private function
-		get_table_editor_form_action_url()
+		get_frame_editor_form_action_url()
 	{
-		$get_variables = array("table_id" => $this->table->get_id());
+		$get_variables = array("frame_id" => $this->frame->get_id());
 		return PublicHTML_URLHelper::get_oo_page_url(
-				'Oedipus_TableEditorRedirectScript',
+				'Oedipus_EditFrameRedirectScript',
 				$get_variables
 			);
 	}
 	
 	private function
-		get_table_editor_form_cancel_url()
+		get_frame_editor_form_cancel_url()
 	{
-		$get_variables = array("table_id" => $this->table->get_id());
+		$get_variables = array("frame_id" => $this->frame->get_id());
 		return PublicHTML_URLHelper::get_oo_page_url(
-				'Oedipus_TableEditorPage',
+				'Oedipus_EditFramePage',
 				$get_variables
 			);
 	}

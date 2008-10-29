@@ -113,59 +113,60 @@ extends
 				$this->get_drama_heading()
 			);
 
-//                        $drama_editor_page_div->append_tag_to_content(
-//                                $this->get_oedipus_html_drama_div()
-//                        );
+                       $drama_editor_page_div->append_tag_to_content(
+                               $this->get_drama_div()
+                       );
 		}
 
 		return $drama_editor_page_div;
 	}
 
 	private function
-		get_oedipus_html_drama_div()
+		get_drama_div()
 	{
-		$drama_div = new HTMLTags_Div();
-		$drama_div->set_attribute_str('class', 'oedipus-drama');
-
-		$first = TRUE;
-
-		// SHOW THE frameS
-		foreach ($this->drama->get_frames() as $frame)
-		{
-			if (!$first)
-			{
-				$hr = new HTMLTags_HR();
-				$drama_div->append_tag_to_content($hr);
-			}
-			$first = FALSE;
-
-			# The left and right column divs
-			$left_div = new HTMLTags_Div();
-			$left_div->set_attribute_str('class', 'left-column');
-
-			# The frame itself
-			$left_div->append_tag_to_content($this->get_oedipus_frame_div($frame));
-			# The instructions
-			//$left_div->append_tag_to_content($this->get_drama_page_frame_instructions_div());
-			$drama_div->append_tag_to_content($left_div);
-
-			$right_div = new HTMLTags_Div();
-			$right_div->set_attribute_str('class', 'right-column');
-			# The notes etc. added here
-			$right_div->append_tag_to_content($this->get_frame_notes_div($frame));
-
-			$drama_div->append_tag_to_content($right_div);
-
-			$clear_div = new HTMLTags_Div();
-			$clear_div->set_attribute_str('class', 'clear-columns');
-			$drama_div->append_tag_to_content($clear_div);
-		}
-
-		// CREATE frame FORM
-		$drama_div->append_tag_to_content($this->get_add_frame_form());
-
-		return $drama_div;
+		$editable = TRUE;
+		return Oedipus_DramaHelper::get_drama_div($this->get_drama(), $editable);
 	}
+
+/*
+ *        private function
+ *                get_oedipus_html_drama_div()
+ *        {
+ *                $drama_div = new HTMLTags_Div();
+ *                $drama_div->set_attribute_str('class', 'oedipus-drama');
+ *
+ *                // SHOW THE frameS
+ *                foreach ($this->drama->get_frames() as $frame)
+ *                {
+ *                
+ *                        # The left and right column divs
+ *                        $left_div = new HTMLTags_Div();
+ *                        $left_div->set_attribute_str('class', 'left-column');
+ *
+ *                        # The frame itself
+ *                        $left_div->append_tag_to_content($this->get_oedipus_frame_div($frame));
+ *                        # The instructions
+ *                        //$left_div->append_tag_to_content($this->get_drama_page_frame_instructions_div());
+ *                        $drama_div->append_tag_to_content($left_div);
+ *
+ *                        $right_div = new HTMLTags_Div();
+ *                        $right_div->set_attribute_str('class', 'right-column');
+ *                        # The notes etc. added here
+ *                        $right_div->append_tag_to_content($this->get_frame_notes_div($frame));
+ *
+ *                        $drama_div->append_tag_to_content($right_div);
+ *
+ *                        $clear_div = new HTMLTags_Div();
+ *                        $clear_div->set_attribute_str('class', 'clear-columns');
+ *                        $drama_div->append_tag_to_content($clear_div);
+ *                }
+ *
+ *                // CREATE frame FORM
+ *                $drama_div->append_tag_to_content($this->get_add_frame_form());
+ *
+ *                return $drama_div;
+ *        }
+ */
 
 	/*
 	 * Functions to call in the html-tags
@@ -196,7 +197,7 @@ extends
 	private function
 		get_oedipus_html_frame(Oedipus_frame $frame)
 	{
-		return new Oedipus_FrameHTMLframe($frame, FALSE);
+		return new Oedipus_FrameHTMLTable($frame, FALSE);
 	}
 
 	private function

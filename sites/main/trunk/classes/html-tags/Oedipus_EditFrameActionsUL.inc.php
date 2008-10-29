@@ -1,13 +1,13 @@
 <?php
 /**
- * Oedipus_OedipusTableEditorOptionsUL
+ * Oedipus_EditFrameActionsUL
  *
  *  2008-03-17, RFI
  *  2008-04-05, SANH
  */
 
 class
-	Oedipus_OedipusTableEditorActionsUL
+	Oedipus_EditFrameActionsUL
 extends
 	HTMLTags_UL
 {
@@ -16,7 +16,7 @@ extends
 	{
 		parent::__construct();
 
-		$this->set_attribute_str('class', 'table-options');
+		$this->set_attribute_str('class', 'frame-options');
 	}
 
 }

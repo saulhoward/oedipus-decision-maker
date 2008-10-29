@@ -10,7 +10,7 @@ class
 	Oedipus_DramaHelper
 {
 	public static function
-		get_drama_div(Oedipus_Drama $drama)
+		get_drama_div(Oedipus_Drama $drama, $editable = FALSE)
 	{
 		$drama_div = new HTMLTags_Div();
 		$drama_div->set_attribute_str('class', 'drama');
@@ -18,14 +18,14 @@ class
 		// SHOW THE ACTS
 		foreach ($drama->get_acts() as $act)
 		{
-			$drama_div->append(self::get_act_div($act));
+			$drama_div->append(self::get_act_div($act, $editable));
 		}
 
 		return $drama_div;
 	}
 
 	public static function
-		get_act_div(Oedipus_Act $act)
+		get_act_div(Oedipus_Act $act, $editable = FALSE)
 	{
 		$act_div = new HTMLTags_Div();
 		$act_div->set_attribute_str('class', 'act');
@@ -34,16 +34,15 @@ class
 		// SHOW THE Scenes
 		foreach ($act->get_scenes() as $scene)
 		{
-
 //                        print_r($scene);exit;
-			$act_div->append(self::get_scene_div($scene));
+			$act_div->append(self::get_scene_div($scene, $editable));
 		}
 
 		return $act_div;
 	}
 
 	public static function
-		get_scene_div(Oedipus_Scene $scene)
+		get_scene_div(Oedipus_Scene $scene, $editable = FALSE)
 	{
 		$scene_div = new HTMLTags_Div();
 		$scene_div->set_attribute_str('class', 'scene');
@@ -52,14 +51,14 @@ class
 		// SHOW THE frames
 		foreach ($scene->get_frames() as $frame)
 		{
-			$scene_div->append(self::get_frame_div($frame));
+			$scene_div->append(self::get_frame_div($frame, $editable));
 		}
 
 		return $scene_div;
 	}
 
 	private function
-		get_frame_div(Oedipus_Frame $frame)
+		get_frame_div(Oedipus_Frame $frame, $editable = FALSE)
 	{
 		$drama_div = new HTMLTags_Div();
 
@@ -69,7 +68,7 @@ class
 
 		# The frame itself
 		$left_div->append_tag_to_content(
-			self::get_oedipus_frame_div($frame)
+			self::get_oedipus_frame_div($frame, $editable)
 	       );
 
 		# The instructions
@@ -83,7 +82,7 @@ class
 		$right_div->set_attribute_str('class', 'right-column');
 
 		# The notes etc. added here
-		$right_div->append_tag_to_content(self::get_frame_notes_div($frame));
+		$right_div->append_tag_to_content(self::get_frame_notes_div($frame, $editable));
 
 		$drama_div->append_tag_to_content($right_div);
 
@@ -94,7 +93,7 @@ class
 	}
 
 	private function
-		get_oedipus_frame_div(Oedipus_Frame $frame)
+		get_oedipus_frame_div(Oedipus_Frame $frame, $editable = FALSE)
 	{
 		$frame_div = new HTMLTags_Div();
 		$frame_div->set_attribute_str('class', 'oedipus-frame');
@@ -103,7 +102,7 @@ class
 		//$frame_div->append_tag_to_content(self::get_oedipus_png_frame($frame));
 
 		$frame_div->append_tag_to_content(
-			self::get_oedipus_html_frame_options($frame)
+			self::get_oedipus_html_frame_options($frame, $editable)
 		);
 
 		return $frame_div;
@@ -154,29 +153,58 @@ class
 	}
 
 	private function
-		get_oedipus_html_frame_options(Oedipus_Frame $frame)
+		get_oedipus_html_frame_options(Oedipus_Frame $frame, $editable = FALSE)
 	{
-		return new Oedipus_FrameOptionsUL($frame, FALSE);
+		return new Oedipus_FrameOptionsUL($frame, $editable);
 	}
 
 	private function
-		get_frame_notes_div(Oedipus_Frame $frame)
+		get_frame_notes_div(Oedipus_Frame $frame, $editable = FALSE)
 	{
 		$div = new HTMLTags_Div();
 		$div->set_attribute_str('class', 'notes');
 
 		$heading = new HTMLTags_Heading(3, $frame->get_name());
+
+		//print_r($frame);exit;
 		$div->append_tag_to_content($heading);
 
 		try
 		{
-			$note = Oedipus_NotesHelper::get_note_by_frame_id($frame->get_id());
-			$div->append_tag_to_content($note->get_note_text_in_pre());
+			if ($editable) {
+				if (isset($_GET['drama_id'])) {
+					$drama_id = $_GET['drama_id'];
+				}
+				else {
+					$drama_id = $frame->get_drama_id();
+				}
+
+				if (Oedipus_NotesHelper::has_frame_got_note($frame->get_id()))
+				{
+					$note = Oedipus_NotesHelper
+						::get_note_by_frame_id($frame->get_id());
+					$div->append(
+						new Oedipus_EditFrameNoteHTMLForm($note, $drama_id)
+					);
+				}
+				else {
+					$div->append(
+						new Oedipus_AddFrameNoteHTMLForm($drama_id, $frame)
+					);
+				}
+			}
+			else {
+				$note = Oedipus_NotesHelper::get_note_by_frame_id($frame->get_id());
+				//print_r($note);exit;
+				$div->append_tag_to_content($note->get_note_text_in_pre());
+			}
 		}
 		catch (Exception $e)
 		{
 			throw new Exception('Failed to retrieve note');
 		}
+
+
 		return $div;
 	}
 
@@ -511,10 +539,10 @@ SQL;
 		}
 
 		$frame = new Oedipus_Frame(
-			$row['id'],
-			$row['name'],
-			$row['added'],
-			$row['scene_id'],
+			$frame_result['id'],
+			$frame_result['name'],
+			$frame_result['added'],
+			$frame_result['scene_id'],
 			$characters
 		);
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * Oedipus_OedipusTableEditorOptionActionsUL
+ * Oedipus_EditFrameOptionActionsUL
  *
  *  2008-03-17, RFI
  *  2008-04-05, SANH
@@ -9,19 +9,19 @@
  */
 
 class
-	Oedipus_OedipusTableEditorOptionActionsUL
+	Oedipus_EditFrameOptionActionsUL
 extends
-	Oedipus_OedipusTableEditorActionsUL
+	Oedipus_EditFrameActionsUL
 {
 	private $option;
-	private $table;
+	private $frame;
 
 	public function
-		__construct(Oedipus_Table $table, Oedipus_Option $option)
+		__construct(Oedipus_Frame $frame, Oedipus_Option $option)
 	{
 		parent::__construct();
 
-		$this->table = $table;
+		$this->frame = $frame;
 		$this->option = $option;
 			
 		// Link to delete_option 
@@ -49,13 +49,13 @@ extends
 		get_delete_option_url()
 	{
 		$get_variables = array(
-			"table_id" => $this->table->get_id(),
+			"frame_id" => $this->frame->get_id(),
 			"option_id" => $this->option->get_id(),
 			"delete_option" => 1
 		);
 
 		return PublicHTML_URLHelper
-			::get_oo_page_url('Oedipus_TableEditorRedirectScript', $get_variables);
+			::get_oo_page_url('Oedipus_EditFrameRedirectScript', $get_variables);
 	}
 }
 ?>

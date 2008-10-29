@@ -1,10 +1,10 @@
 <?php
 class
-	Oedipus_TableEditorRedirectScript
+	Oedipus_EditFrameRedirectScript
 extends
 	PublicHTML_RedirectScript
 {
-	private $table_id;
+	private $frame_id;
 
 	protected function
 		do_actions()
@@ -14,30 +14,30 @@ extends
 		/*
 		 * The $_POST
 		 */
-		if (isset($_POST['table_id']))
+		if (isset($_POST['frame_id']))
 		{
-			$this->table_id = $_POST['table_id'];
+			$this->frame_id = $_POST['frame_id'];
 
-			if (isset($_POST['table_name']))
+			if (isset($_POST['frame_name']))
 			{
-				Oedipus_TableCreationHelper::set_table_name(
-					$this->table_id,
-					$_POST['table_name']
+				Oedipus_FrameHelper::set_frame_name(
+					$this->frame_id,
+					$_POST['frame_name']
 				);
 			}
 
 			elseif (
-				isset($_POST['actor_id'])
+				isset($_POST['character_id'])
 				&&
-				isset($_POST['actor_name'])
+				isset($_POST['character_name'])
 				&&
-				isset($_POST['actor_color'])
+				isset($_POST['character_color'])
 			)
 			{
-				Oedipus_TableCreationHelper::update_actor_by_id(
-					$_POST['actor_id'],
-					$_POST['actor_name'],
-					$_POST['actor_color']
+				Oedipus_FrameHelper::update_character_by_id(
+					$_POST['character_id'],
+					$_POST['character_name'],
+					$_POST['character_color']
 				);
 			}
 
@@ -47,7 +47,7 @@ extends
 				isset($_POST['option_id'])
 			)
 			{
-				Oedipus_TableCreationHelper::set_option_name(
+				Oedipus_FrameHelper::set_option_name(
 					$_POST['option_id'],
 					$_POST['option_name']
 				);
@@ -57,39 +57,39 @@ extends
 		/*
 		 * The $_GET
 		 */
-		elseif (isset($_GET['table_id']))
+		elseif (isset($_GET['frame_id']))
 		{
-			$this->table_id = $_GET['table_id'];
+			$this->frame_id = $_GET['frame_id'];
 			if (
-				isset($_GET['new_actor'])
+				isset($_GET['new_character'])
 			)
 			{
-				Oedipus_TableCreationHelper::add_actor(
-					'New Actor',
-					$this->table_id,
+				Oedipus_FrameHelper::add_character(
+					'New character',
+					$this->frame_id,
 					'orange'
 				);
 			}
 			elseif (
-				isset($_GET['delete_actor'])
+				isset($_GET['delete_character'])
 				&&
-				isset($_GET['actor_id'])
+				isset($_GET['character_id'])
 			)
 			{
-				Oedipus_TableCreationHelper::delete_actor(
-					$_GET['actor_id']
+				Oedipus_FrameHelper::delete_character(
+					$_GET['character_id']
 				);
 			}
 			elseif (
 				isset($_GET['add_option'])
 				&&
-				isset($_GET['actor_id'])
+				isset($_GET['character_id'])
 			)
 			{
-				Oedipus_TableCreationHelper::add_option(
+				Oedipus_FrameHelper::add_option(
 					'New Option',
-					$_GET['actor_id'],
-					$this->table_id
+					$_GET['character_id'],
+					$this->frame_id
 				);
 			}
 			elseif (
@@ -98,7 +98,7 @@ extends
 				isset($_GET['option_id'])
 			)
 			{
-				Oedipus_TableCreationHelper::delete_option(
+				Oedipus_FrameHelper::delete_option(
 					$_GET['option_id']
 				);
 			}
@@ -112,7 +112,7 @@ extends
 				isset($_GET['position_doubt'])
 			)
 			{
-				Oedipus_TableCreationHelper::update_position_by_id(
+				Oedipus_FrameHelper::update_position_by_id(
 					$_GET['position_id'],
 					$_GET['position_tile'],
 					$_GET['position_doubt']
@@ -128,7 +128,7 @@ extends
 				isset($_GET['stated_intention_doubt'])
 			)
 			{
-				Oedipus_TableCreationHelper::update_stated_intention_by_id(
+				Oedipus_FrameHelper::update_stated_intention_by_id(
 					$_GET['stated_intention_id'],
 					$_GET['stated_intention_tile'],
 					$_GET['stated_intention_doubt']
@@ -144,14 +144,14 @@ extends
 	{
 		$get_variables = array();
 
-		if (isset($this->table_id))
+		if (isset($this->frame_id))
 		{
-			$get_variables = array("table_id" => $this->table_id);
+			$get_variables = array("frame_id" => $this->frame_id);
 
 		}
 
 		return PublicHTML_URLHelper
-			::get_oo_page_url('Oedipus_TableEditorPage', $get_variables);
+			::get_oo_page_url('Oedipus_EditFramePage', $get_variables);
 	}
 
 }

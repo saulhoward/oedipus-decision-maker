@@ -10,7 +10,7 @@
 /**
  * Oedipus Form for Adding notes
  *
- * Oedipus_AddTableNote
+ * Oedipus_AddFrameNoteHTMLForm
  *
  * inherits from this
  */
@@ -37,7 +37,7 @@ extends
 		
 		$this->set_attribute_str('name', $name);
 		$this->set_attribute_str('method', $method);
-		$this->set_attribute_str('class', 'oedipus-table-form');
+		$this->set_attribute_str('class', 'frame-form');
 		
 		$this->input_lis = array();
 

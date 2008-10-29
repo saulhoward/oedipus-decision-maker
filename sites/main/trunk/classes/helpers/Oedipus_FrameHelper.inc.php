@@ -1,81 +1,81 @@
 <?php
 /**
- * Oedipus_TableCreationHelper
+ * Oedipus_FrameHelper
  *
  * @copyright RFI, 2008-02-18
  * @copyright SANH, 2008-04-19
  */
 
 class
-Oedipus_TableCreationHelper
+Oedipus_FrameHelper
 {
 	public static function
-		get_oedipus_table_by_id($table_id)
+		get_oedipus_frame_by_id($frame_id)
 	{
 		$dbh = DB::m();
-		// Get the table
-		$tables_query = <<<SQL
+		// Get the frame
+		$frames_query = <<<SQL
 SELECT 
 	*
 	FROM
-		oedipus_tables
+		oedipus_frames
 	WHERE
-		id = $table_id
+		id = $frame_id
 SQL;
 
-		//                print_r($tables_query);exit;
-		$tables_result = mysql_query($tables_query, $dbh);
-		//                print_r($tables);exit;
-		$table_result = mysql_fetch_array($tables_result);
+		//                print_r($frames_query);exit;
+		$frames_result = mysql_query($frames_query, $dbh);
+		//                print_r($frames);exit;
+		$frame_result = mysql_fetch_array($frames_result);
 		// -----------------------------------------------------------------------------
-		// Creating a Table
+		// Creating a frame
 		// -----------------
 		// 1.
-		// Create the actors,
+		// Create the characters,
 		// and their options, options have stated intentions
 
-		// For this table, get the actors
-		$table_id = $table_result['id'];
-		// Get all actors for this drama
-		$actors_query = <<<SQL
+		// For this frame, get the characters
+		$frame_id = $frame_result['id'];
+		// Get all characters for this drama
+		$characters_query = <<<SQL
 SELECT 
 	*
 	FROM
-		oedipus_actors
+		oedipus_characters
 	WHERE
-		table_id = $table_id
+		frame_id = $frame_id
 SQL;
 
-		//                print_r($actors_query);exit;
-		$actors_result = mysql_query($actors_query, $dbh);
-		//                print_r($actors);exit;
+		//                print_r($characters_query);exit;
+		$characters_result = mysql_query($characters_query, $dbh);
+		//                print_r($characters);exit;
 
-		// create an array of actors
-		$actors = array();
-		while($actor_result = mysql_fetch_array($actors_result))
+		// create an array of characters
+		$characters = array();
+		while($character_result = mysql_fetch_array($characters_result))
 		{
-			$actor = new Oedipus_Actor(
-				$actor_result['id'], $actor_result['name'], $actor_result['color']
+			$character = new Oedipus_Character(
+				$character_result['id'], $character_result['name'], $character_result['color']
 			);
 
 			//add the stated intentions to the option object
-			//add the options to the actor object
+			//add the options to the character object
 
-			// For this actor, get the options
-			$actor_id = $actor_result['id'];
-			// Get all actors for this drama
+			// For this character, get the options
+			$character_id = $character_result['id'];
+			// Get all characters for this drama
 			$options_query = <<<SQL
 SELECT 
 	*
 	FROM
 		oedipus_options
 	WHERE
-		actor_id = $actor_id
+		character_id = $character_id
 SQL;
 
-			//                print_r($actors_query);exit;
+			//                print_r($characters_query);exit;
 			$options_result = mysql_query($options_query, $dbh);
-			//                print_r($actors);exit;
+			//                print_r($characters);exit;
 
 			$options = array();
 			while($option_result = mysql_fetch_array($options_result))
@@ -91,7 +91,7 @@ SELECT
 		id = $stated_intention_id
 SQL;
 
-				//                print_r($actors_query);exit;
+				//                print_r($characters_query);exit;
 				$stated_intentions_result = mysql_query($stated_intentions_query, $dbh);
 				$stated_intention_result = mysql_fetch_array($stated_intentions_result);
 
@@ -101,17 +101,17 @@ SQL;
 					$stated_intention_result['doubt']
 				);
 
-				$actors_option = 
+				$characters_option = 
 					new Oedipus_Option(
 						$option_result['id'],
 						$option_result['name'],
 						$stated_intention
 					);
 
-				$actor->add_option($actors_option);
+				$character->add_option($characters_option);
 			}
 
-			$actors[] = $actor;
+			$characters[] = $character;
 			//add the positions to the option object
 			//
 		}
@@ -119,40 +119,40 @@ SQL;
 		// 2.
 		// create the positions 
 		// attached to options for ease of display (?)
-		// positions have an actor as well as an option
-		foreach ($actors as $actor)
+		// positions have an character as well as an option
+		foreach ($characters as $character)
 		{
-			foreach ($actor->get_options() as $option)
+			foreach ($character->get_options() as $option)
 			{
 				$positions = array();
 
-				foreach ($actors as $position_actor)
+				foreach ($characters as $position_character)
 				{
-					$actor_id = $position_actor->get_id();
+					$character_id = $position_character->get_id();
 					$option_id = $option->get_id();
-					// Get all actors for this drama
+					// Get all characters for this drama
 					$positions_query = <<<SQL
 SELECT 
 	*
 	FROM
 		oedipus_positions
 	WHERE
-		actor_id = $actor_id
+		character_id = $character_id
 AND
 		option_id = $option_id
 SQL;
 
-					//                print_r($actors_query);exit;
+					//                print_r($characters_query);exit;
 					$positions_result = mysql_query($positions_query, $dbh);
-					//                print_r($actors);exit;
+					//                print_r($characters);exit;
 					$position_result = mysql_fetch_array($positions_result);
 
-					$positions[$position_actor->get_id()] =
+					$positions[$position_character->get_id()] =
 						new Oedipus_Position(
 							$position_result['id'],
 							$position_result['position'],
 							$position_result['doubt'],
-							$position_actor
+							$position_character
 						);
 				}
 
@@ -160,72 +160,72 @@ SQL;
 			}
 		}
 
-		$table = new Oedipus_Table(
-			$table_result['id'],
-			$table_result['drama_id'],
-			$table_result['name'],
-			$actors
+		$frame = new Oedipus_Frame(
+			$frame_result['id'],
+			$frame_result['drama_id'],
+			$frame_result['name'],
+			$characters
 		);
 		// DEBUG
-		// print_r($table->get_actors());exit;
+		// print_r($frame->get_characters());exit;
 
-		return $table;
+		return $frame;
 	}
 
 	public function
-		get_latest_option_tables($no_of_tables)
+		get_latest_option_frames($no_of_frames)
 	{
 
 		$dbh = DB::m();
-		// Get the table
+		// Get the frame
 		$sql = <<<SQL
 SELECT 
 	id
 FROM 
-	`oedipus_tables`
+	`oedipus_frames`
 ORDER BY 
-	`oedipus_tables`.`added` DESC
+	`oedipus_frames`.`added` DESC
 LIMIT 
-	0 , $no_of_tables
+	0 , $no_of_frames
 SQL;
 
 		$results = mysql_query($sql, $dbh);
-		//                print_r($actors);exit;
+		//                print_r($characters);exit;
 
-		// create an array of actors
-		$tables = array();
-		while($table_id = mysql_fetch_array($results))
+		// create an array of characters
+		$frames = array();
+		while($frame_id = mysql_fetch_array($results))
 		{
-			$table = self::get_oedipus_table_by_id($table_id['id']);
-			$tables[] = $table;
+			$frame = self::get_oedipus_frame_by_id($frame_id['id']);
+			$frames[] = $frame;
 		}
-		return $tables;
+		return $frames;
 	}
 
 	/* 
-	 * Functions for updating and editing table values
+	 * Functions for updating and editing frame values
 	 *
 	 */
 
 	public static function
-		set_table_name(
-			$table_id,
-			$table_name
+		set_frame_name(
+			$frame_id,
+			$frame_name
 		)
 	{
-		$table_name_is_valid = TRUE; //Implement this!
+		$frame_name_is_valid = TRUE; //Implement this!
 
-		if ($table_name_is_valid) 
+		if ($frame_name_is_valid) 
 		{
 			$dbh = DB::m();
 
 			$sql = <<<SQL
 UPDATE
-	oedipus_tables
+	oedipus_frames
 SET
-	name = '$table_name'
+	name = '$frame_name'
 WHERE
-	id = $table_id
+	id = $frame_id
 SQL;
 
 			//                        print_r($sql);exit;
@@ -269,43 +269,43 @@ SQL;
 
 
 	public static function
-		add_actor(
-			$actor_name,
-			$table_id,
-			$actor_color
+		add_character(
+			$character_name,
+			$frame_id,
+			$character_color
 		)
 	{
-		$actor_data_is_valid = TRUE; //Implement this!
+		$character_data_is_valid = TRUE; //Implement this!
 
-		if ($actor_data_is_valid) 
+		if ($character_data_is_valid) 
 		{
-			$table = self::get_oedipus_table_by_id($table_id);
+			$frame = self::get_oedipus_frame_by_id($frame_id);
 
 			$dbh = DB::m();
 
-			// Create the Actor
+			// Create the character
 
 			$sql = <<<SQL
 INSERT INTO
-	oedipus_actors
+	oedipus_characters
 SET
-	name = '$actor_name',
-	table_id = '$table_id',
-	color = '$actor_color',
+	name = '$character_name',
+	frame_id = '$frame_id',
+	color = '$character_color',
 	added = NOW()
 SQL;
 
 			//                        print_r($sql);exit;
 			mysql_query($sql, $dbh);
-			$actor_id = mysql_insert_id($dbh);
+			$character_id = mysql_insert_id($dbh);
 
 			// Create default positions
-			// for all options in the table
+			// for all options in the frame
 
-			$table_actors = $table->get_actors();
-			foreach ($table_actors as $table_actor)
+			$frame_characters = $frame->get_characters();
+			foreach ($frame_characters as $frame_character)
 			{
-				foreach ($table_actor->get_options() as $option)
+				foreach ($frame_character->get_options() as $option)
 				{
 						// ADD DEFAULT position tO DATABASE
 						$position_position = '1';
@@ -318,7 +318,7 @@ SET
 	position = '$position_position',
 	doubt = '$position_doubt',
 	option_id = $option_id,
-	actor_id = $actor_id
+	character_id = $character_id
 SQL;
 
 						//                                                        print_r($sql5);exit;
@@ -336,15 +336,15 @@ SQL;
 	public static function
 		add_option(
 			$option_name,
-			$actor_id,
-			$table_id
+			$character_id,
+			$frame_id
 		)
 	{
 		$option_data_is_valid = TRUE; //Implement this!
 
 		if ($option_data_is_valid) 
 		{
-			$table = self::get_oedipus_table_by_id($table_id);
+			$frame = self::get_oedipus_frame_by_id($frame_id);
 
 			$dbh = DB::m();
 
@@ -370,7 +370,7 @@ INSERT INTO
 	oedipus_options
 SET
 	name = '$option_name',
-	actor_id = '$actor_id',
+	character_id = '$character_id',
 	stated_intention_id = '$stated_intention_id',
 	added = NOW()
 SQL;
@@ -380,15 +380,15 @@ SQL;
 			$option_id = mysql_insert_id($dbh);
 
 			// Create default positions
-			// for all actors in the table
+			// for all characters in the frame
 
-			$table_actors = $table->get_actors();
-			foreach ($table_actors as $table_actor)
+			$frame_characters = $frame->get_characters();
+			foreach ($frame_characters as $frame_character)
 			{
 				// ADD DEFAULT position tO DATABASE
 				$position_position = '1';
 				$position_doubt = '';
-				$actor_id = $table_actor->get_id();
+				$character_id = $frame_character->get_id();
 				$sql5 = <<<SQL
 INSERT INTO
 	oedipus_positions
@@ -396,7 +396,7 @@ SET
 	position = '$position_position',
 	doubt = '$position_doubt',
 	option_id = $option_id,
-	actor_id = $actor_id
+	character_id = $character_id
 SQL;
 
 				//                                                        print_r($sql5);exit;
@@ -410,37 +410,37 @@ SQL;
 	}
 
 	public static function
-		delete_actor($actor_id)
+		delete_character($character_id)
 	{
-		$actor_data_is_valid = TRUE; //Implement this!
+		$character_data_is_valid = TRUE; //Implement this!
 
-		if ($actor_data_is_valid) 
+		if ($character_data_is_valid) 
 		{
 			$dbh = DB::m();
 
-			// First, each actor has positions on everyone's options
-			// delete any of the actors positions
+			// First, each character has positions on everyone's options
+			// delete any of the characters positions
 			$positions_sql = <<<SQL
 DELETE FROM
 	oedipus_positions
 WHERE
-	actor_id = $actor_id
+	character_id = $character_id
 SQL;
 
 //                        print_r($positions_sql);exit;
 			mysql_query($positions_sql, $dbh);
 
-			// Delete any options created by the actor
+			// Delete any options created by the character
 			// and their stated intention, and everyone's positions on them
 			// need options_ids to delete
-			// get all options where actor_id = $actor_id
+			// get all options where character_id = $character_id
 			$option_ids_sql = <<<SQL
 SELECT 
 	id
 FROM
 	oedipus_options
 WHERE
-	actor_id = $actor_id
+	character_id = $character_id
 SQL;
 
 //                        print_r($option_ids_sql);exit;
@@ -482,7 +482,7 @@ SQL;
 DELETE FROM
 	oedipus_options
 WHERE
-	actor_id = $actor_id
+	character_id = $character_id
 SQL;
 
 				//                        print_r($sql);exit;
@@ -490,16 +490,16 @@ SQL;
 
 			}
 
-			// Finally, delete the Actor
-			$actor_sql = <<<SQL
+			// Finally, delete the character
+			$character_sql = <<<SQL
 DELETE FROM
-	oedipus_actors
+	oedipus_characters
 WHERE
-	id = $actor_id
+	id = $character_id
 SQL;
 
-//                        print_r($actor_sql);exit;
-			mysql_query($actor_sql, $dbh);
+//                        print_r($character_sql);exit;
+			mysql_query($character_sql, $dbh);
 		}
 		else 
 		{
@@ -613,26 +613,26 @@ SQL;
 	}
 	
 	public static function
-		update_actor_by_id(
-			$actor_id,
-			$actor_name,
-			$actor_color
+		update_character_by_id(
+			$character_id,
+			$character_name,
+			$character_color
 		)
 	{
-		$actor_data_is_valid = TRUE; //Implement this!
+		$character_data_is_valid = TRUE; //Implement this!
 
-		if ($actor_data_is_valid) 
+		if ($character_data_is_valid) 
 		{
 			$dbh = DB::m();
 
 			$sql = <<<SQL
 UPDATE
-	oedipus_actors
+	oedipus_characters
 SET
-	name = '$actor_name',
-	color = '$actor_color'
+	name = '$character_name',
+	color = '$character_color'
 WHERE
-	id = $actor_id
+	id = $character_id
 SQL;
 
 			#print_r($sql);exit;
@@ -704,48 +704,48 @@ SQL;
 	 */
 
 	public static function
-		create_oedipus_table_from_get($get)
+		create_oedipus_frame_from_get($get)
 	{
-		// Creating a Table
+		// Creating a frame
 		// -----------------
 		// 1.
-		// Create the actors,
+		// Create the characters,
 		// and their options, options have stated intentions
-		// foreach actor, check if 
+		// foreach character, check if 
 
-		$actors = array();
-		for ($i = 1; $i <= $get['no_of_actors'];  $i++)
+		$characters = array();
+		for ($i = 1; $i <= $get['no_of_characters'];  $i++)
 		{
-			$actor = new Oedipus_Actor($i, $get['actor_name-' . $i], $get['actor_color-' . $i]);
+			$character = new Oedipus_Character($i, $get['character_name-' . $i], $get['character_color-' . $i]);
 
-			for ($j = 1; $j <= $get['actor-' . $i . '-no_of_options'];  $j++)
+			for ($j = 1; $j <= $get['character-' . $i . '-no_of_options'];  $j++)
 			{
 				$stated_intention = new Oedipus_StatedIntention('1', 'q');
-				$actors_option = 
+				$characters_option = 
 					new Oedipus_Option(
-						$j, $get['actor-' . $i . '-option_name-' . $j], $stated_intention
+						$j, $get['character-' . $i . '-option_name-' . $j], $stated_intention
 					);
 
-				$actor->add_option($actors_option);
+				$character->add_option($characters_option);
 			}
 
-			$actors[] = $actor;
+			$characters[] = $character;
 		}
 
 		// 2.
 		// create the positions 
 		// attached to options for ease of display (?)
-		// positions have an actor as well as an option
-		foreach ($actors as $actor)
+		// positions have an character as well as an option
+		foreach ($characters as $character)
 		{
-			foreach ($actor->get_options() as $option)
+			foreach ($character->get_options() as $option)
 			{
 				$positions = array();
 
-				foreach ($actors as $position_actor)
+				foreach ($characters as $position_character)
 				{
-					$positions[$position_actor->get_id()] =
-						new Oedipus_Position('0', 'q', $position_actor);
+					$positions[$position_character->get_id()] =
+						new Oedipus_Position('0', 'q', $position_character);
 				}
 
 				$option->add_positions($positions);
@@ -753,39 +753,39 @@ SQL;
 		}
 
 		// 3.
-		// Create the table
-		$table = new Oedipus_Table($get['table_name'], $actors);
+		// Create the frame
+		$frame = new Oedipus_Frame($get['frame_name'], $characters);
 
 		// DEBUG
-		// print_r($table->get_actors());exit;
+		// print_r($frame->get_characters());exit;
 
-		return $table;
+		return $frame;
 	}
 
 	public static function
-		get_default_oedipus_table()
+		get_default_oedipus_frame()
 	{
 		//fake get variables:
 		//
 		$get = array();
-		$get['table_name'] = 'Example Drama Theoretic Oedipus Table';
-		$get['no_of_actors'] = 2;
+		$get['frame_name'] = 'Example Drama Theoretic Oedipus frame';
+		$get['no_of_characters'] = 2;
 
-		$get['actor_name-1'] = 'Ryu';
-		$get['actor_color-1'] = 'blue';
-		$get['actor-1-no_of_options'] = 2;
-		$get['actor-1-option_name-1'] = 'smoke weed';
-		$get['actor-1-option_name-2'] = 'learn kung fu';
+		$get['character_name-1'] = 'Ryu';
+		$get['character_color-1'] = 'blue';
+		$get['character-1-no_of_options'] = 2;
+		$get['character-1-option_name-1'] = 'smoke weed';
+		$get['character-1-option_name-2'] = 'learn kung fu';
 
-		$get['actor_name-2'] = 'Ganja Master';
-		$get['actor_color-2'] = 'red';
+		$get['character_name-2'] = 'Ganja Master';
+		$get['character_color-2'] = 'red';
 
-		return self::create_oedipus_table_from_get($get);
+		return self::create_oedipus_frame_from_get($get);
 	}
 
 	// PROCESS GET & POST
 	public static function
-		process_table_editor_form()
+		process_frame_editor_form()
 	{
 		// NOT USED ANYMORE
 		//
@@ -800,13 +800,13 @@ SQL;
 		//                echo '$_SESSION[\'name\']: ' . $_SESSION['name'] . "\n";
 		//                echo '$_SESSION[\'email\']: ' . $_SESSION['email'] . "\n";
 		//                
-		//                $return_to_url = self::get_table_creator_page_url();
+		//                $return_to_url = self::get_frame_creator_page_url();
 		$return_to_url = new HTMLTags_URL();
 		$return_to_url->set_file('/');
 		$return_to_url->set_get_variable('oo-page', 1);
-		$return_to_url->set_get_variable('page-class', 'Oedipus_TableCreatorPage');
+		$return_to_url->set_get_variable('page-class', 'Oedipus_FrameCreatorPage');
 
-		$return_to_url->set_get_variable('table_values', 1);
+		$return_to_url->set_get_variable('frame_values', 1);
 
 		foreach ($_POST as $key=>$value)
 		{
@@ -817,11 +817,11 @@ SQL;
 		//                print_r($_POST);echo $return_to_url->get_as_string();exit;
 		//                
 		//                if (isset($_GET['add_person'])) {
-		//                        $mysql_user_factory = Database_MySQLUserFactory::get_instance();
-		//                        $mysql_user = $mysql_user_factory->get_for_this_project();
+		//                        $mysql_user_fcharactery = Database_MySQLUserFcharactery::get_instance();
+		//                        $mysql_user = $mysql_user_fcharactery->get_for_this_project();
 		//                        $database = $mysql_user->get_database();
 		//                        
-		//                        $people_table = $database->get_table('hpi_mailing_list_people');
+		//                        $people_frame = $database->get_frame('hpi_mailing_list_people');
 		//                        
 		//                        if (isset($_POST['name'])) {
 		//                                $_SESSION['name'] = $_POST['name'];
@@ -833,13 +833,13 @@ SQL;
 		//                        
 
 		//            try {
-		//                $last_added_id = $oedipus_tables_table->update_table(
+		//                $last_added_id = $oedipus_frames_frame->update_frame(
 		//                    $_POST['name'],
 		//                    $_POST['email'],
 		//                    isset($_POST['force_email'])
 		//                );
 		//                
-		//                $return_to_url->set_get_variable('table_updated');
+		//                $return_to_url->set_get_variable('frame_updated');
 
 		//                
 		//                $_SESSION['last_added_id'] = $last_added_id;
@@ -871,13 +871,13 @@ SQL;
 	 * ----------------------------------------
 	 */
 	public function
-		get_drama_url_for_table(Oedipus_Table $table)
+		get_drama_url_for_frame(Oedipus_Frame $frame)
 	{
 			return PublicHTML_URLHelper
 				::get_oo_page_url(
 					'Oedipus_DramaPage',
 					array(
-						'drama_id' => $table->get_drama_id()
+						'drama_id' => $frame->get_drama_id()
 					)
 				);
 	}

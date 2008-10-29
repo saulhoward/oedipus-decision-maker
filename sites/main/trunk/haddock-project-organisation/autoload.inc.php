@@ -2117,16 +2117,16 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_AddDramaHTMLForm.inc.php';
 			break;
 
+		case('Oedipus_AddFrameNoteHTMLForm'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_AddFrameNoteHTMLForm.inc.php';
+			break;
+
 		case('Oedipus_AddNoteHTMLForm'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_AddNoteHTMLForm.inc.php';
 			break;
 
 		case('Oedipus_AddTableHTMLForm'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_AddTableHTMLForm.inc.php';
-			break;
-
-		case('Oedipus_AddTableNoteHTMLForm'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_AddTableNoteHTMLForm.inc.php';
 			break;
 
 		case('Oedipus_Character'): 
@@ -2177,16 +2177,16 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditDramaStatusHTMLForm.inc.php';
 			break;
 
+		case('Oedipus_EditFrameNoteHTMLForm'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditFrameNoteHTMLForm.inc.php';
+			break;
+
+		case('Oedipus_EditFrameNoteRedirectScript'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/redirect-scripts/Oedipus_EditFrameNoteRedirectScript.inc.php';
+			break;
+
 		case('Oedipus_EditNoteHTMLForm'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditNoteHTMLForm.inc.php';
-			break;
-
-		case('Oedipus_EditTableNoteHTMLForm'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditTableNoteHTMLForm.inc.php';
-			break;
-
-		case('Oedipus_EditTableNoteRedirectScript'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/pages/redirect-scripts/Oedipus_EditTableNoteRedirectScript.inc.php';
 			break;
 
 		case('Oedipus_ExampleTablePage'): 
