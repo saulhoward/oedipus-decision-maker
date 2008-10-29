@@ -56,23 +56,23 @@ table.oedipus colgroup.options-column
 {
 /*        background: grey;*/
 }
-table.oedipus colgroup.actor-column
+table.oedipus colgroup.character-column
 {
 /*        background: cyan;*/
 }
-table.oedipus #blue.actor-column
+table.oedipus #blue.character-column
 {
 	background-color: #8080FF; /* BLUE -50% SAT. */
 }
-table.oedipus #red.actor-column
+table.oedipus #red.character-column
 {
 	background-color: #FF8080; /* RED -50% SAT. */
 }
-table.oedipus #green.actor-column
+table.oedipus #green.character-column
 {
 	background-color: #80FF80; /* GREEN -50% SAT. */
 }
-table.oedipus #orange.actor-column
+table.oedipus #orange.character-column
 {
 	background-color: #FFE480; /* ORANGE -50% SAT. */
 }

@@ -443,14 +443,14 @@ SQL;
 			
 			return PublicHTML_URLHelper
 				::get_oo_page_url(
-					'Oedipus_DramaEditorPage',
+					'Oedipus_EditDramaPage',
 					array(
 						'drama_unique_name' => $drama->get_unique_name()
 					)
 				);
 		} else {
 			return PublicHTML_URLHelper
-				::get_oo_page_url('Oedipus_DramaEditorPage');
+				::get_oo_page_url('Oedipus_EditDramaPage');
 		}
 	}
 

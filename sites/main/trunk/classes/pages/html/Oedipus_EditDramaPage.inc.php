@@ -1,13 +1,13 @@
 <?php
 /**
- * Oedipus_DramaEditorPage
+ * Oedipus_EditDramaPage
  *
  * @copyright 2008-03-30, RFI
- * @copyright 2008-04-11, SANH
+ * @copyright 2008-10-28, SANH
  */
 
 class
-	Oedipus_DramaEditorPage
+	Oedipus_EditDramaPage
 extends
 	Oedipus_HTMLPage
 {
@@ -39,15 +39,13 @@ extends
 		if (isset($_GET['drama_unique_name'])) {
 			try {
 				$this->set_drama(
-					Oedipus_DramaEditorHelper
+					Oedipus_DramaHelper
 						::get_drama_by_unique_name(
 							$_GET['drama_unique_name']
 						)
 				);
 
 				//                        print_r($_GET);exit;
-				$drama_editor_page_div =
-					$this->get_oedipus_drama_editor_page_div();
 			} catch (Exception $e) {
 				/*
 				 * See
@@ -55,56 +53,33 @@ extends
 				 * RFI 2008-04-29
 				 */
 			}
-#		} elseif (isset($_GET['drama_id'])) {
-#			$this->set_drama(
-#			    Oedipus_DramaEditorHelper
-#					::get_drama_by_id(
-#						$_GET['drama_id']
-#					)
-#			);
-#		}
-#<<<<<<< .mine
-#		
-#		if ($this->has_drama()) {
-#			/*
-#			 * Make a link back to the drama's page.
-#			 */
-#			
-#			$drama = $this->get_drama();
-#			
-#			$drama_view = $drama->get_view();
-#			
-#			$drama_view->render_link_back_to_view_page_p();
-#			
-#			/*
-#			 * Show the tables of the drama.
-#			 */
-#			
-#=======
-		} elseif (isset($_GET['drama_id']))
+		} 
+		elseif (isset($_GET['drama_id']))
 		{
 			try
 			{
-				$this->drama =
-					Oedipus_DramaEditorHelper::get_drama_by_id($_GET['drama_id']);
-
-#>>>>>>> .r55
-#<<<<<<< .mine
-#			$drama_editor_page_div =
-#			    $this->get_oedipus_drama_editor_page_div();
-#		} else {
-#=======
-				$drama_editor_page_div =
-					$this->get_oedipus_drama_editor_page_div();
+				$this->set_drama(
+					Oedipus_DramaHelper
+					::get_drama_by_id(
+						$_GET['drama_id']
+					)
+				);
 			}
 			catch (Exception $e)
 			{
 
 			}
 		}
+
+		if ($this->has_drama()) {
+			/*
+			 * Show the frames of the drama.
+			 */
+			$drama_editor_page_div =
+				$this->get_oedipus_drama_editor_page_div();
+		}
 		else
 		{
-#>>>>>>> .r55
 			// NO DRAMA SET
 			DBPages_PageRenderer::render_page_section('drama-editor', 'title');
 			DBPages_PageRenderer::render_page_section('drama-editor', 'no-drama-set');
@@ -132,15 +107,15 @@ extends
 			$this->get_oedipus_html_drama_editor_page_actions_ul()
 		);
 
-		if (isset($this->drama))
+		if ($this->has_drama())
 		{
 			$drama_editor_page_div->append_tag_to_content(
 				$this->get_drama_heading()
 			);
 
-			$drama_editor_page_div->append_tag_to_content(
-				$this->get_oedipus_html_drama_div()
-			);
+//                        $drama_editor_page_div->append_tag_to_content(
+//                                $this->get_oedipus_html_drama_div()
+//                        );
 		}
 
 		return $drama_editor_page_div;
@@ -154,8 +129,8 @@ extends
 
 		$first = TRUE;
 
-		// SHOW THE TABLES
-		foreach ($this->drama->get_tables() as $table)
+		// SHOW THE frameS
+		foreach ($this->drama->get_frames() as $frame)
 		{
 			if (!$first)
 			{
@@ -168,16 +143,16 @@ extends
 			$left_div = new HTMLTags_Div();
 			$left_div->set_attribute_str('class', 'left-column');
 
-			# The table itself
-			$left_div->append_tag_to_content($this->get_oedipus_table_div($table));
+			# The frame itself
+			$left_div->append_tag_to_content($this->get_oedipus_frame_div($frame));
 			# The instructions
-			//$left_div->append_tag_to_content($this->get_drama_page_table_instructions_div());
+			//$left_div->append_tag_to_content($this->get_drama_page_frame_instructions_div());
 			$drama_div->append_tag_to_content($left_div);
 
 			$right_div = new HTMLTags_Div();
 			$right_div->set_attribute_str('class', 'right-column');
 			# The notes etc. added here
-			$right_div->append_tag_to_content($this->get_table_notes_div($table));
+			$right_div->append_tag_to_content($this->get_frame_notes_div($frame));
 
 			$drama_div->append_tag_to_content($right_div);
 
@@ -186,8 +161,8 @@ extends
 			$drama_div->append_tag_to_content($clear_div);
 		}
 
-		// CREATE TABLE FORM
-		$drama_div->append_tag_to_content($this->get_add_table_form());
+		// CREATE frame FORM
+		$drama_div->append_tag_to_content($this->get_add_frame_form());
 
 		return $drama_div;
 	}
@@ -209,65 +184,65 @@ extends
 	}
 
 	private function
-		get_oedipus_table_div(Oedipus_Table $table)
+		get_oedipus_frame_div(Oedipus_frame $frame)
 	{
-		$table_div = new HTMLTags_Div();
-		$table_div->set_attribute_str('class', 'oedipus-table');
-		$table_div->append_tag_to_content($this->get_oedipus_html_table($table));
-		$table_div->append_tag_to_content($this->get_oedipus_html_table_options($table));
-		return $table_div;
+		$frame_div = new HTMLTags_Div();
+		$frame_div->set_attribute_str('class', 'oedipus-frame');
+		$frame_div->append_tag_to_content($this->get_oedipus_html_frame($frame));
+		$frame_div->append_tag_to_content($this->get_oedipus_html_frame_options($frame));
+		return $frame_div;
 	}
 
 	private function
-		get_oedipus_html_table(Oedipus_Table $table)
+		get_oedipus_html_frame(Oedipus_frame $frame)
 	{
-		return new Oedipus_OedipusHTMLTable($table, FALSE);
+		return new Oedipus_FrameHTMLframe($frame, FALSE);
 	}
 
 	private function
-		get_oedipus_html_table_options(Oedipus_Table $table)
+		get_oedipus_html_frame_options(Oedipus_frame $frame)
 	{
-		return new Oedipus_OedipusTableOptionsUL($table);
+		return new Oedipus_FrameOptionsUL($frame);
 	}
 
 	private function
-		get_table_notes_div(Oedipus_Table $table)
+		get_frame_notes_div(Oedipus_frame $frame)
 	{
 		$div = new HTMLTags_Div();
 		$div->set_attribute_str('class', 'notes');
 
-		$heading = new HTMLTags_Heading(3, $table->get_name());
+		$heading = new HTMLTags_Heading(3, $frame->get_name());
 		$div->append_tag_to_content($heading);
 
-		$div->append_tag_to_content($this->get_table_notes_form($table));
+		$div->append_tag_to_content($this->get_frame_notes_form($frame));
 
 		return $div;
 	}
 
 	private function
-		get_table_notes_form(Oedipus_Table $table)
+		get_frame_notes_form(Oedipus_frame $frame)
 	{
-		if (Oedipus_NotesHelper::has_table_got_note($table->get_id()))
+		if (Oedipus_NotesHelper::has_frame_got_note($frame->get_id()))
 		{
-			$note = Oedipus_NotesHelper::get_note_by_table_id($table->get_id());
-			return new Oedipus_EditTableNoteHTMLForm($note, $this->drama);
+			$note = Oedipus_NotesHelper::get_note_by_frame_id($frame->get_id());
+			return new Oedipus_EditFrameNoteHTMLForm($note, $this->drama);
 		}
 		else
 		{
-			return new Oedipus_AddTableNoteHTMLForm($this->drama, $table);
+			return new Oedipus_AddFrameNoteHTMLForm($this->drama, $frame);
 		}
 	}
 
 	private function
 		get_oedipus_html_drama_editor_page_actions_ul()
 	{
-		return new Oedipus_OedipusDramaEditorPageActionsUL($this->drama);
+		return new Oedipus_EditDramaPageActionsUL($this->drama);
 	}
 
 	private function
 		get_all_dramas_ul()
 	{
-		return new Oedipus_OedipusAllDramasUL();
+		return new Oedipus_AllDramasUL();
 	}
 
 	private function
@@ -287,9 +262,9 @@ extends
 	}
 
 	private function
-		get_add_table_form()
+		get_add_frame_form()
 	{
-		return new Oedipus_AddTableHTMLForm($this->drama);
+		return new Oedipus_AddframeHTMLForm($this->drama);
 	}
 }
 ?>

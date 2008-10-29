@@ -1,13 +1,13 @@
 <?php
 /**
- * Oedipus_TableImageHelper
+ * Oedipus_FrameImageHelper
  *
  * @copyright RFI, 2008-02-18
  * @copyright SANH, 2008-04-24
  */
 
 class
-Oedipus_TableImageHelper
+Oedipus_FrameImageHelper
 {
 	public function make_image()
 	{
@@ -17,7 +17,6 @@ Oedipus_TableImageHelper
 		// width = label + (1 X no_of_actors) + 1 for si
 		// height = 1 for header + (1 x no_of_actors)
 		//
-
 
 		$img = load_png("/images/logo.png");
 		imagepng($img);
@@ -51,10 +50,10 @@ Oedipus_TableImageHelper
 	}
 
 	public function
-		get_table_png_url($table_id)
+		get_frame_png_url($frame_id)
 	{
 			$url = new HTMLTags_URL();
-			$url->set_file('/tables/images/option-table-'. $table_id . '.png');
+			$url->set_file('/frames/images/frame-'. $frame_id . '.png');
 			return $url;
 	}
 }

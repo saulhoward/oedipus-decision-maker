@@ -2,7 +2,7 @@
 /**
  * __autoload .INC file
  *
- * Last Modified: 2008-10-24
+ * Last Modified: 2008-10-29
  */
 
 function __autoload($class_name)
@@ -2145,10 +2145,6 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_DramaEditorHelper.inc.php';
 			break;
 
-		case('Oedipus_DramaEditorPage'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_DramaEditorPage.inc.php';
-			break;
-
 		case('Oedipus_DramaEditorRedirectScript'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/redirect-scripts/Oedipus_DramaEditorRedirectScript.inc.php';
 			break;
@@ -2161,8 +2157,20 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_DramaPage.inc.php';
 			break;
 
+		case('Oedipus_DramaPageActionsUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_DramaPageActionsUL.inc.php';
+			break;
+
 		case('Oedipus_DramasHelper'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_DramasHelper.inc.php';
+			break;
+
+		case('Oedipus_EditDramaPage'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_EditDramaPage.inc.php';
+			break;
+
+		case('Oedipus_EditDramaPageActionsUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditDramaPageActionsUL.inc.php';
 			break;
 
 		case('Oedipus_EditDramaStatusHTMLForm'): 
@@ -2195,6 +2203,14 @@ function __autoload($class_name)
 
 		case('Oedipus_FrameHTMLTable'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_FrameHTMLTable.inc.php';
+			break;
+
+		case('Oedipus_FrameImageHelper'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_FrameImageHelper.inc.php';
+			break;
+
+		case('Oedipus_FrameOptionsUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_FrameOptionsUL.inc.php';
 			break;
 
 		case('Oedipus_GDPNGImage'): 
@@ -2253,18 +2269,6 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusAllDramasUL.inc.php';
 			break;
 
-		case('Oedipus_OedipusDramaEditorPageActionsUL'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusDramaEditorPageActionsUL.inc.php';
-			break;
-
-		case('Oedipus_OedipusDramaPageActionsUL'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusDramaPageActionsUL.inc.php';
-			break;
-
-		case('Oedipus_OedipusFrameOptionsUL'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusFrameOptionsUL.inc.php';
-			break;
-
 		case('Oedipus_OedipusHTMLTable'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusHTMLTable.inc.php';
 			break;
@@ -2275,10 +2279,6 @@ function __autoload($class_name)
 
 		case('Oedipus_OedipusOptionEditorHTMLForm'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusOptionEditorHTMLForm.inc.php';
-			break;
-
-		case('Oedipus_OedipusPageActionsUL'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusPageActionsUL.inc.php';
 			break;
 
 		case('Oedipus_OedipusShareDramaPageActionsUL'): 
@@ -2315,6 +2315,10 @@ function __autoload($class_name)
 
 		case('Oedipus_Option'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Option.inc.php';
+			break;
+
+		case('Oedipus_PageActionsUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_PageActionsUL.inc.php';
 			break;
 
 		case('Oedipus_Position'): 
@@ -2367,10 +2371,6 @@ function __autoload($class_name)
 
 		case('Oedipus_TableEditorRedirectScript'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/redirect-scripts/Oedipus_TableEditorRedirectScript.inc.php';
-			break;
-
-		case('Oedipus_TableImageHelper'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_TableImageHelper.inc.php';
 			break;
 
 		case('Oedipus_TablePNGImage'): 

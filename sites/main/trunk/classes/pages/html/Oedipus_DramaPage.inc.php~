@@ -137,7 +137,7 @@ Oedipus_RestrictedPage
 	private function
 		get_oedipus_drama_page_actions()
 	{
-		return new Oedipus_DramaPageActionsUL(
+		return new Oedipus_PageActionsUL(
 			$this->drama, $this->edit_privilege
 		);
 	}

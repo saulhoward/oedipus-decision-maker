@@ -70,7 +70,7 @@ class
 		# The frame itself
 		$left_div->append_tag_to_content(
 			self::get_oedipus_frame_div($frame)
-		);
+	       );
 
 		# The instructions
 		//$left_div->append_tag_to_content(
@@ -128,6 +128,7 @@ class
 	private function
 		get_oedipus_html_frame(Oedipus_Frame $frame)
 	{
+//                print_r($frame);exit;
 		# Get a frame that's not editable
 		return new Oedipus_FrameHTMLTable($frame, FALSE);
 	}
@@ -358,7 +359,7 @@ SQL;
 		get_frame_by_id($frame_id)
 	{
 		$dbh = DB::m();
-		$query = <<<SQL
+		$frames_query = <<<SQL
 SELECT 
 	*
 	FROM
@@ -368,11 +369,146 @@ SELECT
 SQL;
 
 		//                                print_r($query);exit;
-		$result = mysql_query($query, $dbh);
-		$row = mysql_fetch_array($result);
-//                                                print_r($row);exit;
+		//                                                print_r($row);exit;
 
+		//                print_r($frames_query);exit;
+		$frames_result = mysql_query($frames_query, $dbh);
+		//                print_r($frames);exit;
+		$frame_result = mysql_fetch_array($frames_result);
+		// -----------------------------------------------------------------------------
+		// Creating a Table
+		// -----------------
+		// 1.
+		// Create the characters,
+		// and their options, options have stated intentions
+
+		// For this frame, get the characters
+		$frame_id = $frame_result['id'];
+		// Get all characters for this drama
+		$characters_query = <<<SQL
+SELECT 
+	*
+	FROM
+		oedipus_characters
+	WHERE
+		frame_id = $frame_id
+SQL;
+
+		//                print_r($characters_query);exit;
+		$characters_result = mysql_query($characters_query, $dbh);
+		//                print_r($characters);exit;
+
+		// create an array of characters
 		$characters = array();
+		while($character_result = mysql_fetch_array($characters_result))
+		{
+			$character = new Oedipus_Character(
+				$character_result['id'],
+				$character_result['name'],
+			       	$character_result['color']
+			);
+
+			//add the stated intentions to the option object
+			//add the options to the character object
+
+			// For this character, get the options
+			$character_id = $character_result['id'];
+			// Get all characters for this drama
+			$options_query = <<<SQL
+SELECT 
+	*
+	FROM
+		oedipus_options
+	WHERE
+		character_id = $character_id
+SQL;
+
+			//                print_r($characters_query);exit;
+			$options_result = mysql_query($options_query, $dbh);
+			//                print_r($characters);exit;
+
+			$options = array();
+			while($option_result = mysql_fetch_array($options_result))
+			{
+				//get the stated intention
+				$stated_intention_id = $option_result['stated_intention_id'];
+				$stated_intentions_query = <<<SQL
+SELECT 
+	*
+	FROM
+		oedipus_stated_intentions
+	WHERE
+		id = $stated_intention_id
+SQL;
+
+				//                print_r($characters_query);exit;
+				$stated_intentions_result = mysql_query($stated_intentions_query, $dbh);
+				$stated_intention_result = mysql_fetch_array($stated_intentions_result);
+
+				$stated_intention = new Oedipus_StatedIntention(
+					$stated_intention_result['id'],
+					$stated_intention_result['position'],
+					$stated_intention_result['doubt']
+				);
+
+				$characters_option = 
+					new Oedipus_Option(
+						$option_result['id'],
+						$option_result['name'],
+						$stated_intention
+					);
+
+				$character->add_option($characters_option);
+			}
+
+			$characters[] = $character;
+			//add the positions to the option object
+			//
+		}
+
+		// 2.
+		// create the positions 
+		// attached to options for ease of display (?)
+		// positions have an character as well as an option
+		foreach ($characters as $character)
+		{
+			foreach ($character->get_options() as $option)
+			{
+				$positions = array();
+
+				foreach ($characters as $position_character)
+				{
+					$character_id = $position_character->get_id();
+					$option_id = $option->get_id();
+					// Get all characters for this drama
+					$positions_query = <<<SQL
+SELECT 
+	*
+	FROM
+		oedipus_positions
+	WHERE
+		character_id = $character_id
+AND
+		option_id = $option_id
+SQL;
+
+					//                print_r($characters_query);exit;
+					$positions_result = mysql_query($positions_query, $dbh);
+					//                print_r($characters);exit;
+					$position_result = mysql_fetch_array($positions_result);
+
+					$positions[$position_character->get_id()] =
+						new Oedipus_Position(
+							$position_result['id'],
+							$position_result['position'],
+							$position_result['doubt'],
+							$position_character
+						);
+				}
+
+				$option->add_positions($positions);
+			}
+		}
 
 		$frame = new Oedipus_Frame(
 			$row['id'],
@@ -383,6 +519,7 @@ SQL;
 		);
 
 //                                                print_r($frame);exit;
+		//
 		return $frame;
 	}
 	
@@ -432,7 +569,7 @@ SQL;
 		$frame_id = mysql_insert_id($dbh);
 
 		// ADD DEFAULT ACTOR tO DATABASE
-		$character_name = 'First Actor';
+		$character_name = 'First Character';
 		$character_color = 'red';
 		$sql2 = <<<SQL
 INSERT INTO
@@ -530,7 +667,7 @@ SET
 	character_id = $character_id
 SQL;
 
-					//                                                        print_r($sql5);exit;
+//                                        print_r($sql5);exit;
 					$result5 = mysql_query($sql5, $dbh);
 					$position_id = mysql_insert_id($dbh);
 
