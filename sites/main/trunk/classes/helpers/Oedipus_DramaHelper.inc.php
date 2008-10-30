@@ -10,6 +10,31 @@ class
 	Oedipus_DramaHelper
 {
 	public static function
+		get_drama_id_for_scene_id($scene_id)
+	{
+		$dbh = DB::m();
+		$query = <<<SQL
+SELECT 
+	oedipus_dramas.id
+FROM 
+	oedipus_dramas, oedipus_acts, oedipus_scenes, oedipus_frames
+WHERE 
+	oedipus_frames.scene_id = '$scene_id'
+AND
+	oedipus_scenes.act_id = oedipus_acts.id
+AND 
+	oedipus_acts.drama_id = oedipus_dramas.id
+SQL;
+
+		//                                print_r($query);exit;
+		$result = mysql_query($query, $dbh);
+		$row = mysql_fetch_array($result);
+		//                                print_r($row);exit;
+
+		return $row['id'];
+	}
+
+	public static function
 		get_drama_div(Oedipus_Drama $drama, $editable = FALSE)
 	{
 		$drama_div = new HTMLTags_Div();

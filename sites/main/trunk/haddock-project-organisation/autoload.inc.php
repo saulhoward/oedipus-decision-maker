@@ -2165,6 +2165,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_DramasHelper.inc.php';
 			break;
 
+		case('Oedipus_EditCharacterHTMLForm'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditCharacterHTMLForm.inc.php';
+			break;
+
 		case('Oedipus_EditDramaPage'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_EditDramaPage.inc.php';
 			break;
@@ -2177,6 +2181,26 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditDramaStatusHTMLForm.inc.php';
 			break;
 
+		case('Oedipus_EditFrameActionsUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditFrameActionsUL.inc.php';
+			break;
+
+		case('Oedipus_EditFrameCharacterActionsUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditFrameCharacterActionsUL.inc.php';
+			break;
+
+		case('Oedipus_EditFrameFrameActionsUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditFrameFrameActionsUL.inc.php';
+			break;
+
+		case('Oedipus_EditFrameHTMLForm'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditFrameHTMLForm.inc.php';
+			break;
+
+		case('Oedipus_EditFrameNameHTMLForm'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditFrameNameHTMLForm.inc.php';
+			break;
+
 		case('Oedipus_EditFrameNoteHTMLForm'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditFrameNoteHTMLForm.inc.php';
 			break;
@@ -2185,8 +2209,28 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/redirect-scripts/Oedipus_EditFrameNoteRedirectScript.inc.php';
 			break;
 
+		case('Oedipus_EditFrameOptionActionsUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditFrameOptionActionsUL.inc.php';
+			break;
+
+		case('Oedipus_EditFramePage'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_EditFramePage.inc.php';
+			break;
+
+		case('Oedipus_EditFramePageActionsUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditFramePageActionsUL.inc.php';
+			break;
+
+		case('Oedipus_EditFrameRedirectScript'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/redirect-scripts/Oedipus_EditFrameRedirectScript.inc.php';
+			break;
+
 		case('Oedipus_EditNoteHTMLForm'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditNoteHTMLForm.inc.php';
+			break;
+
+		case('Oedipus_EditOptionHTMLForm'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditOptionHTMLForm.inc.php';
 			break;
 
 		case('Oedipus_ExampleTablePage'): 
@@ -2199,6 +2243,10 @@ function __autoload($class_name)
 
 		case('Oedipus_Frame'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Frame.inc.php';
+			break;
+
+		case('Oedipus_FrameHelper'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_FrameHelper.inc.php';
 			break;
 
 		case('Oedipus_FrameHTMLTable'): 
@@ -2261,10 +2309,6 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_NotesHelper.inc.php';
 			break;
 
-		case('Oedipus_OedipusActorEditorHTMLForm'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusActorEditorHTMLForm.inc.php';
-			break;
-
 		case('Oedipus_OedipusAllDramasUL'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusAllDramasUL.inc.php';
 			break;
@@ -2277,40 +2321,8 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusMyDramasUL.inc.php';
 			break;
 
-		case('Oedipus_OedipusOptionEditorHTMLForm'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusOptionEditorHTMLForm.inc.php';
-			break;
-
 		case('Oedipus_OedipusShareDramaPageActionsUL'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusShareDramaPageActionsUL.inc.php';
-			break;
-
-		case('Oedipus_OedipusTableEditorActionsUL'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusTableEditorActionsUL.inc.php';
-			break;
-
-		case('Oedipus_OedipusTableEditorActorActionsUL'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusTableEditorActorActionsUL.inc.php';
-			break;
-
-		case('Oedipus_OedipusTableEditorHTMLForm'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusTableEditorHTMLForm.inc.php';
-			break;
-
-		case('Oedipus_OedipusTableEditorOptionActionsUL'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusTableEditorOptionActionsUL.inc.php';
-			break;
-
-		case('Oedipus_OedipusTableEditorPageActionsUL'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusTableEditorPageActionsUL.inc.php';
-			break;
-
-		case('Oedipus_OedipusTableEditorTableActionsUL'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusTableEditorTableActionsUL.inc.php';
-			break;
-
-		case('Oedipus_OedipusTableNameEditorHTMLForm'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusTableNameEditorHTMLForm.inc.php';
 			break;
 
 		case('Oedipus_Option'): 
@@ -2359,18 +2371,6 @@ function __autoload($class_name)
 
 		case('Oedipus_Table'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Table.inc.php';
-			break;
-
-		case('Oedipus_TableCreationHelper'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_TableCreationHelper.inc.php';
-			break;
-
-		case('Oedipus_TableEditorPage'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_TableEditorPage.inc.php';
-			break;
-
-		case('Oedipus_TableEditorRedirectScript'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/pages/redirect-scripts/Oedipus_TableEditorRedirectScript.inc.php';
 			break;
 
 		case('Oedipus_TablePNGImage'): 

@@ -10,7 +10,7 @@ class
 Oedipus_FrameHelper
 {
 	public static function
-		get_oedipus_frame_by_id($frame_id)
+		get_frame_by_id($frame_id)
 	{
 		$dbh = DB::m();
 		// Get the frame

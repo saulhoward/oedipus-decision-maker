@@ -67,6 +67,12 @@ Oedipus_Frame
 	}
 
 	public function
+		get_drama_id()
+	{
+		return Oedipus_DramaHelper::get_drama_id_for_scene_id();
+	}
+
+	public function
 		get_scene_id()
 	{
 		return $this->scene_id;

@@ -9,7 +9,7 @@
 class
 Oedipus_EditFramePage
 extends
-Oedipus_HTMLPage
+Oedipus_RestrictedPage
 {
 	private $frame;
 
@@ -18,11 +18,12 @@ Oedipus_HTMLPage
 	{
 		if (isset($_GET['frame_id']))
 		{
-			//                        print_r($_GET);exit;
-			$this->frame = Oedipus_DramaHelper
+			//print_r($_GET);exit;
+			$this->frame = Oedipus_FrameHelper
 				::get_frame_by_id(
 					$_GET['frame_id']
 				);
+
 			$frame_editor_page_div 
 				= $this->get_edit_frame_page_div();
 
@@ -53,7 +54,7 @@ Oedipus_HTMLPage
 		# The Actions UL (Edit, Share...)
 		$this->wrap_element_with_class_and_add_to_div(
 			$frame_editor_page_div,
-			$this->get_oedipus_html_frame_editor_page_actions_ul(),
+			$this->get_page_actions_ul(),
 			'frame-editor-page-actions'
 		);
 
@@ -300,7 +301,7 @@ Oedipus_HTMLPage
 	}
 
 	private function
-		get_oedipus_html_frame_editor_page_actions_ul()
+		get_page_actions_ul()
 	{
 		return new Oedipus_EditFramePageActionsUL(
 			$this->frame
