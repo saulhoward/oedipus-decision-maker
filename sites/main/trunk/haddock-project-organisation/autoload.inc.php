@@ -2,7 +2,7 @@
 /**
  * __autoload .INC file
  *
- * Last Modified: 2008-10-29
+ * Last Modified: 2008-11-01
  */
 
 function __autoload($class_name)
@@ -2129,6 +2129,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_AddTableHTMLForm.inc.php';
 			break;
 
+		case('Oedipus_AllDramasUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_AllDramasUL.inc.php';
+			break;
+
 		case('Oedipus_Character'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Character.inc.php';
 			break;
@@ -2307,10 +2311,6 @@ function __autoload($class_name)
 
 		case('Oedipus_NotesHelper'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_NotesHelper.inc.php';
-			break;
-
-		case('Oedipus_OedipusAllDramasUL'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusAllDramasUL.inc.php';
 			break;
 
 		case('Oedipus_OedipusHTMLTable'): 

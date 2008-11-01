@@ -17,21 +17,26 @@ extends
 	{
 		$home_page_div = new HTMLTags_Div();
 
-		$heading = new HTMLTags_Heading(2, 'Drama Theory for Making Decisions');
+		$heading = new HTMLTags_Heading(
+			2, 'Drama Theory for Making Decisions'
+		);
 
 		$home_page_div->append_tag_to_content($heading);
 
-		$home_page_div->append_tag_to_content($this->get_home_page_welcome_text_div());
-		$home_page_div->append_tag_to_content($this->get_links_ul());
+		$home_page_div->append_tag_to_content(
+			$this->get_home_page_welcome_text_div()
+		);
+		$home_page_div->append_tag_to_content(
+			$this->get_links_ul()
+		);
 
 		$home_page_div->append_tag_to_content(
-			$this->get_latest_tables_div()
+			$this->get_latest_frames_div()
 		);
 
 		$home_page_div->append_tag_to_content(
 			$this->get_google_code_rss_div()
 		);
-
 
 		echo $home_page_div->get_as_string();
 	}
@@ -60,17 +65,24 @@ extends
 	}
 
 	private function
-		get_oedipus_table_div(Oedipus_Table $table)
+		get_oedipus_frame_div(Oedipus_Table $frame)
 	{
-		$table_div = new HTMLTags_Div();
-		$table_div->set_attribute_str('class', 'oedipus-table');
+		$frame_div = new HTMLTags_Div();
+		$frame_div->set_attribute_str('class', 'oedipus-frame');
 
-//                $table_div->append_tag_to_content($this->get_oedipus_html_table($table));
-		$table_div->append_tag_to_content($this->get_oedipus_png_table($table));
+		//$frame_div->append_tag_to_content(
+			//$this->get_oedipus_html_frame($frame)
+		//);
 
-		$table_div->append_tag_to_content($this->get_oedipus_html_table_options($table));
+		$frame_div->append_tag_to_content(
+			$this->get_oedipus_png_frame($frame)
+		);
 
-		return $table_div;
+		$frame_div->append_tag_to_content(
+			$this->get_oedipus_html_frame_options($frame)
+		);
+
+		return $frame_div;
 	}
 	
 	/**
@@ -78,11 +90,11 @@ extends
 	 * Wouldn't it be useful elsewhere?
 	 *
 	 * 
-	 * @param Oedipus_Table $table The table that we want to display.
+	 * @param Oedipus_Table $frame The frame that we want to display.
 	 * @return HTMLTags_IMG The html tag object that will be rendered to display the image.
 	 */
 	private function
-		get_oedipus_png_table_img(Oedipus_Table $table)
+		get_oedipus_png_frame_img(Oedipus_Frame $frame)
 	{
 		/*
 		 * Are these global values?
@@ -95,31 +107,38 @@ extends
 		/*
 		 * Should this be moved to its own function?
 		 * e.g.
-		 * 	Oedipus_TableImagesHelper::get_table_thumbnail_img_url(...)
+		 * 	Oedipus_TableImagesHelper
+		 * 	::get_frame_thumbnail_img_url(...)
 		 */
 		$url = new HTMLTags_URL();
 		$url->set_file(
-			'/tables/images/thumbnails/option-table-'
-			. $table->get_id()
+			'/frames/images/thumbnails/option-frame-'
+			. $frame->get_id()
 			. '_' . $max_width . 'x' . $max_height . '.png'
 		);
 		
 		$img = new HTMLTags_IMG();
 		
 		$img->set_src($url);
-		$img->set_alt($table->get_name());
+		$img->set_alt($frame->get_name());
 		
 		return $img;
 	}
 
 	private function
-		get_home_page_table_instructions_div()
+		get_home_page_frame_instructions_div()
 	{
 		$instructions_div = new HTMLTags_Div();
-		$instructions_div->set_attribute_str('class', 'instructions');
-		$instructions_div->set_attribute_str('id', 'drama-page-table');
+		$instructions_div->set_attribute_str(
+			'class', 'instructions'
+		);
+		$instructions_div->set_attribute_str(
+			'id', 'drama-page-frame'
+		);
 
-		$db_page = DBPages_SPoE::get_filtered_page_section('drama', 'table-instructions');
+		$db_page = DBPages_SPoE::get_filtered_page_section(
+			'drama', 'frame-instructions'
+		);
 		$instructions_div->append_str_to_content($db_page);	
 
 		return $instructions_div;
@@ -128,40 +147,41 @@ extends
 	private function
 		get_oedipus_home_page_actions()
 	{
-		return new Oedipus_OedipusDramaPageActionsUL($this->drama);
+		return new Oedipus_DramaPageActionsUL($this->drama);
 	}
 
 	private function
 		get_all_dramas_ul()
 	{
-		return new Oedipus_OedipusAllDramasUL();
+		return new Oedipus_AllDramasUL();
 	}
 
 	private function
-		get_oedipus_html_table_options(Oedipus_Table $table)
+		get_oedipus_html_frame_options(Oedipus_Frame $frame)
 	{
-		return new Oedipus_OedipusTableOptionsUL($table, FALSE);
+		return new Oedipus_FrameOptionsUL($frame, FALSE);
 	}
 
 	private function
-		get_latest_tables_div()
+		get_latest_frames_div()
 	{
 		$div = new HTMLTags_Div();
-		$div->set_attribute_str('class', 'table_thumbnail_list');
+		$div->set_attribute_str('class', 'frame_thumbnail_list');
 
-		$heading = new HTMLTags_Heading(3, 'Latest Option Tables');
+		$heading = new HTMLTags_Heading(3, 'Latest Frames');
 
 		$div->append_tag_to_content($heading);
 
 		$ul = new HTMLTags_UL();
 
-		$tables = Oedipus_TableCreationHelper::get_latest_option_tables(4);
+		$frames = Oedipus_FrameHelper
+			::get_latest_option_frames(4);
 
-		foreach ($tables as $table)
+		foreach ($frames as $frame)
 		{
 			$li = new HTMLTags_LI();
 			
-			$a = $this->get_oedipus_png_table_img_a($table);
+			$a = $this->get_oedipus_png_frame_img_a($frame);
 			$li->append_tag_to_content($a);
 			$ul->append_tag_to_content($li);
 		}
@@ -174,21 +194,23 @@ extends
 	 * Should the content of this function be refactored to a static
 	 * function in a helper class?
 	 * 
-	 * @param Oedipus_Table $table The table that we want to display.
-	 * @return HTMLTags_A A link to the page for the drama of $table.
+	 * @param Oedipus_Frame $frame The frame that we want to display.
+	 * @return HTMLTags_A A link to the page for the drama of $frame.
 	 */
 	private function
-		get_oedipus_png_table_img_a(
-			Oedipus_Table $table
+		get_oedipus_png_frame_img_a(
+			Oedipus_Frame $frame
 		)
 	{
-		$url = Oedipus_TableCreationHelper::get_drama_url_for_table($table);
+		$url = Oedipus_FrameHelper
+			::get_drama_url_for_frame($frame);
 		
 		$a = new HTMLTags_A();
 		$a->set_href($url);
 		$a->set_attribute_str('title', 'View this Drama');
 		
-		$img = $this->get_oedipus_png_table_img($table);
+		$img = $this->get_oedipus_png_frame_img($frame);
+
 		$a->append_tag_to_content($img);
 		
 		return $a;
@@ -200,7 +222,8 @@ extends
 		$welcome_div = new HTMLTags_Div();
 		$welcome_div->set_attribute_str('class', 'welcome');
 
-		$db_page = DBPages_SPoE::get_filtered_page_section('home', 'welcome');
+		$db_page = DBPages_SPoE
+			::get_filtered_page_section('home', 'welcome');
 		$welcome_div->append_str_to_content($db_page);	
 
 		return $welcome_div;
@@ -212,7 +235,10 @@ extends
 		$welcome_div = new HTMLTags_Div();
 		$welcome_div->set_attribute_str('class', 'external-links');
 
-		$welcome_div->append_tag_to_content(Navigation_HTMLListsHelper::get_1d_ul('External Links'));
+		$welcome_div->append_tag_to_content(
+			Navigation_HTMLListsHelper
+			::get_1d_ul('External Links')
+		);
 
 		return $welcome_div;
 	}

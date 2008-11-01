@@ -175,7 +175,6 @@ SQL;
 	public function
 		get_latest_option_frames($no_of_frames)
 	{
-
 		$dbh = DB::m();
 		// Get the frame
 		$sql = <<<SQL
@@ -190,15 +189,17 @@ LIMIT
 SQL;
 
 		$results = mysql_query($sql, $dbh);
-		//                print_r($characters);exit;
+		//print_r($sql);exit;
 
 		// create an array of characters
 		$frames = array();
 		while($frame_id = mysql_fetch_array($results))
 		{
-			$frame = self::get_oedipus_frame_by_id($frame_id['id']);
+			$frame = self::get_frame_by_id($frame_id['id']);
 			$frames[] = $frame;
 		}
+
+		//print_r($frames);exit;
 		return $frames;
 	}
 

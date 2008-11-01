@@ -26,7 +26,7 @@ class
 		catch (Exception $e) // RSS_RSS constructor failed
 		{
 			$rss = NULL;
-			throw new Exception ('RSS_RSS object creation failed');
+			//throw new Exception ('Google Code RSS_RSS object creation failed');
 		}
 		if ($rss)
 		{
