@@ -52,6 +52,7 @@ extends
 				 * http://code.google.com/p/oedipus-decision-maker/issues/detail?id=7
 				 * RFI 2008-04-29
 				 */
+				throw new Exception('Couldnt get Drama by name');
 			}
 		} 
 		elseif (isset($_GET['drama_id']))
@@ -68,6 +69,7 @@ extends
 			catch (Exception $e)
 			{
 
+				throw new Exception('Couldnt get Drama by id');
 			}
 		}
 

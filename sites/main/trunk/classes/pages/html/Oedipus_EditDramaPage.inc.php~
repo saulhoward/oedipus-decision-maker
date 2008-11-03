@@ -124,7 +124,8 @@ extends
 	private function
 		get_drama_div()
 	{
-		return Oedipus_DramaHelper::get_drama_div($this->get_drama(), TRUE);
+		$editable = TRUE;
+		return Oedipus_DramaHelper::get_drama_div($this->get_drama(), $editable);
 	}
 
 /*

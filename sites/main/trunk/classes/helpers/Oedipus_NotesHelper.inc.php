@@ -9,6 +9,18 @@
 class
 	Oedipus_NotesHelper
 {
+
+	public static function
+		add_note_to_frame_with_default_content(Oedipus_Frame $frame)
+	{
+		$note_text = <<<TXT
+This is a Frame.
+TXT;
+
+		return self::add_note_to_frame($frame, $note_text);
+	}
+
+
 	public static function
 		add_note_to_frame(Oedipus_Frame $frame, $note_text)
 	{

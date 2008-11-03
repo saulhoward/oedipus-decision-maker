@@ -50,7 +50,9 @@ Oedipus_Frame
 		if (isset($this->characters[$character_name])) {
 			return $this->characters[$character_name];
 		} else {
-			throw new Exception("No character called '$character_name' in the '$this->name' frame!");
+			throw new Exception(
+				"No character called '$character_name' in the '$this->name' frame!"
+			);
 		}
 	}
 
@@ -69,7 +71,7 @@ Oedipus_Frame
 	public function
 		get_drama_id()
 	{
-		return Oedipus_DramaHelper::get_drama_id_for_scene_id();
+		return Oedipus_DramaHelper::get_drama_id_for_scene_id($this->get_scene_id());
 	}
 
 	public function

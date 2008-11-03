@@ -50,11 +50,54 @@ Oedipus_FrameImageHelper
 	}
 
 	public function
-		get_frame_png_url($frame_id)
+	       get_frame_png_url($frame_id)
 	{
-			$url = new HTMLTags_URL();
-			$url->set_file('/frames/images/frame-'. $frame_id . '.png');
-			return $url;
+	               $url = new HTMLTags_URL();
+	               $url->set_file('/frames/images/frame-'. $frame_id . '.png');
+	               return $url;
+	}
+
+	public static function
+		get_frame_png_thumbnail_img(
+			Oedipus_Frame $frame,
+			$max_width = 250,
+			$max_height = 185
+		)
+	{
+		$url = new HTMLTags_URL();
+		$url->set_file(
+			'/frames/images/thumbnails/frame-'
+			. $frame->get_id()
+			. '_' . $max_width . 'x' . $max_height . '.png'
+		);
+		
+		$img = new HTMLTags_IMG();
+		
+		$img->set_src($url);
+		$img->set_alt($frame->get_name());
+		
+		return $img;
+	}
+
+	public static function
+		get_frame_png_thumbnail_img_a(
+			Oedipus_Frame $frame,
+			$max_width = 250,
+			$max_height = 185
+		)
+	{
+		$url = Oedipus_DramaHelper
+			::get_drama_page_url_for_scene_id($frame->get_scene_id());
+		
+		$a = new HTMLTags_A();
+		$a->set_href($url);
+		$a->set_attribute_str('title', 'View this Drama');
+		
+		$img = self::get_frame_png_thumbnail_img($frame, $max_width, $max_height);
+
+		$a->append_tag_to_content($img);
+		
+		return $a;
 	}
 }
 ?>

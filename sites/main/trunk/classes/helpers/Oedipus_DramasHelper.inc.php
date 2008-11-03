@@ -8,6 +8,7 @@
 class
 	Oedipus_DramasHelper
 {
+
 	/*
 	 * ----------------------------------------
 	 * Functions to do with rendering HTML

@@ -16,12 +16,10 @@
 
 	# Translate numerical IDs to the the relevant table PNG 
 	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteRule ^tables/images/option-table-(\d+).png /?oo-page=1&page-class=Oedipus_TablePNGImage&table_id=$1
+	RewriteRule ^frames/images/frame-(\d+).png /?oo-page=1&page-class=Oedipus_FramePNGImage&frame_id=$1
 	# Translate numerical IDs to the the relevant table PNG Thumbnail
 	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteRule ^tables/images/thumbnails/option-table-(\d+)_(\d+)x(\d+).png /?oo-page=1&page-class=Oedipus_TablePNGImage&table_id=$1&thumbnail=1&max_width=$2&max_height=$3
-
-	
+	RewriteRule ^frames/images/thumbnails/frame-(\d+)_(\d+)x(\d+).png /?oo-page=1&page-class=Oedipus_FramePNGImage&frame_id=$1&thumbnail=1&max_width=$2&max_height=$3
 
 </IfModule>
 

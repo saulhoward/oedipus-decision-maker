@@ -5,9 +5,8 @@
  * @copyright RFI, 2008-02-18
  * @copyright SANH, 2008-04-11
  */
-
 class
-	Oedipus_DramaHelper
+Oedipus_DramaHelper
 {
 	public static function
 		get_drama_id_for_scene_id($scene_id)
@@ -37,10 +36,13 @@ SQL;
 	public static function
 		get_drama_div(Oedipus_Drama $drama, $editable = FALSE)
 	{
+		//print_r($drama);exit;
 		$drama_div = new HTMLTags_Div();
 		$drama_div->set_attribute_str('class', 'drama');
 
-		// SHOW THE ACTS
+		/*
+		 * SHOW THE ACTS
+		 */
 		foreach ($drama->get_acts() as $act)
 		{
 			$drama_div->append(self::get_act_div($act, $editable));
@@ -59,7 +61,7 @@ SQL;
 		// SHOW THE Scenes
 		foreach ($act->get_scenes() as $scene)
 		{
-//                        print_r($scene);exit;
+			//                        print_r($scene);exit;
 			$act_div->append(self::get_scene_div($scene, $editable));
 		}
 
@@ -73,13 +75,25 @@ SQL;
 		$scene_div->set_attribute_str('class', 'scene');
 
 		$scene_div->append('<h3>' . $scene->get_name() . '</h3>');
-		// SHOW THE frames
+		//SHOW THE frames
 		foreach ($scene->get_frames() as $frame)
 		{
 			$scene_div->append(self::get_frame_div($frame, $editable));
 		}
 
+		//Add Frame Form if editable
+		if ($editable)
+		{
+			$scene_div->append(self::get_add_frame_form($scene));
+		}
+
 		return $scene_div;
+	}
+
+	private function
+		get_add_frame_form(Oedipus_Scene $scene)
+	{
+		return new Oedipus_AddFrameHTMLForm($scene);
 	}
 
 	private function
@@ -94,7 +108,7 @@ SQL;
 		# The frame itself
 		$left_div->append_tag_to_content(
 			self::get_oedipus_frame_div($frame, $editable)
-	       );
+		);
 
 		# The instructions
 		//$left_div->append_tag_to_content(
@@ -152,7 +166,7 @@ SQL;
 	private function
 		get_oedipus_html_frame(Oedipus_Frame $frame)
 	{
-//                print_r($frame);exit;
+		//                print_r($frame);exit;
 		# Get a frame that's not editable
 		return new Oedipus_FrameHTMLTable($frame, FALSE);
 	}
@@ -174,7 +188,7 @@ SQL;
 	private function
 		get_all_dramas_ul()
 	{
-		return new Oedipus_OedipusAllDramasUL();
+		return new Oedipus_AllDramasUL();
 	}
 
 	private function
@@ -254,11 +268,11 @@ SQL;
 		$drama = new Oedipus_Drama(
 			$row['id'],
 			$row['name'],
-		       	$row['unique_name'],
-		       	$row['added'],
+			$row['unique_name'],
+			$row['added'],
 			$row['status']
 		);
-		
+
 		// Add the acts to this Drama
 
 		// Get all acts for this drama
@@ -271,7 +285,7 @@ SELECT
 		drama_id = $drama_id
 SQL;
 
-//                                print_r($acts_query);exit;
+		//                                print_r($acts_query);exit;
 		$acts_result = mysql_query($acts_query, $dbh);
 
 		// Add the acts to the drama object
@@ -287,7 +301,7 @@ SQL;
 			}
 		}
 
-//                                print_r($drama);exit;
+		//                                print_r($drama);exit;
 		return $drama;
 	}
 
@@ -328,7 +342,7 @@ SELECT
 		act_id = $act_id
 SQL;
 
-//                                print_r($scenes_query);exit;
+		//                                print_r($scenes_query);exit;
 		$scenes_result = mysql_query($scenes_query, $dbh);
 
 		// Add the scenes to the drama object
@@ -363,7 +377,7 @@ SQL;
 		//                                print_r($query);exit;
 		$result = mysql_query($query, $dbh);
 		$row = mysql_fetch_array($result);
-//                                                print_r($row);exit;
+		//                                                print_r($row);exit;
 
 		$scene = new Oedipus_Scene(
 			$row['id'],
@@ -372,7 +386,7 @@ SQL;
 			$row['act_id']
 		);
 
-//                                                print_r($scene);exit;
+		//                                                print_r($scene);exit;
 
 		// Add the scenes to this Act
 
@@ -386,9 +400,9 @@ SELECT
 		scene_id = $scene_id
 SQL;
 
-//                print_r($frames_query);exit;
+		//                print_r($frames_query);exit;
 		$frames_result = mysql_query($frames_query, $dbh);
-//                print_r($frames_result);exit;
+		//                print_r($frames_result);exit;
 
 		// Add the frames to the drama object
 		//
@@ -397,14 +411,14 @@ SQL;
 
 			while($frame_result = mysql_fetch_array($frames_result))
 			{
-//                                                print_r($frame_result);exit;
+				//                                                print_r($frame_result);exit;
 				$frame_id = $frame_result['id'];
 				$frame = self::get_frame_by_id($frame_id);
 				$scene->add_frame($frame);
 			}
 		}
 
-//                                                print_r($scene);exit;
+		//                                                print_r($scene);exit;
 		return $scene;
 	}
 
@@ -458,7 +472,7 @@ SQL;
 			$character = new Oedipus_Character(
 				$character_result['id'],
 				$character_result['name'],
-			       	$character_result['color']
+				$character_result['color']
 			);
 
 			//add the stated intentions to the option object
@@ -571,11 +585,75 @@ SQL;
 			$characters
 		);
 
-//                                                print_r($frame);exit;
+		//                                                print_r($frame);exit;
 		//
 		return $frame;
 	}
-	
+
+	public function
+		get_all_dramas_for_user($user_id)
+	{
+		$dbh = DB::m();
+		$query = <<<SQL
+SELECT 
+	*
+	FROM
+	oedipus_dramas
+	WHERE
+	created_by_user_id = $user_id
+SQL;
+
+		//                print_r($query);exit;
+		$result = mysql_query($query, $dbh);
+
+		$dramas = array();
+		while($row = mysql_fetch_array($result))
+		{
+			//                print_r($row);exit;
+			$dramas[] = new Oedipus_Drama(
+				$row['id'],
+				$row['name'],
+				$row['unique_name'],
+				$row['added'],
+				$row['status']
+			);
+		}
+
+		return $dramas;
+	}
+
+
+	public function
+		get_all_dramas()
+	{
+		$dbh = DB::m();
+		$query = <<<SQL
+SELECT 
+	*
+	FROM
+	oedipus_dramas
+SQL;
+
+		//                print_r($query);exit;
+		$result = mysql_query($query, $dbh);
+
+		$dramas = array();
+		while($row = mysql_fetch_array($result))
+		{
+			//                print_r($row);exit;
+			$dramas[] = new Oedipus_Drama(
+				$row['id'],
+				$row['name'],
+				$row['unique_name'],
+				$row['added'],
+				$row['status']
+			);
+		}
+
+		return $dramas;
+	}
+
+
 	public function
 		get_drama_by_unique_name($unique_name)
 	{
@@ -720,7 +798,7 @@ SET
 	character_id = $character_id
 SQL;
 
-//                                        print_r($sql5);exit;
+					//                                        print_r($sql5);exit;
 					$result5 = mysql_query($sql5, $dbh);
 					$position_id = mysql_insert_id($dbh);
 
@@ -737,13 +815,44 @@ SQL;
 			}
 		}
 
-		$frame = new Oedipus_Table($frame_id, $drama_id, $frame_name, $characters);
+		$frame = new Oedipus_Frame($frame_id, $frame_name, date(), $scene_id, $characters);
+
+		//__construct($id, $name, $added, $scene_id, $characters)
 		//                print_r($frame);exit;
 
-		//
-		// Update Drama Object with new Table
-		//                $drama->add_frame($frame);
 		return $frame;
+	}
+
+	public static function
+		get_latest_frames_div()
+	{
+                /*
+		 * This is a bad idea really, cos you shouldnt just show everyone's
+		 * frames regardless of who owns them, just for now
+                 */
+		$div = new HTMLTags_Div();
+		$div->set_attribute_str('class', 'frame_thumbnail_list');
+
+		$heading = new HTMLTags_Heading(3, 'Latest Frames');
+
+		$div->append_tag_to_content($heading);
+
+		$ul = new HTMLTags_UL();
+
+		$frames = Oedipus_FrameHelper
+			::get_latest_option_frames(4);
+
+		foreach ($frames as $frame)
+		{
+			$li = new HTMLTags_LI();
+			$a = Oedipus_FrameImageHelper
+				::get_frame_png_thumbnail_img_a($frame);
+			$li->append_tag_to_content($a);
+			$ul->append_tag_to_content($li);
+		}
+
+		$div->append_tag_to_content($ul);
+		return $div;
 	}
 
 	// ------------
@@ -753,26 +862,104 @@ SQL;
 	public static function
 		get_drama_url(Oedipus_Drama $drama = NULL)
 	{
-#		if ($drama == NULL)
-#		{
-#			return PublicHTML_URLHelper
-#				::get_oo_page_url('Oedipus_DramaPage');
-#		}
-#		else
-#		{
-#			$url = new HTMLTags_URL();
-#			$url->set_file('/dramas/'. $drama->get_unique_name());
-#//                        $url->set_get_variable('oo-page', 1);
-#//                        $url->set_get_variable('page-class', 'Oedipus_DramaEditorPage');
-#
-#//                        $url->set_get_variable('drama_unique_name', );
-#
-#			return $url;
-#		}
-		
-		return Oedipus_DramasHelper
-			::get_view_page_url($drama);
+		return self::get_drama_page_url($drama);
 	}
 
+	public static function
+		get_drama_page_url(
+			Oedipus_Drama $drama = NULL
+		)
+	{
+		if (isset($drama)) {
+			return PublicHTML_URLHelper
+				::get_oo_page_url(
+					'Oedipus_DramaPage',
+					array(
+						'drama_id' => $drama->get_id()
+					)
+				);
+		} else {
+			return PublicHTML_URLHelper
+				::get_oo_page_url('Oedipus_DramaPage');
+		}
+	}
+
+	public static function
+		get_drama_page_url_for_drama_id(
+			$drama_id
+		)
+	{
+		return PublicHTML_URLHelper
+			::get_oo_page_url(
+				'Oedipus_DramaPage',
+				array(
+					'drama_id' => $drama_id
+				)
+			);
+	}
+
+	public static function
+		get_edit_drama_page_url(
+			Oedipus_Drama $drama = NULL
+		)
+	{
+		if (isset($drama)) {
+			return PublicHTML_URLHelper
+				::get_oo_page_url(
+					'Oedipus_EditDramaPage',
+					array(
+						'drama_id' => $drama->get_id()
+					)
+				);
+		} else {
+			return PublicHTML_URLHelper
+				::get_oo_page_url('Oedipus_EditDramaPage');
+		}
+	}
+
+	public static function
+		get_edit_drama_page_url_for_drama_id(
+			$drama_id
+		)
+	{
+		return PublicHTML_URLHelper
+			::get_oo_page_url(
+				'Oedipus_EditDramaPage',
+				array(
+					'drama_id' => $drama_id
+				)
+			);
+	}
+
+	public static function
+		get_drama_page_url_for_scene_id($scene_id)
+	{
+		$drama_id = self::get_drama_id_for_scene_id($scene_id);
+		return self::get_drama_page_url_for_drama_id($drama_id);
+	}
+
+	public static function
+		get_edit_drama_page_url_for_scene_id($scene_id)
+	{
+		$drama_id = self::get_drama_id_for_scene_id($scene_id);
+		return self::get_edit_drama_page_url_for_drama_id($drama_id);
+	}
+
+	public static function
+		get_mod_rewrite_drama_page_url(
+			Oedipus_Drama $drama = NULL
+		)
+	{
+		if (isset($drama)) {
+			$url = new HTMLTags_URL();
+			$url->set_file('/dramas/'. $drama->get_unique_name());
+			return $url;
+		} else {
+			return PublicHTML_URLHelper
+				::get_oo_page_url('Oedipus_DramaPage');
+		}
+	}
 }
+
 ?>
+

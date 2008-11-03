@@ -55,7 +55,9 @@ SQL;
 		while($character_result = mysql_fetch_array($characters_result))
 		{
 			$character = new Oedipus_Character(
-				$character_result['id'], $character_result['name'], $character_result['color']
+				$character_result['id'],
+			       	$character_result['name'],
+			       	$character_result['color']
 			);
 
 			//add the stated intentions to the option object
@@ -162,11 +164,14 @@ SQL;
 
 		$frame = new Oedipus_Frame(
 			$frame_result['id'],
-			$frame_result['drama_id'],
 			$frame_result['name'],
+			$frame_result['added'],
+			$frame_result['scene_id'],
 			$characters
 		);
 		// DEBUG
+		//
+		//print_r($frame);exit;
 		// print_r($frame->get_characters());exit;
 
 		return $frame;
@@ -696,6 +701,180 @@ SQL;
 
 	}
 
+
+	
+
+	public static function
+		get_edit_frame_forms_div(Oedipus_Frame $frame)
+	{
+		$frame_editor_forms_div = new HTMLTags_Div();
+		$frame_editor_forms_div->set_attribute_str('class', 'edit-frame-forms');
+
+		//frame Name form
+		self::wrap_element_with_class_and_add_to_div(
+			$frame_editor_forms_div,
+			self::get_oedipus_html_frame_name_editor_form($frame),
+			'edit-frame-form'
+		);
+
+		//frame actions UL
+		self::wrap_element_with_class_and_add_to_div(
+			$frame_editor_forms_div,
+			self::get_oedipus_html_frame_editor_actions_ul($frame),
+			'edit-frame-actions'
+		);
+
+		foreach ($frame->get_characters() as $character)
+		{
+			$character_css_id = $character->get_color();
+
+			//character form
+			self::wrap_element_with_class_and_id_and_add_to_div(
+				$frame_editor_forms_div,
+				self::get_oedipus_html_character_editor_form($frame, $character),
+				'character-editor',
+				$character_css_id
+			);
+			//character actions UL
+			self::wrap_element_with_class_and_id_and_add_to_div(
+				$frame_editor_forms_div,
+				self::get_oedipus_html_character_actions_ul($frame, $character),
+				'character-editor-actions',
+				$character_css_id
+			);
+
+			$i = 1;
+			foreach ($character->get_options() as $option)
+			{
+				//Option form
+				self::wrap_element_with_class_and_id_and_add_to_div(
+					$frame_editor_forms_div,
+					self::get_oedipus_html_option_editor_form($frame, $option, $i),
+					'option-editor',
+					$character_css_id
+				);
+				//Option actions UL
+				self::wrap_element_with_class_and_id_and_add_to_div(
+					$frame_editor_forms_div,
+					self::get_oedipus_html_option_actions_ul($frame, $option),
+					'option-editor-actions',
+					$character_css_id
+				);
+				$i++;
+			}
+
+		}
+		return $frame_editor_forms_div;
+	}
+
+	private function
+		get_oedipus_html_frame_name_editor_form(Oedipus_Frame $frame)
+	{
+		return new Oedipus_EditFrameNameHTMLForm($frame);
+	}
+
+	private function
+		get_oedipus_html_frame_editor_actions_ul(Oedipus_Frame $frame)
+	{
+		return new Oedipus_EditFrameFrameActionsUL($frame);
+	}
+
+	private function
+		get_oedipus_html_character_editor_form(
+			Oedipus_Frame $frame,
+			Oedipus_Character $character
+		)
+	{
+		return new Oedipus_EditCharacterHTMLForm(
+			$frame, $character
+		);
+	}
+
+	private function
+		get_oedipus_html_character_actions_ul(
+			Oedipus_Frame $frame,
+			Oedipus_Character $character
+		)
+	{
+		return new Oedipus_EditFrameCharacterActionsUL(
+			$frame, $character
+		);
+	}
+
+	private function
+		get_oedipus_html_option_editor_form(
+			Oedipus_Frame $frame,
+			Oedipus_Option $option, $iteration
+		)
+	{
+		return new Oedipus_EditOptionHTMLForm(
+			$frame, $option, $iteration
+		);
+	}
+
+	private function
+		get_oedipus_html_option_actions_ul(Oedipus_Frame $frame, Oedipus_Option $option)
+	{
+		return new Oedipus_EditFrameOptionActionsUL(
+			$frame, $option
+		);
+	}
+
+
+	###########
+	# Silly functions to add classes to divs
+	# for the CSS rules
+	#
+	private function
+		wrap_element_with_class_and_add_to_div(
+			$div, $content, $class_name
+		)
+	{
+		$div->append_tag_to_content(
+			self::wrap_in_div_with_class(
+				$content,
+				$class_name
+			)
+		);
+	}
+
+	private function
+		wrap_element_with_class_and_id_and_add_to_div(
+			$div, $content, $class_name, $id_name
+		)
+	{
+		$div->append_tag_to_content(
+			self::wrap_in_div_with_class_and_id(
+				$content,
+				$class_name,
+				$id_name
+			)
+		);
+	}
+
+	private function
+		wrap_in_div_with_class($content, $class_name)
+	{
+		$div = new HTMLTags_Div();
+		$div->set_attribute_str('class', $class_name);
+		$div->append_tag_to_content($content);
+		return $div;
+	}
+
+	private function
+		wrap_in_div_with_class_and_id(
+			$content, $class_name, $id_name
+		)
+	{
+		$div = new HTMLTags_Div();
+		$div->set_attribute_str('class', $class_name);
+		$div->set_attribute_str('id', $id_name);
+		$div->append_tag_to_content($content);
+		return $div;
+	}
+	#
+	#
+	###############
 
 	/*
 	 * --------------------------------------------------------------------------

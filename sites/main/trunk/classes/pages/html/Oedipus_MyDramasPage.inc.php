@@ -79,14 +79,14 @@ Oedipus_RestrictedPage
 	}
 
 	private function
-		get_oedipus_png_table(Oedipus_Table $table)
+		get_oedipus_png_frame(Oedipus_Frame $frame)
 	{
 		$max_width = 300;
 		$max_height = 300;
 		$url = new HTMLTags_URL();
 		$url->set_file(
-			'/tables/images/thumbnails/option-table-'
-			. $table->get_id()
+			'/frames/images/thumbnails/option-frame-'
+			. $frame->get_id()
 			. '_' . $max_width . 'x' . $max_height . '.png'
 		);
 		$img = new HTMLTags_IMG();
@@ -97,13 +97,13 @@ Oedipus_RestrictedPage
 	private function
 		get_all_dramas_ul()
 	{
-		return new Oedipus_OedipusMyDramasUL($this->user_id);
+		return new Oedipus_MyDramasUL($this->user_id);
 	}
 
 	private function
-		get_oedipus_html_table_options(Oedipus_Table $table)
+		get_oedipus_html_frame_options(Oedipus_Frame $frame)
 	{
-		return new Oedipus_OedipusTableOptionsUL($table, FALSE);
+		return new Oedipus_FrameOptionsUL($frame, FALSE);
 	}
 
 

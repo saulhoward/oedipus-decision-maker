@@ -185,34 +185,34 @@ ul.my-dramas li a span#added
 }
 
 /*
- * Table Thumbnail List
+ * frame Thumbnail List
  */
 
-div.table_thumbnail_list
+div.frame_thumbnail_list
 {
 	background-color:#faebf9;
 	border-top:1px solid #fa98c3;
 	border-bottom:1px solid #fa98c3;
 }
-div.table_thumbnail_list h3
+div.frame_thumbnail_list h3
 {
 /*        font-family:Georgia,"Times New Roman",Times,serif;*/
 	text-align: left;
 /*        font-weight: 900;*/
 	padding: 1em 0 0 1em;
 }
-div.table_thumbnail_list ul
+div.frame_thumbnail_list ul
 {
 	margin: 0 auto;
 	text-align: center;
 }
-div.table_thumbnail_list ul li
+div.frame_thumbnail_list ul li
 {
 	margin: 10px;
 	display: inline-block;
 	vertical-align: middle;
 }
-div.table_thumbnail_list a
+div.frame_thumbnail_list a
 {
 	padding: 10px;
 	display: inline-block;
@@ -225,7 +225,7 @@ div.table_thumbnail_list a
 
 	border-color:#faebf9;
 }
-div.table_thumbnail_list a:hover
+div.frame_thumbnail_list a:hover
 {
 	background-color:#FFFFFF;
 	border-color:#fa98c3;
@@ -248,34 +248,34 @@ div#footer ul li
 }
 
 /*
- * Table Options
+ * frame Options
  */
 
-div.oedipus-table ul.table-options
+div.oedipus-frame ul.frame-options
 {
 	margin: 1em 0 0 0;
 }
-div.oedipus-table ul.table-options li
+div.oedipus-frame ul.frame-options li
 {
 	padding: 0.2em 0;
 }
-div.oedipus-table ul.table-options li a
+div.oedipus-frame ul.frame-options li a
 {
 	font-weight: normal;
 	text-decoration: none;
 	padding: 0 0 3px 24px;
 	height: 16px;
 }
-div.oedipus-table ul.table-options li a:hover
+div.oedipus-frame ul.frame-options li a:hover
 {
 /*        text-decoration: underline;*/
 }
-div.oedipus-table ul.table-options li#png-image-table a
+div.oedipus-frame ul.frame-options li#png-image-frame a
 {
 /*        color: #2D36C2;*/
 	background: transparent url(/images/icons/16x16/image.png) top left no-repeat;
 }
-div.oedipus-table ul.table-options li#edit-table a
+div.oedipus-frame ul.frame-options li#edit-frame a
 {
 /*        color: #E9292E;*/
 	background: transparent url(/images/icons/16x16/document-open.png) top left no-repeat;
