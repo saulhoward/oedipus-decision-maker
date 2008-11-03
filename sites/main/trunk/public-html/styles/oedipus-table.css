@@ -2,14 +2,14 @@
  * Saul Howard 2008, CLWD
  */
 
-div.oedipus-table
+div.oedipus-frame
 {
 	padding: 0.5em 1em 1em 1em;
 	margin: 0 2em;
 /*        width: 100%;*/
 	background: #FFFF99;
 }
-div.table-editor div.oedipus-table
+div.table-editor div.oedipus-frame
 {
 /*        float: left;*/
 }
