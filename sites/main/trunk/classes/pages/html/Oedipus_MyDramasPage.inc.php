@@ -79,22 +79,6 @@ Oedipus_RestrictedPage
 	}
 
 	private function
-		get_oedipus_png_frame(Oedipus_Frame $frame)
-	{
-		$max_width = 300;
-		$max_height = 300;
-		$url = new HTMLTags_URL();
-		$url->set_file(
-			'/frames/images/thumbnails/option-frame-'
-			. $frame->get_id()
-			. '_' . $max_width . 'x' . $max_height . '.png'
-		);
-		$img = new HTMLTags_IMG();
-		$img->set_src($url);
-		return $img;
-	}
-
-	private function
 		get_all_dramas_ul()
 	{
 		return new Oedipus_MyDramasUL($this->user_id);

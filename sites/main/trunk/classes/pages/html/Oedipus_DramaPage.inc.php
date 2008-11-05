@@ -14,7 +14,6 @@ Oedipus_RestrictedPage
 //Oedipus_HTMLPage
 {
 	private $drama;
-	private $edit_privilege;
 
 	public function
 		content()
@@ -57,24 +56,22 @@ Oedipus_RestrictedPage
 			 * Or the drama is public
 			 */
 			$user_id = Oedipus_LogInHelper::get_current_user_id();
-			$this->edit_privilege = FALSE;
 
-			//                $user = Oedipus_UsersHelper::get_user($user_id);
+			// $user = Oedipus_UsersHelper::get_user($user_id);
 			if (
 				Oedipus_UsersHelper
 				::is_user_id_drama_creator($user_id, $this->drama)
 			) 
 			{
-				$this->edit_privilege = TRUE;
-
-				$drama_page_div =
-					$this->get_oedipus_drama_page_div();
-
-//                                print_r($drama_page_div);exit;
-				echo $drama_page_div->get_as_string();
+				$this->drama->make_drama_editable();
 			}
-			elseif (
+			if (
 				($this->drama->is_public())
+				||
+				(
+					Oedipus_UsersHelper
+					::is_user_id_drama_creator($user_id, $this->drama)
+				)
 				||
 				(
 					Oedipus_UsersHelper
@@ -84,8 +81,11 @@ Oedipus_RestrictedPage
 				)
 			) 
 			{
+                                /*
+				 * Echo the Drama 
+                                 */
 				$drama_page_div =
-					$this->get_oedipus_drama_page_div();
+					$this->get_drama_page_div();
 				echo $drama_page_div->get_as_string();
 			}
 			else
@@ -107,55 +107,31 @@ Oedipus_RestrictedPage
 	}
 
 	private function
-		get_oedipus_drama_page_div()
+		get_drama_page_div()
 	{
-		$drama_page_div = new HTMLTags_Div();
-		$drama_page_div->set_attribute_str('class', 'drama');
-
-		$drama_page_options = $this->get_oedipus_drama_page_actions();
-		$drama_page_div->append_tag_to_content($drama_page_options);
-
-		if (isset($this->drama))
+		if (isset($_GET['view_frame_id']))
 		{
-			$drama_page_div->append_tag_to_content(
-				$this->get_drama_heading()
-			);
-
-			$drama_page_div->append_tag_to_content(
-				$this->get_drama_div()
-			);
+			return $this->get_frame_view_drama_div();
 		}
-		return $drama_page_div;
+
+		return $this->get_tree_view_drama_div();
 	}
 
 	private function
-		get_drama_div()
+		get_frame_view_drama_div()
 	{
-		return Oedipus_DramaHelper::get_drama_div($this->drama);
-	}
-
-	private function
-		get_oedipus_drama_page_actions()
-	{
-		return new Oedipus_DramaPageActionsUL(
-			$this->drama, $this->edit_privilege
+		return new Oedipus_FrameViewDramaDiv(
+			$this->drama, $_GET['view_frame_id']
 		);
 	}
 
-	/*
-	 * Functions to call in the html-tags
-	 * classes for the page elements
-	 *
-	 */
 	private function
-		get_drama_heading()
+		get_tree_view_drama_div()
 	{
-		$heading = new HTMLTags_Heading(2);
-		//                $span = new HTMLTags_Span('Drama:&nbsp;');
-		//                $span->set_attribute_str('class', 'edit-text');
-		//                $heading->append_tag_to_content($span);
-		$heading->append_str_to_content($this->drama->get_name());
-		return $heading;
+		return new Oedipus_TreeViewDramaDiv(
+			$this->drama
+		);
 	}
+
 }
 ?>

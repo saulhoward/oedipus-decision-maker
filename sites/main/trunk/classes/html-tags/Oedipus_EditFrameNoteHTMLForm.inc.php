@@ -18,7 +18,7 @@ extends
 Oedipus_EditNoteHTMLForm
 {
 	public function
-		__construct(Oedipus_Note $note, $drama_id)
+		__construct(Oedipus_Note $note, $drama_id, $view_frame_id)
 	{
 		parent::__construct($note, 'edit-frame-note');
 
@@ -33,6 +33,8 @@ Oedipus_EditNoteHTMLForm
 
 		# Hidden Inputs
 		$this->add_hidden_input('edit_note', 1);
+		$this->add_hidden_input('drama_id', $drama_id);
+		$this->add_hidden_input('view_frame_id', $view_frame_id);
 		$this->add_hidden_input('drama_id', $drama_id);
 		$this->add_hidden_input('note_id', $note->get_id());
 	}

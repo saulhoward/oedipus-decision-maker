@@ -17,6 +17,8 @@ Oedipus_Frame
 	private $added;
 	private $characters;
 
+	private $editable;
+
 	public function
 		__construct($id, $name, $added, $scene_id, $characters)
 	{
@@ -26,6 +28,8 @@ Oedipus_Frame
 		$this->scene_id = $scene_id;
 
 		$this->characters = $characters;
+
+		$this->editable = FALSE;
 	}
 
 	public function
@@ -91,5 +95,19 @@ Oedipus_Frame
 	{
 		return $this->name;
 	}
+	
+	public function
+		make_editable()
+	{
+		$this->editable = TRUE;
+		return TRUE;
+	}
+	
+	public function
+		is_editable()
+	{
+		return $this->editable;
+	}
+
 }
 ?>

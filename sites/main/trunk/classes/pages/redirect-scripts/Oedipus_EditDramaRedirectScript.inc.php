@@ -26,10 +26,10 @@ extends
 			// A drama needs at least one act and an act, one scene.
 			$act = Oedipus_DramaEditorHelper::add_act($drama);
 			$scene = Oedipus_DramaEditorHelper::add_scene($act);
-			$frame = Oedipus_DramaHelper::add_frame($scene, 'First frame');
+			$frame = Oedipus_DramaHelper::add_frame($scene, 'First frame', '0');
 
 			$return_to_url = 
-				Oedipus_DramaEditorHelper::get_drama_editor_url($drama);
+				Oedipus_DramaHelper::get_drama_page_url($drama);
 		}
 		elseif (
 			isset($_POST['edit_drama_status'])
@@ -52,7 +52,7 @@ extends
 		get_redirect_script_return_url()
 	{
 		return PublicHTML_URLHelper
-			::get_oo_page_url('Oedipus_EditDramaPage');
+			::get_oo_page_url('Oedipus_DramaPage');
 	}
 }
 ?>

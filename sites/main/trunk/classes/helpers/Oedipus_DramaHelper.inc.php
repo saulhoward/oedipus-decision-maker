@@ -34,117 +34,36 @@ SQL;
 	}
 
 	public static function
-		get_drama_div(Oedipus_Drama $drama, $editable = FALSE)
+		get_drama_id_for_frame_id($frame_id)
 	{
-		//print_r($drama);exit;
-		$drama_div = new HTMLTags_Div();
-		$drama_div->set_attribute_str('class', 'drama');
+		$dbh = DB::m();
+		$query = <<<SQL
+SELECT 
+	oedipus_dramas.id
+FROM 
+	oedipus_dramas, oedipus_acts, oedipus_scenes, oedipus_frames
+WHERE 
+	oedipus_frames.id = '$frame_id'
+AND
+	oedipus_frames.scene_id = oedipus_scenes.id
+AND
+	oedipus_scenes.act_id = oedipus_acts.id
+AND 
+	oedipus_acts.drama_id = oedipus_dramas.id
+SQL;
 
-		/*
-		 * SHOW THE ACTS
-		 */
-		foreach ($drama->get_acts() as $act)
-		{
-			$drama_div->append(self::get_act_div($act, $editable));
-		}
+		//                                print_r($query);exit;
+		$result = mysql_query($query, $dbh);
+		$row = mysql_fetch_array($result);
+		//                                print_r($row);exit;
 
-		return $drama_div;
-	}
-
-	public static function
-		get_act_div(Oedipus_Act $act, $editable = FALSE)
-	{
-		$act_div = new HTMLTags_Div();
-		$act_div->set_attribute_str('class', 'act');
-
-		$act_div->append('<h3>' . $act->get_name() . '</h3>');
-		// SHOW THE Scenes
-		foreach ($act->get_scenes() as $scene)
-		{
-			//                        print_r($scene);exit;
-			$act_div->append(self::get_scene_div($scene, $editable));
-		}
-
-		return $act_div;
-	}
-
-	public static function
-		get_scene_div(Oedipus_Scene $scene, $editable = FALSE)
-	{
-		$scene_div = new HTMLTags_Div();
-		$scene_div->set_attribute_str('class', 'scene');
-
-		$scene_div->append('<h3>' . $scene->get_name() . '</h3>');
-		//SHOW THE frames
-		foreach ($scene->get_frames() as $frame)
-		{
-			$scene_div->append(self::get_frame_div($frame, $editable));
-		}
-
-		//Add Frame Form if editable
-		if ($editable)
-		{
-			$scene_div->append(self::get_add_frame_form($scene));
-		}
-
-		return $scene_div;
+		return $row['id'];
 	}
 
 	private function
-		get_add_frame_form(Oedipus_Scene $scene)
+		get_all_dramas_ul()
 	{
-		return new Oedipus_AddFrameHTMLForm($scene);
-	}
-
-	private function
-		get_frame_div(Oedipus_Frame $frame, $editable = FALSE)
-	{
-		$drama_div = new HTMLTags_Div();
-
-		# The left and right column divs
-		$left_div = new HTMLTags_Div();
-		$left_div->set_attribute_str('class', 'left-column');
-
-		# The frame itself
-		$left_div->append_tag_to_content(
-			self::get_oedipus_frame_div($frame, $editable)
-		);
-
-		# The instructions
-		//$left_div->append_tag_to_content(
-		//	self::get_drama_page_frame_instructions_div()
-		//);
-
-		$drama_div->append_tag_to_content($left_div);
-
-		$right_div = new HTMLTags_Div();
-		$right_div->set_attribute_str('class', 'right-column');
-
-		# The notes etc. added here
-		$right_div->append_tag_to_content(self::get_frame_notes_div($frame, $editable));
-
-		$drama_div->append_tag_to_content($right_div);
-
-		$clear_div = new HTMLTags_Div();
-		$clear_div->set_attribute_str('class', 'clear-columns');
-		$drama_div->append_tag_to_content($clear_div);
-		return $drama_div;
-	}
-
-	private function
-		get_oedipus_frame_div(Oedipus_Frame $frame, $editable = FALSE)
-	{
-		$frame_div = new HTMLTags_Div();
-		$frame_div->set_attribute_str('class', 'oedipus-frame');
-
-		$frame_div->append_tag_to_content(self::get_oedipus_html_frame($frame));
-		//$frame_div->append_tag_to_content(self::get_oedipus_png_frame($frame));
-
-		$frame_div->append_tag_to_content(
-			self::get_oedipus_html_frame_options($frame, $editable)
-		);
-
-		return $frame_div;
+		return new Oedipus_AllDramasUL();
 	}
 
 	private function
@@ -163,89 +82,6 @@ SQL;
 		return $img;
 	}
 
-	private function
-		get_oedipus_html_frame(Oedipus_Frame $frame)
-	{
-		//                print_r($frame);exit;
-		# Get a frame that's not editable
-		return new Oedipus_FrameHTMLTable($frame, FALSE);
-	}
-
-	private function
-		get_drama_page_frame_instructions_div()
-	{
-		$instructions_div = new HTMLTags_Div();
-		$instructions_div->set_attribute_str('class', 'instructions');
-		$instructions_div->set_attribute_str('id', 'drama-page-frame');
-
-		$db_page = DBPages_SPoE
-			::get_filtered_page_section('drama', 'frame-instructions');
-		$instructions_div->append_str_to_content($db_page);	
-
-		return $instructions_div;
-	}
-
-	private function
-		get_all_dramas_ul()
-	{
-		return new Oedipus_AllDramasUL();
-	}
-
-	private function
-		get_oedipus_html_frame_options(Oedipus_Frame $frame, $editable = FALSE)
-	{
-		return new Oedipus_FrameOptionsUL($frame, $editable);
-	}
-
-	private function
-		get_frame_notes_div(Oedipus_Frame $frame, $editable = FALSE)
-	{
-		$div = new HTMLTags_Div();
-		$div->set_attribute_str('class', 'notes');
-
-		$heading = new HTMLTags_Heading(3, $frame->get_name());
-
-		//print_r($frame);exit;
-		$div->append_tag_to_content($heading);
-
-		try
-		{
-			if ($editable) {
-				if (isset($_GET['drama_id'])) {
-					$drama_id = $_GET['drama_id'];
-				}
-				else {
-					$drama_id = $frame->get_drama_id();
-				}
-
-				if (Oedipus_NotesHelper::has_frame_got_note($frame->get_id()))
-				{
-					$note = Oedipus_NotesHelper
-						::get_note_by_frame_id($frame->get_id());
-					$div->append(
-						new Oedipus_EditFrameNoteHTMLForm($note, $drama_id)
-					);
-				}
-				else {
-					$div->append(
-						new Oedipus_AddFrameNoteHTMLForm($drama_id, $frame)
-					);
-				}
-			}
-			else {
-				$note = Oedipus_NotesHelper::get_note_by_frame_id($frame->get_id());
-				//print_r($note);exit;
-				$div->append_tag_to_content($note->get_note_text_in_pre());
-			}
-		}
-		catch (Exception $e)
-		{
-			throw new Exception('Failed to retrieve note');
-		}
-
-
-		return $div;
-	}
 
 	public function
 		get_drama_by_id($drama_id)
@@ -679,7 +515,8 @@ SQL;
 	public function
 		add_frame(
 			Oedipus_Scene $scene,
-			$frame_name
+			$frame_name,
+			$parent_frame_id
 		)
 	{
 		// ADD TABLE TO DATABASE
@@ -698,6 +535,7 @@ SQL;
 		$result = mysql_query($sql, $dbh);
 
 		$frame_id = mysql_insert_id($dbh);
+
 
 		// ADD DEFAULT ACTOR tO DATABASE
 		$character_name = 'First Character';
@@ -819,6 +657,9 @@ SQL;
 
 		//__construct($id, $name, $added, $scene_id, $characters)
 		//                print_r($frame);exit;
+
+		// Add Frame to Tree
+		Oedipus_FrameTreeHelper::add_frame_to_tree($frame, $parent_frame_id);
 
 		return $frame;
 	}
@@ -943,6 +784,20 @@ SQL;
 	{
 		$drama_id = self::get_drama_id_for_scene_id($scene_id);
 		return self::get_edit_drama_page_url_for_drama_id($drama_id);
+	}
+
+	public static function
+		get_drama_page_url_for_frame_id($frame_id)
+	{
+		$drama_id = self::get_drama_id_for_frame_id($frame_id);
+		return PublicHTML_URLHelper
+			::get_oo_page_url(
+				'Oedipus_DramaPage',
+				array(
+					'drama_id' => $drama_id,
+					'view_frame_id' => $frame_id
+				)
+			);
 	}
 
 	public static function

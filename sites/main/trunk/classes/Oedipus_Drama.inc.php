@@ -18,6 +18,8 @@ class
 	private $acts;
 	private $status;
 
+	private $editable;
+
 	public function
 		__construct(
 			$id,
@@ -32,6 +34,8 @@ class
 		$this->added = $added;
 		$this->unique_name = $unique_name;
 		$this->status = $status;
+
+		$this->editable = FALSE;
 		
 		$this->acts = array();
 	}
@@ -141,7 +145,18 @@ class
 
 		return explode(",",$EnumValues);
 	}
-
-
+	
+	public function
+		make_drama_editable()
+	{
+		$this->editable = TRUE;
+		return TRUE;
+	}
+	
+	public function
+		is_drama_editable()
+	{
+		return $this->editable;
+	}
 }
 ?>

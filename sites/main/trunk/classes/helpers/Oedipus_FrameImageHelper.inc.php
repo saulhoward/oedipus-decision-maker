@@ -87,7 +87,7 @@ Oedipus_FrameImageHelper
 		)
 	{
 		$url = Oedipus_DramaHelper
-			::get_drama_page_url_for_scene_id($frame->get_scene_id());
+			::get_drama_page_url_for_frame_id($frame->get_id());
 		
 		$a = new HTMLTags_A();
 		$a->set_href($url);
@@ -99,5 +99,6 @@ Oedipus_FrameImageHelper
 		
 		return $a;
 	}
+
 }
 ?>

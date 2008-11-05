@@ -303,3 +303,34 @@ div.rss ul li.odd
 {
 	background: white;
 }
+
+/* Tree View UL for Frames */
+
+div.frame-tree ul
+{
+	margin: 0 0 0 40px;
+}
+
+/* Frame Nav Div */
+div#frame-navigation
+{
+	margin: 0 auto;
+	text-align: center;
+}
+div#frame-navigation h4
+{
+	font-size: 1em;
+	font-weight: bold;
+	text-align: center;
+	margin: 0 0 0.2em 0;
+}
+div#previous-frame,
+div#next-frames
+{
+	/*width: 250px;*/
+	width: 30%;
+display: inline-block;
+vertical-align: top;
+}
+
+

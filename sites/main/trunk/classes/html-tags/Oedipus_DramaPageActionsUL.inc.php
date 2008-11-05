@@ -15,44 +15,38 @@ Oedipus_PageActionsUL
 	private $drama;
 
 	public function
-		__construct(Oedipus_Drama $drama, $edit_privilege)
+		__construct(Oedipus_Drama $drama)
 	{
 		parent::__construct();
 
 		$this->drama = $drama;
 
-		if ($edit_privilege)
-		{
-			// Link to edit the drama
-			$edit_this_drama_li = $this->get_edit_this_drama_li();
-			$this->append_tag_to_content($edit_this_drama_li);
-		}
+		// Link to edit the drama
+		$tree_view_li = $this->get_tree_view_li();
+		$this->append_tag_to_content($tree_view_li);
 
 		// Link to share drama
-		$share_drama_li = $this->get_share_drama_li();
-		$this->append_tag_to_content($share_drama_li);
+//                $share_drama_li = $this->get_share_drama_li();
+//                $this->append_tag_to_content($share_drama_li);
 	}
 
 	private function
-		get_edit_this_drama_li()
+		get_tree_view_li()
 	{
-		$edit_this_drama_url = $this->get_edit_this_drama_url();
-		$link = new HTMLTags_A('Edit this Drama');
-		$link->set_href($edit_this_drama_url);
+		$tree_view_url = $this->get_tree_view_url();
+		$link = new HTMLTags_A('Tree View');
+		$link->set_href($tree_view_url);
 		$li = new HTMLTags_LI();
 		$li->append_tag_to_content($link);
-		$li->set_attribute_str('id', 'edit-drama');
+		$li->set_attribute_str('id', 'tree-view');
 
 		return $li;
 	}
 
 	private function
-		get_edit_this_drama_url()
+		get_tree_view_url()
 	{
-		$get_variables = array("drama_id" => $this->drama->get_id());
-
-		return PublicHTML_URLHelper
-			::get_oo_page_url('Oedipus_EditDramaPage', $get_variables);
+		return Oedipus_DramaHelper::get_drama_page_url_for_drama_id($this->drama->get_id());
 	}
 
 	private function
