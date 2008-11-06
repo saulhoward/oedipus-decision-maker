@@ -17,6 +17,9 @@ class
 	private $frames;
 	private $act_id;
 
+	private $editable;
+
+	
 	public function
 		__construct(
 			$id,
@@ -31,6 +34,8 @@ class
 		$this->act_id = $act_id;
 		
 		$this->frames = array();
+
+		$this->editable = FALSE;
 	}
 
 	public function
@@ -95,6 +100,19 @@ class
 		get_name()
 	{
 		return $this->name;
+	}
+
+	public function
+		make_editable()
+	{
+		$this->editable = TRUE;
+		return TRUE;
+	}
+	
+	public function
+		is_editable()
+	{
+		return $this->editable;
 	}
 }
 ?>

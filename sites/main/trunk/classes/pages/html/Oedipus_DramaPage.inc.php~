@@ -114,7 +114,7 @@ Oedipus_RestrictedPage
 			return $this->get_frame_view_drama_div();
 		}
 
-		return $this->get_frame_view_drama_div();
+		return $this->get_tree_view_drama_div();
 	}
 
 	private function
@@ -124,5 +124,14 @@ Oedipus_RestrictedPage
 			$this->drama, $_GET['view_frame_id']
 		);
 	}
+
+	private function
+		get_tree_view_drama_div()
+	{
+		return new Oedipus_TreeViewDramaDiv(
+			$this->drama
+		);
+	}
+
 }
 ?>

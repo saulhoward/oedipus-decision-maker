@@ -90,7 +90,7 @@ PublicHTML_HTMLPage
 		echo '<script type="text/javascript" 
 			src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>' . "\n";
 		echo '<script type="text/javascript" src="/scripts/jquery.autogrow.js"></script>' . "\n";
-		echo '<script type="text/javascript" src="/scripts/oedipus-forms.js"></script>' . "\n";
+		//echo '<script type="text/javascript" src="/scripts/oedipus-forms.js"></script>' . "\n";
 	}
 
 	public function

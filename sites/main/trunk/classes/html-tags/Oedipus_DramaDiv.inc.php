@@ -93,6 +93,10 @@ extends
                 /*
 		 * Using Tree View
                  */
+		if ($this->drama->is_editable())
+		{
+			$scene->make_editable();
+		}
 		$scene_div->append(
 			Oedipus_FrameTreeHelper::get_frame_tree_div($scene)
 		);

@@ -145,18 +145,33 @@ class
 
 		return explode(",",$EnumValues);
 	}
-	
+
 	public function
-		make_drama_editable()
+		make_editable()
 	{
 		$this->editable = TRUE;
 		return TRUE;
 	}
 	
 	public function
-		is_drama_editable()
+		is_editable()
 	{
 		return $this->editable;
+	}
+
+	/*
+	 * Legacy - find out where these are
+	 */
+	public function
+		make_drama_editable()
+	{
+		return $this->make_editable();
+	}
+	
+	public function
+		is_drama_editable()
+	{
+		return $this->is_editable();
 	}
 }
 ?>

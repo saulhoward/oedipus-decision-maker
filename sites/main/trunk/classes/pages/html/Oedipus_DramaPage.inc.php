@@ -132,6 +132,12 @@ Oedipus_RestrictedPage
 			$this->drama
 		);
 	}
+	public function 
+		render_head_script_javascript() 
+	{ 
+		parent::render_head_script_javascript();
 
+		echo '<script type="text/javascript" src="/scripts/Oedipus_DramaPage.js"></script>' . "\n";
+	}
 }
 ?>

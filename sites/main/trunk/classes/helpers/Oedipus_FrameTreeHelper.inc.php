@@ -20,7 +20,8 @@ Oedipus_FrameTreeHelper
 		$div->set_attribute_str('class', 'frame-tree');
 		$html = self::get_tree_ul(
 				self::get_root_frame_id_for_scene_id($scene->get_id()),
-				$scene->get_id()
+				$scene->get_id(),
+				$scene->is_editable()
 			);
 
 //                print_r($html);exit;
@@ -89,7 +90,7 @@ SQL;
 		return $row['frame_id'];
 	}
 
-	private function get_tree_ul($root_frame_id, $scene_id) 
+	private function get_tree_ul($root_frame_id, $scene_id, $editable) 
 	{
 		$dbh = DB::m();
 		//retrieve the left and right value of the $root node
@@ -133,6 +134,7 @@ SQL;
 
 		//display each row
 		$begin_ul_but_not_first = FALSE;
+		$first = TRUE;
 		$html = '<ul>';
 		while ($row = mysql_fetch_array($result)) {
 			//only check stack if there is one
@@ -152,13 +154,16 @@ SQL;
 			}
 
 			//display Frame Image
-			$html .= str_repeat('  ',count($right));
-			$html .= '<li>';
+			if ($first) {
+				$html .= '<li>';
+				$first = FALSE;
+			}
+			else {
+				$html .= '<li class="node">';
+			}
 
 			$frame = Oedipus_DramaHelper::get_frame_by_id($row['frame_id']);
-//                        print_r($frame);exit;
-			$frame_node_div = self::get_frame_node_div($frame);
-
+			$frame_node_div = self::get_frame_node_div($frame, $editable);
 			$html .= $frame_node_div->get_as_string();
 			$html .= '</li>';
 
@@ -172,16 +177,24 @@ SQL;
 	} 
 
 	private function
-		get_frame_node_div(Oedipus_Frame $frame)
+		get_frame_node_div(Oedipus_Frame $frame, $editable)
 	{
 		$div = new HTMLTags_Div();
+		$div->set_attribute_str('class', 'frame-node');
+
+		$div->append(
+			new HTMLTags_Heading(5, $frame->get_name())
+		);
 		$div->append(
 			Oedipus_FrameImageHelper
 			::get_frame_png_thumbnail_img_a($frame, 150, 100)
 		);
-		$div->append(
-			self::get_add_node_a($frame)
-		);
+		if ($editable)
+		{
+			$div->append(
+				self::get_add_node_a($frame)
+			);
+		}
 
 		return $div;
 	}
@@ -190,6 +203,8 @@ SQL;
 		get_add_node_a(Oedipus_Frame $frame)
 	{
 		$a = new HTMLTags_A('Add a Frame...');
+		$a->set_attribute_str('class', 'add-frame');
+		$a->set_attribute_str('title', 'Add a Frame...');
 		$url = PublicHTML_URLHelper
 			::get_oo_page_url(
 				'Oedipus_EditSceneRedirectScript',
@@ -332,6 +347,9 @@ SQL;
 		);
 
 		$div->append(
+			new HTMLTags_Heading(5, $frame->get_name())
+		);
+		$div->append(
 			Oedipus_FrameImageHelper
 			::get_frame_png_thumbnail_img_a($frame, 150, 100)
 		);
@@ -352,21 +370,26 @@ SQL;
 		{
 			$li = new HTMLTags_LI();
 			$li->append(
+				new HTMLTags_Heading(5, $child->get_name())
+			);
+			$li->append(
 				Oedipus_FrameImageHelper
 				::get_frame_png_thumbnail_img_a($child, 150, 100)
 			);
 			$ul->append($li);
 		}
 
-		$li = new HTMLTags_LI();
-		$li->append(
-			self::get_add_node_a($frame)
-		);
-		$ul->append($li);
+		if ($frame->is_editable())
+		{
+			$li = new HTMLTags_LI();
+			$li->append(
+				self::get_add_node_a($frame)
+			);
+			$ul->append($li);
+		}
 
 		$div->append($ul);
 		return $div;
 	}
-	
 }
 ?>

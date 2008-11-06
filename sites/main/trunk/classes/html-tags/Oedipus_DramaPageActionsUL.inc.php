@@ -21,13 +21,35 @@ Oedipus_PageActionsUL
 
 		$this->drama = $drama;
 
-		// Link to edit the drama
 		$tree_view_li = $this->get_tree_view_li();
 		$this->append_tag_to_content($tree_view_li);
+
+		$frame_view_li = $this->get_frame_view_li();
+		$this->append_tag_to_content($frame_view_li);
 
 		// Link to share drama
 //                $share_drama_li = $this->get_share_drama_li();
 //                $this->append_tag_to_content($share_drama_li);
+	}
+
+	private function
+		get_frame_view_li()
+	{
+		$frame_view_url = $this->get_frame_view_url();
+		$link = new HTMLTags_A('Frame View');
+		$link->set_href($frame_view_url);
+		$li = new HTMLTags_LI();
+		$li->append_tag_to_content($link);
+		$li->set_attribute_str('id', 'frame-view');
+
+		return $li;
+	}
+
+	private function
+		get_frame_view_url()
+	{
+		return Oedipus_DramaHelper
+			::get_frame_view_drama_page_url_for_drama_id($this->drama->get_id());
 	}
 
 	private function
