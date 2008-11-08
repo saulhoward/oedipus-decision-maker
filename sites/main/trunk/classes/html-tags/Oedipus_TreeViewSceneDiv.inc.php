@@ -1,6 +1,6 @@
 <?php
 /**
- * Oedipus_TreeViewDramaDiv
+ * Oedipus_TreeViewSceneDiv
  *
  * @copyright 2006-11-27, RFI
  * @copyright 2008-04-06, RFI
@@ -9,19 +9,19 @@
 
 /**
  * TreeView version of the
- * Main Drama Div
+ * Main Scene Div
  *
  */
 
 class
-	Oedipus_TreeViewDramaDiv
+	Oedipus_TreeViewSceneDiv
 extends
-	Oedipus_DramaDiv
+	Oedipus_SceneDiv
 {
 	public function
-		__construct(Oedipus_Drama $drama)
+		__construct(Oedipus_Scene $scene)
 	{
-		parent::__construct($drama);
+		parent::__construct($scene);
 	}
 }
 ?>

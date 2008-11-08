@@ -109,29 +109,11 @@ Oedipus_RestrictedPage
 	private function
 		get_drama_page_div()
 	{
-		if (isset($_GET['view_frame_id']))
-		{
-			return $this->get_frame_view_drama_div();
-		}
-
-		return $this->get_tree_view_drama_div();
-	}
-
-	private function
-		get_frame_view_drama_div()
-	{
-		return new Oedipus_FrameViewDramaDiv(
-			$this->drama, $_GET['view_frame_id']
-		);
-	}
-
-	private function
-		get_tree_view_drama_div()
-	{
-		return new Oedipus_TreeViewDramaDiv(
+		return new Oedipus_DramaDiv(
 			$this->drama
 		);
 	}
+
 	public function 
 		render_head_script_javascript() 
 	{ 
