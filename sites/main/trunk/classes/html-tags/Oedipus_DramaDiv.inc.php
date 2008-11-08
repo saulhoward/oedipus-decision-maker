@@ -22,7 +22,7 @@ extends
 	public function
 		__construct(Oedipus_Drama $drama)
 	{
-		//print_r($drama);exit;
+//                print_r($drama);exit;
 
 		parent::__construct();
 
@@ -85,41 +85,16 @@ extends
 	protected function
 		get_scene_div(Oedipus_Scene $scene)
 	{
-		$scene_div = new HTMLTags_Div();
-		$scene_div->set_attribute_str('class', 'scene');
-
-		$scene_div->append('<h3>' . $scene->get_name() . '</h3>');
-
-                /*
-		 * Using Tree View
-                 */
 		if ($this->drama->is_editable())
 		{
 			$scene->make_editable();
 		}
-		$scene_div->append(
-			Oedipus_FrameTreeHelper::get_frame_tree_div($scene)
-		);
-
-//                foreach ($scene->get_frames() as $frame)
-//                {
-//                        $scene_div->append($this->get_frame_div($frame));
-//                }
-
-		return $scene_div;
-	}
-
-	protected function
-		get_frame_div(Oedipus_Frame $frame)
-	{
-//                $frame_div = new HTMLTags_Div();
-//                $frame_div->set_attribute_str('class', 'frame');
-
-//                $frame_div->append('<h3>' . $frame->get_name() . '</h3>');
-//                $frame_div->append(
-//                        Oedipus_FrameImageHelper::get_frame_png_thumbnail_img_a($frame, 150, 100)
-//                );
-//                return $frame_div;
+	
+		if (isset($_GET['view_frame_id']))
+		{
+			return new Oedipus_FrameViewSceneDiv($scene, $_GET['view_frame_id']);
+		}
+		return new Oedipus_TreeViewSceneDiv($scene);
 	}
 
 	protected function

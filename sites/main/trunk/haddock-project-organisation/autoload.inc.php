@@ -2,7 +2,7 @@
 /**
  * __autoload .INC file
  *
- * Last Modified: 2008-11-05
+ * Last Modified: 2008-11-08
  */
 
 function __autoload($class_name)
@@ -2285,8 +2285,8 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_FrameTreeHelper.inc.php';
 			break;
 
-		case('Oedipus_FrameViewDramaDiv'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_FrameViewDramaDiv.inc.php';
+		case('Oedipus_FrameViewSceneDiv'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_FrameViewSceneDiv.inc.php';
 			break;
 
 		case('Oedipus_GDPNGImage'): 
@@ -2385,6 +2385,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Scene.inc.php';
 			break;
 
+		case('Oedipus_SceneDiv'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_SceneDiv.inc.php';
+			break;
+
 		case('Oedipus_ShareDramaPage'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_ShareDramaPage.inc.php';
 			break;
@@ -2397,8 +2401,8 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Table.inc.php';
 			break;
 
-		case('Oedipus_TreeViewDramaDiv'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_TreeViewDramaDiv.inc.php';
+		case('Oedipus_TreeViewSceneDiv'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_TreeViewSceneDiv.inc.php';
 			break;
 
 		case('Oedipus_UserPage'): 

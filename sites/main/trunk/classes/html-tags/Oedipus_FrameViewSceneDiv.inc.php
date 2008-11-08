@@ -1,6 +1,6 @@
 <?php
 /**
- * Oedipus_FrameViewDramaDiv
+ * Oedipus_FrameViewSceneDiv
  *
  * @copyright 2006-11-27, RFI
  * @copyright 2008-04-06, RFI
@@ -9,64 +9,61 @@
 
 /**
  * FrameView version of the
- * Main Drama Div
+ * Main SceneDiv
  *
  */
 
 class
-	Oedipus_FrameViewDramaDiv
+	Oedipus_FrameViewSceneDiv
 extends
-	Oedipus_DramaDiv
+	Oedipus_SceneDiv
 {
 	protected $frame_id;
+	protected $scene;
 	
 	public function
-		__construct(Oedipus_Drama $drama, $frame_id = NULL)
+		__construct(Oedipus_Scene $scene, $frame_id = NULL)
 	{
 		$this->frame_id = $frame_id;
-		parent::__construct($drama);
+		parent::__construct($scene);
 	}
 
 	protected function
-		get_scene_div(Oedipus_Scene $scene)
+		get_scene_content_div()
 	{
-		//print_r($this->frame_id);exit;
-		$scene_div = new HTMLTags_Div();
-		$scene_div->set_attribute_str('class', 'scene');
+		$div = new HTMLTags_Div();
 
-		$scene_div->append('<h3>' . $scene->get_name() . '</h3>');
-
-                /*
+		/*
 		 * Set Frame, and set if editable
-                 */
+		 */
 		if ($this->frame_id == NULL)
 		{
-			$frame = $scene->get_root_frame();
+			$frame = $this->scene->get_root_frame();
 		}
 		else
 		{
-			$frame = $scene->get_frame($this->frame_id);
+			$frame = $this->scene->get_frame($this->frame_id);
 		}
 
-		if ($this->drama->is_drama_editable())
+		if ($this->scene->is_editable())
 		{
 			$frame->make_editable();
 		}
 
-                /*
+		/*
 		 *Get the Div
-                 */
-		$scene_div->append(
+		 */
+		$div->append(
 			$this->get_frame_div($frame)
 		);
 		/*
 		 * Get the Navigation Div
 		 */
-		$scene_div->append(
+		$div->append(
 			$this->get_frame_navigation_div($frame)
 		);
 
-		return $scene_div;
+		return $div;
 	}
 
 	protected function
@@ -80,6 +77,5 @@ extends
 	{
 		return Oedipus_FrameTreeHelper::get_frame_navigation_div($frame);
 	}
-
 }
 ?>
