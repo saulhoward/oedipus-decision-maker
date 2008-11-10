@@ -22,10 +22,10 @@ extends
 	protected $scene;
 	
 	public function
-		__construct(Oedipus_Act $act, Oedipus_Scene $scene, $frame_id = NULL)
+		__construct(Oedipus_Scene $scene, $frame_id = NULL)
 	{
 		$this->frame_id = $frame_id;
-		parent::__construct($act, $scene);
+		parent::__construct($scene);
 	}
 
 	protected function

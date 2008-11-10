@@ -49,15 +49,26 @@ div.frame-tree li.node
 /* Frame Nav Div */
 div#frame-navigation
 {
-	margin: 0 auto;
+	margin: 1em auto;
 	text-align: center;
+}
+div#frame-navigation ul li
+{
+	width: 150px;
+	margin: 0.2em auto;
 }
 div#frame-navigation h4
 {
 	font-size: 1em;
 	font-weight: bold;
 	text-align: center;
-	margin: 0 0 0.2em 0;
+	margin: 0 0 0.5em 0;
+	color: #666;
+}
+div#frame-navigation h5
+{
+	font-size: 85%;
+	color: #333;
 }
 div#previous-frame,
 div#next-frames
@@ -68,4 +79,9 @@ div#next-frames
 	vertical-align: top;
 }
 
+div#frame-navigation a.add-frame
+{
+	margin: 1em 0 0 0;
+	display: inline-block;
+}
 

@@ -42,9 +42,14 @@ SQL;
 	}
 
 	public static function
-		add_act(Oedipus_Drama $drama, $name = 'Act 1')
+		add_act(Oedipus_Drama $drama, $name = NULL)
 	{
-		// ADD act TO DATABASE
+		if ($name == NULL) {
+			$name = Oedipus_DramaHelper
+				::get_next_act_name_for_drama_id($drama->get_id());
+		}
+
+		// Add Act to database
 		$dbh = DB::m();
 		$drama_id = mysql_real_escape_string($drama->get_id(), $dbh);
 		$name = mysql_real_escape_string($name, $dbh);
@@ -76,8 +81,14 @@ SQL;
 	}
 
 	public static function
-		add_scene(Oedipus_Act $act, $name = 'Scene 1')
+		add_scene(Oedipus_Act $act, $name = NULL)
 	{
+		if ($name == NULL) {
+			$name = Oedipus_DramaHelper
+				::get_next_scene_name_for_act_id($act->get_id());
+		}
+
+
 		// ADD scene TO DATABASE
 		$dbh = DB::m();
 		$act_id = mysql_real_escape_string($act->get_id(), $dbh);
