@@ -1,0 +1,71 @@
+/* Tree View CSS Styles for
+ * Oedipus Decision Maker
+ * Saul Howard, CLWD, 2008
+ */
+/* Tree View UL for Frames */
+div.frame-tree
+{
+	margin: 20px 0 0 0;
+}
+div.frame-tree a.add-frame
+{
+	margin: -16px 0 0 -20px;
+	width: 32px;
+	height: 29px;
+	display: inline-block;
+	vertical-align: middle;
+	text-indent: -3000px;
+	background: transparent url(/images/icons/32x32/add-rollover.png) top left no-repeat;
+}
+
+div.frame-tree a.add-frame:hover
+{
+	background-position: 0 -29px;
+
+}
+
+div.frame-node 
+{
+	width: 250px;
+}
+div.frame-node h5
+{
+	background: white;
+	padding: 0 0 0.1em 0;
+}
+
+div.frame-tree ul
+{
+	margin: 0 0 0 80px;
+	background: transparent url(/images/tree-side.png) top left repeat-y;
+}
+
+div.frame-tree li.node
+{
+	padding: 50px 0 0 50px;
+	background: transparent url(/images/tree-node.png) top left no-repeat;
+}
+
+/* Frame Nav Div */
+div#frame-navigation
+{
+	margin: 0 auto;
+	text-align: center;
+}
+div#frame-navigation h4
+{
+	font-size: 1em;
+	font-weight: bold;
+	text-align: center;
+	margin: 0 0 0.2em 0;
+}
+div#previous-frame,
+div#next-frames
+{
+	/*width: 250px;*/
+	width: 30%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+

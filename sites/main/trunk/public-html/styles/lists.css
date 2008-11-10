@@ -311,71 +311,73 @@ div.rss ul li.odd
 	background: white;
 }
 
-/* Tree View UL for Frames */
+/* PICKERS */
 
-div.frame-tree
+ul.picker
 {
-	margin: 20px 0 0 0;
+	padding: 10px;
+	margin: 0;
+	background: #e8e8e8;
 }
-div.frame-tree a.add-frame
+
+
+ul.picker li
 {
-	margin: -16px 0 0 -20px;
-	width: 32px;
-	height: 29px;
+	display: inline-block;
+	vertical-align: middle;
+}
+ul.picker a
+{
+	color: #3d3d3d;
+	padding: 2px 6px;
+}
+ul.picker a#selected
+{
+	color:black;
+	background: #f2f2f2;
+	border: 1px solid #bdbdbd;
+	-moz-border-radius: 4px;
+	-khtml-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+ul.picker a:hover
+{
+	color: black;
+
+}
+ul.picker a#selected:hover
+{
+	background: white;
+}
+div.scene ul.picker
+{
+	background: #d1d1d1;
+}
+ul.picker a#add
+{
+	width: 16px;
+	height: 16px;
+	padding: 0;
+	margin: 0 0 0 50px;
 	display: inline-block;
 	vertical-align: middle;
 	text-indent: -3000px;
-	background: transparent url(/images/icons/32x32/add-rollover.png) top left no-repeat;
+	background: transparent url(/images/icons/16x16/add-rollover.png) top left no-repeat;
+}
+ul.picker a#add:hover
+{
+	background-position: 0 -16px;
+
 }
 
-div.frame-tree a.add-frame:hover
+/* Scene View */
+ul.scene-view
 {
-	background-position: 0 -29px;
-
+	margin: 0.4em 10px;
 }
-
-div.frame-node 
+ul.scene-view li
 {
-	width: 250px;
-}
-div.frame-node h5
-{
-	background: white;
-	padding: 0 0 0.1em 0;
-}
-
-div.frame-tree ul
-{
-	margin: 0 0 0 80px;
-	background: transparent url(/images/tree-side.png) top left repeat-y;
-}
-
-div.frame-tree li.node
-{
-	padding: 50px 0 0 50px;
-	background: transparent url(/images/tree-node.png) top left no-repeat;
-}
-
-/* Frame Nav Div */
-div#frame-navigation
-{
-	margin: 0 auto;
-	text-align: center;
-}
-div#frame-navigation h4
-{
-	font-size: 1em;
-	font-weight: bold;
-	text-align: center;
-	margin: 0 0 0.2em 0;
-}
-div#previous-frame,
-div#next-frames
-{
-	/*width: 250px;*/
-	width: 30%;
 	display: inline-block;
-	vertical-align: top;
+	margin: 0 0.2em;
 }
-
-

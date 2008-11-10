@@ -22,10 +22,10 @@ extends
 	protected $scene;
 	
 	public function
-		__construct(Oedipus_Scene $scene, $frame_id = NULL)
+		__construct(Oedipus_Act $act, Oedipus_Scene $scene, $frame_id = NULL)
 	{
 		$this->frame_id = $frame_id;
-		parent::__construct($scene);
+		parent::__construct($act, $scene);
 	}
 
 	protected function
@@ -56,13 +56,6 @@ extends
 		$div->append(
 			$this->get_frame_div($frame)
 		);
-		/*
-		 * Get the Navigation Div
-		 */
-		$div->append(
-			$this->get_frame_navigation_div($frame)
-		);
-
 		return $div;
 	}
 
@@ -70,12 +63,6 @@ extends
 		get_frame_div(Oedipus_Frame $frame)
 	{
 		return new Oedipus_FrameDiv($frame);
-	}
-
-	private function
-		get_frame_navigation_div(Oedipus_Frame $frame)
-	{
-		return Oedipus_FrameTreeHelper::get_frame_navigation_div($frame);
 	}
 }
 ?>

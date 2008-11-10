@@ -35,10 +35,10 @@ extends
 			$this->get_oedipus_frame_div()
 		);
 
-		# The instructions
-		//$left_div->append_tag_to_content(
-		//	$this->get_drama_page_frame_instructions_div()
-		//);
+		# The previous and next frames
+		$left_div->append_tag_to_content(
+			$this->get_frame_navigation_div()
+		);
 
 		$this->append_tag_to_content($left_div);
 
@@ -53,6 +53,12 @@ extends
 		$clear_div = new HTMLTags_Div();
 		$clear_div->set_attribute_str('class', 'clear-columns');
 		$this->append_tag_to_content($clear_div);
+	}
+
+	private function
+		get_frame_navigation_div()
+	{
+		return Oedipus_FrameTreeHelper::get_frame_navigation_div($this->frame);
 	}
 
 	private function

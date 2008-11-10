@@ -50,7 +50,7 @@ p  { font-size:1em;}
 /*CONTENT*/
 #content
 {
-	padding: 0.5em 1em;
+
 }
 #content h2
 {
@@ -171,7 +171,7 @@ div.table-editor-forms
 div#footer
 {
 	clear: both;
-	margin: 2em 0 2em 0;
+	margin: 8em 0 2em 0;
 }
 div#footer p
 {
@@ -224,4 +224,22 @@ div.notes textarea#note_text
 div.notes div.submit_buttons_div
 {
 	text-align: right;
+}
+
+/* Drama Div */
+#content div.drama h2
+{
+	font-family: 'Helvetica', 'BPG Unicode Standard','Corbel', 'Bitstream Vera Sans',Verdana,sans-serif;
+	text-align: left;
+	margin: 0 10px;
+	padding: 0.3em 0;
+	display: inline-block;
+}
+
+#content div.drama ul.actions
+{
+	display: inline-block;
+	margin: 0 0 0 1em;
+	font-size: 90%;
+
 }
