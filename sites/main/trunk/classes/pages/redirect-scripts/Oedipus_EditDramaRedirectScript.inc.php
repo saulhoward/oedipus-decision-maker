@@ -32,6 +32,28 @@ extends
 				Oedipus_DramaHelper::get_drama_page_url($drama);
 		}
 		elseif (
+			isset($_GET['add_act'])
+			&&
+			isset($_GET['drama_id'])
+		)
+		{
+			$drama = Oedipus_DramaHelper::get_drama_by_id(
+				$_GET['drama_id']
+			);
+
+			// an act, one scene.
+			$act = Oedipus_DramaEditorHelper::add_act($drama);
+			$scene = Oedipus_DramaEditorHelper::add_scene($act);
+			$frame = Oedipus_DramaHelper::add_frame($scene, 'First frame', '0');
+
+			$return_to_url = 
+				Oedipus_DramaHelper
+				::get_drama_page_url_for_act_id(
+					$act->get_id()
+				);
+		}
+
+		elseif (
 			isset($_POST['edit_drama_status'])
 			&&
 			isset($_POST['status'])

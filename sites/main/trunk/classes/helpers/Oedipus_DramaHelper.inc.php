@@ -16,7 +16,7 @@ Oedipus_DramaHelper
 SELECT 
 	oedipus_dramas.id
 FROM 
-	oedipus_dramas, oedipus_acts, oedipus_scenes, oedipus_frames
+	oedipus_dramas, oedipus_acts, oedipus_scenes
 WHERE 
 	oedipus_scenes.id = '$scene_id'
 AND
@@ -36,6 +36,145 @@ SQL;
 	}
 
 	public static function
+		get_drama_id_for_act_id($act_id)
+	{
+		$dbh = DB::m();
+		$query = <<<SQL
+SELECT 
+	oedipus_dramas.id
+FROM 
+	oedipus_dramas, oedipus_acts
+WHERE 
+	oedipus_acts.id = '$act_id'
+AND 
+	oedipus_acts.drama_id = oedipus_dramas.id
+LIMIT
+	0, 1
+SQL;
+
+//                                                print_r($query);exit;
+		$result = mysql_query($query, $dbh);
+		$row = mysql_fetch_array($result);
+		//                                print_r($row);exit;
+
+		return $row['id'];
+	}
+
+	public static function
+		get_act_id_for_scene_id($scene_id)
+	{
+		$dbh = DB::m();
+		//retrieve the left and right value of the $root node
+		$sql = <<<SQL
+SELECT 
+	oedipus_scenes.act_id
+FROM 
+	oedipus_scenes
+WHERE 
+	oedipus_scenes.id = $scene_id  
+SQL;
+
+//                print_r($sql);exit;
+		$result = mysql_query($sql, $dbh);
+		$row = mysql_fetch_array($result);
+		return $row['act_id'];
+	}
+	public static function
+		get_act_id_for_frame_id($frame_id)
+	{
+		$dbh = DB::m();
+		//retrieve the left and right value of the $root node
+		$sql = <<<SQL
+SELECT 
+	oedipus_scenes.act_id
+FROM 
+	oedipus_scenes, oedipus_frames
+WHERE 
+	oedipus_frames.id = $frame_id  
+AND
+	oedipus_scenes.id = oedipus_frames.scene_id
+LIMIT
+	0, 1
+SQL;
+
+               //print_r($sql);exit;
+		$result = mysql_query($sql, $dbh);
+		$row = mysql_fetch_array($result);
+		return $row['act_id'];
+	}
+
+	public static function
+		get_scene_id_for_frame_id($frame_id)
+	{
+		$dbh = DB::m();
+		//retrieve the left and right value of the $root node
+		$sql = <<<SQL
+SELECT 
+	oedipus_frames.scene_id
+FROM 
+	oedipus_scenes, oedipus_frames
+WHERE 
+	oedipus_frames.id = $frame_id  
+LIMIT 
+	0, 1
+SQL;
+
+//                print_r($sql);exit;
+		$result = mysql_query($sql, $dbh);
+		$row = mysql_fetch_array($result);
+		return $row['scene_id'];
+	}
+
+
+
+
+	public static function
+		get_first_act_id_for_drama_id($drama_id)
+	{
+		$dbh = DB::m();
+		//retrieve the left and right value of the $root node
+		$sql = <<<SQL
+SELECT 
+	oedipus_acts.id
+FROM 
+	oedipus_acts
+WHERE 
+	oedipus_acts.drama_id = $drama_id  
+ORDER BY
+	oedipus_acts.added ASC
+LIMIT 0, 1
+SQL;
+
+//                print_r($sql);exit;
+		$result = mysql_query($sql, $dbh);
+		$row = mysql_fetch_array($result);
+		return $row['id'];
+	}
+
+	public static function
+		get_first_scene_id_for_act_id($act_id)
+	{
+		$dbh = DB::m();
+		//retrieve the left and right value of the $root node
+		$sql = <<<SQL
+SELECT 
+	oedipus_scenes.id
+FROM 
+	oedipus_scenes
+WHERE 
+	oedipus_scenes.act_id = $act_id  
+ORDER BY
+	oedipus_scenes.added ASC
+LIMIT 0, 1
+SQL;
+
+               //print_r($sql);exit;
+		$result = mysql_query($sql, $dbh);
+		$row = mysql_fetch_array($result);
+		return $row['id'];
+	}
+
+	public static function
 		get_first_scene_id_for_drama_id($drama_id)
 	{
 		$dbh = DB::m();
@@ -50,11 +189,11 @@ WHERE
 AND
 	oedipus_scenes.act_id = oedipus_acts.id
 ORDER BY
-	oedipus_scenes.added DESC
+	oedipus_scenes.added ASC
 LIMIT 0, 1
 SQL;
 
-//                print_r($sql);exit;
+               print_r($sql);exit;
 		$result = mysql_query($sql, $dbh);
 		$row = mysql_fetch_array($result);
 		return $row['id'];
@@ -803,7 +942,15 @@ SQL;
 		get_drama_page_url_for_scene_id($scene_id)
 	{
 		$drama_id = self::get_drama_id_for_scene_id($scene_id);
-		return self::get_drama_page_url_for_drama_id($drama_id);
+		return PublicHTML_URLHelper
+			::get_oo_page_url(
+				'Oedipus_DramaPage',
+				array(
+					'drama_id' => $drama_id,
+					'scene_id' => $scene_id
+				)
+			);
+
 	}
 
 	public static function
@@ -823,10 +970,41 @@ SQL;
 				'Oedipus_DramaPage',
 				array(
 					'drama_id' => $drama_id,
-					'view_frame_id' => $frame_id
+					'frame_id' => $frame_id
 				)
 			);
 	}
+
+	public static function
+		get_frame_view_drama_page_url_for_scene_id($scene_id)
+	{
+		$drama_id = self::get_drama_id_for_scene_id($scene_id);
+		$frame_id = Oedipus_FrameTreeHelper::get_root_frame_id_for_scene_id($scene_id);
+		return PublicHTML_URLHelper
+			::get_oo_page_url(
+				'Oedipus_DramaPage',
+				array(
+					'drama_id' => $drama_id,
+					'frame_id' => $frame_id
+				)
+			);
+	}
+
+
+	public static function
+		get_drama_page_url_for_act_id($act_id)
+	{
+		$drama_id = self::get_drama_id_for_act_id($act_id);
+		return PublicHTML_URLHelper
+			::get_oo_page_url(
+				'Oedipus_DramaPage',
+				array(
+					'drama_id' => $drama_id,
+					'act_id' => $act_id
+				)
+			);
+	}
+
 
 
 	public static function
@@ -838,7 +1016,7 @@ SQL;
 				'Oedipus_DramaPage',
 				array(
 					'drama_id' => $drama_id,
-					'view_frame_id' => $frame_id
+					'frame_id' => $frame_id
 				)
 			);
 	}
@@ -857,6 +1035,31 @@ SQL;
 				::get_oo_page_url('Oedipus_DramaPage');
 		}
 	}
+
+	public static function
+		get_add_act_url($drama_id)
+	{
+		$get_variables = array(
+			"add_act" => '1',
+			"drama_id" => $drama_id
+		);
+
+		return PublicHTML_URLHelper
+			::get_oo_page_url('Oedipus_EditDramaRedirectScript', $get_variables);
+	}
+
+	public static function
+		get_add_scene_url($act_id)
+	{
+		$get_variables = array(
+			"add_scene" => '1',
+			"act_id" => $act_id
+		);
+
+		return PublicHTML_URLHelper
+			::get_oo_page_url('Oedipus_EditActRedirectScript', $get_variables);
+	}
+
 }
 
 ?>

@@ -2,7 +2,7 @@
 /**
  * __autoload .INC file
  *
- * Last Modified: 2008-11-08
+ * Last Modified: 2008-11-09
  */
 
 function __autoload($class_name)
@@ -2109,6 +2109,14 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Act.inc.php';
 			break;
 
+		case('Oedipus_ActActionsUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_ActActionsUL.inc.php';
+			break;
+
+		case('Oedipus_ActionsUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_ActionsUL.inc.php';
+			break;
+
 		case('Oedipus_Actor'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Actor.inc.php';
 			break;
@@ -2145,6 +2153,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Drama.inc.php';
 			break;
 
+		case('Oedipus_DramaActionsUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_DramaActionsUL.inc.php';
+			break;
+
 		case('Oedipus_DramaDiv'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_DramaDiv.inc.php';
 			break;
@@ -2167,6 +2179,10 @@ function __autoload($class_name)
 
 		case('Oedipus_DramasHelper'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_DramasHelper.inc.php';
+			break;
+
+		case('Oedipus_EditActRedirectScript'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/redirect-scripts/Oedipus_EditActRedirectScript.inc.php';
 			break;
 
 		case('Oedipus_EditCharacterHTMLForm'): 
@@ -2387,6 +2403,10 @@ function __autoload($class_name)
 
 		case('Oedipus_SceneDiv'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_SceneDiv.inc.php';
+			break;
+
+		case('Oedipus_SceneViewUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_SceneViewUL.inc.php';
 			break;
 
 		case('Oedipus_ShareDramaPage'): 

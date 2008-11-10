@@ -19,9 +19,25 @@ extends
 	Oedipus_SceneDiv
 {
 	public function
-		__construct(Oedipus_Scene $scene)
+		__construct(Oedipus_Act $act, Oedipus_Scene $scene)
 	{
-		parent::__construct($scene);
+		parent::__construct($act, $scene);
+	}
+
+	protected function
+		get_scene_content_div()
+	{
+                /*
+		 * Using Tree View
+                 */
+
+		$div = new HTMLTags_Div();
+		$div->append(
+			Oedipus_FrameTreeHelper::get_frame_tree_div(
+				$this->scene
+			)
+		);
+		return $div;
 	}
 }
 ?>
