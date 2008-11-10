@@ -2165,10 +2165,6 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_DramaPage.inc.php';
 			break;
 
-		case('Oedipus_DramaPageActionsUL'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_DramaPageActionsUL.inc.php';
-			break;
-
 		case('Oedipus_DramasHelper'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_DramasHelper.inc.php';
 			break;
@@ -2209,6 +2205,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditFrameCharacterActionsUL.inc.php';
 			break;
 
+		case('Oedipus_EditFrameDiv'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditFrameDiv.inc.php';
+			break;
+
 		case('Oedipus_EditFrameFrameActionsUL'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditFrameFrameActionsUL.inc.php';
 			break;
@@ -2243,6 +2243,10 @@ function __autoload($class_name)
 
 		case('Oedipus_EditFrameRedirectScript'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/redirect-scripts/Oedipus_EditFrameRedirectScript.inc.php';
+			break;
+
+		case('Oedipus_EditFrameSceneDiv'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditFrameSceneDiv.inc.php';
 			break;
 
 		case('Oedipus_EditNoteHTMLForm'): 

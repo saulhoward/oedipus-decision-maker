@@ -51,6 +51,22 @@ Oedipus_ToolBarUL
 		$this->append_tag_to_content(
 			$this->get_frame_view_li()
 		);
+		if (
+			isset($_GET['edit_frame'])
+			&&
+			isset($_GET['frame_id'])
+		) {
+			$this->append(
+				$this->get_edit_frame_li($_GET['frame_id'])
+			);
+		}
+		elseif (
+			isset($_GET['frame_id'])
+		) {
+			$this->append(
+				$this->get_edit_frame_li($_GET['frame_id'])
+			);
+		}
 	}
 
 	protected function
@@ -103,7 +119,11 @@ Oedipus_ToolBarUL
 		$frame_view_url = $this->get_frame_view_url();
 		$link = new HTMLTags_A('Frame View');
 		$link->set_href($frame_view_url);
-		if (isset($_GET['frame_id']))
+		if (
+			isset($_GET['frame_id'])
+			&&
+			!isset($_GET['edit_frame'])
+		)
 		{
 			$link->set_attribute_str('id', 'selected');
 		}
@@ -131,6 +151,8 @@ Oedipus_ToolBarUL
 		$link->set_href($tree_view_url);
 		if (
 			!isset($_GET['frame_id'])
+			&&
+			!isset($_GET['edit_frame'])
 		)
 		{
 			$link->set_attribute_str('id', 'selected');
@@ -150,6 +172,33 @@ Oedipus_ToolBarUL
 			$this->scene_id
 		);
 	}
+
+	private function
+		get_edit_frame_li($frame_id)
+	{
+		$edit_frame_url = $this->get_edit_frame_url($frame_id);
+		$link = new HTMLTags_A('Edit this Frame');
+		$link->set_href($edit_frame_url);
+		if (isset($_GET['edit_frame']))
+		{
+			$link->set_attribute_str('id', 'selected');
+		}
+		$li = new HTMLTags_LI();
+		$li->append_tag_to_content($link);
+		$li->set_attribute_str('id', 'edit-frame');
+
+		return $li;
+	}
+
+	private function
+		get_edit_frame_url($frame_id)
+	{
+		return Oedipus_DramaHelper
+			::get_edit_frame_drama_page_url_for_frame_id(
+				$frame_id
+			);
+	}
+
 
 }
 ?>

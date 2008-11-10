@@ -270,7 +270,7 @@ extends
 		{
 			$html_tile_link = PublicHTML_URLHelper
 				::get_oo_page_url(
-					'Oedipus_TableEditorRedirectScript',
+					'Oedipus_EditFrameRedirectScript',
 					array(
 						'frame_id' => $this->frame->get_id(),
 						'edit_position' => 1,
@@ -319,9 +319,9 @@ extends
 		{
 			$html_tile_link = PublicHTML_URLHelper
 				::get_oo_page_url(
-					'Oedipus_TableEditorRedirectScript',
+					'Oedipus_EditFrameRedirectScript',
 					array(
-						'table_id' => $this->frame->get_id(),
+						'frame_id' => $this->frame->get_id(),
 						'edit_stated_intention' => 1,
 						'stated_intention_id' => $stated_intention->get_id(),
 						'stated_intention_tile' => $stated_intention->get_tile(),

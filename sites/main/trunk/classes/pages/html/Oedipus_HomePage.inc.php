@@ -33,9 +33,9 @@ extends
 			$this->get_latest_frames_div()
 		);
 
-		//$home_page_div->append_tag_to_content(
-			//$this->get_google_code_rss_div()
-		//);
+		$home_page_div->append_tag_to_content(
+			$this->get_google_code_rss_div()
+		);
 
 		echo $home_page_div->get_as_string();
 	}

@@ -19,7 +19,6 @@ extends
 	Oedipus_SceneDiv
 {
 	protected $frame_id;
-	protected $scene;
 	
 	public function
 		__construct(Oedipus_Scene $scene, $frame_id = NULL)
@@ -42,6 +41,7 @@ extends
 		}
 		else
 		{
+			//print_r($this->scene);exit;
 			$frame = $this->scene->get_frame($this->frame_id);
 		}
 

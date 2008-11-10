@@ -144,8 +144,16 @@ extends
 		{
 			$scene->make_editable();
 		}
-	
-		if (isset($_GET['frame_id']))
+
+		if (
+			isset($_GET['edit_frame'])
+			&&
+			isset($_GET['frame_id'])
+		)
+		{
+			return new Oedipus_EditFrameSceneDiv($scene, $_GET['frame_id']);
+		}
+		elseif (isset($_GET['frame_id']))
 		{
 			return new Oedipus_FrameViewSceneDiv($scene, $_GET['frame_id']);
 		}

@@ -142,16 +142,7 @@ extends
 	protected function
 		get_return_to_url()
 	{
-		$get_variables = array();
-
-		if (isset($this->frame_id))
-		{
-			$get_variables = array("frame_id" => $this->frame_id);
-
-		}
-
-		return PublicHTML_URLHelper
-			::get_oo_page_url('Oedipus_EditFramePage', $get_variables);
+		return Oedipus_DramaHelper::get_edit_frame_drama_page_url_for_frame_id($this->frame_id);
 	}
 
 }
