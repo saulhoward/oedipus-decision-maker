@@ -285,7 +285,7 @@ SQL;
 
 		if ($character_data_is_valid) 
 		{
-			$frame = self::get_oedipus_frame_by_id($frame_id);
+			$frame = Oedipus_DramaHelper::get_frame_by_id($frame_id);
 
 			$dbh = DB::m();
 
@@ -350,7 +350,7 @@ SQL;
 
 		if ($option_data_is_valid) 
 		{
-			$frame = self::get_oedipus_frame_by_id($frame_id);
+			$frame = Oedipus_DramaHelper::get_frame_by_id($frame_id);
 
 			$dbh = DB::m();
 
@@ -732,14 +732,14 @@ SQL;
 			self::wrap_element_with_class_and_id_and_add_to_div(
 				$frame_editor_forms_div,
 				self::get_oedipus_html_character_editor_form($frame, $character),
-				'character-editor',
+				'edit-character',
 				$character_css_id
 			);
 			//character actions UL
 			self::wrap_element_with_class_and_id_and_add_to_div(
 				$frame_editor_forms_div,
 				self::get_oedipus_html_character_actions_ul($frame, $character),
-				'character-editor-actions',
+				'edit-character-actions',
 				$character_css_id
 			);
 
@@ -750,14 +750,14 @@ SQL;
 				self::wrap_element_with_class_and_id_and_add_to_div(
 					$frame_editor_forms_div,
 					self::get_oedipus_html_option_editor_form($frame, $option, $i),
-					'option-editor',
+					'edit-option',
 					$character_css_id
 				);
 				//Option actions UL
 				self::wrap_element_with_class_and_id_and_add_to_div(
 					$frame_editor_forms_div,
 					self::get_oedipus_html_option_actions_ul($frame, $option),
-					'option-editor-actions',
+					'edit-option-actions',
 					$character_css_id
 				);
 				$i++;

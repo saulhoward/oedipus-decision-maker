@@ -61,7 +61,7 @@ class
 		if (isset($this->frames[$frame_id])) {
 			return $this->frames[$frame_id];
 		} else {
-			throw new Exception("No frame with id '$frame_id' in the '$this->name' drama!");
+			throw new Exception("No frame with id '$frame_id' in the '$this->name' scene!");
 		}
 	}
 

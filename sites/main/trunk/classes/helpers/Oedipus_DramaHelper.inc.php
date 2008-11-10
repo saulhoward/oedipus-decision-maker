@@ -1128,6 +1128,22 @@ SQL;
 			);
 	}
 
+	public static function
+		get_edit_frame_drama_page_url_for_frame_id($frame_id)
+	{
+		$drama_id = self::get_drama_id_for_frame_id($frame_id);
+		return PublicHTML_URLHelper
+			::get_oo_page_url(
+				'Oedipus_DramaPage',
+				array(
+					'drama_id' => $drama_id,
+					'edit_frame' => 1,
+					'frame_id' => $frame_id
+				)
+			);
+	}
+
+
 
 
 	public static function

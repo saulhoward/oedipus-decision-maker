@@ -78,6 +78,11 @@ p  { font-size:1em;}
 	margin: 0.2em 0;
 	list-style: disc url(/images/bullet_blue.png) inside;
 }
+
+#content div.welcome
+{
+	margin: 0 1em;
+}
 #content div.welcome em
 {
 	font-weight: bold;

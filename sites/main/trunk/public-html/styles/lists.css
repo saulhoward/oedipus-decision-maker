@@ -363,18 +363,15 @@ ul.toolbar a#add
 	height: 16px;
 	padding: 0;
 	display: inline-block;
-	margin: 0 0 0 50px;
+	margin: 0 100px 0 25px;
 	vertical-align: middle;
 	text-indent: -3000px;
 	background: transparent url(/images/icons/16x16/add-rollover.png) top left no-repeat;
 }
-ul.toolbar a#add:hover
-{
+ul.toolbar a#add:hover {
 	background-position: 0 -16px;
 
 }
-ul.toolbar li#tree-view
-{
-	margin: 0 0 0 50px;
+ul.toolbar li#tree-view {
 
 }

@@ -92,19 +92,19 @@ form#basic-form span.error
 /* 
  * Table Editor Forms 
  */
-div.table-editor-forms form 
+div.edit-frame-forms form 
 {
 	clear: both;
 	width: auto;
 /*        background: transparent;*/
 }
-div.table-editor-forms form ol
+div.edit-frame-forms form ol
 {
 	/*        float: left;*/
 	/*        border: 1px solid black;*/
 	width: 22em;
 }
-div.table-editor-forms form ol li label
+div.edit-frame-forms form ol li label
 {
 	display:inline-block;
 	float:left;
@@ -113,81 +113,81 @@ div.table-editor-forms form ol li label
 	vertical-align:middle;
 	width:5em;
 }
-div.table-editor-forms input
+div.edit-frame-forms input
 {
 	width: 12em;
 	font-size: 1.05em;
 }
-div.table-editor-forms  input.submit
+div.edit-frame-forms  input.submit
 {
 	width: auto;
 
 	font-size: 0.9em;
 }
-div.table-editor-forms  input#actor_color
+div.edit-frame-forms  input#character_color
 {
 	width: 4em;
 }
-div.table-editor-forms div.submit_buttons_div
+div.edit-frame-forms div.submit_buttons_div
 {
 	margin: -2.2em 0 0 19em;
 	padding: 0.5em 0 0 0;
 }
-div.table-editor-forms
+div.edit-frame-forms
 {
 	background-color:#FFFF99;
 	padding: 0 0 1em 0;
 	margin: 0 auto 3em auto;
 	width: 30em;
 }
-div.table-editor-form,
-div.actor-editor,
-div.option-editor,
-div.table-editor-actions,
-div.actor-editor-actions,
-div.option-editor-actions
+div.edit-frame-form,
+div.edit-character,
+div.edit-option,
+div.edit-frame-actions,
+div.edit-character-actions,
+div.edit-option-actions
 {
 	/*        margin: 0 auto;*/
 }
 
-div.table-editor-form
+div.edit-frame-form
 {
 	padding: 1em 0 0.5em 0;
 }
-div.actor-editor
+div.edit-character
 {
 	padding: 0.5em 0 0.5em 0.5em;
 	margin: 0.5em 1em 0 2em;
 }
-div.option-editor
+div.edit-option
 {
 	padding: 0.5em 0 0.5em 0.5em;
 	margin: 0.2em 1em 0 4em;
 }
-div.table-editor-actions
+div.edit-frame-actions
 {
 	padding: 0.5em 0 0 0.5em;
 }
-div.actor-editor-actions
+div.edit-character-actions
 {
 	padding: 0 0 0.5em 0.5em;
 	margin: 0 1em 0 2em;
 }
-div.option-editor-actions
+div.edit-option-actions
 {
 	padding: 0 0 0.5em 0.5em;
 	margin: 0 1em 0 4em;
 }
-div.table-editor-actions a,
-div.actor-editor-actions a,
-div.option-editor-actions a
+div.edit-frame-actions a,
+div.edit-character-actions a,
+div.edit-option-actions a
 {
 	color: blue;
 	text-decoration:none;
 }
-div.table-editor-actions a:hover,
-div.actor-editor-actions a:hover,
-div.option-editor-actions a:hover
+div.edit-frame-actions a:hover,
+div.edit-character-actions a:hover,
+div.edit-option-actions a:hover
 {
 	text-decoration:underline;
 }
@@ -195,13 +195,13 @@ div.option-editor-actions a:hover
 /*
  * UL ICONS in the Table Editor Forms
  */
-div.table-editor-forms ul.table-options li#add_new_actor,
-div.table-editor-forms ul.table-options li#add_option
+div.edit-frame-forms ul.frame-options li#add_new_character,
+div.edit-frame-forms ul.frame-options li#add_option
 {
 	list-style: disc url(/images/icons/16x16/list-add.png) inside;
 }
-div.table-editor-forms ul.table-options li#delete_actor,
-div.table-editor-forms ul.table-options li#delete_option
+div.edit-frame-forms ul.frame-options li#delete_character,
+div.edit-frame-forms ul.frame-options li#delete_option
 {
 	/*        list-style: disc url(/images/icons/16x16/list-remove.png) inside;*/
 	list-style: disc url(/images/icons/16x16/edit-delete.png) inside;
@@ -210,31 +210,31 @@ div.table-editor-forms ul.table-options li#delete_option
 /*
  * Background colors in the Table Editor Forms
  */
-#blue.actor-editor,
-#blue.option-editor,
-#blue.actor-editor-actions,
-#blue.option-editor-actions
+#blue.edit-character,
+#blue.edit-option,
+#blue.edit-character-actions,
+#blue.edit-option-actions
 {
 	background-color: #8080FF; /* BLUE -50% SAT. */
 }
-#red.actor-editor,
-#red.option-editor,
-#red.actor-editor-actions,
-#red.option-editor-actions
+#red.edit-character,
+#red.edit-option,
+#red.edit-character-actions,
+#red.edit-option-actions
 {
 	background-color: #FF8080; /* RED -50% SAT. */
 }
-#green.actor-editor,
-#green.option-editor,
-#green.actor-editor-actions,
-#green.option-editor-actions
+#green.edit-character,
+#green.edit-option,
+#green.edit-character-actions,
+#green.edit-option-actions
 {
 	background-color: #80FF80; /* GREEN -50% SAT. */
 }
-#orange.actor-editor,
-#orange.option-editor,
-#orange.actor-editor-actions,
-#orange.option-editor-actions
+#orange.edit-character,
+#orange.edit-option,
+#orange.edit-character-actions,
+#orange.edit-option-actions
 {
 	background-color: #FFE480; /* ORANGE -50% SAT. */
 }
