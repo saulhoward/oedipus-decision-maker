@@ -313,25 +313,26 @@ div.rss ul li.odd
 
 /* PICKERS */
 
-ul.picker
+ul.toolbar
 {
 	padding: 10px;
 	margin: 0;
 	background: #e8e8e8;
+	font-size: 90%;
 }
 
 
-ul.picker li
+ul.toolbar li
 {
 	display: inline-block;
 	vertical-align: middle;
 }
-ul.picker a
+ul.toolbar a
 {
 	color: #3d3d3d;
 	padding: 2px 6px;
 }
-ul.picker a#selected
+ul.toolbar a#selected
 {
 	color:black;
 	background: #f2f2f2;
@@ -341,43 +342,39 @@ ul.picker a#selected
 	-webkit-border-radius: 4px;
 	border-radius: 4px;
 }
-ul.picker a:hover
+ul.toolbar a:hover
 {
 	color: black;
 
 }
-ul.picker a#selected:hover
+ul.toolbar a#selected:hover
 {
 	background: white;
 }
-div.scene ul.picker
+ul.toolbar#act
 {
 	background: #d1d1d1;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #bdbdbd;
 }
-ul.picker a#add
+ul.toolbar a#add
 {
 	width: 16px;
 	height: 16px;
 	padding: 0;
-	margin: 0 0 0 50px;
 	display: inline-block;
+	margin: 0 0 0 50px;
 	vertical-align: middle;
 	text-indent: -3000px;
 	background: transparent url(/images/icons/16x16/add-rollover.png) top left no-repeat;
 }
-ul.picker a#add:hover
+ul.toolbar a#add:hover
 {
 	background-position: 0 -16px;
 
 }
+ul.toolbar li#tree-view
+{
+	margin: 0 0 0 50px;
 
-/* Scene View */
-ul.scene-view
-{
-	margin: 0.4em 10px;
-}
-ul.scene-view li
-{
-	display: inline-block;
-	margin: 0 0.2em;
 }

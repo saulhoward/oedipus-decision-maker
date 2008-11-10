@@ -51,9 +51,9 @@ extends
 		{
 			$this->get_variables['drama_id'] = $_POST['drama_id'];
 		}
-		if (isset($_POST['view_frame_id']))
+		if (isset($_POST['frame_id']))
 		{
-			$this->get_variables['view_frame_id'] = $_POST['view_frame_id'];
+			$this->get_variables['frame_id'] = $_POST['frame_id'];
 		}
 
 		$return_to_url = $this->get_return_to_url();

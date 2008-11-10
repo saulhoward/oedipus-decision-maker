@@ -14,13 +14,19 @@ extends
 		if (
 			isset($_POST['new_drama'])
 			&&
-			isset($_POST['drama_name'])
-			&&
 			isset($_POST['user_id'])
 			)
 		{
+			if (isset($_POST['drama_name']))
+			{
+				$drama_name = $_POST['drama_name'];
+			}
+			else
+			{
+				$drama_name = Oedipus_DramaHelper::get_new_drama_name();
+			}
 			$drama = Oedipus_DramaEditorHelper::add_drama(
-				$_POST['drama_name'], $_POST['user_id']
+				$drama_name, $_POST['user_id']
 			);
 
 			// A drama needs at least one act and an act, one scene.

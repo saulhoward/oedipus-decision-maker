@@ -9,6 +9,129 @@ class
 Oedipus_DramaHelper
 {
 	public static function
+		get_new_drama_name()
+	{
+		return 'New Drama';
+	}
+
+	public static function
+		get_next_act_name_for_drama_id($drama_id)
+	{
+		$last_act_name = self::get_latest_act_name_for_drama_id($drama_id);
+
+		$act_name = '';
+		if (strlen($last_act_name))
+		{
+			$act_name = self
+				::get_incremented_name($last_act_name);
+		}
+		else
+		{
+			$act_name = 'Act 1';
+		}
+		return $act_name;
+	}
+
+
+	public static function
+		get_next_scene_name_for_act_id($act_id)
+	{
+		$last_scene_name = self::get_latest_scene_name_for_act_id($act_id);
+
+		$scene_name = '';
+		if (strlen($last_scene_name))
+		{
+			$scene_name = self
+				::get_incremented_name($last_scene_name);
+		}
+		else
+		{
+			$scene_name = 'Scene 1';
+		}
+		return $scene_name;
+	}
+
+	public static function
+		get_incremented_name($name)
+	{
+		/**
+		 * See if there is a number
+		 * at the end of the last scene name.
+		 * If so, use that to make the new name
+		 */
+
+		$new_name = '';
+		$next_no = 0;
+		$last_no = 0;
+		preg_match('/[0-9]+$/', $name, $last_no);
+		//print_r($last_no);exit;
+		if (is_numeric($last_no[0]))
+		{
+			$next_no = $last_no[0] + 1;
+			$new_name = preg_replace('/[0-9]+$/', $next_no, $name);
+		}
+		else
+		{
+			/**
+			 * Otherwise, just add 1 to the last name
+			 */
+			$name = trim($name);
+			$new_name = $name . ' 1';
+		}
+		return $new_name;
+	}
+
+	public static function
+		get_latest_act_name_for_drama_id($drama_id)
+	{
+		$dbh = DB::m();
+		$query = <<<SQL
+SELECT 
+	oedipus_acts.name
+FROM 
+	oedipus_acts
+WHERE 
+	oedipus_acts.drama_id = '$drama_id'
+ORDER BY
+	oedipus_acts.added DESC
+LIMIT
+	0, 1
+SQL;
+
+//                                                print_r($query);exit;
+		$result = mysql_query($query, $dbh);
+		$row = mysql_fetch_array($result);
+		//                                print_r($row);exit;
+
+		return $row['name'];
+	}
+
+	public static function
+		get_latest_scene_name_for_act_id($act_id)
+	{
+		$dbh = DB::m();
+		$query = <<<SQL
+SELECT 
+	oedipus_scenes.name
+FROM 
+	oedipus_scenes
+WHERE 
+	oedipus_scenes.act_id = '$act_id'
+ORDER BY
+	oedipus_scenes.added DESC
+LIMIT
+	0, 1
+SQL;
+
+//                                                print_r($query);exit;
+		$result = mysql_query($query, $dbh);
+		$row = mysql_fetch_array($result);
+		//                                print_r($row);exit;
+
+		return $row['name'];
+	}
+
+	public static function
 		get_drama_id_for_scene_id($scene_id)
 	{
 		$dbh = DB::m();

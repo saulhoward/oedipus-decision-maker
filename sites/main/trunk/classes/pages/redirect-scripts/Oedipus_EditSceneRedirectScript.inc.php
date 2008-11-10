@@ -55,13 +55,15 @@ extends
 			$frame_name = $_GET['frame_name'];
 			$parent_frame_id = $_GET['parent_frame_id'];
 
-			$this->add_frame($scene_id, $frame_name, $parent_frame_id);
+			$frame = $this->add_frame($scene_id, $frame_name, $parent_frame_id);
 			/*
 			 * Set the Return to URL,
 			 * assuming we're on the DramaPage
                          */
 			$return_to_url = Oedipus_DramaHelper
-				::get_drama_page_url_for_scene_id($scene_id);
+				::get_drama_page_url_for_frame_id(
+					$frame->get_id()
+				);
 		} 
 		elseif (
 			isset($_GET['rebuild_tree'])

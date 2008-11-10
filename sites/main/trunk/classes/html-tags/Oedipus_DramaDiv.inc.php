@@ -94,17 +94,12 @@ extends
 		$act_div = new HTMLTags_Div();
 		$act_div->set_attribute_str('class', 'act');
 
-		//$act_div->append('<h3>' . $act->get_name() . '</h3>');
 		$act_div->append(
-			$this->get_act_picker_ul(
-				$act
+			new Oedipus_DramaToolBarUL(
+				$this->drama, $act->get_id()
 			)
 		);
-		//$act_div->append(
-			//new Oedipus_ActActionsUL(
-				//$act, $this->drama->get_id()
-			//)
-		//);
+
 
 		/*
 		 * Show the Selected scene
@@ -129,65 +124,21 @@ extends
 				);
 		}
 		$act_div->append(
+			new Oedipus_ActToolBarUL(
+				$act, $scene_id
+			)
+		);
+		$act_div->append(
 			$this->get_scene_div(
-				$act,
 				$act->get_scene($scene_id)
 			)
 		);
 		return $act_div;
 	}
 
-	protected function
-		get_act_picker_ul(Oedipus_Act $current_act)
-	{
-		$ul = new HTMLTags_UL();
-		$ul->set_attribute_str('class', 'picker');
-
-		foreach($this->drama->get_acts() as $act)
-		{
-			$url = Oedipus_DramaHelper
-				::get_drama_page_url_for_act_id($act->get_id());
-			$li = new HTMLTags_LI();
-			$a = new HTMLTags_A($act->get_name());
-			$a->set_href($url);
-			if ($current_act->get_id() == $act->get_id())
-			{
-				$a->set_attribute_str('id', 'selected');
-			}
-			$li->append($a);
-			$ul->append($li);
-		}
-
-		/*
-		 * Add Act LI
-		 */
-		$ul->append(
-			$this->get_add_act_li()
-		);
-
-		return $ul;
-	}
 
 	protected function
-		get_add_act_li()
-	{
-		$li = new HTMLTags_LI();
-		$a = new HTMLTags_A('Add Act');
-		$a->set_attribute_str('id', 'add');
-		$a->set_attribute_str('title', 'Add an Act');
-		$a->set_href(
-			Oedipus_DramaHelper
-			::get_add_act_url(
-				$this->drama->get_id()
-			)
-		);
-		$li->append($a);
-
-		return $li;
-	}
-
-	protected function
-		get_scene_div(Oedipus_Act $act, Oedipus_Scene $scene)
+		get_scene_div(Oedipus_Scene $scene)
 	{
 		if ($this->drama->is_editable())
 		{
@@ -196,9 +147,9 @@ extends
 	
 		if (isset($_GET['frame_id']))
 		{
-			return new Oedipus_FrameViewSceneDiv($act, $scene, $_GET['frame_id']);
+			return new Oedipus_FrameViewSceneDiv($scene, $_GET['frame_id']);
 		}
-		return new Oedipus_TreeViewSceneDiv($act, $scene);
+		return new Oedipus_TreeViewSceneDiv($scene);
 	}
 
 	protected function

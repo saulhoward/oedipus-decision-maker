@@ -19,9 +19,9 @@ extends
 	Oedipus_SceneDiv
 {
 	public function
-		__construct(Oedipus_Act $act, Oedipus_Scene $scene)
+		__construct(Oedipus_Scene $scene)
 	{
-		parent::__construct($act, $scene);
+		parent::__construct($scene);
 	}
 
 	protected function
