@@ -22,8 +22,9 @@ extends
 	public function
 		__construct(Oedipus_Frame $frame)
 	{
-               //print_r($frame);exit;
-
+		if (!$frame->is_editable()) {
+			throw new Exception('This frame is locked.');
+		}
 		parent::__construct();
 
 		$this->frame = $frame;
@@ -57,18 +58,11 @@ extends
 		$this->append_tag_to_content($right_div);
 	}
 
-	/*
-	 * Functions to call in the html-tags
-	 * classes for the page elements
-	 *
-	 */
-
 	private function
 		get_oedipus_frame_editor_forms_div()
 	{
 		return Oedipus_FrameHelper::get_edit_frame_forms_div($this->frame);
 	}
-
 
 	private function
 		get_frame_editor_heading()

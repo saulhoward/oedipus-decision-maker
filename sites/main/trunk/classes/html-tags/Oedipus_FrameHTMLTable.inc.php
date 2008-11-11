@@ -6,42 +6,39 @@
  *  2008-04-05, SANH
  */
 
+/*
+ * Constructs an HTML <TABLE> 
+ * from an Oedipus_Frame
+ *
+ * An oedipus frame consists of:
+ *
+ * There has to be at least one option and one character;
+ * Options belong to characters.
+ * For each option, every character has a position on it.
+ * For each option, there is a si-position on it.
+ */
+
 class
 	Oedipus_FrameHTMLTable
 extends
 	HTMLTags_Table
 {
-//        private $key_fields;
-//        
-//        private $column_titles;
-//        
-//        private $row_data;
-//        
-//        private $base_redirect_script_url;
-	
-	// An oedipus frame consists of:
-	//
-	// There has to be at least one option and one character;
-	// Options belong to Actors.
-	// For each option, every character has a position on it.
-	// For each option, there is a si-position on it.
-	//
-
-	private $edit_mode;
+        //private $key_fields;
+        //private $column_titles;
+        //private $row_data;
+        //private $base_redirect_script_url;
 
 	private $characters;
 
 	private $frame;
 
 	public function
-		__construct(Oedipus_Frame $frame, $edit_mode = TRUE)
+		__construct(Oedipus_Frame $frame)
 	{
 		parent::__construct();
 		
 		$this->set_attribute_str('class', 'oedipus');
 		
-		$this->edit_mode = $edit_mode;
-
 		$this->frame = $frame;
 
 		$this->characters = $frame->get_characters();
@@ -266,7 +263,7 @@ extends
 	{
 //                <a href="#" class="position-tile" id="character1-option1">0</a>
 
-		if ($this->edit_mode)
+		if ($this->frame->is_editable())
 		{
 			$html_tile_link = PublicHTML_URLHelper
 				::get_oo_page_url(
@@ -315,7 +312,7 @@ extends
 		)
 	{
 //                <a href="#" class="si-tile" id="character1-option1">0</a>
-		if ($this->edit_mode)
+		if ($this->frame->is_editable())
 		{
 			$html_tile_link = PublicHTML_URLHelper
 				::get_oo_page_url(
