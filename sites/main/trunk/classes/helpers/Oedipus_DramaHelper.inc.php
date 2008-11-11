@@ -615,7 +615,7 @@ SELECT
 		character_id = $character_id
 SQL;
 
-			//                print_r($characters_query);exit;
+				       //print_r($options_query);exit;
 			$options_result = mysql_query($options_query, $dbh);
 			//                print_r($characters);exit;
 
@@ -710,7 +710,7 @@ SQL;
 			$characters
 		);
 
-		//                                                print_r($frame);exit;
+		//print_r($frame);exit;
 		//
 		return $frame;
 	}

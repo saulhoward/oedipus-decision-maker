@@ -125,8 +125,7 @@ Oedipus_ToolBarUL
 			isset($_GET['frame_id'])
 			&&
 			!isset($_GET['edit_frame'])
-		)
-		{
+		) {
 			$link->set_attribute_str('id', 'selected');
 		}
 		$li = new HTMLTags_LI();
@@ -139,6 +138,14 @@ Oedipus_ToolBarUL
 	private function
 		get_frame_view_url()
 	{
+		if (
+			isset($_GET['frame_id'])
+		) {
+			return Oedipus_DramaHelper
+				::get_drama_page_url_for_frame_id(
+					$_GET['frame_id']
+				);
+		}
 		return Oedipus_DramaHelper
 			::get_frame_view_drama_page_url_for_scene_id(
 				$this->scene_id

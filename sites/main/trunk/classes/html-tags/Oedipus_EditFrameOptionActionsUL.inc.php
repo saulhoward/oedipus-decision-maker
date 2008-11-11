@@ -54,6 +54,14 @@ extends
 			"delete_option" => 1
 		);
 
+                /*
+		 *If we're on the edit_frame section of Drama Page,
+		 * pass this on to set the return to correctly
+                 */
+		if (isset($_GET['edit_frame'])) {
+			$get_variables['return_to_get'] = 'edit_frame';
+		}
+
 		return PublicHTML_URLHelper
 			::get_oo_page_url('Oedipus_EditFrameRedirectScript', $get_variables);
 	}

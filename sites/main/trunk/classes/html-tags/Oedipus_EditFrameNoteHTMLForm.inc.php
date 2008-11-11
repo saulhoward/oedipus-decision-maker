@@ -34,8 +34,7 @@ Oedipus_EditNoteHTMLForm
 		# Hidden Inputs
 		$this->add_hidden_input('edit_note', 1);
 		$this->add_hidden_input('drama_id', $drama_id);
-		$this->add_hidden_input('view_frame_id', $view_frame_id);
-		$this->add_hidden_input('drama_id', $drama_id);
+		$this->add_hidden_input('frame_id', $view_frame_id);
 		$this->add_hidden_input('note_id', $note->get_id());
 	}
 

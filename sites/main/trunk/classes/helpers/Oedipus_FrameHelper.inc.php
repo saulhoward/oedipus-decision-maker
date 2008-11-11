@@ -348,8 +348,7 @@ SQL;
 	{
 		$option_data_is_valid = TRUE; //Implement this!
 
-		if ($option_data_is_valid) 
-		{
+		if ($option_data_is_valid) {
 			$frame = Oedipus_DramaHelper::get_frame_by_id($frame_id);
 
 			$dbh = DB::m();
@@ -409,19 +408,75 @@ SQL;
 				$result5 = mysql_query($sql5, $dbh);
 			}
 		} 
-		else 
-		{
+		else {
 			//                        throw new Database_CRUDException("'$href' is not a validate HREF!");
 		}
+	}
+
+	public function
+		get_no_of_characters_in_frame_by_character_id($character_id)
+	{
+		$frame_id = self::get_frame_id_for_character_id($character_id);
+		return self::get_no_of_characters_in_frame_by_id($frame_id);
+	}
+
+	public function
+		get_frame_id_for_character_id($character_id)
+	{
+		$dbh = DB::m();
+		// Get the frame
+		$sql = <<<SQL
+SELECT 
+	oedipus_characters.frame_id as frame_id
+FROM 
+	oedipus_characters
+WHERE
+	oedipus_characters.id = '$character_id'
+SQL;
+
+		$result = mysql_query($sql, $dbh);
+		//print_r($sql);exit;
+		$row = mysql_fetch_array($result);
+		return $row['frame_id'];
+	}
+
+	public function
+		get_no_of_characters_in_frame_by_id($frame_id)
+	{
+		$dbh = DB::m();
+		// Get the frame
+		$sql = <<<SQL
+SELECT 
+	COUNT(id) as count
+FROM 
+	oedipus_characters
+WHERE
+	oedipus_characters.frame_id = '$frame_id'
+SQL;
+
+		$result = mysql_query($sql, $dbh);
+		//print_r($sql);exit;
+		$row = mysql_fetch_array($result);
+		return $row['count'];
 	}
 
 	public static function
 		delete_character($character_id)
 	{
-		$character_data_is_valid = TRUE; //Implement this!
+		$character_data_is_valid = TRUE; 
+		if (
+			self::get_no_of_characters_in_frame_by_character_id(
+					$character_id
+				)
+			<= 1
+		) {
+			/*
+			 * Cannot Delete the last character in a frame
+			 */
+			$character_data_is_valid = FALSE;	 
+		}
 
-		if ($character_data_is_valid) 
-		{
+		if ($character_data_is_valid) {
 			$dbh = DB::m();
 
 			// First, each character has positions on everyone's options
@@ -506,10 +561,12 @@ SQL;
 
 //                        print_r($character_sql);exit;
 			mysql_query($character_sql, $dbh);
+			return TRUE;
 		}
-		else 
-		{
-			//throw new Database_CRUDException("'$href' is not a validate HREF!");
+		else {
+			throw new Oedipus_AttemptToDeleteLastCharacterInFrameException(
+				$character_id
+			);
 		}
 
 	}

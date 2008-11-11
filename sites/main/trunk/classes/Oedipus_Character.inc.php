@@ -30,7 +30,7 @@ class
 			Oedipus_Option $option
 			)
 		{
-		$this->options[$option->get_name()] = $option;
+		$this->options[$option->get_id()] = $option;
 	}
 	
 	
@@ -46,10 +46,10 @@ class
 
 
 	public function
-		get_option($option_name)
+		get_option($option_id)
 	{
-		if (isset($this->options[$option_name])) {
-			return $this->options[$option_name];
+		if (isset($this->options[$option_id])) {
+			return $this->options[$option_id];
 		} else {
 			throw new Exception("No option called '$option_name' in the '$this->name' table!");
 		}
