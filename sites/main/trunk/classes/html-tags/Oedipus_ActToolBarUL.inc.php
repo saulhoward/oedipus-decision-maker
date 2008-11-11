@@ -41,26 +41,28 @@ Oedipus_ToolBarUL
 
 		/**
 		 * Add scene LI
+		 *
 		 */
-		$this->append(
-			$this->get_add_scene_li()
-		);
+		if (
+			($this->act->is_editable())
+		) {
+			$this->append(
+				$this->get_add_scene_li()
+			);
+		}
 		$this->append_tag_to_content(
 			$this->get_tree_view_li()
 		);
 		$this->append_tag_to_content(
 			$this->get_frame_view_li()
 		);
+
+                /*
+		 *Edit Frame LI
+                 */
 		if (
-			isset($_GET['edit_frame'])
+			($this->act->is_editable())
 			&&
-			isset($_GET['frame_id'])
-		) {
-			$this->append(
-				$this->get_edit_frame_li($_GET['frame_id'])
-			);
-		}
-		elseif (
 			isset($_GET['frame_id'])
 		) {
 			$this->append(

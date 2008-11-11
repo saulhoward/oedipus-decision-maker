@@ -1,6 +1,6 @@
 <?php
 /**
- * Oedipus_OedipusShareDramaPageActionsUL
+ * Oedipus_ShareDramaPageActionsUL
  *
  *  2008-03-17, RFI
  *  2008-04-05, SANH
@@ -8,9 +8,9 @@
  */
 
 class
-Oedipus_OedipusShareDramaPageActionsUL
+Oedipus_ShareDramaPageActionsUL
 extends
-Oedipus_OedipusPageActionsUL
+Oedipus_PageActionsUL
 {
 	private $drama;
 

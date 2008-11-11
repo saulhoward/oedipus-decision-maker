@@ -17,6 +17,8 @@ class
 	private $scenes;
 	private $drama_id;
 
+	private $editable;
+
 	public function
 		__construct(
 			$id,
@@ -30,6 +32,8 @@ class
 		$this->added = $added;
 		$this->drama_id = $drama_id;
 		
+		$this->editable = FALSE;
+
 		$this->scenes = array();
 	}
 
@@ -96,5 +100,20 @@ class
 	{
 		return $this->name;
 	}
+
+	public function
+		make_editable()
+	{
+		$this->editable = TRUE;
+		return TRUE;
+	}
+	
+	public function
+		is_editable()
+	{
+		return $this->editable;
+	}
+
+
 }
 ?>

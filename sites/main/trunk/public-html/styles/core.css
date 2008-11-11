@@ -248,3 +248,7 @@ div.notes div.submit_buttons_div
 	font-size: 90%;
 
 }
+
+div.edit-frame-instructions {
+	text-align: center;
+}

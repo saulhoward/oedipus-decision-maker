@@ -37,7 +37,7 @@ Oedipus_HTMLPage
 			try
 			{
 				$this->drama =
-					Oedipus_DramaEditorHelper::get_drama_by_id($_GET['drama_id']);
+					Oedipus_DramaHelper::get_drama_by_id($_GET['drama_id']);
 
 			}
 			catch (Exception $e)
@@ -150,7 +150,7 @@ Oedipus_HTMLPage
 	private function
 		get_oedipus_drama_page_actions()
 	{
-		return new Oedipus_OedipusShareDramaPageActionsUL($this->drama);
+		return new Oedipus_ShareDramaPageActionsUL($this->drama);
 	}
 
 	private function

@@ -7,7 +7,6 @@ extends
 	protected function
 		do_actions()
 	{
-
 //                print_r($_POST);exit;
 		$return_to_url = $this->get_redirect_script_return_url();
 
@@ -67,7 +66,7 @@ extends
 			isset($_POST['drama_id'])
 			)
 		{
-			Oedipus_DramaHelper
+			Oedipus_DramaEditorHelper
 				::set_drama_status($_POST['drama_id'], $_POST['status']);
 			$return_to_url = Oedipus_DramaHelper
 				::get_share_drama_url($_POST['drama_id']);
