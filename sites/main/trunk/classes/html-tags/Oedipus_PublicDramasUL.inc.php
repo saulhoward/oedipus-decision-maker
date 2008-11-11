@@ -1,29 +1,26 @@
 <?php
 /**
- * Oedipus_MyDramasUL
+ * Oedipus_PublicDramasUL
  *
  *  2008-03-17, RFI
  *  2008-04-05, SANH
  */
 
 class
-Oedipus_MyDramasUL
+Oedipus_PublicDramasUL
 extends
 Oedipus_DramasUL
 {
-	private $user_id;
-
 	public function
-		__construct($user_id)
+		__construct()
 	{
-		$this->user_id = $user_id;
 		parent::__construct();
 	}
 
 	protected function
 		get_dramas()
 	{
-		return Oedipus_DramaHelper::get_all_dramas_for_user($this->user_id);
+		return Oedipus_DramaHelper::get_latest_public_dramas();
 	}
 }
 ?>

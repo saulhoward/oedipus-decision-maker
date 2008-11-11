@@ -2,7 +2,7 @@
 /**
  * __autoload .INC file
  *
- * Last Modified: 2008-11-10
+ * Last Modified: 2008-11-11
  */
 
 function __autoload($class_name)
@@ -2169,6 +2169,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_DramasHelper.inc.php';
 			break;
 
+		case('Oedipus_DramasUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_DramasUL.inc.php';
+			break;
+
 		case('Oedipus_DramaToolBarUL'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_DramaToolBarUL.inc.php';
 			break;
@@ -2361,10 +2365,6 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusHTMLTable.inc.php';
 			break;
 
-		case('Oedipus_OedipusShareDramaPageActionsUL'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_OedipusShareDramaPageActionsUL.inc.php';
-			break;
-
 		case('Oedipus_Option'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Option.inc.php';
 			break;
@@ -2375,6 +2375,10 @@ function __autoload($class_name)
 
 		case('Oedipus_Position'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Position.inc.php';
+			break;
+
+		case('Oedipus_PublicDramasUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_PublicDramasUL.inc.php';
 			break;
 
 		case('Oedipus_RedirectScript'): 
@@ -2407,6 +2411,10 @@ function __autoload($class_name)
 
 		case('Oedipus_ShareDramaPage'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_ShareDramaPage.inc.php';
+			break;
+
+		case('Oedipus_ShareDramaPageActionsUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_ShareDramaPageActionsUL.inc.php';
 			break;
 
 		case('Oedipus_StatedIntention'): 

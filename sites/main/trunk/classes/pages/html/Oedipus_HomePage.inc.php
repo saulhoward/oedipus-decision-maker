@@ -30,7 +30,7 @@ extends
 		);
 
 		$home_page_div->append_tag_to_content(
-			$this->get_latest_frames_div()
+			$this->get_latest_dramas_div()
 		);
 
 		$home_page_div->append_tag_to_content(
@@ -53,9 +53,13 @@ extends
 	}
 
 	private function
-		get_latest_frames_div()
+		get_latest_dramas_div()
 	{
-		return Oedipus_DramaHelper::get_latest_frames_div();
+		$div = new HTMLTags_Div();
+		$div->set_attribute_str('class', 'dramas-list');
+		$div->append(new HTMLTags_Heading(3, 'Latest Public Dramas'));
+		$div->append(new Oedipus_PublicDramasUL());
+		return $div;
 	}
 	
 	private function

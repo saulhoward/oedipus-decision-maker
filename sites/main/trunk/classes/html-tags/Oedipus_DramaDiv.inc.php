@@ -22,7 +22,6 @@ extends
 	public function
 		__construct(Oedipus_Drama $drama)
 	{
-//                print_r($drama);exit;
 
 		parent::__construct();
 
@@ -65,9 +64,17 @@ extends
 					$this->drama->get_id()
 				);
 		}
+
+                /*
+		 *Get the Act
+                 */
+		$act = $this->drama->get_act($act_id);
+		if ($this->drama->is_editable()) {
+			$act->make_editable();
+		}
 		$this->append(
 			$this->get_act_div(
-				$this->drama->get_act($act_id)
+				$act
 			)
 		);
 	}

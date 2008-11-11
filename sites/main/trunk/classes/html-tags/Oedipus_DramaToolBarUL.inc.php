@@ -41,9 +41,13 @@ Oedipus_ToolBarUL
 		/*
 		 * Add Act LI
 		 */
-		$this->append(
-			$this->get_add_act_li()
-		);
+		if (
+			($this->drama->is_editable())
+		) {
+			$this->append(
+				$this->get_add_act_li()
+			);
+		}
 
                  /*
 		  *Link to share drama

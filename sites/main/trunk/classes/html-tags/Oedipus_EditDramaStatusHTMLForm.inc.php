@@ -56,7 +56,7 @@ extends
 		get_edit_drama_status_form_action_url()
 	{
 		return PublicHTML_URLHelper
-			::get_oo_page_url('Oedipus_DramaEditorRedirectScript');
+			::get_oo_page_url('Oedipus_EditDramaRedirectScript');
 	}
 
 	private function

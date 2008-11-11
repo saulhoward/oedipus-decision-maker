@@ -716,6 +716,41 @@ SQL;
 	}
 
 	public function
+		get_latest_public_dramas($limit = 5)
+	{
+		$dbh = DB::m();
+		$query = <<<SQL
+SELECT 
+	*
+	FROM
+	oedipus_dramas
+	WHERE
+	status = 'public'
+ORDER BY
+	added DESC
+LIMIT
+0, $limit
+SQL;
+
+		//                print_r($query);exit;
+		$result = mysql_query($query, $dbh);
+
+		$dramas = array();
+		while($row = mysql_fetch_array($result))
+		{
+			//                print_r($row);exit;
+			$dramas[] = new Oedipus_Drama(
+				$row['id'],
+				$row['name'],
+				$row['unique_name'],
+				$row['added'],
+				$row['status']
+			);
+		}
+
+		return $dramas;
+	}
+	public function
 		get_all_dramas_for_user($user_id)
 	{
 		$dbh = DB::m();
@@ -1142,6 +1177,18 @@ SQL;
 				)
 			);
 	}
+
+	public static function
+		get_share_drama_url($drama_id)
+	{
+		return PublicHTML_URLHelper
+			::get_oo_page_url(
+				'Oedipus_ShareDramaPage',
+				array(
+					'drama_id' => $drama_id
+				)
+			);
+	}	
 
 
 
