@@ -262,12 +262,11 @@ div.edit-frame-instructions {
 }
 div.drama div#message {
 	position: absolute;
-	top: 74px;
+	top: 37px;
 	right: 10px;
 	color:white;
 	text-shadow: #black 1px 1px 1px;
 	font-weight: 900;
-	font-size: 90%;
 	background: #FF8080;
 	padding: 0;
 	/*border: 1px solid #ccc;*/
@@ -278,6 +277,7 @@ div.drama div#message {
 }
 
 div.drama div#message p {
-	padding: 0.4em 1em;
+	font-size: 85%;
+	padding: 0.3em 1em;
 	margin: 0;
 }
