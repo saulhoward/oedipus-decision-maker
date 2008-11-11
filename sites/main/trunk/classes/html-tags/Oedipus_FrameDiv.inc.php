@@ -111,11 +111,26 @@ extends
 		$div = new HTMLTags_Div();
 		$div->set_attribute_str('class', 'notes');
 
-		$heading = new HTMLTags_Heading(3, $this->frame->get_name());
+                /*
+		 * Put A Textbox for the heading if frame is editable,
+		 * Put a <h3> if it isn't
+                 */
+		if ($this->frame->is_editable()) {
+			$div->append(
+				new Oedipus_EditFrameNameHTMLForm($this->frame)
+			);
+		}
+		else {
+	
+			$div->append(
+				$heading = new HTMLTags_Heading(3, $this->frame->get_name())
+			);
+		}
 
-		//print_r($frame);exit;
-		$div->append_tag_to_content($heading);
-
+                /*
+		 * Put a Textbox for the Note, if frame is editable,
+		 * Put the note in a <pre> if it isn't
+                 */
 		try
 		{
 			if ($this->frame->is_editable()) {

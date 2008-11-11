@@ -40,7 +40,7 @@ extends
 		
 		$this->set_attribute_str('name', $name);
 		$this->set_attribute_str('method', $method);
-		$this->set_attribute_str('class', 'oedipus-table-form');
+		$this->set_attribute_str('class', 'oedipus-frame-form');
 		
 		$this->input_lis = array();
 
@@ -57,7 +57,16 @@ extends
 		# Hidden Inputs
 //                $this->add_hidden_input('table_id', $table->get_id());
 
-		$this->set_submit_text('OK');
+		/*
+		 *If we're on the edit_frame section of Drama Page,
+		 * pass this on to set the return to correctly
+                 */
+		if (isset($_GET['edit_frame'])) {
+
+			$this->add_hidden_input('page', 'edit_frame');
+		}
+
+		$this->set_submit_text('Save');
 	}
 	
 	public function
@@ -239,8 +248,8 @@ MSG;
 		$textarea_tag->set_attribute_str('type', 'text');
 		$textarea_tag->set_attribute_str('id', $name);
 		$textarea_tag->set_attribute_str('name', $name);
-		$textarea_tag->set_attribute_str('ROWS', '10');
-		$textarea_tag->set_attribute_str('COLS', '50');
+		$textarea_tag->set_attribute_str('ROWS', '8');
+		$textarea_tag->set_attribute_str('COLS', '30');
 		
 		$textarea_tag->append_str_to_content($value);
 

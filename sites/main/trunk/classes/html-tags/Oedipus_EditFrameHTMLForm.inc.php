@@ -59,7 +59,16 @@ extends
 		# Hidden Inputs
 		$this->add_hidden_input('frame_id', $frame->get_id());
 
-		$this->set_submit_text('OK');
+                /*
+		 *If we're on the edit_frame section of Drama Page,
+		 * pass this on to set the return to correctly
+                 */
+		if (isset($_GET['edit_frame'])) {
+
+			$this->add_hidden_input('return_to_get', 'edit_frame');
+		}
+	
+		$this->set_submit_text('Save');
 	}
 	
 	public function

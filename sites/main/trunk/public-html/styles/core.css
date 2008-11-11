@@ -218,16 +218,25 @@ div.notes h3 {
 div.notes label {
 	display: none;
 }
+div.notes input#frame_name {
+	font-size: 110%;
+	width: 18em;
+	line-height:1em;
+	display: block;
+	margin: 0 auto;
+}
 div.notes textarea#note_text {
 	font-family:"Lucida Grande","Lucida Sans Unicode",Tahoma,Verdana,sans-serif;
 	width: 24em;
-	height: 20em;
+	height: 18em;
 	line-height:1em;
 	display: block;
 	margin: 0 auto;
 }
 div.notes div.submit_buttons_div {
 	text-align: right;
+	width: 24em;
+	margin: 0.2em 0 1em 0;
 }
 
 /* Drama Div */
@@ -250,4 +259,25 @@ div.notes div.submit_buttons_div {
 
 div.edit-frame-instructions {
 	text-align: center;
+}
+div.drama div#message {
+	position: absolute;
+	top: 74px;
+	right: 10px;
+	color:white;
+	text-shadow: #black 1px 1px 1px;
+	font-weight: 900;
+	font-size: 90%;
+	background: #FF8080;
+	padding: 0;
+	/*border: 1px solid #ccc;*/
+	-moz-border-radius: 4px;
+	-khtml-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+
+div.drama div#message p {
+	padding: 0.4em 1em;
+	margin: 0;
 }

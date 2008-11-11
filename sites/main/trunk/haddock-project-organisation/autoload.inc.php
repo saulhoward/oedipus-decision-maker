@@ -2137,6 +2137,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_AllDramasUL.inc.php';
 			break;
 
+		case('Oedipus_AttemptToDeleteLastCharacterInFrameException'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/exceptions/Oedipus_AttemptToDeleteLastCharacterInFrameException.inc.php';
+			break;
+
 		case('Oedipus_Character'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Character.inc.php';
 			break;
@@ -2267,6 +2271,10 @@ function __autoload($class_name)
 
 		case('Oedipus_ExampleTablePage'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_ExampleTablePage.inc.php';
+			break;
+
+		case('Oedipus_Exception'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/exceptions/Oedipus_Exception.inc.php';
 			break;
 
 		case('Oedipus_ExceptionPage'): 

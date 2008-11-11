@@ -35,6 +35,13 @@ HTMLTags_Div
 			$this->get_drama_heading($drama)
 		);
 
+		if (isset($_GET['return_message'])) {
+			//print_r($_GET);exit;
+			$this->append(
+				$this->get_message_div($_GET['return_message'])
+			);
+		}
+
 		/*
 		 * Get the act id
 		 */
@@ -81,6 +88,17 @@ HTMLTags_Div
 		get_drama_heading()
 	{
 		return new HTMLTags_Heading(2, $this->drama->get_name());
+	}
+
+	protected function
+		get_message_div($msg)
+	{
+		$div = new HTMLTags_Div();
+		$div->set_attribute_str('id', 'message');
+		$p = new HTMLTags_P();
+		$p->append($msg);
+		$div->append($p);
+		return $div;
 	}
 
 	protected function
