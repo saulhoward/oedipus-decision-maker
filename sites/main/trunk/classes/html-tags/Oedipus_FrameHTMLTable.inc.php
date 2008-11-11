@@ -276,6 +276,9 @@ extends
 						'position_doubt' => $position->get_doubt()
 					)
 				);
+			if (isset($_GET['edit_frame'])) {
+				$html_tile_link->set_get_variable('return_to_get', 'edit_frame');
+			}
 		}
 		else
 		{
@@ -325,6 +328,9 @@ extends
 						'stated_intention_doubt' => $stated_intention->get_doubt()
 					)
 				);
+			if (isset($_GET['edit_frame'])) {
+				$html_tile_link->set_get_variable('return_to_get', 'edit_frame');
+			}
 		}
 		else
 		{
