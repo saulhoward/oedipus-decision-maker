@@ -197,7 +197,8 @@ div.notes
 	background: #ECF2FA;
 	border: 1px solid #C6D9E9;
 	padding: 1em 1em 2em 1em;
-	margin-right: 2em;
+	margin: 0 auto;
+	width: 26em;
 }
 div.notes pre 
 {
@@ -209,25 +210,23 @@ div.notes pre
 	word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
 
-div.notes h3
-{
+div.notes h3 {
 	font-family:Georgia,"Times New Roman",Times,serif;
 	text-align: center;
 	margin: 0 0 1em 0;
 }
-div.notes label
-{
+div.notes label {
 	display: none;
 }
-div.notes textarea#note_text
-{
+div.notes textarea#note_text {
 	font-family:"Lucida Grande","Lucida Sans Unicode",Tahoma,Verdana,sans-serif;
-	width: 100%;
+	width: 24em;
 	height: 20em;
 	line-height:1em;
+	display: block;
+	margin: 0 auto;
 }
-div.notes div.submit_buttons_div
-{
+div.notes div.submit_buttons_div {
 	text-align: right;
 }
 

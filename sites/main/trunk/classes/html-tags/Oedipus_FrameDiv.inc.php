@@ -79,9 +79,10 @@ extends
 	private function
 		get_oedipus_html_frame()
 	{
-		//                print_r($frame);exit;
-		# Get a frame that's not editable
-		return new Oedipus_FrameHTMLTable($this->frame, FALSE);
+                /*
+		 * Get a frame HTML Table
+                 */
+		return new Oedipus_FrameHTMLTable($this->frame);
 	}
 
 	private function

@@ -4,9 +4,13 @@
  *
  *  2008-03-17, RFI
  *  2008-04-05, SANH
- *  2008-04-27, SANH
+ *  2008-11-11, SANH
  */
 
+/*
+ *Toolbar for the DramaDiv
+ *Shows acts and share this links
+ */
 class
 Oedipus_DramaToolBarUL
 extends
