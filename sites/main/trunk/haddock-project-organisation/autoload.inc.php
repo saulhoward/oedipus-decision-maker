@@ -2,7 +2,7 @@
 /**
  * __autoload .INC file
  *
- * Last Modified: 2008-11-11
+ * Last Modified: 2008-11-13
  */
 
 function __autoload($class_name)
@@ -2417,12 +2417,20 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_SceneDiv.inc.php';
 			break;
 
+		case('Oedipus_ShareDramaDiv'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_ShareDramaDiv.inc.php';
+			break;
+
 		case('Oedipus_ShareDramaPage'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_ShareDramaPage.inc.php';
 			break;
 
 		case('Oedipus_ShareDramaPageActionsUL'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_ShareDramaPageActionsUL.inc.php';
+			break;
+
+		case('Oedipus_ShareDramaToolBarUL'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_ShareDramaToolBarUL.inc.php';
 			break;
 
 		case('Oedipus_StatedIntention'): 

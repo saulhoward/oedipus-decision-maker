@@ -23,17 +23,30 @@ HTMLTags_Div
 {
 	protected $drama;
 
+	protected function
+		get_drama()
+	{
+		return $this->drama;
+	}
+
+	protected function
+		set_drama(Oedipus_Drama $drama)
+	{
+		$this->drama = $drama;
+	}
+
 	public function
 		__construct(Oedipus_Drama $drama)
 	{
 		parent::__construct();
 
-		$this->drama = $drama;
+		$this->set_drama($drama);
 
 		$this->set_attribute_str('class', 'drama');
-		$this->append_tag_to_content(
-			$this->get_drama_heading($drama)
-		);
+
+		//$this->append_tag_to_content(
+			//$this->get_drama_heading($drama)
+		//);
 
 		if (isset($_GET['return_message'])) {
 			//print_r($_GET);exit;
@@ -42,6 +55,16 @@ HTMLTags_Div
 			);
 		}
 
+
+		$this->append(
+			$this->get_content_div()
+		);
+	}
+
+	protected function
+		get_content_div()
+	{
+		$div = new HTMLTags_Div();
 		/*
 		 * Get the act id
 		 */
@@ -63,31 +86,32 @@ HTMLTags_Div
 		else {
 			$act_id = Oedipus_DramaHelper
 				::get_first_act_id_for_drama_id(
-					$this->drama->get_id()
+					$this->get_drama()->get_id()
 				);
 		}
 
 		/*
 		 *Get the Act
 		 */
-		$act = $this->drama->get_act($act_id);
-		if ($this->drama->is_editable()) {
+		$act = $this->get_drama()->get_act($act_id);
+		if ($this->get_drama()->is_editable()) {
 			$act->make_editable();
 		}
 		/*
 		 *Get the Act Div
 		 */
-		$this->append(
+		$div->append(
 			$this->get_act_div(
 				$act
 			)
 		);
+		return $div;
 	}
 
 	protected function
 		get_drama_heading()
 	{
-		return new HTMLTags_Heading(2, $this->drama->get_name());
+		return new HTMLTags_Heading(2, $this->get_drama()->get_name());
 	}
 
 	protected function
@@ -112,7 +136,7 @@ HTMLTags_Div
 		 */
 		$act_div->append(
 			new Oedipus_DramaToolBarUL(
-				$this->drama, $act->get_id()
+				$this->get_drama(), $act->get_id()
 			)
 		);
 
@@ -162,7 +186,7 @@ HTMLTags_Div
 		/*
 		 *Pass Editing Priviliges
 		 */
-		if ($this->drama->is_editable()) {
+		if ($this->get_drama()->is_editable()) {
 			$scene->make_editable();
 		}
 
