@@ -8,8 +8,8 @@
  */
 
 /*
- *Toolbar for the DramaDiv
- *Shows acts and share this links
+ * Toolbar for the ShareDramaDiv
+ * 
  */
 class
 Oedipus_ShareDramaToolBarUL

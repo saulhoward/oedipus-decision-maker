@@ -15,9 +15,46 @@
 class
 Oedipus_DramaPage
 extends
-Oedipus_RestrictedPage
+Oedipus_HTMLPageWithAccountStatus
+//Oedipus_RestrictedPage
 {
 	private $drama;
+
+	public function
+		send_http_headers()
+	{
+		/**
+		 * Copied this from Oedipus_RestrictedPage
+		 *
+		 * But now it only logs you in again (or redirects)
+		 * if the drama is private or you're already
+		 * logged in
+		 */
+		parent::send_http_headers();
+
+		if (
+			$this->get_drama()->is_private()
+			||
+			Oedipus_LogInHelper::is_logged_in()
+		) {
+			if (
+				Oedipus_LogInHelper::is_logged_in()
+			) {
+				Oedipus_LogInHelper::
+					log_in(
+						Oedipus_LogInHelper
+						::get_current_user_id()
+					);
+			} else {
+				Oedipus_LogInHelper
+					::set_desired_restricted_page_url_to_current_location();
+
+				Oedipus_LogInHelper
+					::redirect_to_log_in_page();
+			}
+
+		}
+	}
 
 	protected function
 		get_drama()
@@ -120,39 +157,53 @@ Oedipus_RestrictedPage
 		 * Or has permission to view the drama
 		 * Or the drama is public
 		 */
-		$user_id = Oedipus_LogInHelper::get_current_user_id();
-		// $user = Oedipus_UsersHelper::get_user($user_id);
+		if (
+			Oedipus_LogInHelper::is_logged_in()
+		) {
+			$user_id = Oedipus_LogInHelper::get_current_user_id();
+			// $user = Oedipus_UsersHelper::get_user($user_id);
 
-		if (
-			Oedipus_UsersHelper
-			::is_user_id_drama_creator(
-				$user_id,
-			       	$this->get_drama()
-			)
-		) {
-			/*
-			 * Set Edit Priviliges
-			 */
-			$this->get_drama()->make_drama_editable();
-		}
-		if (
-			($this->get_drama()->is_public())
-			||
-			($this->get_drama()->is_editable())
-			||
-			(
+			if (
 				Oedipus_UsersHelper
-				::is_user_id_allowed_to_view_drama(
-					$user_id, $this->get_drama()
+				::is_user_id_drama_creator(
+					$user_id,
+					$this->get_drama()
 				)
-			)
-		) {
-			/*
-			 * Render the Drama Div
-			 */
-			$drama_div = $this->get_drama_div();
-			echo $drama_div->get_as_string();
+			) {
+				/*
+				 * Set Edit Priviliges
+				 */
+				$this->get_drama()->make_drama_editable();
+			}
+			if (
+				($this->get_drama()->is_public())
+				||
+				($this->get_drama()->is_editable())
+				||
+				(
+					Oedipus_UsersHelper
+					::is_user_id_allowed_to_view_drama(
+						$user_id, $this->get_drama()
+					)
+				)
+			) {
+				/*
+				 * Render the Drama Div
+				 */
+				$drama_div = $this->get_drama_div();
+				echo $drama_div->get_as_string();
+			}
 		}
+		elseif (
+				$this->get_drama()->is_public()
+			) {
+				/*
+				 * Render the Drama Div
+				 */
+				$drama_div = $this->get_drama_div();
+				echo $drama_div->get_as_string();
+			}
+
 		else {
 			/*
 			 *Drama creator id not same as logged in user
