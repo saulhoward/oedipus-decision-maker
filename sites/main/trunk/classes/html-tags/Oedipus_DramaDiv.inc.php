@@ -55,7 +55,6 @@ HTMLTags_Div
 			);
 		}
 
-
 		$this->append(
 			$this->get_content_div()
 		);

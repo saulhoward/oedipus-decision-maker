@@ -29,9 +29,6 @@ extends
 		if (
 			Oedipus_LogInHelper::is_logged_in()
 		) {
-			// $this # What is this here for? changed it to LogInHelper
-			//
-
 			Oedipus_LogInHelper::
 				log_in(
 					Oedipus_LogInHelper
@@ -46,11 +43,6 @@ extends
 		}
 		
 		#print_r($this); exit;
-		
-		#if (!(isset($this->first_name) && isset($this->last_name))) {
-		#	header('Location: /Play4ATeam_LoginPage');
-		#	exit;
-		#}
 	}
 }
 ?>

@@ -117,6 +117,16 @@ class
 	}
 
 	public function
+		is_private()
+	{
+		if ($this->status == 'public')
+		{
+			return FALSE;
+		}
+		return TRUE;
+	}
+
+	public function
 		is_public()
 	{
 		if ($this->status == 'public')
