@@ -15,6 +15,8 @@ PublicHTML_HTMLPage
 	{
 		$this->render_body_tag_open();
 
+		echo '<div id="container">' . "\n";
+
 		$this->render_body_div_header();
 
 		$this->render_body_div_account_status();
@@ -24,6 +26,7 @@ PublicHTML_HTMLPage
 
 		$this->render_body_div_footer();
 
+		echo "</div>\n";
 		echo "</body>\n";
 
 		//                $this->render_google_analytics_js();
