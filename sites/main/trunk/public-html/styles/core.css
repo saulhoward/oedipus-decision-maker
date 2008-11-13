@@ -27,26 +27,36 @@ a:hover
 
 /* Font-Sizes */
 body { font-size:100%; }
-h1 { font-size:2.25em;}
+h1 { font-size:1.8em;}
 h2 { font-size:1.4em;}
 h3 { font-size:1.2em;}
 h4 { font-size:1.1em;}
 p  { font-size:1em;}
 
-#header
-{
+#header {
 	height: 70px;
 	background-color:#ECF2FA;
 	border-bottom:1px solid #C6D9E9;
 }
-#header h1
-{
+#header h1 {
 	height: 70px;
 	width: 220px;
 	background: transparent url(/images/oedipus-logo-with-head.png) top left no-repeat;
 	text-indent: -3000px;
 }
-
+/* DramaPage Header */
+body#DramaPage #header {
+	height: 40px;
+	background-color:#ECF2FA;
+	border-bottom:1px solid #C6D9E9;
+}
+body#DramaPage #header h1 {
+	line-height: 40px;
+	width: auto;
+	background: transparent;
+	text-indent: 0px;
+	padding: 0 0 0 10px;
+}
 /*CONTENT*/
 #content
 {
@@ -122,21 +132,30 @@ div.clear-columns
 /*
  * Navigation 
  */
-#navigation
-{
+#navigation {
 	position: absolute;
 	top: 38px;
 	left: 220px;
 }
+
 /*
  * Account Status
  */
-#account_status
-{
+#account_status {
+	font-size: 90%;
 	position: absolute;
-	top: 0.5em;
-	right: 1em;
+	top: 0;
+	right: 0;
+	background-color: white;
+	padding: 0.2em 10px 0.3em 10px;
 
+border-bottom: 1px solid #C6D9E9;
+border-left: 1px solid #C6D9E9;
+	
+	-moz-border-radius-bottomleft: 10px;
+	-khtml-border-bottom-left-radius: 10px;
+	-webkit-border-bottom-left-radius: 10px;
+	border-bottom-left-radius: 10px;
 }
 #account_status a
 {
@@ -146,7 +165,7 @@ div.clear-columns
 #account_status ul li
 {
 	display: inline;
-	padding: 0 0 0 1em;
+	padding: 0 0.5em;
 }
 
 
@@ -262,7 +281,7 @@ div.edit-frame-instructions {
 }
 div.drama div#message {
 	position: absolute;
-	top: 37px;
+	top: 45px;
 	right: 10px;
 	color:white;
 	text-shadow: #black 1px 1px 1px;
