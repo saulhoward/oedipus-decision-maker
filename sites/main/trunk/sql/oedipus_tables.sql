@@ -1,7 +1,0 @@
-CREATE TABLE `oedipus_tables` (
-`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-`added` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_roman_ci NOT NULL ,
-`drama_id` INT NOT NULL ,
-`name` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_roman_ci NOT NULL
-) ENGINE = MYISAM ;
-
