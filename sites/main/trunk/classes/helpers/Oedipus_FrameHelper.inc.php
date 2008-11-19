@@ -9,6 +9,111 @@
 class
 Oedipus_FrameHelper
 {
+
+	public static function
+		get_scene_name_for_scene_id($scene_id)
+	{
+		$dbh = DB::m();
+		$query = <<<SQL
+SELECT 
+	oedipus_scenes.name
+FROM 
+	oedipus_scenes
+WHERE 
+	oedipus_scenes.id = '$scene_id'
+SQL;
+
+//                                                print_r($query);exit;
+		$result = mysql_query($query, $dbh);
+		$row = mysql_fetch_array($result);
+		//                                print_r($row);exit;
+
+		return $row['name'];
+	}
+	public static function
+		get_drama_name_for_scene_id($scene_id)
+	{
+		$dbh = DB::m();
+		$query = <<<SQL
+SELECT 
+	oedipus_dramas.name
+FROM 
+	oedipus_dramas,
+	oedipus_acts,
+	oedipus_scenes
+WHERE 
+	oedipus_dramas.id = oedipus_scenes.act_id
+AND
+	oedipus_acts.id = oedipus_scenes.act_id
+AND
+	oedipus_scenes.id = '$scene_id'
+LIMIT
+	0, 1
+SQL;
+
+//                                                print_r($query);exit;
+		$result = mysql_query($query, $dbh);
+		$row = mysql_fetch_array($result);
+		//                                print_r($row);exit;
+
+		return $row['name'];
+	}
+
+
+	public static function
+		get_act_name_for_scene_id($scene_id)
+	{
+		$dbh = DB::m();
+		$query = <<<SQL
+SELECT 
+	oedipus_acts.name
+FROM 
+	oedipus_acts,
+	oedipus_scenes
+WHERE 
+	oedipus_acts.id = oedipus_scenes.act_id
+AND
+	oedipus_scenes.id = '$scene_id'
+LIMIT
+	0, 1
+SQL;
+
+//                                                print_r($query);exit;
+		$result = mysql_query($query, $dbh);
+		$row = mysql_fetch_array($result);
+		//                                print_r($row);exit;
+
+		return $row['name'];
+	}
+
+	public static function
+		get_act_name_for_frame_id($frame_id)
+	{
+		$dbh = DB::m();
+		$query = <<<SQL
+SELECT 
+	oedipus_acts.name
+FROM 
+	oedipus_acts,
+	oedipus_scenes,
+	oedipus_frames
+WHERE 
+	oedipus_acts.id = oedipus_scenes.act_id
+AND
+	oedipus_scenes.id = oedipus_frames.scene_id
+AND
+	oedipus_frames.id = '$frame_id'
+LIMIT
+	0, 1
+SQL;
+
+//                                                print_r($query);exit;
+		$result = mysql_query($query, $dbh);
+		$row = mysql_fetch_array($result);
+		//                                print_r($row);exit;
+
+		return $row['name'];
+	}
 	public static function
 		get_frame_by_id($frame_id)
 	{

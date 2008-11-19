@@ -34,7 +34,7 @@ extends
 			$frame = Oedipus_DramaHelper::add_frame($scene, 'First frame', '0');
 
 			$return_to_url = 
-				Oedipus_DramaHelper::get_drama_page_url($drama);
+				Oedipus_DramaHelper::get_drama_page_url_for_drama($drama);
 		}
 		elseif (
 			isset($_GET['add_act'])

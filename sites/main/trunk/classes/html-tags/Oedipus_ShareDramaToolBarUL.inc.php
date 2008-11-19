@@ -55,7 +55,7 @@ Oedipus_ToolBarUL
 	private function
 		get_view_drama_url()
 	{
-		return Oedipus_DramaHelper::get_drama_page_url($this->drama);
+		return Oedipus_DramaHelper::get_drama_page_url_for_drama($this->drama);
 	}
 
 	private function
