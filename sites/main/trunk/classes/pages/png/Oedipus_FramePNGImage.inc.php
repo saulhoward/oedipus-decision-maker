@@ -31,6 +31,7 @@ Oedipus_GDPNGImage
 	private $stated_intention_font;
 	private $character_name_font;
 	private $frame_name_font;
+	private $act_and_scene_name_font;
 	private $padding;
 	private $label_width;
 	private $label_height;
@@ -49,46 +50,84 @@ Oedipus_GDPNGImage
 	private $frame_background_color;
 	private $stated_intention_background_color;
 
+	private function 
+		image_is_thumbnail()
+	{
+		if (
+			isset($_GET['thumbnail'])
+		) {
+			return TRUE;
+		}
+		else {
+			return FALSE;
+		}
+	}
+
 	public function
 		render()
 	{
-		if (isset($_GET['frame_id']))
-		{
-			// get the Oedipus_frame
-			$this->frame =
-				Oedipus_FrameHelper::get_frame_by_id($_GET['frame_id']);
+		/*
+		 * Set all of the styles and padding
+		 */
 
-			// Set all of the styles and padding
-			$this->set_font('caslon.pfb');
-			$this->set_stated_intenion_font('caslon-italic.pfb');
-			$this->set_character_name_font('caslon-small-caps.pfb');
-			$this->set_frame_name_font('caslon-italic.pfb');
+		/*
+		 *CASLON
+		 */
+		//$this->set_font('caslon/caslon.pfb');
+		//$this->set_stated_intention_font('caslon/caslon-italic.pfb');
+		//$this->set_character_name_font('caslon/caslon-small-caps.pfb');
+		//$this->set_frame_name_font('caslon/caslon-italic.pfb');
 
-			$this->set_font_size(17);
+		/*
+		 * BERA (Bitstream Vera PS version)
+		 */
+		$this->set_font('bera/fvsb8a.pfb');
+		$this->set_stated_intention_font('bera/fvsbo8a.pfb');
+		$this->set_character_name_font('bera/fvsro8a.pfb');
+		$this->set_frame_name_font('bera/fvsr8a.pfb');
+		$this->set_act_and_scene_name_font('bera/fvsro8a.pfb');
 
-			$this->set_padding(10);
-			$this->set_frame_padding(10);
 
-			$this->set_label_indent_width(10);
-			$this->set_column_label_padding(5);
-			$this->set_frame_name_label_height(50);
-			$this->set_column_width(56);
+		$this->set_font_size(17);
 
-			$this->set_label_width_and_height();
+		$this->set_padding(10);
+		$this->set_frame_padding(10);
 
-			// Set the GD image object
-			$this->set_oedipus_frame_image();
-		}
+		$this->set_label_indent_width(10);
+		$this->set_column_label_padding(5);
 
 		if (
-			isset($_GET['thumbnail'])
+			$this->image_is_thumbnail()
+		) {
+			$this->set_frame_name_label_height(0);
+		}
+		else {
+			$this->set_frame_name_label_height(70);
+		}
+		$this->set_column_width(56);
+
+		$this->set_label_width_and_height();
+
+		/*
+		 * Set the GD image object
+		 */
+		$this->set_oedipus_frame_image();
+
+		/*
+		 * Free the Font memory
+		 */
+		$this->free_font_memory();
+
+		if (
+			$this->image_is_thumbnail()
 			&&
 			isset($_GET['max_width'])
 			&&
 			isset($_GET['max_height'])
-		)
-		{
-			// If it's a thumbnail, resize the whole image
+		) {
+			/*
+			 * If it's a thumbnail, resize the whole image
+			 */
 			$this->set_thumbnail_image(
 				$_GET['max_width'],
 				$_GET['max_height']
@@ -135,39 +174,74 @@ Oedipus_GDPNGImage
 		$this->set_frame_height_and_width();
 
 		$this->image_width = $this->frame_width + ($this->padding * 2);
-		$this->image_height = 
-			$this->frame_name_label_height 
-			+
-			$this->frame_height 
-			+
-			($this->padding * 2) 
-			+ 
-			$this->frame_padding;
+		if (
+			$this->image_is_thumbnail()
+		) {
+			$this->image_height = 
+				
+				$this->frame_height 
+				+
+				$this->padding 
+				+ 
+				$this->get_frame_padding();
 
-		// Set the image and the colors
+		}
+		else {
+			$this->image_height = 
+				$this->get_frame_name_label_height() 
+				+
+				$this->frame_height 
+				+
+				($this->padding * 2) 
+				+ 
+				$this->get_frame_padding();
+		}
+                /*
+		 * Set the image and the colors
+                 */
 		$this->image = imagecreatetruecolor($this->image_width, $this->image_height);
 		$this->set_colors();
 
-		// fill image with background color
+                /*
+		 * fill image with background color
+                 */
 		imagefill($this->image, 0, 0, $this->background_color);
+ 
+		if (
+			!$this->image_is_thumbnail()
+		) {
+			/*
+			 * Set the act_and scene names label
+			 */
+			$this->draw_act_and_scene_names_label(
+				$this->get_frame_padding(), ($this->get_frame_padding() * 2)
+			);
 
-		// Set the frame name label
-		$this->draw_frame_name_label(
-			$this->image_width, $this->frame_name_label_height + ($this->frame_padding * 2)
-		);
-
-		// Draw a box for the frame
+			/*
+			 * Set the frame name label
+			 */
+			$this->draw_frame_name_label(
+				$this->image_width, ($this->get_frame_name_label_height() * 2)
+			);
+		}
+                /*
+		 * Draw a box for the frame
+                 */
 		imagefilledrectangle($this->image,
-			$this->padding, $this->padding + $this->frame_name_label_height,        
+			$this->padding, $this->padding + $this->get_frame_name_label_height(),        
 			$this->frame_width + $this->padding,
-			$this->frame_height + $this->padding + $this->frame_name_label_height,
+			$this->frame_height + $this->padding + $this->get_frame_name_label_height(),
 			$this->frame_background_color
 		);
 
-		// Draw the Column headings and backgrounds
+                /*
+		 * Draw the Column headings and backgrounds
+                 */
 		$this->draw_column_headings_and_backgrounds();
 
-		// Draw the option labels and tiles
+                /*
+		 * Draw the option labels and tiles
+                 */
 		$this->draw_option_labels_and_tiles();
 
 	}
@@ -175,27 +249,31 @@ Oedipus_GDPNGImage
 	private function
 		draw_option_labels_and_tiles()
 	{
-		// Foreach option, 
-		// write the characters name if this is his/her first option
-		// write the option label,
-		// and put in a tile for all characters and one for the s.i.
+		/*
+		 * Foreach option, 
+		 * write the characters name if this is his/her first option
+		 * write the option label,
+		 * and put in a tile for all characters and one for the s.i.
+		 */
 
 		$x = 0;
 		$y = 0;
-		//put the x,y in the first column
+                /*
+		 * put the x,y in the first column
+                 */
 		$x = 
 			$this->padding
 			+
-			$this->frame_padding;
+			$this->get_frame_padding();
 		$y = 
 			$this->padding 
 			+ 
-			$this->frame_name_label_height 
+			$this->get_frame_name_label_height() 
 			+
 			$this->label_height;
 
 
-		foreach ($this->frame->get_characters() as $character)
+		foreach ($this->get_frame()->get_characters() as $character)
 		{
 			if ($character->has_options())
 			{
@@ -204,10 +282,14 @@ Oedipus_GDPNGImage
 				{
 					if ($first)
 					{
-						//print the characters name
+                                                /*
+						 * print the characters name
+                                                 */
 						$this->draw_character_label($character->get_name(), $x, $y);
 
-						// move onto the next row
+						/*
+						 * move onto the next row
+						 */
 						$y += ( $this->label_height / 2 );
 
 						$first = FALSE;
@@ -219,7 +301,7 @@ Oedipus_GDPNGImage
 					//move x to the first character
 					$x = $this->padding + $this->label_width;
 
-					foreach ($this->frame->get_characters() as $position_character)
+					foreach ($this->get_frame()->get_characters() as $position_character)
 					{
 						$position = $option->get_position(
 							$position_character->get_id()
@@ -243,7 +325,7 @@ Oedipus_GDPNGImage
 					// move onto the next row
 					$y += $this->label_height;
 					// reset x to the beginning of the line
-					$x = $this->padding + $this->frame_padding;
+					$x = $this->padding + $this->get_frame_padding();
 				}
 			}
 		}
@@ -259,7 +341,8 @@ Oedipus_GDPNGImage
 			$this->font_size, 
 			$this->font_color,
 			$this->frame_background_color,
-			$x, $y
+			$x, $y,
+			0, 0, 0, 16
 		);
 	}
 
@@ -277,7 +360,8 @@ Oedipus_GDPNGImage
 			$this->font_size, 
 			$this->font_color,
 			$this->frame_background_color,
-			$x, $y
+			$x, $y,
+			0, 0, 0, 16
 		);
 	}
 
@@ -403,7 +487,7 @@ Oedipus_GDPNGImage
 		$this->frame_width = 
 			$this->label_width 
 			+ ($this->column_width * ( $this->get_no_of_characters() + 1)) 
-			+ ($this->frame_padding * 2);
+			+ ($this->get_frame_padding() * 2);
 
 		$this->frame_height = 
 			(
@@ -421,13 +505,13 @@ Oedipus_GDPNGImage
 		$first = TRUE;
 
 		// go through the characters
-		foreach ($this->frame->get_characters() as $character)
+		foreach ($this->get_frame()->get_characters() as $character)
 		{
 			if ($first)
 			{
 				//put the x,y in the first column
 				$x = $this->padding + $this->label_width;
-				$y = $this->padding + $this->frame_name_label_height;
+				$y = $this->padding + $this->get_frame_name_label_height();
 			}
 
 			// Draw a box for the column background
@@ -517,7 +601,7 @@ Oedipus_GDPNGImage
 		$count_characters_with_options = 0;
 
 		// Get all options 
-		foreach ($this->frame->get_characters() as $character)
+		foreach ($this->get_frame()->get_characters() as $character)
 		{
 			if ($character->has_options())
 			{
@@ -542,7 +626,7 @@ Oedipus_GDPNGImage
 		// Get all option names
 		// and work out which one has
 		// the longest name
-		foreach ($this->frame->get_characters() as $character)
+		foreach ($this->get_frame()->get_characters() as $character)
 		{
 			if ($character->has_options())
 			{
@@ -576,10 +660,10 @@ Oedipus_GDPNGImage
 		// Make the width
 		$this->label_width = $max_text_width 
 			+ $this->label_indent_width 
-			+ ( $this->frame_padding * 3 );
+			+ ( $this->get_frame_padding() * 3 );
 
 		// Make the height
-		$label_height = $text_height + $this->frame_padding; 
+		$label_height = $text_height + $this->get_frame_padding(); 
 		// for the icons, 50 px wide
 		if ($label_height < 60)
 		{
@@ -590,6 +674,83 @@ Oedipus_GDPNGImage
 			$this->label_height = $label_height;
 		}
 	}
+
+        /*
+	 * Get and Set
+         */
+	private function
+		set_frame(Oedipus_Frame $frame)
+	{
+		$this->frame = $frame;
+	}
+
+	private function
+		get_frame()
+	{
+		if (isset($this->frame)) {
+			return $this->frame;
+		}
+		elseif (isset($_GET['frame_id'])) {
+			$this->set_frame(
+				Oedipus_FrameHelper::get_frame_by_id($_GET['frame_id'])
+			);
+			return $this->get_frame();
+		}
+		else {
+			throw new Oedipus_FrameNotSetException('Oedipus_FramePNGImage');
+		}
+	}
+
+	private function
+		get_frame_padding()
+	{
+		if (isset($this->frame_padding)) {
+			return $this->frame_padding;
+		}
+		else {
+			throw new Oedipus_FramePNGConfigValueNotSetException('frame padding');
+		}
+	}
+
+	private function
+		get_font_size()
+	{
+		if (isset($this->font_size)) {
+			return $this->font_size;
+		}
+		else {
+			throw new Oedipus_FramePNGConfigValueNotSetException('font_size');
+		}
+	}
+
+	private function
+		get_smaller_font_size()
+	{
+		return $this->font_size * 0.8;
+	}
+
+	private function
+		get_act_and_scene_name_font()
+	{
+		if (isset($this->act_and_scene_name_font)) {
+			return $this->act_and_scene_name_font;
+		}
+		else {
+			throw new Oedipus_FramePNGConfigValueNotSetException('act_and_scene_name_font');
+		}
+	}
+
+	private function
+		get_frame_name_label_height()
+	{
+		if (isset($this->frame_name_label_height)) {
+			return $this->frame_name_label_height;
+		}
+		else {
+			throw new Oedipus_FramePNGConfigValueNotSetException('frame_name_label_height');
+		}
+	}
+
 
 	private function
 		set_label_indent_width($amount = 10)
@@ -635,46 +796,69 @@ Oedipus_GDPNGImage
 	}
 
 	private function
-		set_stated_intenion_font($font_name = 'caslon.pfb')
+		load_font($font_name)
+	{
+		return imagepsloadfont(
+				PROJECT_ROOT 
+				. '/project-specific/public-html/fonts/' 
+				. $font_name
+			);
+	}
+
+
+	private function
+		set_stated_intention_font($font_name)
 	{
 		$this->stated_intention_font 
-			= imagepsloadfont(
-				PROJECT_ROOT 
-				. '/project-specific/public-html/fonts/' 
-				. $font_name
+			= $this->load_font(
+				$font_name
 			);
 	}
 
 	private function
-		set_frame_name_font($font_name = 'caslon.pfb')
+		set_act_and_scene_name_font($font_name)
+	{
+		$this->act_and_scene_name_font 
+			= $this->load_font(
+				$font_name
+			);
+	}
+
+
+	private function
+		set_frame_name_font($font_name)
 	{
 		$this->frame_name_font 
-			= imagepsloadfont(
-				PROJECT_ROOT 
-				. '/project-specific/public-html/fonts/' 
-				. $font_name
+			= $this->load_font(
+				$font_name
 			);
 	}
 
 	private function
-		set_character_name_font($font_name = 'caslon.pfb')
+		set_character_name_font($font_name)
 	{
-		$this->character_name_font = 
-			imagepsloadfont(
-				PROJECT_ROOT 
-				. '/project-specific/public-html/fonts/' 
-				. $font_name
+		$this->character_name_font
+			= $this->load_font(
+				$font_name
 			);
 	}
 
 	private function
-		set_font($font_name = 'caslon.pfb')
+		set_font($font_name)
 	{
-		$this->font = imagepsloadfont(
-			PROJECT_ROOT 
-			. '/project-specific/public-html/fonts/' 
-			. $font_name
-		);
+		$this->font
+			= $this->load_font(
+				$font_name
+			);
+	}
+
+	private function
+		free_font_memory()
+	{
+		imagepsfreefont($this->font);
+		imagepsfreefont($this->stated_intention_font);
+		imagepsfreefont($this->character_name_font);
+		imagepsfreefont($this->frame_name_font);
 	}
 
 	private function
@@ -690,7 +874,8 @@ Oedipus_GDPNGImage
 		#######################
 
 		$y += ( $this->label_height / 2.4 );
-		$x += $this->column_label_padding;
+		//$x += $this->column_label_padding;
+		$x += ($this->column_label_padding * 1.6);
 
 		imagepstext(
 			$this->image,
@@ -699,7 +884,8 @@ Oedipus_GDPNGImage
 			$this->font_size, 
 			$this->font_color,
 			$character_background_color,
-			$x, $y
+			$x, $y,
+			0, 0, 0, 16
 		);
 	}
 
@@ -716,27 +902,15 @@ Oedipus_GDPNGImage
 			$this->font_size, 
 			$this->font_color,
 			$this->stated_intention_background_color,
-			$x, $y
+			$x, $y,
+			0, 0, 0, 16
 		);
 	}
 
 	private function
 		draw_frame_name_label($bounding_width, $bounding_height)
 	{
-		// The text to draw
-		$text = $this->frame->get_name();
-
-		// Add the text
-//                imagepstext (
-//                        $this->image,
-//                        $text,
-//                        $this->font, 
-//                        $this->font_size, 
-//                        $this->font_color,
-//                        $this->background_color,
-//                        $this->padding, $this->frame_name_label_height - $this->padding
-//                );
-
+		$text = $this->get_frame()->get_name();
 		$this->center_text(
 			$text,
 		       	$this->frame_name_font,
@@ -747,26 +921,95 @@ Oedipus_GDPNGImage
 	}
 
 	private function
+		draw_act_and_scene_names_label($bounding_width, $bounding_height)
+	{
+                /*
+		 *Draw Drama Name
+                 */
+		$text = '';
+		$text .= $this->get_frame()->get_drama_name();
+		$this->left_align_text(
+			$text,
+		       	$this->get_act_and_scene_name_font(),
+		       	$this->background_color,
+		       	$bounding_width,
+			$bounding_height,
+			$this->get_smaller_font_size()
+		);
+
+                /*
+		 *Draw Act and scene
+                 */
+		$text = '';
+		$text .= $this->get_frame()->get_act_name();
+		//$text .= ' - ';
+		$text .= ', ';
+		$text .= $this->get_frame()->get_scene_name();
+		$this->left_align_text(
+			$text,
+		       	$this->get_act_and_scene_name_font(),
+		       	$this->background_color,
+		       	$bounding_width,
+			$bounding_height + ($this->get_frame_padding() * 2),
+			$this->get_smaller_font_size()
+		);
+
+	}
+
+	private function
 		get_no_of_characters()
 	{
-		return count($this->frame->get_characters());
+		return count($this->get_frame()->get_characters());
+	}
+
+	private function
+		left_align_text(
+			$text,
+		       	$font,
+		       	$background_color,
+		       	$bounding_width,
+		       	$bounding_height,
+		       	$font_size = NULL
+		)
+	{
+		if ($font_size == NULL) {
+		       	$font_size = $this->get_font_size();
+		}
+		//print_r('wtf');exit;
+		imagepstext (
+			$this->image,
+			$text,
+			$font, 
+			$font_size, 
+			$this->font_color,
+			$this->background_color,
+			$bounding_width, $bounding_height,
+			0, 0, 0, 16
+		);
 	}
 
 	private function
 		center_text($text, $font, $background_color, $bounding_width, $bounding_height)
 	{
-		///get the left lower corner and the right upper
+                /*
+		 * get the left lower corner and the right upper
+                 */
 		list($lx,$ly,$rx,$ry) = imagepsbbox($text, $this->font, $this->font_size);
-		// calculate the size of the text
+                /*
+		 * calculate the size of the text
+                 */
 		$textW = $rx - $lx;
 		$textH = $ry - $ly;
 
-		// Calculate the positions
+                /*
+		 * Calculate the positions
+                 */
 		$positionLeft = ($bounding_width - $textW)/2;
 		$positionTop = ($bounding_height - $textH)/2;
 
-		// Add some text
-//                imagettftext($image, $textSize, 0, $positionLeft, $positionTop, $white, $textFont, $textString);
+                /*
+		 * Add some text
+                 */
 		imagepstext (
 			$this->image,
 			$text,
@@ -774,19 +1017,9 @@ Oedipus_GDPNGImage
 			$this->font_size, 
 			$this->font_color,
 			$this->background_color,
-			$positionLeft, $positionTop
+			$positionLeft, $positionTop,
+			0, 0, 0, 16
 		);
-
-
-//                imagepstext (
-//                        $this->image,
-//                        $text,
-//                        $this->font, 
-//                        $this->font_size, 
-//                        $this->font_color,
-//                        $background_color,
-//                        $positionLeft, $positionTop
-//                );
 	}
 
 	// Image files for overlaying, etc.

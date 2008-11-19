@@ -36,7 +36,7 @@ HTMLTags_UL
 	private function
 		get_drama_li(Oedipus_Drama $drama)
 	{
-		$drama_url = $this->get_drama_url($drama);
+		$drama_url = $this->get_drama_page_url_for_drama($drama);
 		$link = new HTMLTags_A();
 
 		/*
@@ -71,15 +71,9 @@ HTMLTags_UL
 	}
 
 	private function
-		get_drama_url(Oedipus_Drama $drama)
+		get_drama_page_url_for_drama(Oedipus_Drama $drama)
 	{
-		//This function uses the mod-rewrited urls (/dramas/nameofdrama)
-		return Oedipus_DramaHelper::get_drama_url($drama);
-
-		//This function uses the get variable drama_id URLS
-		//                $get_variables = array("drama_id" => $this->frame->get_drama_id());
-		//                return PublicHTML_URLHelper
-		//                        ::get_oo_page_url('Oedipus_DramaEditorPage', $get_variables);
+		return Oedipus_DramaHelper::get_drama_page_url_for_drama($drama);
 	}
 }
 ?>

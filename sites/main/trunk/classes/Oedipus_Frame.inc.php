@@ -109,5 +109,22 @@ Oedipus_Frame
 		return $this->editable;
 	}
 
+	public function
+		get_drama_name()
+	{
+		return Oedipus_FrameHelper::get_drama_name_for_scene_id($this->get_scene_id());
+	}
+
+	public function
+		get_scene_name()
+	{
+		return Oedipus_FrameHelper::get_scene_name_for_scene_id($this->get_scene_id());
+	}
+
+	public function
+		get_act_name()
+	{
+		return Oedipus_FrameHelper::get_act_name_for_scene_id($this->get_scene_id());
+	}
 }
 ?>

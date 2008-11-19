@@ -1023,30 +1023,20 @@ SQL;
 	// ------------
 	// URLS
 	// ------------
-
 	public static function
-		get_drama_url(Oedipus_Drama $drama = NULL)
-	{
-		return self::get_drama_page_url($drama);
-	}
-
-	public static function
-		get_drama_page_url(
-			Oedipus_Drama $drama = NULL
+		get_drama_page_url_for_drama(
+			Oedipus_Drama $drama
 		)
 	{
-		if (isset($drama)) {
-			return PublicHTML_URLHelper
-				::get_oo_page_url(
-					'Oedipus_DramaPage',
-					array(
-						'drama_id' => $drama->get_id()
-					)
-				);
-		} else {
-			return PublicHTML_URLHelper
-				::get_oo_page_url('Oedipus_DramaPage');
-		}
+		return self::get_drama_page_url_for_drama_id($drama->get_id());
+	}
+
+
+	public static function
+		get_drama_page_url()
+	{
+		return PublicHTML_URLHelper
+			::get_oo_page_url('Oedipus_DramaPage');
 	}
 
 	public static function
@@ -1054,32 +1044,25 @@ SQL;
 			$drama_id
 		)
 	{
-		return PublicHTML_URLHelper
-			::get_oo_page_url(
-				'Oedipus_DramaPage',
-				array(
-					'drama_id' => $drama_id
-				)
-			);
+		$url = self::get_drama_page_url();
+		$url->set_get_variable('drama_id', $drama_id);
+
+		return $url;
 	}
 
 	public static function
-		get_edit_drama_page_url(
-			Oedipus_Drama $drama = NULL
+		get_edit_drama_page_url_for_drama(
+			Oedipus_Drama $drama
 		)
 	{
-		if (isset($drama)) {
-			return PublicHTML_URLHelper
-				::get_oo_page_url(
-					'Oedipus_EditDramaPage',
-					array(
-						'drama_id' => $drama->get_id()
-					)
-				);
-		} else {
-			return PublicHTML_URLHelper
-				::get_oo_page_url('Oedipus_EditDramaPage');
-		}
+		return self::get_edit_drama_page_url_for_drama_id($drama->get_id());
+	}
+
+	public static function
+		get_edit_drama_page_url()
+	{
+		return PublicHTML_URLHelper
+			::get_oo_page_url('Oedipus_EditDramaPage');
 	}
 
 	public static function
@@ -1087,28 +1070,18 @@ SQL;
 			$drama_id
 		)
 	{
-		return PublicHTML_URLHelper
-			::get_oo_page_url(
-				'Oedipus_EditDramaPage',
-				array(
-					'drama_id' => $drama_id
-				)
-			);
+		$url = self::get_edit_drama_page_url();
+		$url->set_get_variable('drama_id', $drama_id);
+		return $url;
 	}
 
 	public static function
 		get_drama_page_url_for_scene_id($scene_id)
 	{
 		$drama_id = self::get_drama_id_for_scene_id($scene_id);
-		return PublicHTML_URLHelper
-			::get_oo_page_url(
-				'Oedipus_DramaPage',
-				array(
-					'drama_id' => $drama_id,
-					'scene_id' => $scene_id
-				)
-			);
-
+		$url = self::get_drama_page_url_for_drama_id($drama_id);
+		$url->set_get_variable('scene_id', $scene_id);
+		return $url;
 	}
 
 	public static function
@@ -1123,14 +1096,9 @@ SQL;
 	{
 		$scene_id = self::get_first_scene_id_for_drama_id($drama_id);
 		$frame_id = Oedipus_FrameTreeHelper::get_root_frame_id_for_scene_id($scene_id);
-		return PublicHTML_URLHelper
-			::get_oo_page_url(
-				'Oedipus_DramaPage',
-				array(
-					'drama_id' => $drama_id,
-					'frame_id' => $frame_id
-				)
-			);
+		$url = self::get_drama_page_url_for_drama_id($drama_id);
+		$url->set_get_variable('frame_id', $frame_id);
+		return $url;
 	}
 
 	public static function
@@ -1138,73 +1106,55 @@ SQL;
 	{
 		$drama_id = self::get_drama_id_for_scene_id($scene_id);
 		$frame_id = Oedipus_FrameTreeHelper::get_root_frame_id_for_scene_id($scene_id);
-		return PublicHTML_URLHelper
-			::get_oo_page_url(
-				'Oedipus_DramaPage',
-				array(
-					'drama_id' => $drama_id,
-					'frame_id' => $frame_id
-				)
-			);
+		$url = self::get_drama_page_url_for_drama_id($drama_id);
+		$url->set_get_variable('frame_id', $frame_id);
+		return $url;
 	}
-
 
 	public static function
 		get_drama_page_url_for_act_id($act_id)
 	{
 		$drama_id = self::get_drama_id_for_act_id($act_id);
-		return PublicHTML_URLHelper
-			::get_oo_page_url(
-				'Oedipus_DramaPage',
-				array(
-					'drama_id' => $drama_id,
-					'act_id' => $act_id
-				)
-			);
+		$url = self::get_drama_page_url_for_drama_id($drama_id);
+		$url->set_get_variable('act_id', $act_id);
+		return $url;
 	}
 
 	public static function
 		get_edit_frame_drama_page_url_for_frame_id($frame_id)
 	{
 		$drama_id = self::get_drama_id_for_frame_id($frame_id);
-		return PublicHTML_URLHelper
-			::get_oo_page_url(
-				'Oedipus_DramaPage',
-				array(
-					'drama_id' => $drama_id,
-					'edit_frame' => 1,
-					'frame_id' => $frame_id
-				)
-			);
+		$url = self::get_drama_page_url_for_drama_id($drama_id);
+		$url->set_get_variable('frame_id', $frame_id);
+		$url->set_get_variable('edit_frame', '1');
+		return $url;
 	}
 
 	public static function
-		get_share_drama_url($drama_id)
+		get_share_drama_url()
 	{
 		return PublicHTML_URLHelper
 			::get_oo_page_url(
-				'Oedipus_ShareDramaPage',
-				array(
-					'drama_id' => $drama_id
-				)
+				'Oedipus_ShareDramaPage'
 			);
 	}	
 
-
-
+	public static function
+		get_share_drama_url_for_drama_id($drama_id)
+	{
+		$url = self::get_share_drama_url();
+		$url->set_get_variable('drama_id', $drama_id);
+		return $url;
+	}	
 
 	public static function
 		get_drama_page_url_for_frame_id($frame_id)
 	{
 		$drama_id = self::get_drama_id_for_frame_id($frame_id);
-		return PublicHTML_URLHelper
-			::get_oo_page_url(
-				'Oedipus_DramaPage',
-				array(
-					'drama_id' => $drama_id,
-					'frame_id' => $frame_id
-				)
-			);
+
+		$url = self::get_drama_page_url_for_drama_id($drama_id);
+		$url->set_get_variable('frame_id', $frame_id);
+		return $url;
 	}
 
 	public static function
@@ -1217,8 +1167,7 @@ SQL;
 			$url->set_file('/dramas/'. $drama->get_unique_name());
 			return $url;
 		} else {
-			return PublicHTML_URLHelper
-				::get_oo_page_url('Oedipus_DramaPage');
+			return self::get_drama_page_url();
 		}
 	}
 
