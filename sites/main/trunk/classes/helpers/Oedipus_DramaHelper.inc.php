@@ -388,6 +388,10 @@ SQL;
 		//                                print_r($query);exit;
 		$result = mysql_query($query, $dbh);
 		$row = mysql_fetch_array($result);
+		if ($row == FALSE) {
+			throw new Oedipus_DramaNotFoundException('ID ' . $drama_id);
+		}
+
 		//                                print_r($row);exit;
 
 		$drama = new Oedipus_Drama(
@@ -828,12 +832,13 @@ SELECT
 		unique_name = '$unique_name'
 SQL;
 
-		//                                print_r($query);exit;
 		$result = mysql_query($query, $dbh);
-		$row = mysql_fetch_array($result);
-		//                                print_r($row);exit;
-
-		return self::get_drama_by_id($row['id']);
+		if ($row = mysql_fetch_array($result)) {
+			return self::get_drama_by_id($row['id']);
+		}
+		else {
+			throw new Oedipus_DramaNotFoundException($unique_name);
+		}
 	}
 
 	public function

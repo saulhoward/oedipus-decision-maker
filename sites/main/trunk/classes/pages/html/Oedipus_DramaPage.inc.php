@@ -62,10 +62,17 @@ Oedipus_HTMLPageWithAccountStatus
 		if (isset($this->drama)) {
 			return $this->drama;
 		}
-		else {
+		elseif (
+			(isset($_GET['drama_unique_name']))
+			||
+		       	(isset($_GET['drama_id']))
+		) {
 			$this->set_drama_from_get();
+			return $this->get_drama();
 		}
-		return $this->get_drama();
+		else {
+			throw new Oedipus_DramaPageException('No specific drama requested.');
+		}
 	}
 
 	protected function
@@ -82,12 +89,10 @@ Oedipus_HTMLPageWithAccountStatus
 		}
 		elseif (isset($_GET['drama_id'])) {
 			$this->set_drama(
-				$this->drama =
 				Oedipus_DramaHelper
 				::get_drama_by_id($_GET['drama_id'])
 			);
 		}
-		return $this->get_drama();
 	}
 
 	protected function
@@ -133,7 +138,6 @@ Oedipus_HTMLPageWithAccountStatus
 		
 		return $home_link->get_as_string();
 	}
-
 
 	protected function
 		get_body_div_header_link_content()
