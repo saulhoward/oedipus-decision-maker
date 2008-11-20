@@ -2,7 +2,7 @@
 /**
  * __autoload .INC file
  *
- * Last Modified: 2008-11-19
+ * Last Modified: 2008-11-20
  */
 
 function __autoload($class_name)
@@ -2129,6 +2129,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_AddNoteHTMLForm.inc.php';
 			break;
 
+		case('Oedipus_AddSceneNoteHTMLForm'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_AddSceneNoteHTMLForm.inc.php';
+			break;
+
 		case('Oedipus_AllDramasUL'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_AllDramasUL.inc.php';
 			break;
@@ -2251,6 +2255,22 @@ function __autoload($class_name)
 
 		case('Oedipus_EditOptionHTMLForm'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditOptionHTMLForm.inc.php';
+			break;
+
+		case('Oedipus_EditSceneHTMLForm'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditSceneHTMLForm.inc.php';
+			break;
+
+		case('Oedipus_EditSceneNameHTMLForm'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditSceneNameHTMLForm.inc.php';
+			break;
+
+		case('Oedipus_EditSceneNoteHTMLForm'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditSceneNoteHTMLForm.inc.php';
+			break;
+
+		case('Oedipus_EditSceneNoteRedirectScript'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/pages/redirect-scripts/Oedipus_EditSceneNoteRedirectScript.inc.php';
 			break;
 
 		case('Oedipus_EditSceneRedirectScript'): 
@@ -2719,6 +2739,10 @@ function __autoload($class_name)
 
 		case('Strings_SplittingHelper'): 
 			require_once PROJECT_ROOT . '/haddock/strings/classes/helpers/Strings_SplittingHelper.inc.php';
+			break;
+
+		case('Textile_Textile'): 
+			require_once PROJECT_ROOT . '/plug-ins/textile/classes/Textile_Textile.inc.php';
 			break;
 
 		case('UnitTests_CreateUnitTestsClassCLIScript'): 

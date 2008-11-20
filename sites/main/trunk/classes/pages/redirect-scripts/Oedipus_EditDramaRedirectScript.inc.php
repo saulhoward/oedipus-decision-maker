@@ -69,7 +69,7 @@ extends
 			Oedipus_DramaEditorHelper
 				::set_drama_status($_POST['drama_id'], $_POST['status']);
 			$return_to_url = Oedipus_DramaHelper
-				::get_share_drama_url($_POST['drama_id']);
+				::get_share_drama_url_for_drama_id($_POST['drama_id']);
 		}
 	
 		$this->set_return_to_url($return_to_url);

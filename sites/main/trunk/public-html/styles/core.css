@@ -231,6 +231,9 @@ div#footer p a
 /*
  * Notes Div in Right Column
  */
+div.notes#scene
+{
+}
 div.notes
 {
 /*        background: #ECF2FA url(/images/icons/32x32/note.png) 98% 10px no-repeat;*/
@@ -254,10 +257,12 @@ div.notes h3 {
 	font-family:Georgia,"Times New Roman",Times,serif;
 	text-align: center;
 	margin: 0 0 1em 0;
+	color: #666;
 }
 div.notes label {
 	display: none;
 }
+div.notes input#scene_name,
 div.notes input#frame_name {
 	font-size: 110%;
 	width: 18em;
@@ -277,6 +282,33 @@ div.notes div.submit_buttons_div {
 	text-align: right;
 	width: 24em;
 	margin: 0.2em 0 1em 0;
+}
+
+/*
+ *User HTML in Notes
+ */
+div.user-html ul {
+	margin: 1em 0;
+}
+div.user-html ul li {
+	list-style: disc url(/images/bullet_blue.png) inside;
+}
+
+div.user-html h1,
+div.user-html h2,
+div.user-html h3,
+div.user-html p {
+	margin: 0.5em 0 !important;
+	padding: 0 !important;
+	display: block !important;
+	font-family: 'Helvetica', 'BPG Unicode Standard','Corbel', 'Bitstream Vera Sans',Verdana,sans-serif !important;
+	color: #333 !important;
+}
+
+div.user-html h1,
+div.user-html h2,
+div.user-html h3 {
+	text-align: center !important;
 }
 
 /* Drama Div */
