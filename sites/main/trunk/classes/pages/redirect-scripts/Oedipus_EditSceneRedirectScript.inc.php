@@ -37,6 +37,22 @@ extends
 			$return_to_url = Oedipus_DramaHelper
 				::get_drama_page_url_for_scene_id($scene_id);
 		} 
+
+		elseif (
+			isset($_POST['scene_name'])
+			&&
+			isset($_POST['scene_id'])
+		) {
+			Oedipus_DramaHelper::set_scene_name(
+				$_POST['scene_id'],
+				$_POST['scene_name']
+			);
+			//$this->set_return_message('saved scene name');
+			//
+			$return_to_url = Oedipus_DramaHelper
+				::get_drama_page_url_for_scene_id($_POST['scene_id']);
+		}
+
 		elseif (
 			isset($_GET['add_frame'])
 			&&

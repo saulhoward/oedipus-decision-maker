@@ -1,0 +1,6 @@
+CREATE TABLE `oedipus_scene_to_note_links` (
+`id` INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`scene_id` INT( 10 ) UNSIGNED NOT NULL ,
+`note_id` INT( 10 ) UNSIGNED NOT NULL
+) ENGINE = MYISAM ;
+

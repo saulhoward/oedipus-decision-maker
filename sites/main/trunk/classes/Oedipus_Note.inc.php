@@ -43,12 +43,23 @@ Oedipus_Note
 	}
 
 	public function
-		get_note_text_in_pre()
+		get_note_text_html()
 	{
-		$content = $this->note_text;
-		return new HTMLTags_Pre($content);
+		return $this->get_note_text_textiled();
 	}
 
+	public function
+		get_note_text_textiled()
+	{
+		$textile = new Textile_Textile();
+		return $textile->TextileThis($this->get_note_text());
+	}
 
+	public function
+		get_note_text_in_pre()
+	{
+		$content = $this->get_note_text();
+		return new HTMLTags_Pre($content);
+	}
 }
 ?>

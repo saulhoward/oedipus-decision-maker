@@ -156,7 +156,11 @@ extends
 			else {
 				$note = Oedipus_NotesHelper::get_note_by_frame_id($this->frame->get_id());
 				//print_r($note);exit;
-				$div->append_tag_to_content($note->get_note_text_in_pre());
+				$user_html_div = new HTMLTags_Div();
+				$user_html_div->set_attribute_str('class', 'user-html');
+					
+				$user_html_div->append($note->get_note_text_html());
+				$div->append($user_html_div);
 			}
 		}
 		catch (Exception $e)

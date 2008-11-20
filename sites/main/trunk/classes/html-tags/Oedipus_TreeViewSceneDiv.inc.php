@@ -18,25 +18,41 @@ class
 extends
 	Oedipus_SceneDiv
 {
-	public function
-		__construct(Oedipus_Scene $scene)
-	{
-		parent::__construct($scene);
-	}
-
 	protected function
 		get_scene_content_div()
 	{
-                /*
-		 * Using Tree View
-                 */
-
 		$div = new HTMLTags_Div();
-		$div->append(
+		# The left and right column divs
+		$left_div = new HTMLTags_Div();
+		$left_div->set_attribute_str('class', 'left-column');
+
+                /*
+		 * Tree View Div
+                 */
+		$left_div->append(
 			Oedipus_FrameTreeHelper::get_frame_tree_div(
-				$this->scene
+				$this->get_scene()
 			)
 		);
+
+		$div->append_tag_to_content($left_div);
+
+		$right_div = new HTMLTags_Div();
+		$right_div->set_attribute_str('class', 'right-column');
+                /*
+		 * Scene Note Div
+                 */
+		$right_div->append(
+			Oedipus_DramaHelper::get_scene_notes_div(
+				$this->get_scene()
+			)
+		);
+		$div->append_tag_to_content($right_div);
+
+		$clear_div = new HTMLTags_Div();
+		$clear_div->set_attribute_str('class', 'clear-columns');
+		$div->append_tag_to_content($clear_div);
+
 		return $div;
 	}
 }
