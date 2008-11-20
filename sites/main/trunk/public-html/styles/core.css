@@ -254,10 +254,11 @@ div.notes pre
 }
 
 div.notes h3 {
-	font-family:Georgia,"Times New Roman",Times,serif;
+	/*font-family:Georgia,"Times New Roman",Times,serif;*/
 	text-align: center;
 	margin: 0 0 1em 0;
 	color: #666;
+	font-weight: 900;
 }
 div.notes label {
 	display: none;
@@ -301,7 +302,7 @@ div.user-html p {
 	margin: 0.5em 0 !important;
 	padding: 0 !important;
 	display: block !important;
-	font-family: 'Helvetica', 'BPG Unicode Standard','Corbel', 'Bitstream Vera Sans',Verdana,sans-serif !important;
+	/*font-family: 'Helvetica', 'BPG Unicode Standard','Corbel', 'Bitstream Vera Sans',Verdana,sans-serif !important;*/
 	color: #333 !important;
 }
 
