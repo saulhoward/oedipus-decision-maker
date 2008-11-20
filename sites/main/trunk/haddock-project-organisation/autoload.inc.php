@@ -2161,8 +2161,16 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_DramaHelper.inc.php';
 			break;
 
+		case('Oedipus_DramaNotFoundException'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/exceptions/Oedipus_DramaNotFoundException.inc.php';
+			break;
+
 		case('Oedipus_DramaPage'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_DramaPage.inc.php';
+			break;
+
+		case('Oedipus_DramaPageException'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/exceptions/Oedipus_DramaPageException.inc.php';
 			break;
 
 		case('Oedipus_DramasHelper'): 
