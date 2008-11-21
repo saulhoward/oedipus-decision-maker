@@ -19,9 +19,14 @@ Oedipus_DramaHelper
 		 *Set the Phrases
                  */
 		$owner_of_position = $position->get_character()->get_name(); 
-		$owner_of_position_is_plural = Oedipus_DramaHelper::is_plural($owner_of_position);
+		$owner_of_position_is_plural 
+			= self::is_plural($owner_of_position);
 		if ($owner_of_position == $character->get_name()) {
-			$owner_of_option = ' they ';
+			if ($owner_of_position_is_plural) {
+				$owner_of_option = ' they ';
+			} else {
+				$owner_of_option = ' he/she ';
+			}
 		}
 		else {
 			$owner_of_option = $character->get_name();
@@ -40,7 +45,43 @@ Oedipus_DramaHelper
 		}
 		$explanation .= 'that ' . $owner_of_option . ' ';
 		$explanation .= $should_or_shouldnt . ' ';
-		$explanation .= $option->get_name();
+		$explanation .= $option->get_name() . '.';
+		return $explanation;
+	}
+
+	public function
+		get_explanation_for_stated_intention(
+			Oedipus_Character $character,
+		       	Oedipus_StatedIntention $stated_intention,
+			Oedipus_Option $option
+		)
+	{
+                /*
+		 *Set the Phrases
+		 */
+		$owner_of_option = $character->get_name(); 
+		$owner_of_option_is_plural 
+			= self::is_plural($owner_of_option);
+		if ($owner_of_option_is_plural) {
+			$pronoun = ' they ';
+		} else {
+			$pronoun = ' he/she ';
+		}
+		$will_or_wont = $stated_intention->get_stated_intention_str(); 
+
+                /*
+		 *Construct the sentence
+                 */
+		$explanation = '';
+		$explanation .= $owner_of_option . ' ';
+		if ($owner_of_option_is_plural) {
+			$explanation .= 'have ';
+		} else {
+			$explanation .= 'has ';
+		}
+		$explanation .= 'stated that ' . $pronoun . ' ';
+		$explanation .= $will_or_wont . ' ';
+		$explanation .= $option->get_name() . '.';
 		return $explanation;
 	}
 

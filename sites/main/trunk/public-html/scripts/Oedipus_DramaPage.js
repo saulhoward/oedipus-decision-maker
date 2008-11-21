@@ -50,10 +50,13 @@ $(document).ready(function() {
 				});
 
 		/**
-		 * Position Tile
-		 * Tool Tips
+		 * Position & SI Tile
+		 * Tool Tips on Hover
 		 * using ClueTip plugin
 		 */
-		$('a.position-tile').cluetip({splitTitle: '|'});
+		$('a.position-tile, a.si-tile').cluetip({
+			splitTitle: '|',
+			arrows: true
+		});
 });
 
