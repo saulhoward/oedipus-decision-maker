@@ -105,7 +105,13 @@ Oedipus_HTMLPageWithAccountStatus
 		render_head_script_javascript() 
 	{ 
 		parent::render_head_script_javascript();
-		echo '<script type="text/javascript" src="/scripts/Oedipus_DramaPage.js"></script>' . "\n";
+		echo <<<HTML
+<script src="/scripts/jquery.dimensions.js" type="text/javascript"></script>
+<script src="/scripts/jquery.hoverIntent.js" type="text/javascript"></script>
+<script src="/scripts/jquery.cluetip.js" type="text/javascript"></script>
+<script type="text/javascript" src="/scripts/Oedipus_DramaPage.js"></script>
+HTML;
+
 	}
 
 	public function

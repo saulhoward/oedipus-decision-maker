@@ -91,7 +91,7 @@ Oedipus_FrameImageHelper
 		
 		$a = new HTMLTags_A();
 		$a->set_href($url);
-		$a->set_attribute_str('title', 'View this Drama');
+		$a->set_attribute_str('title', 'View this Frame');
 		
 		$img = self::get_frame_png_thumbnail_img($frame, $max_width, $max_height);
 

@@ -54,5 +54,30 @@ class
 		return $this->character;
 	}
 
+	public function
+		get_position_str()
+	{
+		switch ($this->get_tile() . $this->get_doubt()) {
+		case "1":
+			return 'should';
+			break;
+		case "0":
+			return "shouldn't";
+			break;
+		case "1?":
+			return 'should perhaps';
+			break;
+		case "0?":
+			return "probably shouldn't";
+			break;
+		case "1x":
+			return "should, (but doesn't believe them)";
+			break;
+		case "0x":
+			return "shouldn't, (but doesn't believe them)";
+			break;
+		}
+		return 'should';
+	}
 }
 ?>

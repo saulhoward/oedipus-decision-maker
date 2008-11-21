@@ -221,8 +221,12 @@ extends
 						);
 
 						$position_td = new HTMLTags_TD();
+						$explanation = Oedipus_DramaHelper
+							::get_explanation_for_position(
+								$character, $position, $option
+							);
 						$position_td->append_tag_to_content(
-							$this->get_position_tile($position)
+							$this->get_position_tile($position, $explanation)
 						);
 						$tr->append_tag_to_content($position_td);
 					}
@@ -259,7 +263,7 @@ extends
 	}
 	
 	public function
-		get_position_tile(Oedipus_Position $position)
+		get_position_tile(Oedipus_Position $position, $explanation)
 	{
 //                <a href="#" class="position-tile" id="character1-option1">0</a>
 
@@ -285,10 +289,21 @@ extends
 			$html_tile_link = new HTMLTags_URL();
 			$html_tile_link->set_file('#');
 		}
-
 		$html_tile = new HTMLTags_A($position->get_tile() . $position->get_doubt());
-		$html_tile->set_href($html_tile_link);
 
+		/**
+		 * An explanation for the position is set here in the
+		 * title attribute, for the javascript to use as a
+		 * cool -tip
+		 */
+		$html_tile->set_attribute_str(
+			'title',
+			$position->get_character()->get_name() . "'s Position" 
+			. '|' .
+			$explanation
+		);
+
+		$html_tile->set_href($html_tile_link);
 		$html_tile->set_attribute_str('class', 'position-tile');
 		$character = $position->get_character();
 		$html_tile_id = $character->get_color() . $position->get_tile() 
@@ -297,7 +312,8 @@ extends
 		return $html_tile;
 
 	}
-	
+
+
 	private function
 		add_q_to_doubt($doubt)
 	{
