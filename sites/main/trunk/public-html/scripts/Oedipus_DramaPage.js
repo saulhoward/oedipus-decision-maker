@@ -49,5 +49,11 @@ $(document).ready(function() {
 				}
 				});
 
+		/**
+		 * Position Tile
+		 * Tool Tips
+		 * using ClueTip plugin
+		 */
+		$('a.position-tile').cluetip({splitTitle: '|'});
 });
 

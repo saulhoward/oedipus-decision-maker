@@ -288,13 +288,16 @@ div.notes div.submit_buttons_div {
 /*
  *User HTML in Notes
  */
+div.user-html ol,
 div.user-html ul {
 	margin: 1em 0;
 }
 div.user-html ul li {
 	list-style: disc url(/images/bullet_blue.png) inside;
 }
-
+div.user-html ol li {
+	list-style: decimal inside;
+}
 div.user-html h1,
 div.user-html h2,
 div.user-html h3,
