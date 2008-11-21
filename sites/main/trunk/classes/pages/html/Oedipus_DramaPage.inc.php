@@ -107,7 +107,17 @@ Oedipus_HTMLPageWithAccountStatus
 		parent::render_head_script_javascript();
 		echo <<<HTML
 <script src="/scripts/jquery.dimensions.js" type="text/javascript"></script>
+<!--
+	Would like to Use HoverIntent Plugin
+	As it makes ClueTip better,
+	but I prefer original hover because it 
+	fires on page load and not just on mouse movement
+	This means that if the user is cycling through
+	Position tiles then they get fresh ClueTips on page load even
+	if they don't move the mouse.
+
 <script src="/scripts/jquery.hoverIntent.js" type="text/javascript"></script>
+-->
 <script src="/scripts/jquery.cluetip.js" type="text/javascript"></script>
 <script type="text/javascript" src="/scripts/Oedipus_DramaPage.js"></script>
 HTML;

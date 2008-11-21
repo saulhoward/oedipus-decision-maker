@@ -221,12 +221,12 @@ extends
 						);
 
 						$position_td = new HTMLTags_TD();
-						$explanation = Oedipus_DramaHelper
+						$p_explanation = Oedipus_DramaHelper
 							::get_explanation_for_position(
 								$character, $position, $option
 							);
 						$position_td->append_tag_to_content(
-							$this->get_position_tile($position, $explanation)
+							$this->get_position_tile($position, $p_explanation)
 						);
 						$tr->append_tag_to_content($position_td);
 					}
@@ -235,9 +235,14 @@ extends
 					$stated_intention = $option->get_stated_intention();
 
 					$stated_intention_td = new HTMLTags_TD();
+
+					$si_explanation = Oedipus_DramaHelper
+							::get_explanation_for_stated_intention(
+								$character, $stated_intention, $option
+							);
 					$stated_intention_td->append_tag_to_content(
 						$this->get_stated_intention_tile(
-							$stated_intention, $character
+							$stated_intention, $character, $si_explanation
 						)
 					);
 					$tr->append_tag_to_content($stated_intention_td);
@@ -327,7 +332,8 @@ extends
 	public function
 		get_stated_intention_tile(
 			Oedipus_StatedIntention $stated_intention,
-			Oedipus_Character $character
+			Oedipus_Character $character,
+			$explanation
 		)
 	{
 //                <a href="#" class="si-tile" id="character1-option1">0</a>
@@ -357,6 +363,18 @@ extends
 		$html_tile 
 			= new HTMLTags_A($stated_intention->get_tile() . $stated_intention->get_doubt());
 		$html_tile->set_href($html_tile_link);
+
+		/**
+		 * An explanation for the position is set here in the
+		 * title attribute, for the javascript to use as a
+		 * cool -tip
+		 */
+		$html_tile->set_attribute_str(
+			'title',
+			$character->get_name() . "'s Stated Intention" 
+			. '|' .
+			$explanation
+		);
 
 		$html_tile->set_attribute_str('class', 'si-tile');
 		$html_tile_id = 
