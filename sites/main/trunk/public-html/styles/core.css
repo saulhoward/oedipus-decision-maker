@@ -298,15 +298,20 @@ div.user-html ul li {
 div.user-html ol li {
 	list-style: decimal inside;
 }
+
+div.user-html form ol li {
+	list-style: none;
+	margin: 0;
+}
 div.user-html h1,
 div.user-html h2,
 div.user-html h3,
 div.user-html p {
-	margin: 0.5em 0 !important;
-	padding: 0 !important;
-	display: block !important;
+	margin: 0.5em 0;
+	padding: 0;
+	display: block;
 	/*font-family: 'Helvetica', 'BPG Unicode Standard','Corbel', 'Bitstream Vera Sans',Verdana,sans-serif !important;*/
-	color: #333 !important;
+	color: #333;
 }
 
 div.user-html h1,
@@ -316,6 +321,14 @@ div.user-html h3 {
 }
 
 /* Drama Div */
+div.user-html em {
+	font-style: italic;
+	font-weight: normal !important;
+}
+div.user-html strong {
+	font-weight: 900;
+}
+#content div.drama h2
 #content div.drama h2
 {
 	font-family: 'Helvetica', 'BPG Unicode Standard','Corbel', 'Bitstream Vera Sans',Verdana,sans-serif;
