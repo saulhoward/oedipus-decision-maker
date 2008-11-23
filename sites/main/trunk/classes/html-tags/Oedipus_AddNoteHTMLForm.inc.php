@@ -37,7 +37,7 @@ extends
 		
 		$this->set_attribute_str('name', $name);
 		$this->set_attribute_str('method', $method);
-		$this->set_attribute_str('class', 'frame-form');
+		$this->set_attribute_str('class', $name);
 		
 		$this->input_lis = array();
 
@@ -53,7 +53,7 @@ extends
 		# Hidden Inputs
 //                $this->add_hidden_input('table_id', $table->get_id());
 
-		$this->set_submit_text('OK');
+		$this->set_submit_text('Save');
 	}
 	
 	public function

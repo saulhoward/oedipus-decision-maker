@@ -102,8 +102,7 @@ Oedipus_DramaHelper
 	{
 		$scene_name_is_valid = TRUE; //Implement this!
 
-		if ($scene_name_is_valid) 
-		{
+		if ($scene_name_is_valid) {
 			$dbh = DB::m();
 
 			$sql = <<<SQL
@@ -117,9 +116,7 @@ SQL;
 
 			//                        print_r($sql);exit;
 			mysql_query($sql, $dbh);
-		} 
-		else 
-		{
+		} else {
 			//                        throw new Database_CRUDException("'$href' is not a validate HREF!");
 		}
 	}
@@ -136,9 +133,12 @@ SQL;
 		 * Put a <h3> if it isn't
                  */
 		if ($scene->is_editable()) {
-			$div->append(
+			$name_div = new HTMLTags_Div();
+			$name_div->set_attribute_str('id', 'name-form');
+			$name_div->append(
 				new Oedipus_EditSceneNameHTMLForm($scene)
 			);
+			$div->append($name_div);
 		}
 		else {
 	
@@ -157,21 +157,28 @@ SQL;
 
 				$drama_id = Oedipus_DramaHelper::get_drama_id_for_scene_id($scene->get_id());
 
+				$note_div = new HTMLTags_Div();
+				$note_div->set_attribute_str('id', 'note-form');
+				$note_div->set_attribute_str('class', 'user-html');
 				if (Oedipus_NotesHelper::has_scene_got_note($scene->get_id()))
 				{
 					$note = Oedipus_NotesHelper
 						::get_note_by_scene_id($scene->get_id());
-					$div->append(
+
+					$note_div->append(self::get_note_preview_div($note));
+
+					$note_div->append(
 						new Oedipus_EditSceneNoteHTMLForm(
 							$note, $drama_id, $scene->get_id()
 						)
 					);
 				}
 				else {
-					$div->append(
+					$note_div->append(
 						new Oedipus_AddSceneNoteHTMLForm($drama_id, $scene)
 					);
 				}
+				$div->append($note_div);
 			}
 			else {
 				$note = Oedipus_NotesHelper::get_note_by_scene_id($scene->get_id());
@@ -188,6 +195,14 @@ SQL;
 		}
 
 
+		return $div;
+	}
+	public static function
+		get_note_preview_div(Oedipus_Note $note)
+	{
+		$div = new HTMLTags_Div();
+		$div->set_attribute_str('class', 'note-preview');
+		$div->append($note->get_note_text_html());
 		return $div;
 	}
 
@@ -1051,7 +1066,7 @@ SQL;
 
 
 		// ADD DEFAULT ACTOR tO DATABASE
-		$character_name = 'First Character';
+		$character_name = 'Wile E. Coyote';
 		$character_color = 'red';
 		$sql2 = <<<SQL
 INSERT INTO
@@ -1091,7 +1106,7 @@ SQL;
 
 
 			// ADD DEFAULT option tO DATABASE
-			$option_name = 'First Option';
+			$option_name = 'Chase Road Runner';
 			$sql4 = <<<SQL
 INSERT INTO
 	oedipus_options

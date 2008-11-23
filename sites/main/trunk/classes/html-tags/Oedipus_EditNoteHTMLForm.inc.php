@@ -40,7 +40,7 @@ extends
 		
 		$this->set_attribute_str('name', $name);
 		$this->set_attribute_str('method', $method);
-		$this->set_attribute_str('class', 'oedipus-frame-form');
+		$this->set_attribute_str('class', $name);
 		
 		$this->input_lis = array();
 

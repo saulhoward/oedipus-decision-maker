@@ -14,7 +14,13 @@ class
 		add_note_to_scene_with_default_content(Oedipus_Scene $scene)
 	{
 		$note_text = <<<TXT
-This is a Scene.
+h3. Notes on this Scene
+
+Click this note to edit it.
+
+You can use "Textile":http://textile.thresholdstate.com/ markup.
+
+Click on the *First Frame* to start editing this Scene.
 TXT;
 
 		return self::add_note_to_scene($scene, $note_text);
@@ -25,7 +31,16 @@ TXT;
 		add_note_to_frame_with_default_content(Oedipus_Frame $frame)
 	{
 		$note_text = <<<TXT
-This is a Frame.
+h3. Notes on this Frame
+
+Click this note to edit it.
+
+You can use "Textile":http://textile.thresholdstate.com/ markup.
+
+Click *Edit this Frame* (in the Toolbar) to edit characters and options in this Frame.
+
+Click the Coloured Tiles on the Frame to change them, or hover over them to find out what they mean.
+TXT;
 TXT;
 
 		return self::add_note_to_frame($frame, $note_text);

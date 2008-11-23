@@ -116,9 +116,12 @@ extends
 		 * Put a <h3> if it isn't
                  */
 		if ($this->frame->is_editable()) {
-			$div->append(
+			$name_div = new HTMLTags_Div();
+			$name_div->set_attribute_str('id', 'name-form');
+			$name_div->append(
 				new Oedipus_EditFrameNameHTMLForm($this->frame)
 			);
+			$div->append($name_div);
 		}
 		else {
 	
@@ -137,21 +140,29 @@ extends
 
 				$drama_id = $this->frame->get_drama_id();
 
+				$note_div = new HTMLTags_Div();
+				$note_div->set_attribute_str('id', 'note-form');
+				$note_div->set_attribute_str('class', 'user-html');
 				if (Oedipus_NotesHelper::has_frame_got_note($this->frame->get_id()))
 				{
 					$note = Oedipus_NotesHelper
 						::get_note_by_frame_id($this->frame->get_id());
-					$div->append(
+
+
+					$note_div->append(Oedipus_DramaHelper::get_note_preview_div($note));
+
+					$note_div->append(
 						new Oedipus_EditFrameNoteHTMLForm(
 							$note, $drama_id, $this->frame->get_id()
 						)
 					);
 				}
 				else {
-					$div->append(
+					$note_div->append(
 						new Oedipus_AddFrameNoteHTMLForm($drama_id, $this->frame)
 					);
 				}
+				$div->append($note_div);
 			}
 			else {
 				$note = Oedipus_NotesHelper::get_note_by_frame_id($this->frame->get_id());
