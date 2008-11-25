@@ -873,11 +873,11 @@ SQL;
 		$frame_editor_forms_div->set_attribute_str('class', 'edit-frame-forms');
 
 		//frame Name form
-		self::wrap_element_with_class_and_add_to_div(
-			$frame_editor_forms_div,
-			self::get_oedipus_html_frame_name_editor_form($frame),
-			'edit-frame-form'
-		);
+		//self::wrap_element_with_class_and_add_to_div(
+			//$frame_editor_forms_div,
+			//self::get_oedipus_html_frame_name_editor_form($frame),
+			//'edit-frame-form'
+		//);
 
 		//frame actions UL
 		self::wrap_element_with_class_and_add_to_div(

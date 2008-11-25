@@ -189,22 +189,7 @@ HTMLTags_Div
 			$scene->make_editable();
 		}
 
-		if (
-			isset($_GET['edit_frame'])
-			&&
-			isset($_GET['frame_id'])
-			&&
-			($scene->is_editable())
-		) {
-			/*
-			 * Return the Editable Frame
-			 */
-			return new Oedipus_EditFrameSceneDiv(
-				$scene,
-				$_GET['frame_id']
-			);
-		}
-		elseif (isset($_GET['frame_id'])) {
+		if (isset($_GET['frame_id'])) {
 			/*
 			 * Return the normal frame
 			 */
