@@ -32,7 +32,7 @@ extends
 			$act = Oedipus_DramaEditorHelper::add_act($drama);
 			$scene = Oedipus_DramaEditorHelper::add_scene($act);
 			$scene_note = Oedipus_NotesHelper::add_note_to_scene_with_default_content($scene);
-			$frame = Oedipus_DramaHelper::add_frame($scene, 'First frame', '0');
+			$frame = Oedipus_DramaHelper::add_frame($scene, 'Frame 1', '0');
 			$frame_note = Oedipus_NotesHelper::add_note_to_frame_with_default_content($frame);
 
 			$return_to_url = 
@@ -52,7 +52,7 @@ extends
 			$act = Oedipus_DramaEditorHelper::add_act($drama);
 			$scene = Oedipus_DramaEditorHelper::add_scene($act);
 			$scene_note = Oedipus_NotesHelper::add_note_to_scene_with_default_content($scene);
-			$frame = Oedipus_DramaHelper::add_frame($scene, 'First frame', '0');
+			$frame = Oedipus_DramaHelper::add_frame($scene, 'Frame 1', '0');
 			$frame_note = Oedipus_NotesHelper::add_note_to_frame_with_default_content($frame);
 
 			$return_to_url = 

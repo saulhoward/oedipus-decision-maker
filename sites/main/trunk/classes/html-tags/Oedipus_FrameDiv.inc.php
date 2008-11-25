@@ -19,12 +19,28 @@ extends
 {
 	private $frame;
 	
+	protected function
+		set_frame(Oedipus_Frame $frame)
+	{
+		$this->frame = $frame;
+	}
+
+	protected function
+		get_frame()
+	{
+		if (isset($this->frame)) {
+			return $this->frame;
+		} else {
+			throw new Oedipus_FrameNotSetException('In the Frame Div');
+		}
+	}
+
 	public function
 		__construct(Oedipus_Frame $frame)
 	{
 //                print_r($frame);exit;
 		parent::__construct();
-		$this->frame = $frame;
+		$this->set_frame($frame);
 
 		# The left and right column divs
 		$left_div = new HTMLTags_Div();
@@ -39,6 +55,11 @@ extends
 		$left_div->append_tag_to_content(
 			$this->get_frame_navigation_div()
 		);
+
+		# The forms to edit names, add characters and options
+		if ($this->get_frame()->is_editable()) {
+			$left_div->append($this->get_oedipus_frame_editor_forms_div());
+		}
 
 		$this->append_tag_to_content($left_div);
 
@@ -56,9 +77,15 @@ extends
 	}
 
 	private function
+		get_oedipus_frame_editor_forms_div()
+	{
+		return Oedipus_FrameHelper::get_edit_frame_forms_div($this->get_frame());
+	}
+
+	private function
 		get_frame_navigation_div()
 	{
-		return Oedipus_FrameTreeHelper::get_frame_navigation_div($this->frame);
+		return Oedipus_FrameTreeHelper::get_frame_navigation_div($this->get_frame());
 	}
 
 	private function
@@ -76,6 +103,7 @@ extends
 
 		return $frame_div;
 	}
+
 	private function
 		get_oedipus_html_frame()
 	{

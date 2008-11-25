@@ -60,7 +60,7 @@ extends
 		}
 
 		/*
-		 *Get the Div
+		 * Get the Div
 		 */
 		$div->append(
 			$this->get_frame_div($frame)

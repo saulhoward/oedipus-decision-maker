@@ -1041,14 +1041,199 @@ SQL;
 	}
 
 	public function
+		add_child_frame_as_duplicate_of_parent(
+			Oedipus_Scene $scene,
+			$parent_frame_id
+		)
+	{
+		$parent_frame = $scene->get_frame($parent_frame_id);
+		$frame_name = self::get_incremented_name($parent_frame->get_name());
+		//print_r($frame_name);exit;
+
+		$scene_id = $scene->get_id();
+		// ADD TABLE TO DATABASE
+		$dbh = DB::m();
+		$sql = <<<SQL
+INSERT INTO
+	oedipus_frames
+SET
+	name = '$frame_name',
+	scene_id = $scene_id,
+	added = NOW()
+SQL;
+
+		//print_r($sql);exit;
+		$result = mysql_query($sql, $dbh);
+
+		$frame_id = mysql_insert_id($dbh);
+
+		/*
+		 *Set Frame Name
+		 */
+		$characters = array();
+		$parent_characters = array();
+
+		$i = 0;
+		foreach ($parent_frame->get_characters() as $parent_character) {
+			// ADD Duplicate ACTOR tO DATABASE
+			$character_name = $parent_character->get_name();
+			$character_color = $parent_character->get_color();
+			$sql2 = <<<SQL
+INSERT INTO
+	oedipus_characters
+SET
+	name = '$character_name',
+	color = '$character_color',
+	frame_id = $frame_id,
+	added = NOW()
+SQL;
+
+			//                print_r($sql);exit;
+			$result2 = mysql_query($sql2, $dbh);
+			$character_id = mysql_insert_id($dbh);
+
+			$character = new Oedipus_Character(
+				$character_id, $character_name, $character_color
+			);
+			$characters[$i] = $character;
+			$parent_characters[$i] = $parent_character;
+			$i++;
+		}
+
+		//print_r($parent_characters);exit;
+		$i = 0;
+		foreach ($parent_characters[$i]->get_options() as $parent_option) {
+
+			$parent_si = $parent_option->get_stated_intention();
+			//print_r($parent_si);exit;
+			// ADD DEFAULT stated_intention tO DATABASE
+			$stated_intention_position = $parent_si->get_tile();
+			$stated_intention_doubt = $parent_si->get_doubt();
+			$sql3 = <<<SQL
+INSERT INTO
+	oedipus_stated_intentions
+SET
+	position = '$stated_intention_position',
+	doubt = '$stated_intention_doubt'
+SQL;
+
+			//print_r($sql3);exit;
+			$result3 = mysql_query($sql3, $dbh);
+			$stated_intention_id = mysql_insert_id($dbh);
+
+
+			// ADD DEFAULT option tO DATABASE
+			$character_id = $characters[$i]->get_id();
+			$option_name = $parent_option->get_name();
+			$sql4 = <<<SQL
+INSERT INTO
+	oedipus_options
+SET
+	name = '$option_name',
+	character_id = $character_id,
+	stated_intention_id = $stated_intention_id,
+	added = NOW()
+SQL;
+
+			//                print_r($sql);exit;
+			$result4 = mysql_query($sql4, $dbh);
+			$option_id = mysql_insert_id($dbh);
+
+			$stated_intention = new Oedipus_StatedIntention(
+				$stated_intention_id,
+				$stated_intention_position,
+				$stated_intention_doubt
+			);
+
+			$characters_option = 
+				new Oedipus_Option(
+					$option_id,
+					$option_name,
+					$stated_intention
+				);
+
+
+			$characters[$i]->add_option($characters_option);
+			$i ++;
+		}
+
+		// Create default positions
+
+		foreach ($characters as $character)
+		{
+			foreach ($character->get_options() as $option)
+			{
+				$positions = array();
+
+				foreach ($characters as $position_character)
+				{
+
+					// ADD DEFAULT position tO DATABASE
+					$position_position = '1';
+					$position_doubt = '';
+					$option_id = $option->get_id();
+					$character_id = $position_character->get_id();
+					$sql5 = <<<SQL
+INSERT INTO
+	oedipus_positions
+SET
+	position = '$position_position',
+	doubt = '$position_doubt',
+	option_id = $option_id,
+	character_id = $character_id
+SQL;
+
+					//                                        print_r($sql5);exit;
+					$result5 = mysql_query($sql5, $dbh);
+					$position_id = mysql_insert_id($dbh);
+
+					$positions[$position_character->get_name()] =
+						new Oedipus_Position(
+							$position_id,
+							$position_position,
+							$position_doubt,
+							$position_character
+						);
+				}
+
+				$option->add_positions($positions);
+			}
+		}
+
+		$frame = new Oedipus_Frame($frame_id, $frame_name, date(), $scene_id, $characters);
+
+		//__construct($id, $name, $added, $scene_id, $characters
+		// Add Frame to Tree
+		Oedipus_FrameTreeHelper::add_frame_to_tree($frame, $parent_frame_id);
+
+		return $frame;
+	}
+
+	public function
 		add_frame(
 			Oedipus_Scene $scene,
 			$frame_name,
 			$parent_frame_id
 		)
 	{
-		// ADD TABLE TO DATABASE
+		if ($parent_frame_id != 0) {
+			return self
+				::add_child_frame_as_duplicate_of_parent(
+					$scene, $parent_frame_id
+				);
+		} 
+
+		/*
+		 *Set Frame Name
+		 */
+		if (
+			!isset($frame_name)
+		) {
+			$frame_name = 'New Frame';
+		}
+
 		$scene_id = $scene->get_id();
+		// ADD TABLE TO DATABASE
 		$dbh = DB::m();
 		$sql = <<<SQL
 INSERT INTO
@@ -1063,7 +1248,6 @@ SQL;
 		$result = mysql_query($sql, $dbh);
 
 		$frame_id = mysql_insert_id($dbh);
-
 
 		// ADD DEFAULT ACTOR tO DATABASE
 		$character_name = 'Wile E. Coyote';

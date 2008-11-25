@@ -14,8 +14,6 @@ extends
 		if (
 			isset($_POST['add_frame'])
 			&&
-			isset($_POST['frame_name'])
-			&&
 			isset($_POST['scene_id'])
 			&&
 			isset($_POST['parent_frame_id'])
@@ -26,7 +24,11 @@ extends
 			 * CURRENTLY UNSAFE
 			 */
 			$scene_id = $_POST['scene_id'];
-			$frame_name = $_POST['frame_name'];
+			if (isset($_POST['frame_name'])) {
+				$frame_name = $_POST['frame_name'];
+			} else {
+				$frame_name = NULL;
+			}
 			$parent_frame_id = $_POST['parent_frame_id'];
 
 			$this->add_frame($scene_id, $frame_name, $parent_frame_id);
@@ -56,8 +58,6 @@ extends
 		elseif (
 			isset($_GET['add_frame'])
 			&&
-			isset($_GET['frame_name'])
-			&&
 			isset($_GET['scene_id'])
 			&&
 			isset($_GET['parent_frame_id'])
@@ -68,7 +68,11 @@ extends
 			 * CURRENTLY UNSAFE
 			 */
 			$scene_id = $_GET['scene_id'];
-			$frame_name = $_GET['frame_name'];
+			if (isset($_GET['frame_name'])){
+				$frame_name = $_GET['frame_name'];
+			} else{
+				$frame_name = NULL;
+			}
 			$parent_frame_id = $_GET['parent_frame_id'];
 
 			$frame = $this->add_frame($scene_id, $frame_name, $parent_frame_id);
