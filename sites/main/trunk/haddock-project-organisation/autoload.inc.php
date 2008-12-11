@@ -2,7 +2,7 @@
 /**
  * __autoload .INC file
  *
- * Last Modified: 2008-11-20
+ * Last Modified: 2008-12-11
  */
 
 function __autoload($class_name)
@@ -2153,12 +2153,16 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Drama.inc.php';
 			break;
 
+		case('Oedipus_DramaDBHelper'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_DramaDBHelper.inc.php';
+			break;
+
 		case('Oedipus_DramaDiv'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_DramaDiv.inc.php';
 			break;
 
-		case('Oedipus_DramaEditorHelper'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_DramaEditorHelper.inc.php';
+		case('Oedipus_DramaFactory'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/factories/Oedipus_DramaFactory.inc.php';
 			break;
 
 		case('Oedipus_DramaHelper'): 
@@ -2213,10 +2217,6 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditFrameCharacterActionsUL.inc.php';
 			break;
 
-		case('Oedipus_EditFrameDiv'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditFrameDiv.inc.php';
-			break;
-
 		case('Oedipus_EditFrameFrameActionsUL'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditFrameFrameActionsUL.inc.php';
 			break;
@@ -2245,10 +2245,6 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/redirect-scripts/Oedipus_EditFrameRedirectScript.inc.php';
 			break;
 
-		case('Oedipus_EditFrameSceneDiv'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditFrameSceneDiv.inc.php';
-			break;
-
 		case('Oedipus_EditNoteHTMLForm'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditNoteHTMLForm.inc.php';
 			break;
@@ -2275,6 +2271,10 @@ function __autoload($class_name)
 
 		case('Oedipus_EditSceneRedirectScript'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/redirect-scripts/Oedipus_EditSceneRedirectScript.inc.php';
+			break;
+
+		case('Oedipus_EnglishHelper'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_EnglishHelper.inc.php';
 			break;
 
 		case('Oedipus_Exception'): 

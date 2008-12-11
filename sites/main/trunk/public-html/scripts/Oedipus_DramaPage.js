@@ -61,7 +61,7 @@ $(document).ready(function() {
 
 
 		/*
-		 *HIde the Forms and replace with divs
+		 * Hide the Forms and replace with divs
 		 */
 		if ($('.scene-form').length) {
 			replace_form_with_content_from_element_value(
@@ -95,6 +95,25 @@ $(document).ready(function() {
 					'.note-preview'
 					);
 				}
+
+		if ($('.edit-character').length) {
+			replace_form_with_content_from_element_value(
+				'.edit-character',
+				'.frame-form',
+				'#character_name',
+				'h3'
+				);
+		}
+
+		if ($('.edit-option').length) {
+			replace_form_with_content_from_element_value(
+				'.edit-option',
+				'.frame-form',
+				'#option_name',
+				'h3'
+				);
+		}
+
 });
 
 function 
