@@ -37,13 +37,98 @@ Click this note to edit it.
 
 You can use "Textile":http://textile.thresholdstate.com/ markup.
 
-Click *Edit this Frame* (in the Toolbar) to edit characters and options in this Frame.
+Use the panel below to edit characters and options in this Frame.
 
 Click the Coloured Tiles on the Frame to change them, or hover over them to find out what they mean.
 TXT;
-TXT;
 
 		return self::add_note_to_frame($frame, $note_text);
+	}
+
+	public static function
+		get_scene_notes_div(Oedipus_Scene $scene)
+	{
+		$div = new HTMLTags_Div();
+		$div->set_attribute_str('class', 'notes');
+		$div->set_attribute_str('id', 'scene');
+
+                /*
+		 * Put A Textbox for the heading if scene is editable,
+		 * Put a <h3> if it isn't
+                 */
+		if ($scene->is_editable()) {
+			$name_div = new HTMLTags_Div();
+			$name_div->set_attribute_str('id', 'name-form');
+			$name_div->append(
+				new Oedipus_EditSceneNameHTMLForm($scene)
+			);
+			$div->append($name_div);
+		}
+		else {
+	
+			$div->append(
+				$heading = new HTMLTags_Heading(3, $scene->get_name())
+			);
+		}
+
+                /*
+		 * Put a Textbox for the Note, if frame is editable,
+		 * Put the note in a <pre> if it isn't
+                 */
+		try
+		{
+			if ($scene->is_editable()) {
+
+				$drama_id = Oedipus_DramaHelper::get_drama_id_for_scene_id($scene->get_id());
+
+				$note_div = new HTMLTags_Div();
+				$note_div->set_attribute_str('id', 'note-form');
+				$note_div->set_attribute_str('class', 'user-html');
+				if (Oedipus_NotesHelper::has_scene_got_note($scene->get_id()))
+				{
+					$note = Oedipus_NotesHelper
+						::get_note_by_scene_id($scene->get_id());
+
+					$note_div->append(self::get_note_preview_div($note));
+
+					$note_div->append(
+						new Oedipus_EditSceneNoteHTMLForm(
+							$note, $drama_id, $scene->get_id()
+						)
+					);
+				}
+				else {
+					$note_div->append(
+						new Oedipus_AddSceneNoteHTMLForm($drama_id, $scene)
+					);
+				}
+				$div->append($note_div);
+			}
+			else {
+				$note = Oedipus_NotesHelper::get_note_by_scene_id($scene->get_id());
+				$user_html_div = new HTMLTags_Div();
+				$user_html_div->set_attribute_str('class', 'user-html');
+					
+				$user_html_div->append($note->get_note_text_html());
+				$div->append($user_html_div);
+			}
+		}
+		catch (Exception $e)
+		{
+			throw new Exception('Failed to retrieve note');
+		}
+
+
+		return $div;
+	}
+
+	public static function
+		get_note_preview_div(Oedipus_Note $note)
+	{
+		$div = new HTMLTags_Div();
+		$div->set_attribute_str('class', 'note-preview');
+		$div->append($note->get_note_text_html());
+		return $div;
 	}
 
 	public static function

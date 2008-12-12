@@ -177,7 +177,7 @@ extends
 						::get_note_by_frame_id($this->frame->get_id());
 
 
-					$note_div->append(Oedipus_DramaHelper::get_note_preview_div($note));
+					$note_div->append(Oedipus_NotesHelper::get_note_preview_div($note));
 
 					$note_div->append(
 						new Oedipus_EditFrameNoteHTMLForm(
