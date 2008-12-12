@@ -1,18 +1,30 @@
+/**
+ * Oedipus_DramaPage.js
+ *
+ * @copyright SANH, 2008-12-12
+ *
+ * Using jQuery to hide and show divs,
+ * and to ajax the tiles
+ */
+
 $(document).ready(function() {
 
-		/*
-		 *Find the add frame links in each node and hide them
+		/**
+		 * For the Frame tree,
+		 * Find the add frame links in each node and hide them
 		 */
-		$('.frame-node').each(function(){
-			var $node = $(this);
-			var $anim = $node.find('.add-frame').hide();
-			$node.hover(function() {
-				$node.find(".add-frame").show();
-				}, function(){
-				$node.find(".add-frame").hide();
-				});
+		if ($('.frame-node').length) {
+			$('.frame-node').each(function(){
+				var $node = $(this);
+				var $anim = $node.find('.add-frame').hide();
+				$node.hover(function() {
+					$node.find(".add-frame").show();
+					}, function(){
+					$node.find(".add-frame").hide();
+					});
 
-			});
+				});
+		}
 
 		/*
 		 *Fade Out the Message Div,
@@ -50,17 +62,30 @@ $(document).ready(function() {
 				});
 
 		/**
-		 * Position & SI Tile
+		 * Position & SI Tiles
+		 * -------------------
 		 * Tool Tips on Hover
 		 * using ClueTip plugin
 		 */
-		$('a.position-tile, a.si-tile').cluetip({
-			splitTitle: '|',
-			arrows: true
-		});
+		if ($('a.position-tile, a.si-tile').length) {
+			$('a.position-tile, a.si-tile').cluetip({
+				splitTitle: '|',
+				arrows: true
+			});
+		}
+                /*
+		 * Load Ajax tiles when clicking position tiles
+		 * if frame is editable (if it has a href)
+		 */
+		if (
+				($('a.position-tile, a.si-tile').length)
+				&&
+				($('a.position-tile, a.si-tile').attr('href') != '#') 
+		) {
+			set_ajax_on_click_for_tiles();
+		}
 
-
-		/*
+		/**
 		 * Hide the Forms and replace with divs
 		 */
 		if ($('.scene-form').length) {
@@ -183,3 +208,102 @@ replace_form_with_content_from_div(
 				});
 			});
 }
+
+/*
+ *AJAX Tile Functions
+ */
+function 
+	set_ajax_on_click_for_tiles()
+{
+	$('a.position-tile, a.si-tile').click(function () {
+			$a = $(this);
+			new_tile_and_doubt = load_new_tile($a);
+			var $new_a =
+			change_tile_a_to_new_tile_and_doubt(
+				$a,
+				new_tile_and_doubt
+				);
+			return false;
+			});
+}
+
+function load_new_tile(
+		$a // jQuery <a> obj
+		)
+{
+	/*
+	 *This returns just the tile data,
+	 *eg. 1q or 0x or 0
+	 */
+	var $url = $a.attr('href');
+	$new_url = $url.replace('Oedipus_EditFrameRedirectScript', 'Oedipus_FrameXMLPage');	
+	var $ajax = $.ajax({ url: $new_url, cache: false, async: false });
+	var new_tile_and_doubt;
+	return $ajax.responseText;
+}
+function change_tile_a_to_new_tile_and_doubt(
+		$a, // Jquery <a> html obj
+		$tile_and_doubt // oedipus tile eg. 1x or 0 or 0?
+		)
+{
+	/*
+	 * First split up the tile and doubt
+	 */
+	var $tile = $tile_and_doubt.charAt(0);
+	var $doubt = '';
+	if ($tile_and_doubt.length > 1) {
+		$doubt = $tile_and_doubt.charAt(1);
+	}
+
+	/*
+	 * the get variable needs html entity
+	 * and the css needs q where the doubt is ?
+	 */
+	var $doubt_url = $doubt;
+	var $doubt_id = $doubt;
+	if ($doubt  == '?') {
+		$doubt_url = '%3F';
+		$doubt_id = 'q';
+	}
+
+	/*
+	 *Replace the css id
+	 */
+	var $old_id_length = $a.attr("id").length;
+	var $new_id;
+	if (
+			($a.attr("id").slice(-1) != '1')
+			&&
+			($a.attr("id").slice(-1) != '0')
+	   ) {
+
+		$new_id = $a.attr("id").slice(0, $old_id_length - 2);
+
+	} else {
+		$new_id = $a.attr("id").slice(0, $old_id_length - 1);
+	}
+	$new_id = $new_id + $tile + $doubt_id;
+
+	/*
+	 *Regexen on the get variables, not very pretty
+	 * "..._tile=1&..._doubt=%3F" assuming doubt is always last
+	 */
+	url = $a.attr('href');
+	var $tile_re = new RegExp('tile=[0-9]', 'g');
+	url = url.replace($tile_re, 'tile=' + $tile);	
+	var $doubt_re = new RegExp('doubt=[%A-Za-z0-9]*', 'gi');
+	url = url.replace($doubt_re, 'doubt=' + $doubt_url);	
+	$a.attr({
+id: $new_id,
+href: url
+});
+
+/*
+ *Finally, replace the inner html
+ */
+$a.html($tile_and_doubt);
+return $a;
+}
+
+
+

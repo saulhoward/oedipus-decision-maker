@@ -21,7 +21,7 @@ extends
 			);
 
 			// an act, one scene.
-			$scene = Oedipus_DramaEditorHelper::add_scene($act);
+			$scene = Oedipus_DramaHelper::add_scene($act);
 			$scene_note = Oedipus_NotesHelper::add_note_to_scene_with_default_content($scene);
 			$frame = Oedipus_DramaHelper::add_frame($scene, 'First frame', '0');
 			$frame_note = Oedipus_NotesHelper::add_note_to_frame_with_default_content($frame);
@@ -39,8 +39,7 @@ extends
 	private function
 		get_redirect_script_return_url()
 	{
-		return PublicHTML_URLHelper
-			::get_oo_page_url('Oedipus_DramaPage');
+		return Oedipus_DramaHelper::get_drama_page_url();
 	}
 }
 ?>

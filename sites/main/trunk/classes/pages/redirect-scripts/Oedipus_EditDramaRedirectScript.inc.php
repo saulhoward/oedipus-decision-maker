@@ -29,8 +29,8 @@ extends
 			);
 
 			// A drama needs at least one act and an act, one scene.
-			$act = Oedipus_DramaEditorHelper::add_act($drama);
-			$scene = Oedipus_DramaEditorHelper::add_scene($act);
+			$act = Oedipus_DramaHelper::add_act($drama);
+			$scene = Oedipus_DramaHelper::add_scene($act);
 			$scene_note = Oedipus_NotesHelper::add_note_to_scene_with_default_content($scene);
 			$frame = Oedipus_DramaHelper::add_frame($scene, 'Frame 1', '0');
 			$frame_note = Oedipus_NotesHelper::add_note_to_frame_with_default_content($frame);
@@ -49,8 +49,8 @@ extends
 			);
 
 			// an act, one scene.
-			$act = Oedipus_DramaEditorHelper::add_act($drama);
-			$scene = Oedipus_DramaEditorHelper::add_scene($act);
+			$act = Oedipus_DramaHelper::add_act($drama);
+			$scene = Oedipus_DramaHelper::add_scene($act);
 			$scene_note = Oedipus_NotesHelper::add_note_to_scene_with_default_content($scene);
 			$frame = Oedipus_DramaHelper::add_frame($scene, 'Frame 1', '0');
 			$frame_note = Oedipus_NotesHelper::add_note_to_frame_with_default_content($frame);
@@ -70,7 +70,7 @@ extends
 			isset($_POST['drama_id'])
 			)
 		{
-			Oedipus_DramaEditorHelper
+			Oedipus_DramaHelper
 				::set_drama_status($_POST['drama_id'], $_POST['status']);
 			$return_to_url = Oedipus_DramaHelper
 				::get_share_drama_url_for_drama_id($_POST['drama_id']);
@@ -82,8 +82,7 @@ extends
 	private function
 		get_redirect_script_return_url()
 	{
-		return PublicHTML_URLHelper
-			::get_oo_page_url('Oedipus_DramaPage');
+		return Oedipus_DramaHelper::get_drama_page_url();
 	}
 }
 ?>

@@ -709,6 +709,7 @@ SQL;
 		{
 			//                        throw new Database_CRUDException("'$href' is not a validate HREF!");
 		}
+		return $position_tile . $position_doubt;
 	}
 
 	public static function
@@ -744,6 +745,8 @@ SQL;
 		{
 			//                        throw new Database_CRUDException("'$href' is not a validate HREF!");
 		}
+
+		return $stated_intention_tile . $stated_intention_doubt;
 	}
 
 
