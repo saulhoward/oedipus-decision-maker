@@ -71,88 +71,8 @@ Oedipus_DramaHelper
 	public static function
 		get_scene_notes_div(Oedipus_Scene $scene)
 	{
-		$div = new HTMLTags_Div();
-		$div->set_attribute_str('class', 'notes');
-		$div->set_attribute_str('id', 'scene');
-
-                /*
-		 * Put A Textbox for the heading if scene is editable,
-		 * Put a <h3> if it isn't
-                 */
-		if ($scene->is_editable()) {
-			$name_div = new HTMLTags_Div();
-			$name_div->set_attribute_str('id', 'name-form');
-			$name_div->append(
-				new Oedipus_EditSceneNameHTMLForm($scene)
-			);
-			$div->append($name_div);
-		}
-		else {
-	
-			$div->append(
-				$heading = new HTMLTags_Heading(3, $scene->get_name())
-			);
-		}
-
-                /*
-		 * Put a Textbox for the Note, if frame is editable,
-		 * Put the note in a <pre> if it isn't
-                 */
-		try
-		{
-			if ($scene->is_editable()) {
-
-				$drama_id = Oedipus_DramaHelper::get_drama_id_for_scene_id($scene->get_id());
-
-				$note_div = new HTMLTags_Div();
-				$note_div->set_attribute_str('id', 'note-form');
-				$note_div->set_attribute_str('class', 'user-html');
-				if (Oedipus_NotesHelper::has_scene_got_note($scene->get_id()))
-				{
-					$note = Oedipus_NotesHelper
-						::get_note_by_scene_id($scene->get_id());
-
-					$note_div->append(self::get_note_preview_div($note));
-
-					$note_div->append(
-						new Oedipus_EditSceneNoteHTMLForm(
-							$note, $drama_id, $scene->get_id()
-						)
-					);
-				}
-				else {
-					$note_div->append(
-						new Oedipus_AddSceneNoteHTMLForm($drama_id, $scene)
-					);
-				}
-				$div->append($note_div);
-			}
-			else {
-				$note = Oedipus_NotesHelper::get_note_by_scene_id($scene->get_id());
-				$user_html_div = new HTMLTags_Div();
-				$user_html_div->set_attribute_str('class', 'user-html');
-					
-				$user_html_div->append($note->get_note_text_html());
-				$div->append($user_html_div);
-			}
-		}
-		catch (Exception $e)
-		{
-			throw new Exception('Failed to retrieve note');
-		}
-
-
-		return $div;
+		return Oedipus_NotesHelper::get_scene_notes_div($scene);
 	}
-	public static function
-		get_note_preview_div(Oedipus_Note $note)
-	{
-		$div = new HTMLTags_Div();
-		$div->set_attribute_str('class', 'note-preview');
-		$div->append($note->get_note_text_html());
-		return $div;
-	}
-
 
 	public static function
 		get_new_drama_name()
@@ -299,22 +219,6 @@ Oedipus_DramaHelper
 		return new Oedipus_AllDramasUL();
 	}
 
-	private function
-		get_oedipus_png_frame(Oedipus_Frame $frame)
-	{
-		$max_width = 300;
-		$max_height = 300;
-		$url = new HTMLTags_URL();
-		$url->set_file(
-			'/frames/images/thumbnails/option-frame-'
-			. $frame->get_id()
-			. '_' . $max_width . 'x' . $max_height . '.png'
-		);
-		$img = new HTMLTags_IMG();
-		$img->set_src($url);
-		return $img;
-	}
-
 	public function
 		get_drama_by_id($drama_id)
 	{
@@ -373,9 +277,11 @@ Oedipus_DramaHelper
 	}
 
 
-	// ------------
-	// URLS
-	// ------------
+	/**
+	 *
+	 * URLs
+	 *
+	 */
 	public static function
 		get_drama_page_url_for_drama(
 			Oedipus_Drama $drama

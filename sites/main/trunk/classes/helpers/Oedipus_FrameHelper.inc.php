@@ -9,7 +9,6 @@
 class
 Oedipus_FrameHelper
 {
-
 	public static function
 		get_scene_name_for_scene_id($scene_id)
 	{
@@ -30,6 +29,7 @@ SQL;
 
 		return $row['name'];
 	}
+
 	public static function
 		get_drama_name_for_scene_id($scene_id)
 	{
