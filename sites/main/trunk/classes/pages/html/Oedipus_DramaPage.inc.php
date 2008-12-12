@@ -115,9 +115,11 @@ Oedipus_HTMLPageWithAccountStatus
 	This means that if the user is cycling through
 	Position tiles then they get fresh ClueTips on page load even
 	if they don't move the mouse.
-
-<script src="/scripts/jquery.hoverIntent.js" type="text/javascript"></script>
+	
+	Ended up using the hoverIntent anyway (optimise for viewer of dramas)
 -->
+<script src="/scripts/jquery.hoverIntent.js" type="text/javascript"></script>
+
 <script src="/scripts/jquery.cluetip.js" type="text/javascript"></script>
 <script type="text/javascript" src="/scripts/Oedipus_DramaPage.js"></script>
 HTML;
