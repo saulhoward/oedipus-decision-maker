@@ -33,7 +33,7 @@ Oedipus_DramaHelper
 			Oedipus_Option $option
 		)
 	{
-		return Oedipus_EnglishHelper::get_explanation_for_position(
+		return Oedipus_LanguageHelper::get_explanation_for_position(
 			$character, $position, $option
 		);
 	}	
@@ -45,7 +45,7 @@ Oedipus_DramaHelper
 			Oedipus_Option $option
 		)
 	{
-		return Oedipus_EnglishHelper::get_explanation_for_stated_intention(
+		return Oedipus_LanguageHelper::get_explanation_for_stated_intention(
 			$character, $stated_intention, $option
 		);
 	}	

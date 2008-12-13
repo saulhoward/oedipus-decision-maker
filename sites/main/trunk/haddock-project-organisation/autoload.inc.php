@@ -2,7 +2,7 @@
 /**
  * __autoload .INC file
  *
- * Last Modified: 2008-12-11
+ * Last Modified: 2008-12-13
  */
 
 function __autoload($class_name)
@@ -2133,10 +2133,6 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_AddSceneNoteHTMLForm.inc.php';
 			break;
 
-		case('Oedipus_AJAXRedirectScript'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/pages/redirect-scripts/Oedipus_AJAXRedirectScript.inc.php';
-			break;
-
 		case('Oedipus_AllDramasUL'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_AllDramasUL.inc.php';
 			break;
@@ -2215,10 +2211,6 @@ function __autoload($class_name)
 
 		case('Oedipus_EditFrameActionsUL'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_EditFrameActionsUL.inc.php';
-			break;
-
-		case('Oedipus_EditFrameAJAXRedirectScript'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/pages/redirect-scripts/Oedipus_EditFrameAJAXRedirectScript.inc.php';
 			break;
 
 		case('Oedipus_EditFrameCharacterActionsUL'): 
@@ -2355,6 +2347,14 @@ function __autoload($class_name)
 
 		case('Oedipus_HTMLPageWithAccountStatus'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_HTMLPageWithAccountStatus.inc.php';
+			break;
+
+		case('Oedipus_InflectEnglishHelper'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_InflectEnglishHelper.inc.php';
+			break;
+
+		case('Oedipus_LanguageHelper'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_LanguageHelper.inc.php';
 			break;
 
 		case('Oedipus_LogInHelper'): 
