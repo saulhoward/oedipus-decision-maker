@@ -190,17 +190,16 @@ extends
 			{
 				// Actors Name TR
 				$characters_name_tr = new HTMLTags_TR();
-				$characters_name_em = new HTMLTags_Em($character->get_name());
 				$characters_name_th = new HTMLTags_TH();
-				$characters_name_th->append_tag_to_content($characters_name_em);
+				$characters_name_th->append($character->get_name());
 				$characters_name_th->set_attribute_str('class', 'option');
 				$characters_name_th->set_attribute_str('id', $character->get_color());
-				$characters_name_tr->append_tag_to_content($characters_name_th);
+				$characters_name_tr->append($characters_name_th);
 
 				for ($i = -1; $i < count($this->characters); $i++)
 				{
 					$blank_td = new HTMLTags_TD();
-					$characters_name_tr->append_tag_to_content($blank_td);
+					$characters_name_tr->append($blank_td);
 				}
 				$option_trs[] = $characters_name_tr;
 
@@ -209,7 +208,9 @@ extends
 				foreach ($options as $option)
 				{
 					$tr = new HTMLTags_TR();
-					$option_th = new HTMLTags_TH($option->get_name());
+					$option_em = new HTMLTags_Em($option->get_name());
+					$option_th = new HTMLTags_TH();
+					$option_th->append($option_em);
 					$option_th->set_attribute_str('class', 'option');
 					$option_th->set_attribute_str('id', $character->get_color());
 					$tr->append_tag_to_content($option_th);
@@ -303,7 +304,8 @@ extends
 		 */
 		$html_tile->set_attribute_str(
 			'title',
-			$position->get_character()->get_name() . "'s Position" 
+			Oedipus_LanguageHelper::get_possessive($position->get_character()->get_name()) 
+			. " Position" 
 			. '|' .
 			$explanation
 		);
@@ -371,7 +373,8 @@ extends
 		 */
 		$html_tile->set_attribute_str(
 			'title',
-			$character->get_name() . "'s Stated Intention" 
+			Oedipus_LanguageHelper::get_possessive($character->get_name())
+		       	. " Stated Intention" 			
 			. '|' .
 			$explanation
 		);
