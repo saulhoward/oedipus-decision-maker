@@ -34,7 +34,7 @@ Oedipus_EnglishHelper
 		else {
 			$owner_of_option = $character->get_name();
 		}
-		$should_or_shouldnt = $position->get_position_str(); 
+		$should_or_shouldnt = self::get_position_str($position, $owner_of_position_is_plural); 
 
                 /*
 		 *Construct the sentence
@@ -70,7 +70,11 @@ Oedipus_EnglishHelper
 		} else {
 			$pronoun = ' he/she ';
 		}
-		$will_or_wont = $stated_intention->get_stated_intention_str(); 
+		$will_or_wont =
+			self::get_stated_intention_str(
+				$stated_intention,
+			       	$owner_of_position_is_plural
+			);
 
                 /*
 		 *Construct the sentence
@@ -86,6 +90,82 @@ Oedipus_EnglishHelper
 		$explanation .= $will_or_wont . ' ';
 		$explanation .= $option->get_name() . '.';
 		return $explanation;
+	}
+
+	public function
+		get_position_str(Oedipus_Position $position, $is_plural)
+	{
+		switch ($position->get_tile() . $position->get_doubt()) {
+		case "1":
+			return 'should';
+			break;
+		case "0":
+			return "shouldn't";
+			break;
+		case "1?":
+			return 'should perhaps';
+			break;
+		case "0?":
+			return "probably shouldn't";
+			break;
+		case "1x":
+			$str = "should, (but doesn't believe ";
+			if ($is_plural) {
+				$str .= 'them)';
+			} else {
+				$str .= 'him/her)';
+			}
+			return $str;
+			break;
+		case "0x":
+			$str = "shouldn't, (but doesn't believe ";
+			if ($is_plural) {
+				$str .= 'them)';
+			} else {
+				$str .= 'him/her)';
+			}
+			return $str;
+			break;
+		}
+		return 'should';
+	}
+
+	public function
+		get_stated_intention_str(Oedipus_StatedIntention $si, $is_plural)
+	{
+		switch ($si->get_tile() . $si->get_doubt()) {
+		case "1":
+			return 'will';
+			break;
+		case "0":
+			return "won't";
+			break;
+		case "1?":
+			return 'will perhaps';
+			break;
+		case "0?":
+			return "probably won't";
+			break;
+		case "1x":
+			$str = "will, (but doesn't believe ";
+			if ($is_plural) {
+				$str .= 'them)';
+			} else {
+				$str .= 'him/her)';
+			}
+			return $str;
+			break;
+		case "0x":
+			$str = "won't, (but doesn't believe ";
+			if ($is_plural) {
+				$str .= 'them)';
+			} else {
+				$str .= 'him/her)';
+			}
+			return $str;
+			break;
+		}
+		return 'will';
 	}
 
 	public static function

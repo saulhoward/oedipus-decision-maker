@@ -42,32 +42,5 @@ class
 	{
 		return $this->doubt;
 	}
-
-	public function
-		get_stated_intention_str()
-	{
-		switch ($this->get_tile() . $this->get_doubt()) {
-		case "1":
-			return 'will';
-			break;
-		case "0":
-			return "won't";
-			break;
-		case "1?":
-			return 'will perhaps';
-			break;
-		case "0?":
-			return "probably won't";
-			break;
-		case "1x":
-			return "will, (but doesn't believe them)";
-			break;
-		case "0x":
-			return "won't, (but doesn't believe them)";
-			break;
-		}
-		return 'will';
-	}
-
 }
 ?>

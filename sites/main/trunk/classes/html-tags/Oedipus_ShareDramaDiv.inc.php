@@ -43,13 +43,27 @@ Oedipus_DramaDiv
 				$this->get_edit_drama_status_form()
 			);
 		}
+
+		/*
+		 * Drama URL display
+		 */
+		$div->append_tag_to_content(
+			$this->get_drama_url_div()
+		);
 		return $div;
 	}
-	
+
 	private function
 		get_edit_drama_status_form()
 	{
 		return new Oedipus_EditDramaStatusHTMLForm($this->get_drama());
 	}
+
+	private function
+		get_drama_url_div()
+	{
+		return Oedipus_DramaHelper::get_drama_url_div($this->get_drama());
+	}
+
 }
 ?>

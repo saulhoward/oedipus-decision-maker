@@ -115,6 +115,14 @@ Oedipus_InflectEnglishHelper
 		 */
 		return array_slice(self::get_plurals(), 0, -1);
 	}
+	public static function
+		get_match_singulars()
+	{
+		/*
+		 *Same as plural, but without the final match
+		 */
+		return array_slice(self::get_singulars(), 0, -1);
+	}
 
 	public static function
 		get_singulars()
@@ -275,10 +283,16 @@ Oedipus_InflectEnglishHelper
 		}
 
 		// check for matches using regular expressions
-		foreach ( self::get_match_plurals() as $pattern => $result )
+		foreach ( self::get_match_singulars() as $pattern => $result )
 		{
 			if ( preg_match( $pattern, $string ) )
 				return TRUE;
+		}
+
+		foreach ( self::get_match_plurals() as $pattern => $result )
+		{
+			if ( preg_match( $pattern, $string ) )
+				return FALSE;
 		}
 		return FALSE;
 	}

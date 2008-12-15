@@ -869,7 +869,7 @@ SQL;
 
 		$result = mysql_query($query, $dbh);
 		if ($row = mysql_fetch_array($result)) {
-			return self::get_drama_by_id($row['id']);
+			return Oedipus_DramaHelper::get_drama_by_id($row['id']);
 		}
 		else {
 			throw new Oedipus_DramaNotFoundException($unique_name);
