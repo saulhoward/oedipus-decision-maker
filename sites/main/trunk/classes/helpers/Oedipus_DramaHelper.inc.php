@@ -276,6 +276,38 @@ Oedipus_DramaHelper
 		);
 	}
 
+	public function
+		get_drama_url_div(
+			Oedipus_Drama $drama
+		)
+	{
+		$div = new HTMLTags_Div();
+		$div->append('<h3>Web address for this drama:</h3>');
+		$p = new HTMLTags_P();
+		$p->append(self::get_unique_link_for_drama($drama));
+		$div->append($p);
+		return $div;
+	}
+
+	public function
+		get_unique_link_for_drama(
+			Oedipus_Drama $drama
+		)
+	{
+		$url = self::get_mod_rewrite_drama_page_url($drama);
+		$a = new HTMLTags_A(self::get_unique_url_string_for_drama($drama));
+		$a->set_href($url);
+		return $a;
+	}
+
+	public function
+		get_unique_url_string_for_drama(
+			Oedipus_Drama $drama
+		)
+	{
+		return 'http://' . $_SERVER['HTTP_HOST'] . '/dramas/' . $drama->get_unique_name();
+	}
+
 
 	/**
 	 *
@@ -310,44 +342,12 @@ Oedipus_DramaHelper
 	}
 
 	public static function
-		get_edit_drama_page_url_for_drama(
-			Oedipus_Drama $drama
-		)
-	{
-		return self::get_edit_drama_page_url_for_drama_id($drama->get_id());
-	}
-
-	public static function
-		get_edit_drama_page_url()
-	{
-		return PublicHTML_URLHelper
-			::get_oo_page_url('Oedipus_EditDramaPage');
-	}
-
-	public static function
-		get_edit_drama_page_url_for_drama_id(
-			$drama_id
-		)
-	{
-		$url = self::get_edit_drama_page_url();
-		$url->set_get_variable('drama_id', $drama_id);
-		return $url;
-	}
-
-	public static function
 		get_drama_page_url_for_scene_id($scene_id)
 	{
 		$drama_id = self::get_drama_id_for_scene_id($scene_id);
 		$url = self::get_drama_page_url_for_drama_id($drama_id);
 		$url->set_get_variable('scene_id', $scene_id);
 		return $url;
-	}
-
-	public static function
-		get_edit_drama_page_url_for_scene_id($scene_id)
-	{
-		$drama_id = self::get_drama_id_for_scene_id($scene_id);
-		return self::get_edit_drama_page_url_for_drama_id($drama_id);
 	}
 
 	public static function
@@ -453,8 +453,5 @@ Oedipus_DramaHelper
 		return PublicHTML_URLHelper
 			::get_oo_page_url('Oedipus_EditActRedirectScript', $get_variables);
 	}
-
 }
-
 ?>
-
