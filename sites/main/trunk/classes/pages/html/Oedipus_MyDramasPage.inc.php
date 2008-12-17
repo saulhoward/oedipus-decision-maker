@@ -40,10 +40,10 @@ Oedipus_RestrictedPage
 
 		if (isset($this->user_id))
 		{
-			$drama_page_div->append_tag_to_content(
+			$drama_page_div->append(
 				$this->get_all_dramas_div()
 			);
-			$drama_page_div->append_tag_to_content(
+			$drama_page_div->append(
 				$this->get_create_new_drama_div()
 			);
 		}
@@ -81,7 +81,8 @@ Oedipus_RestrictedPage
 	private function
 		get_all_dramas_ul()
 	{
-		return new Oedipus_MyDramasUL($this->user_id);
+		return new Oedipus_MyDramasListDiv($this->user_id);
+		//return new Oedipus_MyDramasUL($this->user_id);
 	}
 
 	private function

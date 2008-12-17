@@ -126,73 +126,6 @@ ul.page-actions li#frame-view a
 	background: transparent url(/images/icons/24x24/frame-view.png) top left no-repeat;
 }
 
-
-/*
- * Dramas UL
- */
-div.my-dramas-list,
-div.dramas-list
-{
-
-	background-color:#faebf9;
-	border-top:1px solid #fa98c3;
-	border-bottom:1px solid #fa98c3;
-	margin: 2em auto;
-	padding: 1em 0 2em 0;
-}
-div.my-dramas-list h3,
-div.dramas-list h3
-{
-	text-align: left;
-	padding: 0 0 0 1em;
-}
-ul.dramas
-{
-	text-align: center;
-
-}
-ul.dramas li
-{
-	display: inline-block;
-
-	padding: 0 1em;
-}
-ul.dramas li a
-{
-	text-decoration: none;
-	font-size: 1.2em;
-	font-weight: 900;
-
-	padding: 10px;
-	display: inline-block;
-	-moz-border-radius: 6px;
-	-khtml-border-radius: 6px;
-	-webkit-border-radius: 6px;
-	border-radius: 6px;
-	border-width: 1px;
-	border-style: solid;
-
-	border-color:#faebf9;
-}
-ul.dramas li a:hover
-{
-	background-color:#FFFFFF;
-	border-color:#fa98c3;
-}
-ul.dramas li a span
-{
-
-	text-align: left;
-	display: block;
-	padding: 0 0 0.2em 0;
-}
-ul.dramas li a span#added
-{
-	font-size: 0.7em;
-	font-weight: 300;
-	color: #333;
-}
-
 /*
  * frame Thumbnail List
  */
@@ -294,14 +227,12 @@ div.oedipus-frame ul.frame-options li#edit-frame a
 div.rss
 {
 	width: 40em;
-	margin: 1em 0;
-	padding: 1em;
 }
 
 div.rss ul
 {
+	margin: 1em 25px;
 	border: 1px solid #ccc;
-	margin: 1em 0;
 }
 div.rss ul li
 {

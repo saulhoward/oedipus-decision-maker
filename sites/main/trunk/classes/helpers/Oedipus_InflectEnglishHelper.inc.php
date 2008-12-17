@@ -4,7 +4,7 @@
  *
  * @copyright SANH, 2008-04-11
  *
- * Started with copied phpo code from:
+ * Started with copied php code from:
  * http://kuwamoto.org/2007/12/17/improved-pluralizing-in-php-actionscript-and-ror/
  * Have refactored it and added some functions like is_plural()
  */
