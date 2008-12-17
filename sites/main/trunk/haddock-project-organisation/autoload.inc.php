@@ -2,7 +2,7 @@
 /**
  * __autoload .INC file
  *
- * Last Modified: 2008-12-13
+ * Last Modified: 2008-12-17
  */
 
 function __autoload($class_name)
@@ -2169,6 +2169,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_DramaHelper.inc.php';
 			break;
 
+		case('Oedipus_DramaListDiv'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_DramaListDiv.inc.php';
+			break;
+
 		case('Oedipus_DramaNotFoundException'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/exceptions/Oedipus_DramaNotFoundException.inc.php';
 			break;
@@ -2377,6 +2381,10 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_MailingListSignUpPage.inc.php';
 			break;
 
+		case('Oedipus_MyDramasListDiv'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_MyDramasListDiv.inc.php';
+			break;
+
 		case('Oedipus_MyDramasPage'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_MyDramasPage.inc.php';
 			break;
@@ -2407,6 +2415,10 @@ function __autoload($class_name)
 
 		case('Oedipus_Position'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Position.inc.php';
+			break;
+
+		case('Oedipus_PublicDramasListDiv'): 
+			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_PublicDramasListDiv.inc.php';
 			break;
 
 		case('Oedipus_PublicDramasUL'): 

@@ -58,7 +58,7 @@ extends
 		$div = new HTMLTags_Div();
 		$div->set_attribute_str('class', 'dramas-list');
 		$div->append(new HTMLTags_Heading(3, 'Latest Public Dramas'));
-		$div->append(new Oedipus_PublicDramasUL());
+		$div->append(new Oedipus_PublicDramasListDiv());
 		return $div;
 	}
 	
