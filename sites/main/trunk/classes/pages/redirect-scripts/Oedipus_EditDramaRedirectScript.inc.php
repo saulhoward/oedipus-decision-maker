@@ -16,15 +16,12 @@ extends
 			isset($_POST['user_id'])
 			)
 		{
-			if (isset($_POST['drama_name']))
-			{
+			if (isset($_POST['drama_name'])) {
 				$drama_name = $_POST['drama_name'];
-			}
-			else
-			{
+			} else {
 				$drama_name = Oedipus_DramaHelper::get_new_drama_name();
 			}
-			$drama = Oedipus_DramaEditorHelper::add_drama(
+			$drama = Oedipus_DramaHelper::add_drama(
 				$drama_name, $_POST['user_id']
 			);
 
