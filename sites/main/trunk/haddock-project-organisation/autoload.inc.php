@@ -2,7 +2,7 @@
 /**
  * __autoload .INC file
  *
- * Last Modified: 2008-12-17
+ * Last Modified: 2009-10-07
  */
 
 function __autoload($class_name)
@@ -31,6 +31,14 @@ function __autoload($class_name)
 
 		case('Admin_EditUserCLIScript'): 
 			require_once PROJECT_ROOT . '/haddock/admin/classes/cli-scripts/Admin_EditUserCLIScript.inc.php';
+			break;
+
+		case('Admin_Exception'): 
+			require_once PROJECT_ROOT . '/haddock/admin/classes/exceptions/Admin_Exception.inc.php';
+			break;
+
+		case('Admin_FileException'): 
+			require_once PROJECT_ROOT . '/haddock/admin/classes/exceptions/Admin_FileException.inc.php';
 			break;
 
 		case('Admin_HTMLPage'): 
@@ -2189,10 +2197,6 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/helpers/Oedipus_DramasHelper.inc.php';
 			break;
 
-		case('Oedipus_DramasUL'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_DramasUL.inc.php';
-			break;
-
 		case('Oedipus_DramaToolBarUL'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_DramaToolBarUL.inc.php';
 			break;
@@ -2389,10 +2393,6 @@ function __autoload($class_name)
 			require_once PROJECT_ROOT . '/project-specific/classes/pages/html/Oedipus_MyDramasPage.inc.php';
 			break;
 
-		case('Oedipus_MyDramasUL'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_MyDramasUL.inc.php';
-			break;
-
 		case('Oedipus_Note'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/Oedipus_Note.inc.php';
 			break;
@@ -2419,10 +2419,6 @@ function __autoload($class_name)
 
 		case('Oedipus_PublicDramasListDiv'): 
 			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_PublicDramasListDiv.inc.php';
-			break;
-
-		case('Oedipus_PublicDramasUL'): 
-			require_once PROJECT_ROOT . '/project-specific/classes/html-tags/Oedipus_PublicDramasUL.inc.php';
 			break;
 
 		case('Oedipus_RedirectScript'): 
@@ -2767,6 +2763,10 @@ function __autoload($class_name)
 
 		case('Textile_Textile'): 
 			require_once PROJECT_ROOT . '/plug-ins/textile/classes/Textile_Textile.inc.php';
+			break;
+
+		case('Textile_TranslationHelper'): 
+			require_once PROJECT_ROOT . '/plug-ins/textile/classes/helpers/Textile_TranslationHelper.inc.php';
 			break;
 
 		case('UnitTests_CreateUnitTestsClassCLIScript'): 
