@@ -1,13 +1,21 @@
 -- The create script for the database of ODM
 -- (c) Robert Impey, 2010-08-22
 
--- --------------------------------------------------------
-
---
--- Table structure for table `oedipus_acts`
---
-
 DROP TABLE IF EXISTS `oedipus_acts`;
+DROP TABLE IF EXISTS `oedipus_dramas`;
+DROP TABLE IF EXISTS `oedipus_frame_to_note_links`;
+DROP TABLE IF EXISTS `oedipus_frame_trees`;
+DROP TABLE IF EXISTS `oedipus_notes`;
+DROP TABLE IF EXISTS `oedipus_options`;
+DROP TABLE IF EXISTS `oedipus_positions`;
+DROP TABLE IF EXISTS `oedipus_scenes`;
+DROP TABLE IF EXISTS `oedipus_users`;
+DROP TABLE IF EXISTS `oedipus_scene_to_note_links`;
+DROP TABLE IF EXISTS `oedipus_stated_intentions`;
+DROP TABLE IF EXISTS `oedipus_users_allowed_to_view_drama_links`;
+DROP TABLE IF EXISTS `oedipus_characters`;
+DROP TABLE IF EXISTS `oedipus_frames`;
+
 CREATE TABLE IF NOT EXISTS `oedipus_acts` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `added` varchar(255) CHARACTER SET utf8 COLLATE utf8_roman_ci NOT NULL,
@@ -16,13 +24,6 @@ CREATE TABLE IF NOT EXISTS `oedipus_acts` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `oedipus_dramas`
---
-
-DROP TABLE IF EXISTS `oedipus_dramas`;
 CREATE TABLE IF NOT EXISTS `oedipus_dramas` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_roman_ci NOT NULL,
@@ -34,13 +35,6 @@ CREATE TABLE IF NOT EXISTS `oedipus_dramas` (
   UNIQUE KEY `unique_name` (`unique_name`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `oedipus_frame_to_note_links`
---
-
-DROP TABLE IF EXISTS `oedipus_frame_to_note_links`;
 CREATE TABLE IF NOT EXISTS `oedipus_frame_to_note_links` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `frame_id` int(10) unsigned NOT NULL,
@@ -48,13 +42,6 @@ CREATE TABLE IF NOT EXISTS `oedipus_frame_to_note_links` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `oedipus_frame_trees`
---
-
-DROP TABLE IF EXISTS `oedipus_frame_trees`;
 CREATE TABLE IF NOT EXISTS `oedipus_frame_trees` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `parent_frame_id` int(10) unsigned NOT NULL,
@@ -65,13 +52,6 @@ CREATE TABLE IF NOT EXISTS `oedipus_frame_trees` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `oedipus_notes`
---
-
-DROP TABLE IF EXISTS `oedipus_notes`;
 CREATE TABLE IF NOT EXISTS `oedipus_notes` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `added` varchar(255) CHARACTER SET utf8 COLLATE utf8_roman_ci NOT NULL,
@@ -79,13 +59,6 @@ CREATE TABLE IF NOT EXISTS `oedipus_notes` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `oedipus_options`
---
-
-DROP TABLE IF EXISTS `oedipus_options`;
 CREATE TABLE IF NOT EXISTS `oedipus_options` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `added` varchar(255) CHARACTER SET utf8 COLLATE utf8_roman_ci NOT NULL,
@@ -95,13 +68,6 @@ CREATE TABLE IF NOT EXISTS `oedipus_options` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `oedipus_positions`
---
-
-DROP TABLE IF EXISTS `oedipus_positions`;
 CREATE TABLE IF NOT EXISTS `oedipus_positions` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `position` varchar(255) CHARACTER SET utf8 COLLATE utf8_roman_ci NOT NULL,
@@ -111,13 +77,6 @@ CREATE TABLE IF NOT EXISTS `oedipus_positions` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `oedipus_scenes`
---
-
-DROP TABLE IF EXISTS `oedipus_scenes`;
 CREATE TABLE IF NOT EXISTS `oedipus_scenes` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_roman_ci NOT NULL,
@@ -126,13 +85,6 @@ CREATE TABLE IF NOT EXISTS `oedipus_scenes` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `oedipus_scene_to_note_links`
---
-
-DROP TABLE IF EXISTS `oedipus_scene_to_note_links`;
 CREATE TABLE IF NOT EXISTS `oedipus_scene_to_note_links` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `scene_id` int(10) unsigned NOT NULL,
@@ -140,13 +92,6 @@ CREATE TABLE IF NOT EXISTS `oedipus_scene_to_note_links` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `oedipus_stated_intentions`
---
-
-DROP TABLE IF EXISTS `oedipus_stated_intentions`;
 CREATE TABLE IF NOT EXISTS `oedipus_stated_intentions` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `position` varchar(255) CHARACTER SET utf8 COLLATE utf8_roman_ci NOT NULL,
@@ -154,13 +99,6 @@ CREATE TABLE IF NOT EXISTS `oedipus_stated_intentions` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `oedipus_users`
---
-
-DROP TABLE IF EXISTS `oedipus_users`;
 CREATE TABLE IF NOT EXISTS `oedipus_users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `first_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_roman_ci NOT NULL,
@@ -172,28 +110,12 @@ CREATE TABLE IF NOT EXISTS `oedipus_users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `oedipus_users_allowed_to_view_drama_links`
---
-
-DROP TABLE IF EXISTS `oedipus_users_allowed_to_view_drama_links`;
 CREATE TABLE IF NOT EXISTS `oedipus_users_allowed_to_view_drama_links` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
   `drama_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `oedipus_frames`
---
-
-DROP TABLE IF EXISTS `oedipus_characters`;
-DROP TABLE IF EXISTS `oedipus_frames`;
 
 CREATE TABLE IF NOT EXISTS `oedipus_frames` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -202,12 +124,6 @@ CREATE TABLE IF NOT EXISTS `oedipus_frames` (
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_roman_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `oedipus_characters`
---
 
 CREATE TABLE IF NOT EXISTS `oedipus_characters` (
 	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,

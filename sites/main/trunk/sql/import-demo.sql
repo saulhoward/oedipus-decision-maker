@@ -1,14 +1,25 @@
+-- A demo of the site
+-- (c) Robert Impey, 2010-08-22
+-- All inserted data is by Saul Howard.
 
---
--- Dumping data for table `hc_admin_users`
---
+TRUNCATE TABLE hc_admin_users;
+TRUNCATE TABLE oedipus_acts;
+TRUNCATE TABLE oedipus_dramas;
+TRUNCATE TABLE oedipus_frame_to_note_links;
+TRUNCATE TABLE oedipus_frame_trees;
+TRUNCATE TABLE oedipus_notes;
+TRUNCATE TABLE oedipus_options;
+TRUNCATE TABLE oedipus_positions;
+TRUNCATE TABLE oedipus_scenes;
+TRUNCATE TABLE oedipus_scene_to_note_links;
+TRUNCATE TABLE oedipus_stated_intentions;
+TRUNCATE TABLE oedipus_users;
+TRUNCATE TABLE oedipus_frames;
+TRUNCATE TABLE oedipus_characters;
 
+-- This user's password is '123456'
 INSERT INTO `hc_admin_users` (`id`, `name`, `email`, `password`, `real_name`, `type`) VALUES
 (1, 'foo_bar', 'foo.bar@example.com', '7c4a8d09ca3762af61e59520943dc26494f8941b', 'Foo Bar', 'Developer');
-
---
--- Dumping data for table `oedipus_acts`
---
 
 INSERT INTO `oedipus_acts` (`id`, `added`, `name`, `drama_id`) VALUES
 (1, '2008-11-10 22:37:25', 'Act 1', 1),
@@ -26,10 +37,6 @@ INSERT INTO `oedipus_acts` (`id`, `added`, `name`, `drama_id`) VALUES
 (13, '2010-04-14 09:31:19', 'Act 1', 13),
 (14, '2010-08-02 23:28:36', 'Act 1', 14);
 
---
--- Dumping data for table `oedipus_dramas`
---
-
 INSERT INTO `oedipus_dramas` (`id`, `name`, `unique_name`, `added`, `created_by_user_id`, `status`) VALUES
 (1, 'Brighton Wok', 'brightonwok', '2008-11-10 22:37:25', 1, 'private'),
 (2, 'Vafan in Venice', 'vafaninvenice', '2008-11-11 01:02:58', 1, 'public'),
@@ -45,10 +52,6 @@ INSERT INTO `oedipus_dramas` (`id`, `name`, `unique_name`, `added`, `created_by_
 (12, 'Example Drama', 'exampledrama', '2009-05-17 07:45:56', 1, 'private'),
 (13, 'Furies', 'furies', '2010-04-14 09:31:19', 1, 'private'),
 (14, 'test', 'test', '2010-08-02 23:28:36', 1, 'private');
-
---
--- Dumping data for table `oedipus_frame_to_note_links`
---
 
 INSERT INTO `oedipus_frame_to_note_links` (`id`, `frame_id`, `note_id`) VALUES
 (1, 1, 1),
@@ -82,10 +85,6 @@ INSERT INTO `oedipus_frame_to_note_links` (`id`, `frame_id`, `note_id`) VALUES
 (29, 30, 38),
 (30, 31, 40);
 
---
--- Dumping data for table `oedipus_frame_trees`
---
-
 INSERT INTO `oedipus_frame_trees` (`id`, `parent_frame_id`, `lft`, `rgt`, `scene_id`, `frame_id`) VALUES
 (1, 0, 1, 4, 1, 1),
 (2, 1, 2, 3, 1, 2),
@@ -118,10 +117,6 @@ INSERT INTO `oedipus_frame_trees` (`id`, `parent_frame_id`, `lft`, `rgt`, `scene
 (29, 28, 3, 6, 15, 29),
 (30, 29, 4, 5, 15, 30),
 (31, 0, 1, 2, 16, 31);
-
---
--- Dumping data for table `oedipus_notes`
---
 
 INSERT INTO `oedipus_notes` (`id`, `added`, `note_text`) VALUES
 (1, '2008-11-10 22:40:03', 'In this first frame, the Arsonist has burnt down the Pier.'),
@@ -164,10 +159,6 @@ INSERT INTO `oedipus_notes` (`id`, `added`, `note_text`) VALUES
 (38, '2010-04-14 09:32:58', 'h3. Notes on this Frame\n\nClick this note to edit it.\n\nYou can use "Textile":http://textile.thresholdstate.com/ markup.\n\nUse the panel below to edit characters and options in this Frame.\n\nClick the Coloured Tiles on the Frame to change them, or hover over them to find out what they mean.'),
 (39, '2010-08-02 23:28:36', 'h3. Notes on this Scene\n\nClick this note to edit it.\n\nYou can use "Textile":http://textile.thresholdstate.com/ markup.\n\nClick on the *First Frame* to start editing this Scene.'),
 (40, '2010-08-02 23:28:36', 'h3. Notes on this Frame\n\nClick this note to edit it.\n\nYou can use "Textile":http://textile.thresholdstate.com/ markup.\n\nUse the panel below to edit characters and options in this Frame.\n\nClick the Coloured Tiles on the Frame to change them, or hover over them to find out what they mean.');
-
---
--- Dumping data for table `oedipus_options`
---
 
 INSERT INTO `oedipus_options` (`id`, `added`, `name`, `character_id`, `stated_intention_id`) VALUES
 (2, '2008-11-10 22:38:46', 'Burn down Pier', 2, 2),
@@ -225,10 +216,6 @@ INSERT INTO `oedipus_options` (`id`, `added`, `name`, `character_id`, `stated_in
 (63, '2010-04-14 09:34:52', 'New Option', 56, 63),
 (64, '2010-08-02 23:28:36', 'Chase Road Runner', 57, 64),
 (65, '2010-08-02 23:29:01', 'test', 57, 65);
-
---
--- Dumping data for table `oedipus_positions`
---
 
 INSERT INTO `oedipus_positions` (`id`, `position`, `doubt`, `option_id`, `character_id`) VALUES
 (3, '0', '', 2, 1),
@@ -343,10 +330,6 @@ INSERT INTO `oedipus_positions` (`id`, `position`, `doubt`, `option_id`, `charac
 (134, '1', '', 64, 58),
 (135, '1', '', 65, 58);
 
---
--- Dumping data for table `oedipus_scenes`
---
-
 INSERT INTO `oedipus_scenes` (`id`, `name`, `added`, `act_id`) VALUES
 (1, 'Scene 1', '2008-11-10 22:37:25', 1),
 (2, 'Scene 1', '2008-11-11 01:02:58', 2),
@@ -365,10 +348,6 @@ INSERT INTO `oedipus_scenes` (`id`, `name`, `added`, `act_id`) VALUES
 (15, 'Scene 1', '2010-04-14 09:31:19', 13),
 (16, 'Scene 1', '2010-08-02 23:28:36', 14);
 
---
--- Dumping data for table `oedipus_scene_to_note_links`
---
-
 INSERT INTO `oedipus_scene_to_note_links` (`id`, `scene_id`, `note_id`) VALUES
 (1, 7, 9),
 (2, 8, 10),
@@ -380,10 +359,6 @@ INSERT INTO `oedipus_scene_to_note_links` (`id`, `scene_id`, `note_id`) VALUES
 (8, 14, 31),
 (9, 15, 34),
 (10, 16, 39);
-
---
--- Dumping data for table `oedipus_stated_intentions`
---
 
 INSERT INTO `oedipus_stated_intentions` (`id`, `position`, `doubt`) VALUES
 (1, '1', ''),
@@ -452,16 +427,9 @@ INSERT INTO `oedipus_stated_intentions` (`id`, `position`, `doubt`) VALUES
 (64, '1', ''),
 (65, '1', '');
 
---
--- Dumping data for table `oedipus_users`
---
-
+-- This user's password is '123456'
 INSERT INTO `oedipus_users` (`id`, `first_name`, `last_name`, `email`, `password`, `joined`, `last_logged_in`) VALUES
 (1, 'Foo', 'Bar', 'foo.bar@example.com', 'e10adc3949ba59abbe56e057f20f883e', '2010-08-22 09:51:46', '2010-08-22 09:51:46');
-
---
--- Dumping data for table `oedipus_frames`
---
 
 INSERT INTO `oedipus_frames` (`id`, `added`, `scene_id`, `name`) VALUES
 (1, '2008-11-10 22:37:25', 1, 'Pier on Fire'),
@@ -495,10 +463,6 @@ INSERT INTO `oedipus_frames` (`id`, `added`, `scene_id`, `name`) VALUES
 (29, '2010-04-14 09:32:53', 15, 'Frame 3'),
 (30, '2010-04-14 09:32:58', 15, 'Frame 4'),
 (31, '2010-08-02 23:28:36', 16, 'Frame 1');
-
---
--- Dumping data for table `oedipus_characters`
---
 
 INSERT INTO `oedipus_characters` (`id`, `added`, `name`, `color`, `frame_id`) VALUES
 (1, '2008-11-10 22:37:25', 'Citizens of Brighton', 'red', 1),
