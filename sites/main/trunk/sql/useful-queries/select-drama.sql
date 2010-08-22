@@ -1,5 +1,3 @@
-#USE odm_dev_rob;
-
 SELECT 
     *
 FROM 
