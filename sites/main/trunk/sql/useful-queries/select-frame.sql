@@ -13,7 +13,7 @@ SELECT
 FROM 
     oedipus_frames f
         LEFT JOIN oedipus_characters c ON f.id = c.frame_id
-        LEFT JOIN oedipus_options O ON c.id = o.character_id
+        LEFT JOIN oedipus_options o ON c.id = o.character_id
         LEFT JOIN oedipus_stated_intentions si ON si.id = o.stated_intention_id
         LEFT JOIN oedipus_positions p ON o.id = p.option_id AND c.id = p.character_id
 WHERE

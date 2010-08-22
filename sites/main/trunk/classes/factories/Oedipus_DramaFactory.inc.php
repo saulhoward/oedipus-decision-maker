@@ -186,7 +186,15 @@ SQL;
 		//                                                print_r($scene);exit;
 		return $scene;
 	}
-
+	
+	/**
+	 * Get the frame object.
+	 *
+	 * We should use a select with a few joins.
+	 * See http://oedipus-decision-maker.googlecode.com/svn/sites/main/trunk/sql/useful-queries/select-frame.sql
+	 *
+	 * The select should probably also be made into a view.
+	 */
 	public function
 		get_frame_by_id($frame_id)
 	{
