@@ -1,12 +1,21 @@
 -- Create the tables that are used by the project indirectly.
 
--- --------------------------------------------------------
-
---
--- Table structure for table `hc_admin_users`
---
-
 DROP TABLE IF EXISTS `hc_admin_users`;
+DROP TABLE IF EXISTS `hc_logging_ignored_hosts`;
+DROP TABLE IF EXISTS `hc_logging_referer_domains`;
+DROP TABLE IF EXISTS `hc_logging_server_logs`;
+DROP TABLE IF EXISTS `hpi_db_pages_edits`;
+DROP TABLE IF EXISTS `hpi_db_pages_filter_functions`;
+DROP TABLE IF EXISTS `hpi_db_pages_pages`;
+DROP TABLE IF EXISTS `hpi_db_pages_sections`;
+DROP TABLE IF EXISTS `hpi_db_pages_texts`;
+DROP TABLE IF EXISTS `hpi_db_pages_text_section_links`;
+DROP TABLE IF EXISTS `hpi_mailing_list_people`;
+DROP TABLE IF EXISTS `hpi_navigation_nodes`;
+DROP TABLE IF EXISTS `hpi_navigation_trees`;
+DROP TABLE IF EXISTS `hpi_navigation_urls`;
+DROP TABLE IF EXISTS `hpi_news_items`;
+
 CREATE TABLE IF NOT EXISTS `hc_admin_users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -18,26 +27,12 @@ CREATE TABLE IF NOT EXISTS `hc_admin_users` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `hc_logging_ignored_hosts`
---
-
-DROP TABLE IF EXISTS `hc_logging_ignored_hosts`;
 CREATE TABLE IF NOT EXISTS `hc_logging_ignored_hosts` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `referer_domain_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `hc_logging_referer_domains`
---
-
-DROP TABLE IF EXISTS `hc_logging_referer_domains`;
 CREATE TABLE IF NOT EXISTS `hc_logging_referer_domains` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `domain` varchar(255) NOT NULL,
@@ -45,13 +40,6 @@ CREATE TABLE IF NOT EXISTS `hc_logging_referer_domains` (
   UNIQUE KEY `domain` (`domain`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `hc_logging_server_logs`
---
-
-DROP TABLE IF EXISTS `hc_logging_server_logs`;
 CREATE TABLE IF NOT EXISTS `hc_logging_server_logs` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `remote_addr` varchar(255) NOT NULL,
@@ -64,13 +52,6 @@ CREATE TABLE IF NOT EXISTS `hc_logging_server_logs` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `hpi_db_pages_edits`
---
-
-DROP TABLE IF EXISTS `hpi_db_pages_edits`;
 CREATE TABLE IF NOT EXISTS `hpi_db_pages_edits` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `page_id` int(10) unsigned NOT NULL,
@@ -81,13 +62,6 @@ CREATE TABLE IF NOT EXISTS `hpi_db_pages_edits` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `hpi_db_pages_filter_functions`
---
-
-DROP TABLE IF EXISTS `hpi_db_pages_filter_functions`;
 CREATE TABLE IF NOT EXISTS `hpi_db_pages_filter_functions` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
@@ -96,13 +70,6 @@ CREATE TABLE IF NOT EXISTS `hpi_db_pages_filter_functions` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `hpi_db_pages_pages`
---
-
-DROP TABLE IF EXISTS `hpi_db_pages_pages`;
 CREATE TABLE IF NOT EXISTS `hpi_db_pages_pages` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
@@ -110,13 +77,6 @@ CREATE TABLE IF NOT EXISTS `hpi_db_pages_pages` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `hpi_db_pages_sections`
---
-
-DROP TABLE IF EXISTS `hpi_db_pages_sections`;
 CREATE TABLE IF NOT EXISTS `hpi_db_pages_sections` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
@@ -124,13 +84,6 @@ CREATE TABLE IF NOT EXISTS `hpi_db_pages_sections` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `hpi_db_pages_texts`
---
-
-DROP TABLE IF EXISTS `hpi_db_pages_texts`;
 CREATE TABLE IF NOT EXISTS `hpi_db_pages_texts` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `text` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
@@ -139,13 +92,6 @@ CREATE TABLE IF NOT EXISTS `hpi_db_pages_texts` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `hpi_db_pages_text_section_links`
---
-
-DROP TABLE IF EXISTS `hpi_db_pages_text_section_links`;
 CREATE TABLE IF NOT EXISTS `hpi_db_pages_text_section_links` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `text_id` int(10) unsigned NOT NULL,
@@ -153,13 +99,6 @@ CREATE TABLE IF NOT EXISTS `hpi_db_pages_text_section_links` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `hpi_mailing_list_people`
---
-
-DROP TABLE IF EXISTS `hpi_mailing_list_people`;
 CREATE TABLE IF NOT EXISTS `hpi_mailing_list_people` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_roman_ci NOT NULL,
@@ -170,13 +109,6 @@ CREATE TABLE IF NOT EXISTS `hpi_mailing_list_people` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `hpi_navigation_nodes`
---
-
-DROP TABLE IF EXISTS `hpi_navigation_nodes`;
 CREATE TABLE IF NOT EXISTS `hpi_navigation_nodes` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `url_id` int(11) unsigned NOT NULL,
@@ -188,13 +120,6 @@ CREATE TABLE IF NOT EXISTS `hpi_navigation_nodes` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `hpi_navigation_trees`
---
-
-DROP TABLE IF EXISTS `hpi_navigation_trees`;
 CREATE TABLE IF NOT EXISTS `hpi_navigation_trees` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `added` datetime NOT NULL,
@@ -203,13 +128,6 @@ CREATE TABLE IF NOT EXISTS `hpi_navigation_trees` (
   UNIQUE KEY `title` (`title`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `hpi_navigation_urls`
---
-
-DROP TABLE IF EXISTS `hpi_navigation_urls`;
 CREATE TABLE IF NOT EXISTS `hpi_navigation_urls` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `href` varchar(255) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
@@ -218,13 +136,6 @@ CREATE TABLE IF NOT EXISTS `hpi_navigation_urls` (
   UNIQUE KEY `href` (`href`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `hpi_news_items`
---
-
-DROP TABLE IF EXISTS `hpi_news_items`;
 CREATE TABLE IF NOT EXISTS `hpi_news_items` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `submitted` datetime NOT NULL,
