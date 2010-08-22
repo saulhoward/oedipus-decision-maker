@@ -1,6 +1,14 @@
---
--- Dumping data for table `hpi_db_pages_edits`
---
+-- Import the data that is needed for the pages and navigation.
+
+TRUNCATE TABLE hpi_db_pages_edits;
+TRUNCATE TABLE hpi_db_pages_filter_functions;
+TRUNCATE TABLE hpi_db_pages_pages;
+TRUNCATE TABLE hpi_db_pages_sections;
+TRUNCATE TABLE hpi_db_pages_texts;
+TRUNCATE TABLE hpi_db_pages_text_section_links;
+TRUNCATE TABLE hpi_navigation_nodes;
+TRUNCATE TABLE hpi_navigation_trees;
+TRUNCATE TABLE hpi_navigation_urls;
 
 INSERT INTO `hpi_db_pages_edits` (`id`, `page_id`, `text_id`, `submitted`, `current`, `deleted`) VALUES
 (1, 1, 1, '2008-03-30 18:44:20', 'No', 'No'),
@@ -41,17 +49,9 @@ INSERT INTO `hpi_db_pages_edits` (`id`, `page_id`, `text_id`, `submitted`, `curr
 (36, 8, 36, '2008-11-03 15:10:56', 'Yes', 'No'),
 (37, 8, 37, '2008-11-03 15:11:11', 'Yes', 'No');
 
---
--- Dumping data for table `hpi_db_pages_filter_functions`
---
-
 INSERT INTO `hpi_db_pages_filter_functions` (`id`, `name`, `human_name`) VALUES
 (1, 'DBPages_FilterHelper::blank_line_delimited_paragraphs', 'Blank Line Delimited Paragraphs'),
 (2, 'stripcslashes', 'Strip Slashes');
-
---
--- Dumping data for table `hpi_db_pages_pages`
---
 
 INSERT INTO `hpi_db_pages_pages` (`id`, `name`) VALUES
 (1, 'home'),
@@ -63,10 +63,6 @@ INSERT INTO `hpi_db_pages_pages` (`id`, `name`) VALUES
 (7, 'my-dramas'),
 (8, 'edit-frame');
 
---
--- Dumping data for table `hpi_db_pages_sections`
---
-
 INSERT INTO `hpi_db_pages_sections` (`id`, `name`) VALUES
 (1, 'content'),
 (2, 'instructions'),
@@ -76,10 +72,6 @@ INSERT INTO `hpi_db_pages_sections` (`id`, `name`) VALUES
 (6, 'welcome'),
 (7, 'drama-unavailable'),
 (8, 'no-frame-set');
-
---
--- Dumping data for table `hpi_db_pages_texts`
---
 
 INSERT INTO `hpi_db_pages_texts` (`id`, `text`, `checksum`, `filter_function_id`) VALUES
 (1, '<h2>Drama Theory for Making Decisions</h2>', '4ab32feac3a4da1dc50909cc03369c48', 1),
@@ -120,10 +112,6 @@ INSERT INTO `hpi_db_pages_texts` (`id`, `text`, `checksum`, `filter_function_id`
 (36, 'Edit Frame', 'a82282443e8bb834dfc2e0fc15de8522', 1),
 (37, 'No Frame Set!', '23e732c0731fe42b374f097257d4938a', 1);
 
---
--- Dumping data for table `hpi_db_pages_text_section_links`
---
-
 INSERT INTO `hpi_db_pages_text_section_links` (`id`, `text_id`, `section_id`) VALUES
 (1, 1, 1),
 (2, 2, 1),
@@ -163,17 +151,6 @@ INSERT INTO `hpi_db_pages_text_section_links` (`id`, `text_id`, `section_id`) VA
 (36, 36, 3),
 (37, 37, 8);
 
---
--- Dumping data for table `hpi_mailing_list_people`
---
-
-INSERT INTO `hpi_mailing_list_people` (`id`, `name`, `email`, `added`, `status`, `sort_order`) VALUES
-(1, 'Foo Bar', 'foo.bar@example.com', '2010-08-22 09:51:46', 'new', 1);
-
---
--- Dumping data for table `hpi_navigation_nodes`
---
-
 INSERT INTO `hpi_navigation_nodes` (`id`, `url_id`, `tree_id`, `parent_id`, `sort_order`, `added`, `open_in_new_window`) VALUES
 (1, 1, 3, 0, 4, '2008-03-30 18:54:51', 'No'),
 (2, 2, 1, 0, 1, '2008-03-30 18:55:24', 'No'),
@@ -186,18 +163,10 @@ INSERT INTO `hpi_navigation_nodes` (`id`, `url_id`, `tree_id`, `parent_id`, `sor
 (11, 6, 3, 0, 2, '2008-11-13 02:39:03', 'No'),
 (12, 10, 3, 0, 3, '2008-11-13 20:48:46', 'No');
 
---
--- Dumping data for table `hpi_navigation_trees`
---
-
 INSERT INTO `hpi_navigation_trees` (`id`, `added`, `title`) VALUES
 (1, '2008-03-30 18:54:38', 'Main Nav'),
 (3, '2008-05-27 16:46:48', 'Footer Nav'),
 (4, '2008-05-29 01:24:32', 'External Links');
-
---
--- Dumping data for table `hpi_navigation_urls`
---
 
 INSERT INTO `hpi_navigation_urls` (`id`, `href`, `title`) VALUES
 (1, '/mailing-list/sign-up.html', 'Mailing List'),
