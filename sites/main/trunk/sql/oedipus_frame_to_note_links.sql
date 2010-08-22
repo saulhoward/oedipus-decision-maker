@@ -1,6 +1,0 @@
-CREATE TABLE `oedipus_frame_to_note_links` (
-`id` INT( 10 ) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-`frame_id` INT( 10 ) UNSIGNED NOT NULL ,
-`note_id` INT( 10 ) UNSIGNED NOT NULL
-) ENGINE = MYISAM ;
-
