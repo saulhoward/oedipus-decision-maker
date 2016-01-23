@@ -1,0 +1,21 @@
+# Introduction #
+
+ODM concerns itself with Dramas.
+
+Each Drama consists of one or more Acts.
+
+Each Act consists of one or more Scenes.
+
+Each Scene consists of one or more Frames.
+
+The Frame is the basic decision making unit.
+
+Each Drama has one or more Characters, who populate the Frames.
+
+
+# Details #
+
+Add your content here.  Format your content with:
+  * Text in **bold** or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
